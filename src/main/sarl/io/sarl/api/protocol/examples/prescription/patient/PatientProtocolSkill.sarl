@@ -5,7 +5,7 @@ import io.sarl.api.protocol.examples.prescription.events.Complain
 import io.sarl.lang.core.EventSpace
 import io.sarl.lang.core.util.MutableOptional
 
-skill PatientComplainSkill implements PatientComplainCapacity {
+skill PatientProtocolSkill implements PatientProtocolCapacity {
 	
 	uses Logging
 

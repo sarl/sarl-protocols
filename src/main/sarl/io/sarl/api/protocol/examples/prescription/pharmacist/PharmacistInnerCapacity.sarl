@@ -5,7 +5,7 @@ package io.sarl.api.protocol.examples.prescription.pharmacist
  * Patient -> any Doctor : Request [ in id, out symptoms, out age]
  * Doctor -> any Pharmacist : Prescribe [ in id, in symptoms, in age, out prescription]
  */
-capacity PharmacistPreparePkgCapacity {
+capacity PharmacistInnerCapacity {
 
 	def preparePkg(rx : String) : String
 

@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>io.sarl.sdk</groupId>
   <artifactId>api.protocol</artifactId>
-  <version>0.13.0-SNAPSHOT</version>
+  <version>0.1</version>
   <properties>
     <sarl.version>0.13.0</sarl.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

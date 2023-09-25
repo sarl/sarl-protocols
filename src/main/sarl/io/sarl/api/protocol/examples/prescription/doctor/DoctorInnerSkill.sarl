@@ -1,6 +1,6 @@
 package io.sarl.api.protocol.examples.prescription.doctor
 
-skill DoctorComputePrescribeSkill implements DoctorComputePrescribeCapacity {
+skill DoctorInnerSkill implements DoctorInnerCapacity {
 
 	override computePrescribe(symptoms : String) : String {
 		// compute the perscription depending on the symptoms

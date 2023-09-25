@@ -9,7 +9,7 @@ import io.sarl.lang.core.util.MutableOptional
  * Patient -> any Doctor : Request [ in id, out symptoms, out age]
  * Doctor -> any Pharmacist : Prescribe [ in id, in symptoms, in age, out prescription]
  */
-skill DoctorPrescribeSkill implements DoctorPrescribeCapacity {
+skill DoctorProtocolSkill implements DoctorProtocolCapacity {
 
 	val protocolSpace : EventSpace
 

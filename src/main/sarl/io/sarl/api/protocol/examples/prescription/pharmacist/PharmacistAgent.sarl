@@ -15,7 +15,7 @@ agent PharmacistAgent {
 	
 	on SpaceCreated [it.spaceID.spaceSpecification == PrescriptionSpaceSpecification] {
 		setSkill(new ProtocolEnactmentSkill)
-		setSkill(new PharmacistPreparePkgSkill)
+		setSkill(new PharmacistInnerSkill)
 		prescriptionSpace = enact(occurrence.spaceID, PrescriptionRole.PHARMACIST)
 	}
 	

@@ -1,6 +1,6 @@
 package io.sarl.api.protocol.examples.prescription.enactment
 
-import io.sarl.api.protocol.examples.prescription.ProtocolRole
+import io.sarl.api.protocol.ProtocolRole
 import io.sarl.lang.core.Space
 import io.sarl.lang.core.SpaceID
 

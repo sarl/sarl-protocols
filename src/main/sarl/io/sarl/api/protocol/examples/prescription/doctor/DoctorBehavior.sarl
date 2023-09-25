@@ -8,7 +8,7 @@ import io.sarl.api.protocol.examples.prescription.events.Complain
  */
 behavior DoctorBehavior {
 
-	uses DoctorPrescribeCapacity, DoctorComputePrescribeCapacity
+	uses DoctorProtocolCapacity, DoctorInnerCapacity
 	
 	on Complain {
 		var prescribe = computePrescribe(occurrence.symptoms)

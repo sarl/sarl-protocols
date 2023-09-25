@@ -12,7 +12,7 @@ import io.sarl.lang.core.Space
 
 agent PatientAgent {
 	
-	uses ProtocolEnactment, PatientComplainCapacity, Logging
+	uses ProtocolEnactment, PatientProtocolCapacity, Logging
 	
 	var prescriptionSpace : Space
 	

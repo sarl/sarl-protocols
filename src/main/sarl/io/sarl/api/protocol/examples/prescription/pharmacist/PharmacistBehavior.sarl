@@ -8,7 +8,7 @@ import io.sarl.api.protocol.examples.prescription.events.Prescribe
  */
 behavior PharmacistBehavior {
 
-	uses PharmacistFilledCapacity, PharmacistPreparePkgCapacity
+	uses PharmacistProtocolCapacity, PharmacistInnerCapacity
 	
 	on Prescribe {
 		var pkg = preparePkg(occurrence.rx)

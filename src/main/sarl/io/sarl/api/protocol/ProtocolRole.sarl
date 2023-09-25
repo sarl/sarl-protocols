@@ -1,0 +1,4 @@
+package io.sarl.api.protocol
+
+interface ProtocolRole {
+}
