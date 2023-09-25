@@ -1,0 +1,9 @@
+package io.sarl.api.protocol.examples.cnp.participant
+
+capacity ParticipantProtocolCapacity {
+
+	def setBid(bid : int)
+	
+	def setReason(reason : String)
+
+}

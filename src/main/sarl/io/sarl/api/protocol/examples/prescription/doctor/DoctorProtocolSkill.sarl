@@ -4,11 +4,6 @@ import io.sarl.api.protocol.examples.prescription.events.Prescribe
 import io.sarl.lang.core.EventSpace
 import io.sarl.lang.core.util.MutableOptional
 
-/** 
- * parameters in id, out symptoms, in age
- * Patient -> any Doctor : Request [ in id, out symptoms, out age]
- * Doctor -> any Pharmacist : Prescribe [ in id, in symptoms, in age, out prescription]
- */
 skill DoctorProtocolSkill implements DoctorProtocolCapacity {
 
 	val protocolSpace : EventSpace

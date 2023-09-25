@@ -1,0 +1,36 @@
+package io.sarl.api.protocol.examples.cnp.initiator
+
+import io.sarl.api.core.Logging
+import io.sarl.api.protocol.examples.cnp.events.Propose
+
+behavior InitiatorBehavior {
+
+	uses InitiatorProtocolCapacity, InitiatorInnerCapacity, Logging
+	
+	var proposals = <Propose> newArrayList
+	
+	on Propose {
+		info("PROPOSE received")
+		synchronized(proposals) {
+			proposals += occurrence
+			var decision = evaluate(proposals)
+			if (decision !== null) {
+				for(p : proposals) {
+					if(p === decision) {
+						emitAcceptTo(p.source.ID)
+						// TODO why emit accept here?
+					}
+					else {
+						var reason = computeRejectReason(p.bid)
+						//setReason(reason)
+						emitRejectTo(p.source.ID, reason)
+						// TODO emit refuse
+					}
+				}
+			}
+		}
+		// TODO if we receive late proposals, currently they are not managed (no reject is sent)
+		
+	}
+
+}

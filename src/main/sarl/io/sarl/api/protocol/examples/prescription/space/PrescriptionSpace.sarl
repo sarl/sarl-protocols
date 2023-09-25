@@ -1,13 +1,8 @@
 package io.sarl.api.protocol.examples.prescription.^space
 
-import io.sarl.api.protocol.examples.prescription.events.ReadyForDoctor
-import io.sarl.api.protocol.examples.prescription.events.ReadyForPatient
-import io.sarl.api.protocol.examples.prescription.events.ReadyForPharmacist
-import io.sarl.lang.core.Event
+import io.sarl.api.protocol.ProtocolReady
 import io.sarl.lang.core.EventListener
 import io.sarl.sre.janus.spaces.OpenLocalEventSpace
-import java.util.UUID
-import io.sarl.api.protocol.examples.prescription.events.Filled
 
 class PrescriptionSpace extends OpenLocalEventSpace {
 	
@@ -74,9 +69,7 @@ class PrescriptionSpace extends OpenLocalEventSpace {
 	
 	private synchronized def emitIfReady {
 		if(patient !== null && doctor !== null && pharmacist !== null) {
-			emit(spaceID.ID, new ReadyForPatient)
-			emit(spaceID.ID, new ReadyForDoctor)
-			emit(spaceID.ID, new ReadyForPharmacist)
+			emit(spaceID.ID, new ProtocolReady)
 		}
 	}
 	

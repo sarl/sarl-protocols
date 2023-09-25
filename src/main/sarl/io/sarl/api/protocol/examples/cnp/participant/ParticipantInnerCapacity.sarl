@@ -1,0 +1,9 @@
+package io.sarl.api.protocol.examples.cnp.participant
+
+capacity ParticipantInnerCapacity {
+
+	def computeBid(task : String) : Integer
+	
+	def computeRefuseReason(task : String) : String
+
+}

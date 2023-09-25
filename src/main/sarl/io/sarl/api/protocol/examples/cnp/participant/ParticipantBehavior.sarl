@@ -1,0 +1,28 @@
+package io.sarl.api.protocol.examples.cnp.participant
+
+import io.sarl.api.core.Logging
+import io.sarl.api.protocol.examples.cnp.events.Accept
+import io.sarl.api.protocol.examples.cnp.events.CFP
+
+behavior ParticipantBehavior {
+
+	uses ParticipantProtocolCapacity, ParticipantInnerCapacity, Logging
+	
+	on CFP {
+		info("CFP received")
+		var bid = computeBid(occurrence.task)
+		if (bid !== null) {
+			setBid(bid.intValue)
+		}
+		else {
+			var reason = computeRefuseReason(occurrence.task)
+			setReason(reason)
+		}
+		
+	}
+	
+	on Accept {
+		info("ACCEPT received")
+	}
+	
+}

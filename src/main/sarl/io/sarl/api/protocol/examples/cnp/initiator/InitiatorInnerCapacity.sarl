@@ -1,0 +1,18 @@
+/** 
+ * 
+ */
+package io.sarl.api.protocol.examples.cnp.initiator
+
+import io.sarl.api.protocol.examples.cnp.events.Propose
+import java.util.List
+
+/** 
+ * 
+ */
+capacity InitiatorInnerCapacity {
+	
+	def evaluate(proposals : List<Propose>) : Propose
+
+	def computeRejectReason(bid : int) : String
+	
+}

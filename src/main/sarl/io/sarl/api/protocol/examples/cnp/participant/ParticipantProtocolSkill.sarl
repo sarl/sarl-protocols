@@ -1,0 +1,43 @@
+package io.sarl.api.protocol.examples.cnp.participant
+
+import io.sarl.api.protocol.examples.cnp.events.Propose
+import io.sarl.api.protocol.examples.cnp.events.Refuse
+import io.sarl.lang.core.EventSpace
+import io.sarl.lang.core.util.MutableOptional
+
+skill ParticipantProtocolSkill implements ParticipantProtocolCapacity {
+
+	val protocolSpace : EventSpace
+
+	val bid : MutableOptional<Integer> = MutableOptional.empty
+	val reason : MutableOptional<String> = MutableOptional.empty
+	
+	new (protocolSpace : EventSpace) {
+		this.protocolSpace = protocolSpace
+	}
+	
+	def setBid(bid : int) {
+		this.bid.set(bid)
+		emitProposeIfReady
+	}
+	
+	def setReason(reason : String) {
+		this.reason.set(reason)
+		emitRefuseIfReady
+	}
+	
+	private def emitProposeIfReady {
+		if (this.bid.isPresent) {
+			var evt = new Propose(this.bid.get)
+			this.protocolSpace.emit(owner.ID, evt)
+		}
+	}
+
+	private def emitRefuseIfReady {
+		if (this.reason.isPresent) {
+			var evt = new Refuse(this.reason.get)
+			this.protocolSpace.emit(owner.ID, evt)
+		}
+	}
+	
+}

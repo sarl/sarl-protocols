@@ -1,4 +1,4 @@
-package io.sarl.api.protocol.examples.prescription.enactment
+package io.sarl.api.protocol.examples.cnp.enactment
 
 import io.sarl.api.protocol.ProtocolRole
 import io.sarl.lang.core.Space

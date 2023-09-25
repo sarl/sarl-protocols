@@ -1,0 +1,27 @@
+package io.sarl.api.protocol.examples.cnp.initiator
+
+import java.util.List
+import io.sarl.api.protocol.examples.cnp.events.Propose
+
+skill InitiatorInnerSkill implements InitiatorInnerCapacity {
+	
+	def evaluate(proposals : List<Propose>) : Propose {
+		if(proposals.length < 5) {
+			return null
+		}
+		else {
+			var currentWinner = proposals.get(0)
+			for(p : proposals) {
+				if(p.bid < currentWinner.bid) {
+					currentWinner = p
+				}
+			}
+			return currentWinner
+		}
+	}
+
+	override computeRejectReason(bid : int) : String {
+		"Too expensive"
+	}
+	
+}

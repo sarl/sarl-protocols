@@ -1,0 +1,73 @@
+package io.sarl.api.protocol.examples.cnp.enactment
+
+import io.sarl.api.core.Behaviors
+import io.sarl.api.core.DefaultContextInteractions
+import io.sarl.api.protocol.ProtocolRole
+import io.sarl.api.protocol.examples.cnp.CNPRole
+import io.sarl.api.protocol.examples.cnp.initiator.InitiatorBehavior
+import io.sarl.api.protocol.examples.cnp.initiator.InitiatorProtocolCapacity
+import io.sarl.api.protocol.examples.cnp.initiator.InitiatorProtocolSkill
+import io.sarl.api.protocol.examples.cnp.participant.ParticipantBehavior
+import io.sarl.api.protocol.examples.cnp.participant.ParticipantProtocolCapacity
+import io.sarl.api.protocol.examples.cnp.participant.ParticipantProtocolSkill
+import io.sarl.api.protocol.examples.cnp.^space.CNPSpace
+import io.sarl.api.protocol.examples.cnp.^space.CNPSpaceSpecification
+import io.sarl.lang.core.Behavior
+import io.sarl.lang.core.Space
+import io.sarl.lang.core.SpaceID
+import java.util.UUID
+
+skill ProtocolEnactmentSkill implements ProtocolEnactment {
+	
+	uses DefaultContextInteractions, Behaviors
+	
+	var initiatorBehavior : Behavior
+	var participantBehavior : Behavior
+
+	// TODO make it general for any protocol
+	def enact(protocol : Class<? extends Space>, role : ProtocolRole) : Space {
+		var ^space = defaultContext.createSpace(CNPSpaceSpecification, UUID::randomUUID)
+		adoptRole(^space, role)
+		return ^space
+	}
+	
+	def enact(spaceID : SpaceID, role : ProtocolRole ) : Space {
+		var ^space = defaultContext.getSpace(spaceID.ID) as CNPSpace
+		if(^space === null) {
+			throw new RuntimeException
+		}
+		adoptRole(^space, role)
+		return ^space
+	}
+	
+	private def adoptRole(^space : CNPSpace, role : ProtocolRole) {
+		switch (role as CNPRole) {
+			case CNPRole.INITIATOR: {
+				setSkill(new InitiatorProtocolSkill(^space))
+				initiatorBehavior = registerBehavior(new InitiatorBehavior(this.owner))
+				^space.registerInitiator(asEventListener)
+			}
+			case CNPRole.PARTICIPANT: {
+				setSkill(new ParticipantProtocolSkill(^space))
+				participantBehavior = registerBehavior(new ParticipantBehavior(this.owner))
+				^space.registerParticipant(asEventListener)
+			}
+		}
+	}
+
+	def leave(^space : Space, role : ProtocolRole) : void {
+		val cnpSpace = ^space as CNPSpace
+		switch (role as CNPRole) {
+			case CNPRole.INITIATOR: {
+				clearSkill(InitiatorProtocolCapacity)
+				cnpSpace.unregisterInitiator(asEventListener)
+			}
+			case CNPRole.PARTICIPANT: {
+				clearSkill(ParticipantProtocolCapacity)
+				unregisterBehavior(participantBehavior)
+				cnpSpace.unregisterParticipant(asEventListener)
+			}
+		}
+	}
+
+}

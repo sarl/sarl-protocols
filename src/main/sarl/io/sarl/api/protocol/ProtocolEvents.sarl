@@ -1,0 +1,5 @@
+package io.sarl.api.protocol
+
+event ProtocolReady {
+	var protocolid : String
+}

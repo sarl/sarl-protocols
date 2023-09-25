@@ -1,10 +1,5 @@
 package io.sarl.api.protocol.examples.prescription.doctor
 
-/** 
- * parameters in id, out symptoms, in age
- * Patient -> any Doctor : Request [ in id, out symptoms, out age]
- * Doctor -> any Pharmacist : Prescribe [ in id, in symptoms, in age, out prescription]
- */
 capacity DoctorInnerCapacity {
 
 	def computePrescribe(symptoms : String) : String
