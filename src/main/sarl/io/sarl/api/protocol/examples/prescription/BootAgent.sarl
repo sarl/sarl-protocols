@@ -1,0 +1,24 @@
+package io.sarl.api.protocol.examples.prescription
+
+import io.sarl.api.core.AgentSpawned
+import io.sarl.api.core.Initialize
+import io.sarl.api.core.Lifecycle
+import io.sarl.api.protocol.examples.prescription.doctor.DoctorAgent
+import io.sarl.api.protocol.examples.prescription.patient.PatientAgent
+import io.sarl.api.protocol.examples.prescription.pharmacist.PharmacistAgent
+
+agent BootAgent {
+	uses Lifecycle
+
+	on Initialize {		
+		spawn(DoctorAgent)
+	}
+	
+	on AgentSpawned[it.agentType == DoctorAgent.name] {
+		spawn(PharmacistAgent)
+	}
+
+	on AgentSpawned [it.agentType == PharmacistAgent.name] {
+		spawn(PatientAgent)
+	}
+}

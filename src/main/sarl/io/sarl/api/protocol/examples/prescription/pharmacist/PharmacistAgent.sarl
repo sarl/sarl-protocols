@@ -1,0 +1,22 @@
+package io.sarl.api.protocol.examples.prescription.pharmacist
+
+import io.sarl.api.core.SpaceCreated
+import io.sarl.api.protocol.examples.prescription.PrescriptionRole
+import io.sarl.api.protocol.examples.prescription.enactment.ProtocolEnactment
+import io.sarl.api.protocol.examples.prescription.enactment.ProtocolEnactmentSkill
+import io.sarl.api.protocol.examples.prescription.^space.PrescriptionSpaceSpecification
+import io.sarl.lang.core.Space
+
+agent PharmacistAgent {
+	
+	uses ProtocolEnactment
+	
+	var prescriptionSpace : Space
+	
+	on SpaceCreated [it.spaceID.spaceSpecification == PrescriptionSpaceSpecification] {
+		setSkill(new ProtocolEnactmentSkill)
+		setSkill(new PharmacistPreparePkgSkill)
+		prescriptionSpace = enact(occurrence.spaceID, PrescriptionRole.PHARMACIST)
+	}
+	
+}

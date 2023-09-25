@@ -1,0 +1,9 @@
+package io.sarl.api.protocol.examples.prescription.pharmacist
+
+skill PharmacistPreparePkgSkill implements PharmacistPreparePkgCapacity {
+
+	override preparePkg(rx : String) : String {
+		// compute the perscription depending on the symptoms
+		"Preparing package"
+	}
+}

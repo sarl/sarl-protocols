@@ -1,0 +1,42 @@
+package io.sarl.api.protocol.examples.prescription
+
+/*
+Prescription { 
+
+	roles Doctor, Pharmacist, Patient 
+	parameters out vID key, out Rx, out package
+	
+	Patient    −> Doctor     : Complain  [ out vID key, out symptoms ]
+	Doctor	   −> Pharmacist : Prescribe [ in vID key,  in symptoms, out Rx ]
+	Pharmacist −> Patient    : Filled    [ in vID key,  in Rx,       out package ]
+
+}
+*/
+ 
+/*space PrescriptionEnvironment {
+
+	// Because we have protocol, then the space is a ProtocolEventSpace
+	
+	protocol Prescription {
+
+		role Patient
+		role Doctor
+		role Pharmacist
+
+		// in id is implicit
+		
+		var symptoms : String
+		var rx : String
+		var pkg : String
+
+		Patient to Doctor : Request [ out symptoms ]
+		Doctor to Pharmacist : Prescribe [ in symptoms, out rx ]
+		Pharmacist to Patient : Filled [ in rx, out pkg ]
+
+		// Filtering actions on events by the space?
+
+	}
+	
+	// More protocol ?
+
+}*/

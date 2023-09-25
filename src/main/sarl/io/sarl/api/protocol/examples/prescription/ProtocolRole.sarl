@@ -1,0 +1,4 @@
+package io.sarl.api.protocol.examples.prescription
+
+interface ProtocolRole {
+}

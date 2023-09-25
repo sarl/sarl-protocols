@@ -1,0 +1,16 @@
+package io.sarl.api.protocol.examples.prescription.events
+
+/** 
+ * parameters in id, out symptoms, in age
+ * Patient -> any Doctor : Request [ in id, out symptoms, out age]
+ * Doctor -> any Pharmacist : Prescribe [ in id, in symptoms, in age, out prescription]
+ */
+event Complain {
+
+	val symptoms : String
+
+	new(symptoms : String) {
+		this.symptoms = symptoms
+	}
+	
+}

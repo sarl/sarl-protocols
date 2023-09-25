@@ -1,0 +1,18 @@
+package io.sarl.api.protocol.examples.prescription.doctor
+
+import io.sarl.api.protocol.examples.prescription.events.Complain
+
+/** 
+ * Patient -> any Doctor : Request [ in id, out symptoms, out age]
+ * Doctor -> any Pharmacist : Prescribe [ in id, in symptoms, in age, out prescription]
+ */
+behavior DoctorBehavior {
+
+	uses DoctorPrescribeCapacity, DoctorComputePrescribeCapacity
+	
+	on Complain {
+		var prescribe = computePrescribe(occurrence.symptoms)
+		setRx(prescribe)
+	}
+
+}

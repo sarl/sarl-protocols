@@ -1,0 +1,34 @@
+package io.sarl.api.protocol.examples.prescription.patient
+
+import io.sarl.api.core.Initialize
+import io.sarl.api.core.Logging
+import io.sarl.api.protocol.examples.prescription.PrescriptionRole
+import io.sarl.api.protocol.examples.prescription.enactment.ProtocolEnactment
+import io.sarl.api.protocol.examples.prescription.enactment.ProtocolEnactmentSkill
+import io.sarl.api.protocol.examples.prescription.events.Filled
+import io.sarl.api.protocol.examples.prescription.events.ReadyForPatient
+import io.sarl.api.protocol.examples.prescription.^space.PrescriptionSpace
+import io.sarl.lang.core.Space
+
+agent PatientAgent {
+	
+	uses ProtocolEnactment, PatientComplainCapacity, Logging
+	
+	var prescriptionSpace : Space
+	
+	on Initialize {
+		setSkill(new ProtocolEnactmentSkill)
+		prescriptionSpace = enact(PrescriptionSpace, PrescriptionRole.PATIENT)
+	}
+
+	on ReadyForPatient {
+		info("Fever")
+		setSymptoms("fever")
+	}
+	
+	on Filled {
+		info("Thank you!")
+		leave(prescriptionSpace, PrescriptionRole.PATIENT)
+	}
+	
+}

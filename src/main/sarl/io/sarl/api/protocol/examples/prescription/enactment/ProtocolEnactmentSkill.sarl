@@ -1,0 +1,84 @@
+package io.sarl.api.protocol.examples.prescription.enactment
+
+import io.sarl.api.core.Behaviors
+import io.sarl.api.core.DefaultContextInteractions
+import io.sarl.api.protocol.examples.prescription.PrescriptionRole
+import io.sarl.api.protocol.examples.prescription.ProtocolRole
+import io.sarl.api.protocol.examples.prescription.doctor.DoctorBehavior
+import io.sarl.api.protocol.examples.prescription.doctor.DoctorPrescribeCapacity
+import io.sarl.api.protocol.examples.prescription.doctor.DoctorPrescribeSkill
+import io.sarl.api.protocol.examples.prescription.patient.PatientComplainCapacity
+import io.sarl.api.protocol.examples.prescription.patient.PatientComplainSkill
+import io.sarl.api.protocol.examples.prescription.pharmacist.PharmacistBehavior
+import io.sarl.api.protocol.examples.prescription.pharmacist.PharmacistFilledCapacity
+import io.sarl.api.protocol.examples.prescription.pharmacist.PharmacistFilledSkill
+import io.sarl.api.protocol.examples.prescription.^space.PrescriptionSpace
+import io.sarl.api.protocol.examples.prescription.^space.PrescriptionSpaceSpecification
+import io.sarl.lang.core.Behavior
+import io.sarl.lang.core.Space
+import io.sarl.lang.core.SpaceID
+import java.util.UUID
+
+skill ProtocolEnactmentSkill implements ProtocolEnactment {
+	
+	uses DefaultContextInteractions, Behaviors
+	
+	var doctorBehavior : Behavior
+	var pharmacistBehavior : Behavior
+
+	// TODO make it general for any protocol
+	def enact(protocol : Class<? extends Space>, role : ProtocolRole) : Space {
+		var ^space = defaultContext.createSpace(PrescriptionSpaceSpecification, UUID::randomUUID)
+		adoptRole(^space, role)
+		return ^space
+	}
+	
+	def enact(spaceID : SpaceID, role : ProtocolRole ) : Space {
+		var ^space = defaultContext.getSpace(spaceID.ID) as PrescriptionSpace
+		if(^space === null) {
+			throw new RuntimeException
+		}
+		adoptRole(^space, role)
+		return ^space
+	}
+	
+	private def adoptRole(^space : PrescriptionSpace, role : ProtocolRole) {
+		switch (role as PrescriptionRole) {
+			case PrescriptionRole.PATIENT: {
+				setSkill(new PatientComplainSkill(^space))
+				^space.registerPatient(asEventListener)
+			}
+			case PrescriptionRole.DOCTOR: {
+				setSkill(new DoctorPrescribeSkill(^space))
+				doctorBehavior = registerBehavior(new DoctorBehavior(this.owner))
+				^space.registerDoctor(asEventListener)
+			}
+			case PrescriptionRole.PHARMACIST: {
+				setSkill(new PharmacistFilledSkill(^space))
+				pharmacistBehavior = registerBehavior(new PharmacistBehavior(this.owner))
+				^space.registerPharmacist(asEventListener)
+			}
+		}
+	}
+
+	def leave(^space : Space, role : ProtocolRole) : void {
+		val prescriptionSpace = ^space as PrescriptionSpace
+		switch (role as PrescriptionRole) {
+			case PrescriptionRole.PATIENT: {
+				clearSkill(PatientComplainCapacity)
+				prescriptionSpace.unregisterPatient(asEventListener)
+			}
+			case PrescriptionRole.DOCTOR: {
+				clearSkill(DoctorPrescribeCapacity)
+				unregisterBehavior(doctorBehavior)
+				prescriptionSpace.unregisterDoctor(asEventListener)
+			}
+			case PrescriptionRole.PHARMACIST: {
+				clearSkill(PharmacistFilledCapacity)
+				unregisterBehavior(pharmacistBehavior)
+				prescriptionSpace.unregisterPharmacist(asEventListener)
+			}
+		}
+	}
+
+}
