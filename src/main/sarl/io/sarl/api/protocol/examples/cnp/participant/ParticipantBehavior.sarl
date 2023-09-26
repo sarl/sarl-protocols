@@ -23,6 +23,14 @@ behavior ParticipantBehavior {
 	
 	on Accept {
 		info("ACCEPT received")
+		var result = performTask
+		if(result) {
+			emitInformTo(occurrence.source.ID)
+		}
+		else {
+			var reason = computeFailureReason
+			emitFailureTo(occurrence.source.ID, reason)
+		}
 	}
 	
 }

@@ -1,9 +1,15 @@
 package io.sarl.api.protocol.examples.cnp.participant
 
+import java.util.UUID
+
 capacity ParticipantProtocolCapacity {
 
 	def setBid(bid : int)
 	
 	def setReason(reason : String)
+
+	def emitInformTo(id : UUID)
+
+	def emitFailureTo(id : UUID, reason : String)
 
 }

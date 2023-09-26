@@ -12,4 +12,12 @@ skill ParticipantInnerSkill implements ParticipantInnerCapacity {
 		"I'm lazy"
 	}
 	
+	override performTask : boolean {
+		new Random().nextBoolean
+	}
+
+	override computeFailureReason : String {
+		"Failure"
+	}
+	
 }

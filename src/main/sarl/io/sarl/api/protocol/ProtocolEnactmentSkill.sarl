@@ -1,0 +1,53 @@
+package io.sarl.api.protocol
+
+import io.sarl.api.core.Behaviors
+import io.sarl.api.core.DefaultContextInteractions
+import io.sarl.api.protocol.ProtocolRole
+import io.sarl.lang.core.Behavior
+import io.sarl.lang.core.EventSpace
+import io.sarl.lang.core.SpaceID
+import io.sarl.lang.core.SpaceSpecification
+import java.util.Map
+import java.util.UUID
+
+skill ProtocolEnactmentSkill implements ProtocolEnactment {
+	
+	uses DefaultContextInteractions, Behaviors
+	
+	val behaviors : Map<ProtocolRole, Behavior> = newHashMap
+
+	synchronized def enact(protocol : Class<? extends SpaceSpecification<S>>, role : ProtocolRole) : S with S extends EventSpace {
+		var ^space = defaultContext.createSpace(protocol, UUID::randomUUID)
+		adoptRole(^space, role)
+		return ^space
+	}
+
+	synchronized def enact(spaceID : SpaceID, role : ProtocolRole) : EventSpace {
+		var ^space = defaultContext.getSpace(spaceID.ID) as EventSpace
+		if(^space === null) {
+			throw new RuntimeException
+		}
+		adoptRole(^space, role)
+		return ^space
+	}
+	
+	private def adoptRole(^space : EventSpace, role : ProtocolRole) {
+		setSkill(role.getProtocolSkill(^space))
+		var beh = role.getProtocolBehavior(this.owner)
+		if (beh !== null) {
+			behaviors.put(role, beh)
+			registerBehavior(beh)
+		}
+		role.registerRole(^space, asEventListener)
+	}
+
+	synchronized def leave(^space : EventSpace, role : ProtocolRole) : void {
+		clearSkill(role.getProtocolCapacity)
+		var beh = behaviors.remove(role)
+		if (beh !== null) {
+			unregisterBehavior(beh)
+		}
+		role.unregisterRole(^space, asEventListener)
+	}
+
+}

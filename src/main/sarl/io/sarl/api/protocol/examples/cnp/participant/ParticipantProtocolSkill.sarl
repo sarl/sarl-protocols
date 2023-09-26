@@ -1,11 +1,17 @@
 package io.sarl.api.protocol.examples.cnp.participant
 
+import io.sarl.api.core.Logging
+import io.sarl.api.protocol.examples.cnp.events.Failure
+import io.sarl.api.protocol.examples.cnp.events.Inform
 import io.sarl.api.protocol.examples.cnp.events.Propose
 import io.sarl.api.protocol.examples.cnp.events.Refuse
 import io.sarl.lang.core.EventSpace
 import io.sarl.lang.core.util.MutableOptional
+import java.util.UUID
 
 skill ParticipantProtocolSkill implements ParticipantProtocolCapacity {
+
+	uses Logging
 
 	val protocolSpace : EventSpace
 
@@ -38,6 +44,16 @@ skill ParticipantProtocolSkill implements ParticipantProtocolCapacity {
 			var evt = new Refuse(this.reason.get)
 			this.protocolSpace.emit(owner.ID, evt)
 		}
+	}
+
+	def emitInformTo(id : UUID) {
+		info("Emit INFORM")
+		this.protocolSpace.emit(owner.ID, new Inform)[it.ID == id]
+	}
+
+	def emitFailureTo(id : UUID, reason : String) {
+		info("Emit Failure")
+		this.protocolSpace.emit(owner.ID, new Failure(reason))[it.ID == id]
 	}
 	
 }

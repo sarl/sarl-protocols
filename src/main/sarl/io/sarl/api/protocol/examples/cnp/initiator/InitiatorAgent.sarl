@@ -2,26 +2,27 @@ package io.sarl.api.protocol.examples.cnp.initiator
 
 import io.sarl.api.core.Initialize
 import io.sarl.api.core.Logging
+import io.sarl.api.protocol.ProtocolEnactment
+import io.sarl.api.protocol.ProtocolEnactmentSkill
 import io.sarl.api.protocol.ProtocolReady
 import io.sarl.api.protocol.examples.cnp.CNPRole
-import io.sarl.api.protocol.examples.cnp.enactment.ProtocolEnactment
-import io.sarl.api.protocol.examples.cnp.enactment.ProtocolEnactmentSkill
 import io.sarl.api.protocol.examples.cnp.events.Failure
 import io.sarl.api.protocol.examples.cnp.events.Inform
 import io.sarl.api.protocol.examples.cnp.events.Refuse
-import io.sarl.api.protocol.examples.cnp.^space.CNPSpace
-import io.sarl.lang.core.Space
+import io.sarl.api.protocol.examples.cnp.^space.CNPSpaceSpecification
+import io.sarl.lang.core.EventSpace
 
 agent InitiatorAgent {
 	
 	uses ProtocolEnactment, InitiatorProtocolCapacity, Logging
 	
-	var cnpSpace : Space
+	var cnpSpace : EventSpace
 	
 	on Initialize {
+		loggingName = "Initiator"
 		setSkill(new ProtocolEnactmentSkill)
 		setSkill(new InitiatorInnerSkill)
-		cnpSpace = enact(CNPSpace, CNPRole.INITIATOR)
+		cnpSpace = enact(CNPSpaceSpecification, CNPRole.INITIATOR)
 	}
 
 	on ProtocolReady {
