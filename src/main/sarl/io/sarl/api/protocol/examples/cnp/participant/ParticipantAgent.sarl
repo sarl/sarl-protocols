@@ -5,9 +5,9 @@ import io.sarl.api.core.Logging
 import io.sarl.api.core.SpaceCreated
 import io.sarl.api.protocol.ProtocolEnactment
 import io.sarl.api.protocol.ProtocolEnactmentSkill
-import io.sarl.api.protocol.examples.cnp.CNPRole
-import io.sarl.api.protocol.examples.cnp.events.Reject
-import io.sarl.api.protocol.examples.cnp.^space.CNPSpaceSpecification
+import io.sarl.api.protocol.examples.cnp._generated.CNPRole
+import io.sarl.api.protocol.examples.cnp._generated.events.Reject
+import io.sarl.api.protocol.examples.cnp._generated.^space.CNPSpaceSpecification
 import io.sarl.lang.core.EventSpace
 
 agent ParticipantAgent {

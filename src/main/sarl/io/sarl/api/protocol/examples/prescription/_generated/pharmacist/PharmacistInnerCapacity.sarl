@@ -1,0 +1,12 @@
+package io.sarl.api.protocol.examples.prescription._generated.pharmacist
+
+/** 
+ * parameters in id, out symptoms, in age
+ * Patient -> any Doctor : Request [ in id, out symptoms, out age]
+ * Doctor -> any Pharmacist : Prescribe [ in id, in symptoms, in age, out prescription]
+ */
+capacity PharmacistInnerCapacity {
+
+	def preparePkg(rx : String) : String
+
+}

@@ -1,0 +1,28 @@
+package io.sarl.api.protocol.examples.prescription._generated.doctor
+
+import io.sarl.api.protocol.examples.prescription._generated.events.Prescribe
+import io.sarl.lang.core.EventSpace
+import io.sarl.lang.core.util.MutableOptional
+
+skill DoctorProtocolSkill implements DoctorProtocolCapacity {
+
+	val protocolSpace : EventSpace
+
+	val rx : MutableOptional<String> = MutableOptional.empty
+	
+	new (protocolSpace : EventSpace) {
+		this.protocolSpace = protocolSpace
+	}
+	
+	def setRx(rx : String) {
+		this.rx.set(rx)
+		emitIfReady
+	}
+
+	private def emitIfReady {
+		if (this.rx.isPresent) {
+			var evt = new Prescribe(this.rx.get)
+			this.protocolSpace.emit(owner.ID, evt)
+		}
+	}
+}

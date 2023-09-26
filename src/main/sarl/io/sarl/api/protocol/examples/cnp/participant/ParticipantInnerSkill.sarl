@@ -1,5 +1,6 @@
 package io.sarl.api.protocol.examples.cnp.participant
 
+import io.sarl.api.protocol.examples.cnp._generated.participant.ParticipantInnerCapacity
 import java.util.Random
 
 skill ParticipantInnerSkill implements ParticipantInnerCapacity {

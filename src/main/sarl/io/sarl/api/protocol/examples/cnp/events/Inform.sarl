@@ -1,3 +1,0 @@
-package io.sarl.api.protocol.examples.cnp.events
-
-event Inform

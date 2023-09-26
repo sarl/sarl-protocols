@@ -1,7 +1,0 @@
-package io.sarl.api.protocol.examples.prescription.doctor
-
-capacity DoctorProtocolCapacity {
-
-	def setRx(rx : String)
-
-}

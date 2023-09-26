@@ -1,0 +1,11 @@
+package io.sarl.api.protocol.examples.prescription._generated.events
+
+event Prescribe {
+
+	val rx : String
+
+	new(rx : String) {
+		this.rx = rx
+	}
+
+}

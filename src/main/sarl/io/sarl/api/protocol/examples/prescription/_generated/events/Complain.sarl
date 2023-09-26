@@ -1,0 +1,11 @@
+package io.sarl.api.protocol.examples.prescription._generated.events
+
+event Complain {
+
+	val symptoms : String
+
+	new(symptoms : String) {
+		this.symptoms = symptoms
+	}
+	
+}

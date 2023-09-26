@@ -1,9 +1,10 @@
 package io.sarl.api.protocol.examples.prescription.pharmacist
 
+import io.sarl.api.protocol.examples.prescription._generated.pharmacist.PharmacistInnerCapacity
+
 skill PharmacistInnerSkill implements PharmacistInnerCapacity {
 
 	override preparePkg(rx : String) : String {
-		// compute the perscription depending on the symptoms
 		"Preparing package"
 	}
 }

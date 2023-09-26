@@ -1,0 +1,39 @@
+package io.sarl.api.protocol.examples.cnp._generated.^space
+
+import io.bootique.di.Injector
+import io.sarl.api.core.OpenEventSpace
+import io.sarl.lang.core.SpaceID
+import io.sarl.lang.core.SpaceSpecification
+import io.sarl.sre.janus.KernelScope
+import io.sarl.sre.janus.services.logging.LoggingService
+import io.sarl.sre.janus.spaces.SpaceParticipantListenerFactory
+import javax.inject.Inject
+import javax.inject.Named
+
+class CNPSpaceSpecification implements SpaceSpecification<CNPSpace> {
+
+	@Inject
+	var injector : Injector
+	
+	@Inject
+	var loggingService : LoggingService
+	
+	@Inject
+	@KernelScope
+	var spaceParticipantListenerFactory : SpaceParticipantListenerFactory
+	
+	@Inject
+	@Named("defaultSpace")
+	var defaultSpace : OpenEventSpace
+	
+	def create(id : SpaceID, params : Object*) : CNPSpace {
+		val logger = this.loggingService.getKernelLogger
+		val listener = this.spaceParticipantListenerFactory.create(this.defaultSpace, logger)
+		val ^space = new CNPSpace(id, listener, this.loggingService)
+		listener.defaultSpace = ^space
+		this.injector.injectMembers(^space)
+		return ^space
+		
+	}
+
+}

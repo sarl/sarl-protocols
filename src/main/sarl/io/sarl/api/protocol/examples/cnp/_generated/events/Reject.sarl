@@ -1,0 +1,11 @@
+package io.sarl.api.protocol.examples.cnp._generated.events
+
+event Reject {
+
+	val reason : String
+
+	new(reason : String) {
+		this.reason = reason
+	}
+	
+}

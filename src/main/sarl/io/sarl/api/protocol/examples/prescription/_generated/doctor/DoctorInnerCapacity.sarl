@@ -1,0 +1,7 @@
+package io.sarl.api.protocol.examples.prescription._generated.doctor
+
+capacity DoctorInnerCapacity {
+
+	def computePrescribe(symptoms : String) : String
+
+}

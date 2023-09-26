@@ -1,7 +1,8 @@
 package io.sarl.api.protocol.examples.cnp.initiator
 
+import io.sarl.api.protocol.examples.cnp._generated.events.Propose
+import io.sarl.api.protocol.examples.cnp._generated.initiator.InitiatorInnerCapacity
 import java.util.List
-import io.sarl.api.protocol.examples.cnp.events.Propose
 
 skill InitiatorInnerSkill implements InitiatorInnerCapacity {
 	

@@ -1,0 +1,11 @@
+package io.sarl.api.protocol.examples.prescription._generated.patient
+
+/** 
+ * parameters in id, out symptoms, in age
+ * Patient -> Doctor : Request [ in id, out symptoms, out age]
+ */
+capacity PatientProtocolCapacity {
+
+	def setSymptoms(symptoms : String)
+
+}

@@ -3,8 +3,8 @@ package io.sarl.api.protocol.examples.prescription.doctor
 import io.sarl.api.core.SpaceCreated
 import io.sarl.api.protocol.ProtocolEnactment
 import io.sarl.api.protocol.ProtocolEnactmentSkill
-import io.sarl.api.protocol.examples.prescription.PrescriptionRole
-import io.sarl.api.protocol.examples.prescription.^space.PrescriptionSpaceSpecification
+import io.sarl.api.protocol.examples.prescription._generated.PrescriptionRole
+import io.sarl.api.protocol.examples.prescription._generated.^space.PrescriptionSpaceSpecification
 import io.sarl.lang.core.EventSpace
 
 agent DoctorAgent {
