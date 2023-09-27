@@ -16,7 +16,7 @@ class PrescriptionSpace extends OpenLocalEventSpace {
 		}
 		this.patient = patient
 		registerStrongParticipant(patient)
-		System.out.println("New patient registered")
+		logger.info("New patient registered")
 		emitIfReady
 	}
 
@@ -26,7 +26,7 @@ class PrescriptionSpace extends OpenLocalEventSpace {
 		}
 		this.doctor = doctor
 		registerStrongParticipant(doctor)
-		System.out.println("New doctor registered")
+		logger.info("New doctor registered")
 		emitIfReady
 	}
 
@@ -36,6 +36,7 @@ class PrescriptionSpace extends OpenLocalEventSpace {
 		}
 		this.pharmacist = pharmacist
 		registerStrongParticipant(pharmacist)
+		logger.info("New doctor registered")
 		emitIfReady
 	}
 
@@ -45,7 +46,7 @@ class PrescriptionSpace extends OpenLocalEventSpace {
 		}
 		unregister(patient)
 		this.patient = null
-		System.out.println("Patient unregistered")
+		logger.info("Patient unregistered")
 		//TODO emit something
 	}
 
@@ -55,7 +56,7 @@ class PrescriptionSpace extends OpenLocalEventSpace {
 		}
 		unregister(doctor)
 		this.doctor = null
-		System.out.println("Doctor unregistered")
+		logger.info("Doctor unregistered")
 	}
 
 	def synchronized unregisterPharmacist(pharmacist : EventListener) {
@@ -64,7 +65,7 @@ class PrescriptionSpace extends OpenLocalEventSpace {
 		}
 		unregister(pharmacist)
 		this.pharmacist = null
-		System.out.println("Pharmacist unregistered")
+		logger.info("Pharmacist unregistered")
 	}
 	
 	private synchronized def emitIfReady {

@@ -18,12 +18,12 @@ agent PatientAgent {
 	var prescriptionSpace : EventSpace
 	
 	on Initialize {
+		loggingName = "Patient"
 		setSkill(new ProtocolEnactmentSkill)
 		prescriptionSpace = enact(PrescriptionSpaceSpecification, PrescriptionRole.PATIENT)
 	}
 
 	on ProtocolReady {
-		info("Fever")
 		setSymptoms("fever")
 	}
 	

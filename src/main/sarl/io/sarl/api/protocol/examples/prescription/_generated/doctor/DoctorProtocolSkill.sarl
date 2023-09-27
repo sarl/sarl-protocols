@@ -1,6 +1,7 @@
 package io.sarl.api.protocol.examples.prescription._generated.doctor
 
 import io.sarl.api.core.Behaviors
+import io.sarl.api.core.Logging
 import io.sarl.api.protocol.examples.prescription._generated.events.Prescribe
 import io.sarl.api.protocol.examples.prescription._generated.events.RxBound
 import io.sarl.api.protocol.examples.prescription._generated.events.SymptomsBound
@@ -9,7 +10,7 @@ import io.sarl.lang.core.util.MutableOptional
 
 skill DoctorProtocolSkill implements DoctorProtocolCapacity {
 	
-	uses Behaviors
+	uses Behaviors, Logging
 
 	val protocolSpace : EventSpace
 
@@ -39,6 +40,7 @@ skill DoctorProtocolSkill implements DoctorProtocolCapacity {
 	private def emitIfReady {
 		if (this.symptoms.isPresent && this.rx.isPresent) {
 			var evt = new Prescribe(this.symptoms.get, this.rx.get)
+			info("Emit PRESCRIBE")
 			this.protocolSpace.emit(owner.ID, evt)
 		}
 	}
