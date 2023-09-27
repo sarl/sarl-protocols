@@ -1,6 +1,6 @@
 package io.sarl.api.protocol.examples.prescription.pharmacist
 
-import io.sarl.api.protocol.examples.prescription._generated.pharmacist.PharmacistInnerCapacity
+import io.sarl.api.protocol.examples.prescription.pharmacist.PharmacistInnerCapacity
 
 skill PharmacistInnerSkill implements PharmacistInnerCapacity {
 

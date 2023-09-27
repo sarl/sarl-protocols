@@ -4,6 +4,7 @@ import io.sarl.api.protocol.ProtocolRole;
 import io.sarl.api.protocol.examples.prescription._generated.doctor.DoctorBehavior;
 import io.sarl.api.protocol.examples.prescription._generated.doctor.DoctorProtocolCapacity;
 import io.sarl.api.protocol.examples.prescription._generated.doctor.DoctorProtocolSkill;
+import io.sarl.api.protocol.examples.prescription._generated.patient.PatientBehavior;
 import io.sarl.api.protocol.examples.prescription._generated.patient.PatientProtocolCapacity;
 import io.sarl.api.protocol.examples.prescription._generated.patient.PatientProtocolSkill;
 import io.sarl.api.protocol.examples.prescription._generated.pharmacist.PharmacistBehavior;
@@ -31,7 +32,7 @@ public enum PrescriptionRole implements ProtocolRole {
 
 		@Override
 		public Behavior getProtocolBehavior(Agent ag) {
-			return null; // Return null because not behavior was _generated
+			return new PatientBehavior(ag);
 		}
 
 		@Override

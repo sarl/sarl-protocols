@@ -2,9 +2,11 @@ package io.sarl.api.protocol.examples.prescription._generated.events
 
 event Filled {
 
+	val rx : String
 	val pkg : String
 
-	new(pkg : String) {
+	new(rx : String, pkg : String) {
+		this.rx = rx
 		this.pkg = pkg
 	}
 

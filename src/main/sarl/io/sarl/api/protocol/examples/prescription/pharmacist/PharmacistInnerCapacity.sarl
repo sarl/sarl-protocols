@@ -1,0 +1,7 @@
+package io.sarl.api.protocol.examples.prescription.pharmacist
+
+capacity PharmacistInnerCapacity {
+
+	def preparePkg(rx : String) : String
+
+}

@@ -4,12 +4,14 @@ import io.sarl.api.core.SpaceCreated
 import io.sarl.api.protocol.ProtocolEnactment
 import io.sarl.api.protocol.ProtocolEnactmentSkill
 import io.sarl.api.protocol.examples.prescription._generated.PrescriptionRole
+import io.sarl.api.protocol.examples.prescription._generated.events.RxBound
+import io.sarl.api.protocol.examples.prescription._generated.pharmacist.PharmacistProtocolCapacity
 import io.sarl.api.protocol.examples.prescription._generated.^space.PrescriptionSpaceSpecification
 import io.sarl.lang.core.EventSpace
 
 agent PharmacistAgent {
 	
-	uses ProtocolEnactment
+	uses ProtocolEnactment, PharmacistProtocolCapacity, PharmacistInnerCapacity
 	
 	var prescriptionSpace : EventSpace
 	
@@ -17,6 +19,11 @@ agent PharmacistAgent {
 		setSkill(new ProtocolEnactmentSkill)
 		setSkill(new PharmacistInnerSkill)
 		prescriptionSpace = enact(occurrence.spaceID, PrescriptionRole.PHARMACIST)
+	}
+
+	on RxBound {
+		var pkg = preparePkg(rx)
+		setPkg(pkg)
 	}
 	
 }

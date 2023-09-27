@@ -2,17 +2,13 @@ package io.sarl.api.protocol.examples.prescription._generated.pharmacist
 
 import io.sarl.api.protocol.examples.prescription._generated.events.Prescribe
 
-/** 
- * Patient -> any Doctor : Request [ in id, out symptoms, out age]
- * Doctor -> any Pharmacist : Prescribe [ in id, in symptoms, in age, out prescription]
- */
 behavior PharmacistBehavior {
 
-	uses PharmacistProtocolCapacity, PharmacistInnerCapacity
+	uses PharmacistProtocolCapacity
 	
 	on Prescribe {
-		var pkg = preparePkg(occurrence.rx)
-		setPkg(pkg)
+		setSymptoms(occurrence.symptoms)
+		setRx(occurrence.rx)
 	}
 
 }

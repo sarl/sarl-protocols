@@ -8,4 +8,10 @@ capacity PatientProtocolCapacity {
 
 	def setSymptoms(symptoms : String)
 
+	def setRx(rx : String)
+	def getRx : String
+
+	def setPkg(pkg : String)
+	def getPkg : String
+
 }

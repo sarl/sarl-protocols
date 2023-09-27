@@ -6,7 +6,7 @@ import io.sarl.api.protocol.ProtocolEnactment
 import io.sarl.api.protocol.ProtocolEnactmentSkill
 import io.sarl.api.protocol.ProtocolReady
 import io.sarl.api.protocol.examples.prescription._generated.PrescriptionRole
-import io.sarl.api.protocol.examples.prescription._generated.events.Filled
+import io.sarl.api.protocol.examples.prescription._generated.events.PkgBound
 import io.sarl.api.protocol.examples.prescription._generated.patient.PatientProtocolCapacity
 import io.sarl.api.protocol.examples.prescription._generated.^space.PrescriptionSpaceSpecification
 import io.sarl.lang.core.EventSpace
@@ -27,7 +27,7 @@ agent PatientAgent {
 		setSymptoms("fever")
 	}
 	
-	on Filled {
+	on PkgBound {
 		info("Thank you!")
 		leave(prescriptionSpace, PrescriptionRole.PATIENT)
 	}

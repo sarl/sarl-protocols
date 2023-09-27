@@ -1,7 +1,11 @@
 package io.sarl.api.protocol.examples.prescription._generated.pharmacist
 
+import io.sarl.api.core.Behaviors
 import io.sarl.api.core.Logging
 import io.sarl.api.protocol.examples.prescription._generated.events.Filled
+import io.sarl.api.protocol.examples.prescription._generated.events.PkgBound
+import io.sarl.api.protocol.examples.prescription._generated.events.RxBound
+import io.sarl.api.protocol.examples.prescription._generated.events.SymptomsBound
 import io.sarl.lang.core.EventSpace
 import io.sarl.lang.core.util.MutableOptional
 
@@ -12,26 +16,51 @@ import io.sarl.lang.core.util.MutableOptional
  */
 skill PharmacistProtocolSkill implements PharmacistProtocolCapacity {
 	
-	uses Logging
+	uses Logging, Behaviors
 
 	val protocolSpace : EventSpace
 
+	val symptoms : MutableOptional<String> = MutableOptional.empty
+	val rx : MutableOptional<String> = MutableOptional.empty
 	val pkg : MutableOptional<String> = MutableOptional.empty
 	
 	new (protocolSpace : EventSpace) {
 		this.protocolSpace = protocolSpace
 	}
-	
+
+	def setSymptoms(symptoms : String) {
+		this.symptoms.set(symptoms)
+		wake(new SymptomsBound)
+		//emitIfReady
+		// TODO should we have the emitIfReady here, since symptoms are not in the Filled message?
+	}
+
+	def getSymptoms : String {
+		this.symptoms.get
+	}
+
+	def setRx(rx : String) {
+		this.rx.set(rx)
+		wake(new RxBound)
+		emitIfReady
+	}
+
+	def getRx : String {
+		this.rx.get
+	}
+
 	def setPkg(pkg : String) {
 		this.pkg.set(pkg)
+		wake(new PkgBound)
 		emitIfReady
 	}
 
 	private def emitIfReady {
-		if (this.pkg.isPresent) {
-			var evt = new Filled(this.pkg.get)
+		if (this.rx.isPresent && this.pkg.isPresent) {
+			var evt = new Filled(this.rx.get, this.pkg.get)
 			info("Emit FILLED")
 			this.protocolSpace.emit(owner.ID, evt)
 		}
 	}
+	
 }

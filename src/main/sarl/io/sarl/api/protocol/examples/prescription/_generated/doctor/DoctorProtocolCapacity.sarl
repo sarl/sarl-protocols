@@ -2,6 +2,9 @@ package io.sarl.api.protocol.examples.prescription._generated.doctor
 
 capacity DoctorProtocolCapacity {
 
+	def setSymptoms(symptoms : String)
+	def getSymptoms : String
+	
 	def setRx(rx : String)
 
 }

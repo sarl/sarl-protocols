@@ -1,28 +1,46 @@
 package io.sarl.api.protocol.examples.prescription._generated.doctor
 
+import io.sarl.api.core.Behaviors
 import io.sarl.api.protocol.examples.prescription._generated.events.Prescribe
+import io.sarl.api.protocol.examples.prescription._generated.events.RxBound
+import io.sarl.api.protocol.examples.prescription._generated.events.SymptomsBound
 import io.sarl.lang.core.EventSpace
 import io.sarl.lang.core.util.MutableOptional
 
 skill DoctorProtocolSkill implements DoctorProtocolCapacity {
+	
+	uses Behaviors
 
 	val protocolSpace : EventSpace
 
+	val symptoms : MutableOptional<String> = MutableOptional.empty
 	val rx : MutableOptional<String> = MutableOptional.empty
 	
 	new (protocolSpace : EventSpace) {
 		this.protocolSpace = protocolSpace
 	}
+
+	def setSymptoms(symptoms : String) {
+		this.symptoms.set(symptoms)
+		wake(new SymptomsBound)
+		emitIfReady
+	}
+
+	def getSymptoms : String {
+		this.symptoms.get
+	}
 	
 	def setRx(rx : String) {
 		this.rx.set(rx)
+		wake(new RxBound)
 		emitIfReady
 	}
 
 	private def emitIfReady {
-		if (this.rx.isPresent) {
-			var evt = new Prescribe(this.rx.get)
+		if (this.symptoms.isPresent && this.rx.isPresent) {
+			var evt = new Prescribe(this.symptoms.get, this.rx.get)
 			this.protocolSpace.emit(owner.ID, evt)
 		}
 	}
+	
 }

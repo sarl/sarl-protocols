@@ -1,17 +1,23 @@
 package io.sarl.api.protocol.examples.prescription._generated.patient
 
+import io.sarl.api.core.Behaviors
 import io.sarl.api.core.Logging
 import io.sarl.api.protocol.examples.prescription._generated.events.Complain
+import io.sarl.api.protocol.examples.prescription._generated.events.PkgBound
+import io.sarl.api.protocol.examples.prescription._generated.events.RxBound
+import io.sarl.api.protocol.examples.prescription._generated.events.SymptomsBound
 import io.sarl.lang.core.EventSpace
 import io.sarl.lang.core.util.MutableOptional
 
 skill PatientProtocolSkill implements PatientProtocolCapacity {
 	
-	uses Logging
+	uses Logging, Behaviors
 
 	val protocolSpace : EventSpace
 
 	val symptoms : MutableOptional<String> = MutableOptional.empty
+	val rx : MutableOptional<String> = MutableOptional.empty
+	val pkg : MutableOptional<String> = MutableOptional.empty
 	
 	new (protocolSpace : EventSpace) {
 		this.protocolSpace = protocolSpace
@@ -19,7 +25,28 @@ skill PatientProtocolSkill implements PatientProtocolCapacity {
 	
 	def setSymptoms(symptoms : String) {
 		this.symptoms.set(symptoms)
+		wake(new SymptomsBound)
 		emitIfReady
+	}
+
+	def setRx(rx : String) {
+		this.rx.set(rx)
+		wake(new RxBound)
+		//emitIfReady
+	}
+
+	def getRx : String {
+		this.rx.get
+	}
+
+	def setPkg(pkg : String) {
+		this.pkg.set(pkg)
+		wake(new PkgBound)
+		//emitIfReady
+	}
+
+	def getPkg : String {
+		this.pkg.get
 	}
 	
 	private def emitIfReady {
@@ -30,5 +57,5 @@ skill PatientProtocolSkill implements PatientProtocolCapacity {
 			//TODO guard for emit only to specific role players
 		}
 	}
-
+	
 }

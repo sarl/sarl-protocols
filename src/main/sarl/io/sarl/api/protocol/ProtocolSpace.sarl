@@ -1,0 +1,9 @@
+package io.sarl.api.protocol
+
+import io.sarl.api.core.OpenEventSpace
+
+interface ProtocolSpace extends OpenEventSpace {
+
+
+
+}
