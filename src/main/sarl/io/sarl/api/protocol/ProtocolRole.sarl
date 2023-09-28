@@ -4,19 +4,28 @@ import io.sarl.lang.core.Agent
 import io.sarl.lang.core.Behavior
 import io.sarl.lang.core.Capacity
 import io.sarl.lang.core.EventListener
-import io.sarl.lang.core.EventSpace
 import io.sarl.lang.core.Skill
 
 interface ProtocolRole {
 
 	def getProtocolCapacity : Class<? extends Capacity>
 	
-	def getProtocolSkill(^space : EventSpace) : Skill
+	def getProtocolSkill(^space : ProtocolSpace) : Skill
 
 	def getProtocolBehavior(ag : Agent) : Behavior
-	
-	def registerRole(sp : EventSpace, listener : EventListener)
 
-	def unregisterRole(sp : EventSpace, listener : EventListener)
+	def registerRole(sp : ProtocolSpace, listener : EventListener) {
+		sp.register(this,listener)
+	}
+
+	def unregisterRole(sp : ProtocolSpace, listener : EventListener) {
+		sp.unregister(this,listener);
+	}
+	
+	def getMinCardinality : int {
+		1
+	}
+	
+	def getMaxCardinality : int
 
 }

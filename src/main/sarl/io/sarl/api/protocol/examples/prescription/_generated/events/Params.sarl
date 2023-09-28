@@ -1,7 +1,0 @@
-package io.sarl.api.protocol.examples.prescription._generated.events
-
-event SymptomsBound
-
-event RxBound
-
-event PkgBound

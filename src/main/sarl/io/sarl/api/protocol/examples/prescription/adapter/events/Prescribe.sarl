@@ -1,4 +1,4 @@
-package io.sarl.api.protocol.examples.prescription._generated.events
+package io.sarl.api.protocol.examples.prescription.adapter.events
 
 event Prescribe {
 
@@ -11,3 +11,5 @@ event Prescribe {
 	}
 
 }
+
+event PrescribeEnabled

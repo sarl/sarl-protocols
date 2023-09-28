@@ -20,5 +20,6 @@ agent BootAgent {
 
 	on AgentSpawned [it.agentType == PharmacistAgent.name] {
 		spawn(PatientAgent)
+		killMe
 	}
 }

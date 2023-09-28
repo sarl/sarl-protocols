@@ -2,9 +2,7 @@ package io.sarl.api.protocol
 
 import io.sarl.api.core.Behaviors
 import io.sarl.api.core.DefaultContextInteractions
-import io.sarl.api.protocol.ProtocolRole
 import io.sarl.lang.core.Behavior
-import io.sarl.lang.core.EventSpace
 import io.sarl.lang.core.SpaceID
 import io.sarl.lang.core.SpaceSpecification
 import java.util.Map
@@ -16,14 +14,14 @@ skill ProtocolEnactmentSkill implements ProtocolEnactment {
 	
 	val behaviors : Map<ProtocolRole, Behavior> = newHashMap
 
-	synchronized def enact(protocol : Class<? extends SpaceSpecification<S>>, role : ProtocolRole) : S with S extends EventSpace {
+	synchronized def enact(protocol : Class<? extends SpaceSpecification<S>>, role : ProtocolRole) : S with S extends ProtocolSpace {
 		var ^space = defaultContext.createSpace(protocol, UUID::randomUUID)
 		adoptRole(^space, role)
 		return ^space
 	}
 
-	synchronized def enact(spaceID : SpaceID, role : ProtocolRole) : EventSpace {
-		var ^space = defaultContext.getSpace(spaceID.ID) as EventSpace
+	synchronized def enact(spaceID : SpaceID, role : ProtocolRole) : ProtocolSpace {
+		var ^space = defaultContext.getSpace(spaceID.ID) as ProtocolSpace
 		if(^space === null) {
 			throw new RuntimeException
 		}
@@ -31,7 +29,7 @@ skill ProtocolEnactmentSkill implements ProtocolEnactment {
 		return ^space
 	}
 	
-	private def adoptRole(^space : EventSpace, role : ProtocolRole) {
+	private def adoptRole(^space : ProtocolSpace, role : ProtocolRole) {
 		setSkill(role.getProtocolSkill(^space))
 		var beh = role.getProtocolBehavior(this.owner)
 		if (beh !== null) {
@@ -41,7 +39,7 @@ skill ProtocolEnactmentSkill implements ProtocolEnactment {
 		role.registerRole(^space, asEventListener)
 	}
 
-	synchronized def leave(^space : EventSpace, role : ProtocolRole) : void {
+	synchronized def leave(^space : ProtocolSpace, role : ProtocolRole) : void {
 		clearSkill(role.getProtocolCapacity)
 		var beh = behaviors.remove(role)
 		if (beh !== null) {

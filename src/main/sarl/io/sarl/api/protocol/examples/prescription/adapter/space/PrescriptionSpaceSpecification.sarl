@@ -1,0 +1,13 @@
+package io.sarl.api.protocol.examples.prescription.adapter.^space
+
+import io.sarl.api.protocol.AbstractProtocolSpaceSpecification
+import io.sarl.api.protocol.ProtocolRole
+import io.sarl.api.protocol.examples.prescription.adapter.PrescriptionRole
+
+class PrescriptionSpaceSpecification extends AbstractProtocolSpaceSpecification {
+	
+	def getRoles : ProtocolRole[] {
+		PrescriptionRole.values
+	}
+	
+}

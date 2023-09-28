@@ -1,0 +1,34 @@
+package io.sarl.api.protocol.examples.prescription
+
+/*
+Prescription { 
+
+	roles Doctor, Pharmacist, Patient 
+	parameters out vID key, out Rx, out package
+	
+	Patient    −> Doctor     : Complain  [ out vID key, out symptoms ]
+	Doctor	   −> Pharmacist : Prescribe [ in vID key,  in symptoms, out Rx ]
+	Pharmacist −> Patient    : Filled    [ in vID key,  in Rx,       out package ]
+
+}
+*/
+
+/*	
+protocol Prescription {
+
+		// role name [min, max]
+		role Patient    [1,1]
+		role Doctor     [1,1]
+		role Pharmacist [1,1]
+
+		// id is implicit
+		var symptoms : String
+		var rx : String
+		var pkg : String
+
+		Patient to Doctor     : Complain  [ out symptoms ]
+		Doctor to Pharmacist  : Prescribe [ in symptoms, out rx ]
+		Pharmacist to Patient : Filled    [ in rx, out pkg ]
+
+}
+*/

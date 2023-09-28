@@ -1,6 +1,8 @@
 package io.sarl.api.protocol
 
-event ProtocolReady {
-	// TODO do we need the id here? Maybe the space id is sufficient
-	var protocolId : String
-}
+
+event ProtocolReady
+
+event ProtocolCompleted
+
+event ProtocolFailed

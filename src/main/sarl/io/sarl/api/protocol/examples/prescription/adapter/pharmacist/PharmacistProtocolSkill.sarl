@@ -1,11 +1,12 @@
-package io.sarl.api.protocol.examples.prescription._generated.pharmacist
+package io.sarl.api.protocol.examples.prescription.adapter.pharmacist
 
 import io.sarl.api.core.Behaviors
 import io.sarl.api.core.Logging
-import io.sarl.api.protocol.examples.prescription._generated.events.Filled
-import io.sarl.api.protocol.examples.prescription._generated.events.PkgBound
-import io.sarl.api.protocol.examples.prescription._generated.events.RxBound
-import io.sarl.api.protocol.examples.prescription._generated.events.SymptomsBound
+import io.sarl.api.protocol.examples.prescription.adapter.events.Filled
+import io.sarl.api.protocol.examples.prescription.adapter.events.FilledEnabled
+import io.sarl.api.protocol.examples.prescription.adapter.events.PkgBound
+import io.sarl.api.protocol.examples.prescription.adapter.events.RxBound
+import io.sarl.api.protocol.examples.prescription.adapter.events.SymptomsBound
 import io.sarl.lang.core.EventSpace
 import io.sarl.lang.core.util.MutableOptional
 
@@ -29,10 +30,12 @@ skill PharmacistProtocolSkill implements PharmacistProtocolCapacity {
 	}
 
 	def setSymptoms(symptoms : String) {
+		if (this.symptoms.isPresent) {
+			throw new RuntimeException("Already bound")
+		}
 		this.symptoms.set(symptoms)
 		wake(new SymptomsBound)
-		//emitIfReady
-		// TODO should we have the emitIfReady here, since symptoms are not in the Filled message?
+		wakeIfEnabled
 	}
 
 	def getSymptoms : String {
@@ -40,9 +43,12 @@ skill PharmacistProtocolSkill implements PharmacistProtocolCapacity {
 	}
 
 	def setRx(rx : String) {
+		if (this.rx.isPresent) {
+			throw new RuntimeException("Already bound")
+		}
 		this.rx.set(rx)
 		wake(new RxBound)
-		emitIfReady
+		wakeIfEnabled
 	}
 
 	def getRx : String {
@@ -50,9 +56,18 @@ skill PharmacistProtocolSkill implements PharmacistProtocolCapacity {
 	}
 
 	def setPkg(pkg : String) {
+		if (this.pkg.isPresent) {
+			throw new RuntimeException("Already bound")
+		}
 		this.pkg.set(pkg)
 		wake(new PkgBound)
 		emitIfReady
+	}
+
+	private def wakeIfEnabled {
+		if (this.rx.isPresent) {
+			wake(new FilledEnabled)
+		}
 	}
 
 	private def emitIfReady {

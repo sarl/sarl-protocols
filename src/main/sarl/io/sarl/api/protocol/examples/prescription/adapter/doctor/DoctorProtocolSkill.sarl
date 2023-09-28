@@ -1,10 +1,11 @@
-package io.sarl.api.protocol.examples.prescription._generated.doctor
+package io.sarl.api.protocol.examples.prescription.adapter.doctor
 
 import io.sarl.api.core.Behaviors
 import io.sarl.api.core.Logging
-import io.sarl.api.protocol.examples.prescription._generated.events.Prescribe
-import io.sarl.api.protocol.examples.prescription._generated.events.RxBound
-import io.sarl.api.protocol.examples.prescription._generated.events.SymptomsBound
+import io.sarl.api.protocol.examples.prescription.adapter.events.Prescribe
+import io.sarl.api.protocol.examples.prescription.adapter.events.PrescribeEnabled
+import io.sarl.api.protocol.examples.prescription.adapter.events.RxBound
+import io.sarl.api.protocol.examples.prescription.adapter.events.SymptomsBound
 import io.sarl.lang.core.EventSpace
 import io.sarl.lang.core.util.MutableOptional
 
@@ -22,9 +23,12 @@ skill DoctorProtocolSkill implements DoctorProtocolCapacity {
 	}
 
 	def setSymptoms(symptoms : String) {
+		if(this.symptoms.isPresent) {
+			throw new RuntimeException("Already bound")
+		}
 		this.symptoms.set(symptoms)
 		wake(new SymptomsBound)
-		emitIfReady
+		wakeIfEnabled
 	}
 
 	def getSymptoms : String {
@@ -32,11 +36,20 @@ skill DoctorProtocolSkill implements DoctorProtocolCapacity {
 	}
 	
 	def setRx(rx : String) {
+		if (this.rx.isPresent) {
+			throw new RuntimeException("Already bound")
+		}
 		this.rx.set(rx)
 		wake(new RxBound)
 		emitIfReady
 	}
 
+	private def wakeIfEnabled {
+		if (this.symptoms.isPresent) {
+			wake(new PrescribeEnabled)
+		}
+	}
+	
 	private def emitIfReady {
 		if (this.symptoms.isPresent && this.rx.isPresent) {
 			var evt = new Prescribe(this.symptoms.get, this.rx.get)

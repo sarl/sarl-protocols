@@ -1,0 +1,8 @@
+package io.sarl.api.protocol.examples.prescription.adapter.events
+
+
+event SymptomsBound
+
+event RxBound
+
+event PkgBound

@@ -1,4 +1,4 @@
-package io.sarl.api.protocol.examples.prescription._generated.pharmacist
+package io.sarl.api.protocol.examples.prescription.adapter.pharmacist
 
 capacity PharmacistProtocolCapacity {
 

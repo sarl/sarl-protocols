@@ -1,35 +1,43 @@
 package io.sarl.api.protocol.examples.prescription.patient
 
 import io.sarl.api.core.Initialize
+import io.sarl.api.core.Lifecycle
 import io.sarl.api.core.Logging
+import io.sarl.api.protocol.ProtocolCompleted
 import io.sarl.api.protocol.ProtocolEnactment
 import io.sarl.api.protocol.ProtocolEnactmentSkill
-import io.sarl.api.protocol.ProtocolReady
-import io.sarl.api.protocol.examples.prescription._generated.PrescriptionRole
-import io.sarl.api.protocol.examples.prescription._generated.events.PkgBound
-import io.sarl.api.protocol.examples.prescription._generated.patient.PatientProtocolCapacity
-import io.sarl.api.protocol.examples.prescription._generated.^space.PrescriptionSpaceSpecification
-import io.sarl.lang.core.EventSpace
+import io.sarl.api.protocol.ProtocolSpace
+import io.sarl.api.protocol.examples.prescription.adapter.PrescriptionRole
+import io.sarl.api.protocol.examples.prescription.adapter.events.ComplainEnabled
+import io.sarl.api.protocol.examples.prescription.adapter.events.PkgBound
+import io.sarl.api.protocol.examples.prescription.adapter.patient.PatientProtocolCapacity
+import io.sarl.api.protocol.examples.prescription.adapter.^space.PrescriptionSpaceSpecification
+import java.util.concurrent.atomic.AtomicReference
 
 agent PatientAgent {
 	
-	uses ProtocolEnactment, PatientProtocolCapacity, Logging
+	uses ProtocolEnactment, PatientProtocolCapacity, Logging, Lifecycle
 	
-	var prescriptionSpace : EventSpace
+	var prescriptionSpace = new AtomicReference<ProtocolSpace>
 	
 	on Initialize {
 		loggingName = "Patient"
 		setSkill(new ProtocolEnactmentSkill)
-		prescriptionSpace = enact(PrescriptionSpaceSpecification, PrescriptionRole.PATIENT)
+		var sp = enact(PrescriptionSpaceSpecification, PrescriptionRole.PATIENT)
+		prescriptionSpace.set(sp)
 	}
 
-	on ProtocolReady {
+	on ComplainEnabled {
 		setSymptoms("fever")
 	}
 	
 	on PkgBound {
 		info("Thank you!")
-		leave(prescriptionSpace, PrescriptionRole.PATIENT)
+	}
+	
+	on ProtocolCompleted {
+		leave(prescriptionSpace.get, PrescriptionRole.PATIENT)
+		killMe
 	}
 	
 }

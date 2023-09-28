@@ -1,38 +1,45 @@
-package io.sarl.api.protocol.examples.prescription._generated.patient
+package io.sarl.api.protocol.examples.prescription.adapter.patient
 
 import io.sarl.api.core.Behaviors
 import io.sarl.api.core.Logging
-import io.sarl.api.protocol.examples.prescription._generated.events.Complain
-import io.sarl.api.protocol.examples.prescription._generated.events.PkgBound
-import io.sarl.api.protocol.examples.prescription._generated.events.RxBound
-import io.sarl.api.protocol.examples.prescription._generated.events.SymptomsBound
-import io.sarl.lang.core.EventSpace
+import io.sarl.api.protocol.ProtocolCompleted
+import io.sarl.api.protocol.ProtocolSpace
+import io.sarl.api.protocol.examples.prescription.adapter.events.Complain
+import io.sarl.api.protocol.examples.prescription.adapter.events.PkgBound
+import io.sarl.api.protocol.examples.prescription.adapter.events.RxBound
+import io.sarl.api.protocol.examples.prescription.adapter.events.SymptomsBound
 import io.sarl.lang.core.util.MutableOptional
 
 skill PatientProtocolSkill implements PatientProtocolCapacity {
 	
 	uses Logging, Behaviors
 
-	val protocolSpace : EventSpace
+	val protocolSpace : ProtocolSpace
 
 	val symptoms : MutableOptional<String> = MutableOptional.empty
 	val rx : MutableOptional<String> = MutableOptional.empty
 	val pkg : MutableOptional<String> = MutableOptional.empty
 	
-	new (protocolSpace : EventSpace) {
+	new (protocolSpace : ProtocolSpace) {
 		this.protocolSpace = protocolSpace
 	}
 	
 	def setSymptoms(symptoms : String) {
+		if (this.symptoms.isPresent) {
+			throw new RuntimeException("Already bound")
+		}
 		this.symptoms.set(symptoms)
 		wake(new SymptomsBound)
 		emitIfReady
 	}
 
 	def setRx(rx : String) {
+		if (this.rx.isPresent) {
+			throw new RuntimeException("Already bound")
+		}
 		this.rx.set(rx)
 		wake(new RxBound)
-		//emitIfReady
+		//wakeIfEnabled
 	}
 
 	def getRx : String {
@@ -40,9 +47,13 @@ skill PatientProtocolSkill implements PatientProtocolCapacity {
 	}
 
 	def setPkg(pkg : String) {
+		if (this.pkg.isPresent) {
+			throw new RuntimeException("Already bound")
+		}
 		this.pkg.set(pkg)
 		wake(new PkgBound)
-		//emitIfReady
+		// TODO here not needed because wakeIfEnabled is empty
+		protocolSpace.emit(ID, new ProtocolCompleted)
 	}
 
 	def getPkg : String {
@@ -57,5 +68,7 @@ skill PatientProtocolSkill implements PatientProtocolCapacity {
 			//TODO guard for emit only to specific role players
 		}
 	}
+	
+	private def wakeIfEnabled {}
 	
 }

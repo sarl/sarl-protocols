@@ -1,4 +1,4 @@
-package io.sarl.api.protocol.examples.prescription._generated.patient
+package io.sarl.api.protocol.examples.prescription.adapter.patient
 
 /** 
  * parameters in id, out symptoms, in age

@@ -1,4 +1,4 @@
-package io.sarl.api.protocol.examples.prescription._generated.^space
+package io.sarl.api.protocol
 
 import io.bootique.di.Injector
 import io.sarl.api.core.OpenEventSpace
@@ -10,33 +10,31 @@ import io.sarl.sre.janus.spaces.SpaceParticipantListenerFactory
 import javax.inject.Inject
 import javax.inject.Named
 
-/** 
- * 
- */
-class PrescriptionSpaceSpecification implements SpaceSpecification<PrescriptionSpace> {
+abstract class AbstractProtocolSpaceSpecification implements SpaceSpecification<ProtocolSpace> {
 
 	@Inject
-	var injector : Injector
+	protected var injector : Injector
 	
 	@Inject
-	var loggingService : LoggingService
+	protected var loggingService : LoggingService
 	
 	@Inject
 	@KernelScope
-	var spaceParticipantListenerFactory : SpaceParticipantListenerFactory
+	protected var spaceParticipantListenerFactory : SpaceParticipantListenerFactory
 	
 	@Inject
 	@Named("defaultSpace")
-	var defaultSpace : OpenEventSpace
+	protected var defaultSpace : OpenEventSpace
 	
-	def create(id : SpaceID, params : Object*) : PrescriptionSpace {
+	def create(id : SpaceID, params : Object*) : ProtocolSpace {
 		val logger = this.loggingService.getKernelLogger
 		val listener = this.spaceParticipantListenerFactory.create(this.defaultSpace, logger)
-		val ^space = new PrescriptionSpace(id, listener, this.loggingService)
+		val ^space = new ProtocolSpace(id, listener, this.loggingService, getRoles)
 		listener.defaultSpace = ^space
 		this.injector.injectMembers(^space)
 		return ^space
-		
 	}
+	
+	abstract def getRoles : ProtocolRole[] 
 
 }
