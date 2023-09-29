@@ -1,0 +1,45 @@
+# SARL temporary files
+**/generated-sources/sarl
+**/*.sarlbin
+**/io.sarl.eclipse.examples/contents
+
+# Xtext templates
+**/*.xml_gen
+**/*.java_gen
+**/.antlr-generator*.jar
+
+# NetBean / Eclipse
+bin/
+**/*.java._trace
+**/*.java_trace
+**/*.smap
+**/.project
+**/.classpath
+**/.settings
+**/.metadata
+
+
+# Subversion and CVS
+**/.svn/
+**/.cvs/
+
+# Maven
+target/
+**/.flattened-pom.xml
+
+# Compiled files
+**/*.class
+**/*.dll
+**/*.lib
+**/*.exe
+**/*.so
+**/*.dynlib
+
+# Temp files
+**/*.bak
+**/*~
+workspace/
+
+#Others
+**/.DS_Store
+
