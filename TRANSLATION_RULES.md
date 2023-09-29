@@ -44,7 +44,7 @@ Creation of a SARL event per BSPL message to transport the information between t
 > Loop for each $m \in M$:  
 $\quad U = \{v | \forall v \in A \cup E, u = \langle \square,\square,m,A,E\rangle, \forall u \in B\}$  
 $\quad \oplus($"event" $m$ "{"$)$  
-$\quad$Loop for each $v \in U$:  
+$\quad $Loop for each $v \in U$:  
 $\qquad\oplus($"var" $v$ ":" typeof($v$)$)$  
 $\quad\oplus($"new("$)$  
 $\quad$Loop for each $v \in U$:  
