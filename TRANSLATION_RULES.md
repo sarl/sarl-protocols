@@ -43,25 +43,32 @@ Creation of a SARL event per BSPL message to transport the information between t
 
 > Loop for each $m \in M$:  
 $\quad U = \{v | \forall v \in A \cup E, u = \langle \square,\square,m,A,E\rangle, \forall u \in B\}$  
-$\quad \oplus($"event" $m$ "{"$)$  
-$\quad $Loop for each $v \in U$:  
-$\qquad\oplus($"var" $v$ ":" typeof($v$)$)$  
-$\quad\oplus($"new("$)$  
-$\quad$Loop for each $v \in U$:  
-$\qquad\oplus(v$ ":" typeof($v$)$)$  
-$\quad\oplus($") {"$)$  
-$\quad$Loop for each $v \in U$:  
-$\qquad\oplus($"this." $v$ "=" v$)$  
-$\quad\oplus($"}" "}"$)$  
+$\quad\oplus$ ("event" $m$ "{")  
 >
->$\quad\oplus($"event" $m$ "Enabled" $)$
+>$\quad$Loop for each $v \in U$:  
+$\qquad\oplus$ ("var" $v$ ":" $\tau$($v$))  
+>
+>$\quad\oplus$ ("new" "(")  
+$\quad$Loop for each $v \in U$:  
+$\qquad\oplus$ ($v$ ":" $\tau$($v$))  
+$\quad\oplus$ (")" "{")  
+$\quad$Loop for each $v \in U$:  
+$\qquad\oplus$ ("this" "." $v$ "=" $v$)  
+$\quad\oplus$ ("}" "}")  
+>
+>$\quad\oplus$ ("event" $m$ + "Enabled")
 
-where $\square$ stands for a free variable, and $\oplus(x)$ generates SARL code $x$.
+where:
+
+* $\square$ stands for a free variable;
+* $\oplus(x)$ generates SARL code $x$;
+* $a + b$ in $\oplus(x)$ means the concatenation of the symbols $a$ and $b$ to generat a single symbol in SARL code; and
+* $\tau(x)$ is the type declared for the variable $x$ as it is declared in the protocol specification.
 
 Creation of a SARL "bound" event for each variable in BSPL that indicates to the agent that the knowledge $v$ was bounded to its value:
 
 > Loop for each $v \in V$:  
-$\quad \oplus($"event" $v$ "Bound"$)$
+$\quad \oplus$ ("event" $v$ + "Bound")
 
 
 ## 2.2. Definition of the protocol roles
@@ -79,20 +86,25 @@ The capacity/skill is for the emitters of a message; and, the behavior is for th
 
 Definition of all the roles in the protocol:
 
-> $\oplus($"enum" $B$ "Role" "implements" "ProtocolRole" "{"$)$  
+> $\oplus$("enum" $B$ + "Role" "implements" "ProtocolRole" "{")  
 Loop for each $r \in R$:  
-$\quad\oplus(r$ "{"$)$  
-$\quad\oplus($"def" "getProtocolCapacity" ":" "Class<? extends Capacity>" "{" $r$ "ProtocolCapacity" "}"$)$  
+$\quad\oplus$ ($r$ "{")  
+$\quad\oplus$ ("def" "getProtocolCapacity" ":" "Class&lt;? extends Capacity&gt;" "{" $r$ + "ProtocolCapacity" "}")  
 >
-> $\quad\oplus($"def" "getProtocolSkill" "(" "space" ":" "ProtocolSpace" ")" ":" "Skill"$)$  
-$\quad\oplus($"{" "new" $r$ "ProtocolSkill(space)" "}"$)$  
+> $\quad\oplus$ ("def" "getProtocolSkill" "(" "space" ":" "ProtocolSpace" ")" ":" "Skill")  
+$\quad\oplus$ ("{" "new" $r$ + "ProtocolSkill" "(" "space" ")" "}")  
 >
-> $\quad\oplus($"def" "getProtocolBehavior" "(" "^agent" ":" "Agent" ")" ":" "Behavior"$)$  
-$\quad\oplus($"{" "new" $r$ "Behavior(^agent)" "}"$)$  
+> $\quad\oplus$ ("def" "getProtocolBehavior" "(" "^agent" ":" "Agent" ")" ":" "Behavior")  
+$\quad\oplus$ ("{" "new" $r$ + "Behavior" "(" "agent" ")" "}")  
 >
-> $\quad\oplus($"def" "getMaxCardinality" ":" "int" "{" "1" "}"$)$  
-$\quad\oplus($"}"$)$  
-$\oplus($"}"$)$
+>$\quad$Let $i \in [1:+\infty)$ the minimum cardinality for the role $r$, with a default value of $1$  
+$\quad$If $i > 1$:  
+$\qquad\oplus$ ("def" "getMinCardinality" ":" "int" "{" $i$ "}")  
+>
+>$\quad$Let $a \in [i;+\infty)$ the maximum cardinality for the role $r$, with a default value of $1$  
+$\quad\oplus$ ("def" "getMaxCardinality" ":" "int" "{" $a$ "}")  
+$\quad\oplus$ ("}")  
+$\oplus$ ("}")
 
 
 ## 2.3. Definition of the protocol space (specification)
@@ -100,8 +112,8 @@ $\oplus($"}"$)$
 The protocol space is generic and independent of any specific protocol.
 A protocol defines a space specification (a kind of factory for the space) that specifies the accepted roles in the protocol:
 
-> $\oplus($"class" $B$ "SpaceSpecification" "extends" "AbstractProtocolSpaceSpecification" "{"$)$  
-$\oplus($"def" "getRoles" ":" "ProtocolRole[]" "{" $B$ "Role.values" "}" "}"$)$  
+> $\oplus$ ("class" $B$ + "SpaceSpecification" "extends" "AbstractProtocolSpaceSpecification" "{")  
+$\oplus$ ("def" "getRoles" ":" "ProtocolRole[]" "{" $B$ + "Role" "." "values" "}" "}")
 
 
 ## 2.4. Definition of the protocol capacity
@@ -110,65 +122,69 @@ The players of the roles are equiped with a capacity and a skill for storing the
 All the variables that are bound in a message are accessible by the roles attached to the message.
 
 > Loop for each $r \in R$:  
-$\quad\oplus($"capacity" $r$ "ProtocolCapacity" "{"$)$  
+$\quad\oplus$ ("capacity" $r$ + "ProtocolCapacity" "{")  
 $\quad l = \{v | \forall v \in A \cup E, u = \langle X,Y,\square,A, E\rangle, r \in \{X, Y\}, \forall u \in B\}$  
 $\quad$Loop for each $v \in l$:  
-$\qquad\oplus($"def" "set" $v$ "(" "v" ":" typeof($v$) ")"$)$  
-$\qquad\oplus($"def" "get" $v$ ":" typeof($v$)$)$  
-$\quad\oplus($"}"$)$
+$\qquad\oplus$ ("def" "set" + $v$ "(" "v" ":" $\tau$($v$) ")")  
+$\qquad\oplus$ ("def" "get" + $v$ ":" $\tau$($v$))  
+$\quad\oplus$ ("}")
 
 ## 2.5. Definition of the protocol skill
 
 > Loop for each $r \in R$:  
->$\quad\oplus($"skill" $r$ "ProtocolSkill" "implements" "ProtocolCapacity" "{"$)$  
+>$\quad\oplus$ ("skill" $r$ + "ProtocolSkill" "implements" "ProtocolCapacity" "{")  
 >
->$\quad\oplus($"uses" "Logging" "Behaviors"$)$  
+>$\quad\oplus$ ("uses" "Logging" "Behaviors")  
 >
->$\quad\oplus($"val" "protocolSpace" ":" "ProtocolSpace"$)$  
+>$\quad\oplus$ ("val" "protocolSpace" ":" "ProtocolSpace")  
 >
->$\quad\oplus($"new" "(" "protocolSpace" ":" "ProtocolSpace" ")" "{" "this.protocolSpace" "=" "protocolSpace" "}"$)$  
+>$\quad\oplus$ ("new" "(" "protocolSpace" ":" "ProtocolSpace" ")" "{" "this" "." "protocolSpace" "=" "protocolSpace" "}")  
 >
 >$\quad l = \{v | \forall v \in A \cup E, u = \langle X,Y,\square,A, E\rangle, r \in \{X, Y\}, \forall u \in B\}$  
 $\quad$Loop for each $v \in l$:  
-$\qquad\oplus($"val" $v$ ":" "MutableOptional<" typeof($v$) ">" "=" "MutableOptional.empty"$)$
+$\qquad\oplus$ ("val" $v$ ":" "MutableOptional&lt;" + $\tau$($v$) + "&gt;" "=" "MutableOptional" "." "empty")
 >
-> $\qquad\oplus($"def" "get" $v$ ":" typeof($v$) "{" "this." $v$ "}"$)$  
+> $\qquad\oplus$ ("def" "get" + $v$ ":" $\tau$($v$) "{" "this" "." $v$ "}")  
 >
->$\qquad\oplus($"def" "set" $v$ "(" "v" ":" typeof($v$) ")" "{"$)$  
-$\qquad\oplus($"if" "(" "this." $v$ ".isPresent" ")" "{" $\boxtimes($Already bound$)$ "}"$)$  
-$\qquad\oplus($"this." $v$ ".set(" $v$ ")"$)$  
-$\qquad\oplus($"wake" "(" "new" $v$ "Bound" ")"$)$  
+>$\qquad\oplus$ ("def" "set" + $v$ "(" "v" ":" $\tau$($v$) ")" "{")  
+$\qquad\oplus$ ("if" "(" "this" "." $v$ "." "isPresent" ")" "{" $\boxtimes($Already bound$)$ "}")  
+$\qquad\oplus$ ("this" "." $v$ "." "set" "(" $v$ ")")  
+$\qquad\oplus$ ("wake" "(" "new" $v$ + "Bound" ")")  
 >
 >$\qquad\Omega_1 = \{m | u = \langle X,Y,m,A,\square\rangle, v \in A, r \in \{X, Y\}, \forall u \in B\}$  
 $\qquad$Loop for each $m \in \Omega_1$:  
-$\qquad\quad\oplus($"wake" $m$ "IfEnabled"$)$  
-$\qquad\oplus($"}"$)$  
+$\qquad\quad\oplus$ ("wake" $m$ + "IfEnabled")  
+$\qquad\oplus$ ("}")  
 >
 > $\qquad$Loop for each $m \in \Omega_1$:  
-$\qquad\quad\oplus($"private" "def" "wake" $m$ "IfEnabled" "{"$)$  
-$\qquad\quad\oplus($"if" "("$)$  
+$\qquad\quad\oplus$ ("private" "def" "wake" + $m$ + "IfEnabled" "{")  
+$\qquad\quad\oplus$ ("if" "(")  
 $\qquad\quad$Loop for each $v \in \bigcup(A | u = \langle r,\square,m,A,\square\rangle, \forall u \in B)$:  
-$\qquad\qquad\oplus($"this." v ".isPresent" "&&"$)$  
-$\qquad\quad\oplus($")" "{"$)$  
-$\qquad\quad\oplus($"wake" "(" "new" $m$ "Enabled" ")" "}" "}"$)$  
+$\qquad\qquad$If $v$ is not the first item in the loop:  
+$\qquad\qquad\quad\oplus$ ("&&")  
+$\qquad\qquad\oplus$ ("this" "." v "." "isPresent")  
+$\qquad\quad\oplus$ (")" "{")  
+$\qquad\quad\oplus$ ("wake" "(" "new" $m$ + "Enabled" ")" "}" "}")  
 >
 >$\qquad\Omega_2 = \{m | u = \langle X,Y,m,\square,E\rangle, v \in E, r \in \{X, Y\}, \forall u \in B\}$  
 $\qquad$Loop for each $m \in \Omega_2$:  
-$\qquad\quad\oplus($"emit" $m$ "IfReady"$)$  
-$\qquad\oplus($"}"$)$  
+$\qquad\quad\oplus$ ("emit" $m$ + "IfReady")  
+$\qquad\oplus$ ("}")  
 >
 > $\qquad$Loop for each $m \in \Omega_2$:  
-$\qquad\quad\oplus($"private" "def" "emit" $m$ "IfReady" "{"$)$  
-$\qquad\quad\oplus($"if" "("$)$  
+$\qquad\quad\oplus$ ("private" "def" "emit" + $m$ + "IfReady" "{")  
+$\qquad\quad\oplus$ ("if" "(")  
 $\qquad\quad\Omega_3 = \bigcup(E | u = \langle r,\square,m,\square,E\rangle, \forall u \in B)$  
 $\qquad\quad$Loop for each $v \in \Omega_3$:  
-$\qquad\qquad\oplus($"this." v ".isPresent" "&&"$)$  
-$\qquad\quad\oplus($")" "{"$)$  
-$\qquad\quad\oplus($"var" "evt" "=" "new" $m$ "("$)$  
+$\qquad\qquad$If $v$ is not the first item in the loop:  
+$\qquad\qquad\quad\oplus$ ("&&")  
+$\qquad\qquad\oplus$ ("this" "." v "." "isPresent")  
+$\qquad\quad\oplus$ (")" "{")  
+$\qquad\quad\oplus$ ("var" "evt" "=" "new" $m$ "(")  
 $\qquad\quad$Loop for each $v \in \Omega_3$:  
-$\qquad\qquad\oplus($"this." v$)$  
-$\qquad\quad\oplus($")" "this.protocolSpace.emit" "(" "owner.ID" "," "evt" ")" "}" "}"$)$  
-$\quad\oplus($"}"$)$
+$\qquad\qquad\oplus $ ("this" "." v)  
+$\qquad\quad\oplus$ (")" "this" "." "protocolSpace" "." "emit" "(" "owner" "." "ID" "," "evt" ")" "}" "}")  
+$\quad\oplus$ ("}")
 
 
 where $\boxtimes(x)$ generates an error with the message text $x$.
@@ -178,49 +194,49 @@ where $\boxtimes(x)$ generates an error with the message text $x$.
 The players of the receiver roles are equiped with a behavior for reacting to the receiving of an event and to transform the received data from inside the event to knowledge in the receiving agent memory.
 
 > Loop for each $r \in R_r$:  
-$\quad\oplus($"behavior" $r$ "Behavior" "{"$)$  
+$\quad\oplus$ ("behavior" $r$ + "Behavior" "{")  
 >
 >$\quad$If $\exists m | m \in M, u = \langle r,\square,m,\emptyset,\square\rangle, \forall u \in B$:  
-$\qquad\oplus($"uses" "Behaviors"$)$  
-$\qquad\oplus($"on" "ProtocolReady" "{" "wake" "(" "new" i "Enabled" ")" "}"$)$
+$\qquad\oplus$ ("uses" "Behaviors")  
+$\qquad\oplus$ ("on" "ProtocolReady" "{" "wake" "(" "new" i + "Enabled" ")" "}")
 >
->$\quad\oplus($"uses" $r$ "ProtocolCapacity"$)$  
+>$\quad\oplus$ ("uses" $r$ + "ProtocolCapacity")  
 >
 >$\quad\Omega = \{m | u = \langle\square,r,m,\square,\square\rangle, \forall u \in B\}$  
 $\quad$Loop for each $m \in \Omega$:  
-$\qquad\oplus($"on" $m$ "{"$)$  
+$\qquad\oplus$ ("on" $m$ "{")  
 $\qquad$Loop for each $v \in \{v | v \in A \cup E, u = \langle \square,r,m,A,E\rangle, \forall u \in B\}$:  
-$\qquad\qquad\oplus($"set" $v$ "(" "occurrence." $v$ ")"$)$  
-$\qquad\oplus($"}"$)$  
-$\quad\oplus($"}"$)$  
+$\qquad\qquad\oplus$ ("set" $v$ "(" "occurrence" "." $v$ ")")  
+$\qquad\oplus$ ("}")  
+$\quad\oplus$ ("}")  
 
 # 3. Generated Templates for Agents
 
 The following rule describes the generation of a template code for an agent involved in a protocol.
 
 > Loop for each $r \in R$:  
-$\quad\oplus($"agent" $r$ "Agent" "{"$)$  
-$\quad\oplus($"uses" "ProtocolEnactment"$)$  
-$\quad\oplus($"uses" $r$ "ProtocolCapacity"$)$  
+$\quad\oplus$ ("agent" $r$ + "Agent" "{")  
+$\quad\oplus$ ("uses" "ProtocolEnactment")  
+$\quad\oplus$ ("uses" $r$ + "ProtocolCapacity")  
 >
->$\quad\oplus($"val" "protocolSpace" "=" "new" "AtomicRerence<ProtocolSpace>"$)$  
+>$\quad\oplus$ ("val" "protocolSpace" "=" "new" "AtomicRerence&lt;ProtocolSpace&gt;")  
 >
->$\quad\oplus($"on" "SpaceCreated" "[" "it.spaceID.spaceSpecification" "==" $B$ "SpaceSpecification" "{"$)$  
+>$\quad\oplus$ ("on" "SpaceCreated" "[" "it" "." "spaceID" "." "spaceSpecification" "==" $B$ +"SpaceSpecification" "]" "{")  
 $\quad$If ProtocolEnactmentSkill is not a built-in capacity in SARL:  
-$\qquad\oplus($"setSkill(new ProtocolEnactmentSkill)"$)$  
-$\quad\oplus($"var" "sp" "=" "enact" "(" "occurrence.spaceID" "," $B$ "Role." $r$ ")"$)$  
-$\quad\oplus($"protocolSpace.set(sp)" "}"$)$  
+$\qquad\oplus$ ("setSkill(new ProtocolEnactmentSkill)")  
+$\quad\oplus$ ("var" "sp" "=" "enact" "(" "occurrence" "." "spaceID" "," $B$ + "Role" "." $r$ ")")  
+$\quad\oplus$ ("protocolSpace" "." "set" "(" "sp" ")" "}")  
 >
 >$\quad\Omega_1 = \{m | u = \langle r,\square,m,\square,\square\rangle, \forall u \in B\}$  
 $\quad$Loop on $m \in \Omega_1$:  
-$\qquad\oplus($"on" $m$ "Enabled" "{"$)$  
+$\qquad\oplus$ ("on" $m$ + "Enabled" "{")  
 $\qquad\Omega_2 = \{v | v \in E, u = \langle r,\square,m,\square,E\rangle, \forall u \in B\}$  
 $\qquad$Loop for each $v \in \Omega_2$:  
-$\qquad\quad\oplus($"// TODO: Replace $\Delta$ by a value"$)$  
-$\qquad\quad\oplus($"set" $v$ "(" "$\Delta$" ")"$)$  
-$\qquad\oplus($"}"$)$  
+$\qquad\quad\oplus$ ("// TODO: Replace $\Delta$ by a value")  
+$\qquad\quad\oplus$ ("set" $v$ "(" "$\Delta$" ")")  
+$\qquad\oplus$ ("}")  
 >
->$\quad\oplus($"on" "ProtocolCompleted" "{" "}"$)$  
-$\qquad\oplus($"// TODO: Leave the procotol"$)$  
-$\quad\oplus($"}"$)$  
+>$\quad\oplus$ ("on" "ProtocolCompleted" "{")  
+$\quad\oplus$ ("// TODO: Leave the procotol")  
+$\quad\oplus$ ("}" "}")  
 
