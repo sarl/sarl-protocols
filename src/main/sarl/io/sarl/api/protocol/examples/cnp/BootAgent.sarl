@@ -3,28 +3,24 @@ package io.sarl.api.protocol.examples.cnp
 import io.sarl.api.core.AgentSpawned
 import io.sarl.api.core.Initialize
 import io.sarl.api.core.Lifecycle
-import io.sarl.api.protocol.examples.cnp.initiator.InitiatorAgent
-import io.sarl.api.protocol.examples.cnp.participant.ParticipantAgent
 import java.util.concurrent.atomic.AtomicInteger
 
 agent BootAgent {
 	
 	uses Lifecycle
 
-	static val PARTICIPANT_COUNT = 5
-	
-	val participantCount = new AtomicInteger
+	val participants = new AtomicInteger
 
-	on Initialize {
-		for (var i = 0; i < PARTICIPANT_COUNT; i++) {
-			spawn(ParticipantAgent, i)
-		}
+	on Initialize {	
+		spawn(ParticipantAgent, 0)
+		spawn(ParticipantAgent, 1)
+		spawn(ParticipantAgent, 2)
 	}
 	
-	on AgentSpawned [it.agentType == ParticipantAgent.name] {
-		val n = participantCount.incrementAndGet
-		if (n === PARTICIPANT_COUNT) {
-			spawn(InitiatorAgent)
+	on AgentSpawned[it.agentType == ParticipantAgent.name] {
+		var n = participants.incrementAndGet
+		if(n === 3) {
+			spawn(ContractorAgent)
 		}
 	}
 

@@ -2,13 +2,12 @@ package io.sarl.api.protocol
 
 import io.sarl.lang.core.Agent
 import io.sarl.lang.core.Behavior
-import io.sarl.lang.core.Capacity
 import io.sarl.lang.core.EventListener
 import io.sarl.lang.core.Skill
 
 interface ProtocolRole {
 
-	def getProtocolCapacity : Class<? extends Capacity>
+	def getProtocolCapacity : Class<? extends ProtocolCapacity>
 	
 	def getProtocolSkill(^space : ProtocolSpace) : Skill
 

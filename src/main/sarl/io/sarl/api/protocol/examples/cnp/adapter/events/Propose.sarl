@@ -1,0 +1,17 @@
+package io.sarl.api.protocol.examples.cnp.adapter.events
+
+event Propose {
+
+	var iDt : String
+	var iDp : String
+	var task : String
+	var offer : int
+	var pDecision : String
+	
+	new(iDt : String, iDp : String, task : String) {
+		this.iDp = iDp
+		this.iDt = iDt
+		this.task = task
+	}
+	
+}

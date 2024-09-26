@@ -14,23 +14,29 @@ skill ProtocolEnactmentSkill implements ProtocolEnactment {
 	
 	val behaviors : Map<ProtocolRole, Behavior> = newHashMap
 
-	synchronized def enact(protocol : Class<? extends SpaceSpecification<S>>, role : ProtocolRole) : S with S extends ProtocolSpace {
+	synchronized def enact(protocol : Class<? extends SpaceSpecification<S>>, role : ProtocolRole) with S extends ProtocolSpace {
 		var ^space = defaultContext.createSpace(protocol, UUID::randomUUID)
 		adoptRole(^space, role)
-		return ^space
+		//return ^space
 	}
 
-	synchronized def enact(spaceID : SpaceID, role : ProtocolRole) : ProtocolSpace {
+	synchronized def enact(spaceID : SpaceID, role : ProtocolRole) {
 		var ^space = defaultContext.getSpace(spaceID.ID) as ProtocolSpace
 		if(^space === null) {
 			throw new RuntimeException
 		}
 		adoptRole(^space, role)
-		return ^space
+		//return ^space
 	}
 	
 	private def adoptRole(^space : ProtocolSpace, role : ProtocolRole) {
-		setSkill(role.getProtocolSkill(^space))
+		if(hasSkill(role.protocolCapacity)) {
+			var s = getSkill(role.protocolCapacity)
+			s.addProtocolSpace(^space)
+		}
+		else {
+			setSkill(role.getProtocolSkill(^space))
+		}
 		var beh = role.getProtocolBehavior(this.owner)
 		if (beh !== null) {
 			behaviors.put(role, beh)
@@ -40,12 +46,12 @@ skill ProtocolEnactmentSkill implements ProtocolEnactment {
 	}
 
 	synchronized def leave(^space : ProtocolSpace, role : ProtocolRole) : void {
+		role.unregisterRole(^space, asEventListener)
 		clearSkill(role.getProtocolCapacity)
 		var beh = behaviors.remove(role)
 		if (beh !== null) {
 			unregisterBehavior(beh)
 		}
-		role.unregisterRole(^space, asEventListener)
 	}
 
 }

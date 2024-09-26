@@ -1,14 +1,16 @@
 package io.sarl.api.protocol
 
+import io.sarl.lang.core.DefaultSkill
 import io.sarl.lang.core.SpaceID
 import io.sarl.lang.core.SpaceSpecification
 
+@DefaultSkill(typeof(ProtocolEnactmentSkill))
 capacity ProtocolEnactment {
 
-	def enact(protocol : Class<? extends SpaceSpecification<S>>, role : ProtocolRole) : S with S extends ProtocolSpace
+	def enact(protocol : Class<? extends SpaceSpecification<S>>, role : ProtocolRole) with S extends ProtocolSpace
 	
-	def enact(spaceId : SpaceID, role : ProtocolRole) : ProtocolSpace
+	def enact(spaceId : SpaceID, role : ProtocolRole)
 	
-	def leave(protocol : ProtocolSpace, role : ProtocolRole) : void
+	def leave(protocol : ProtocolSpace, role : ProtocolRole)
 
 }

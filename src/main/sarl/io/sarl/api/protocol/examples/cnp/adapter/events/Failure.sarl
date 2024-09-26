@@ -1,0 +1,10 @@
+package io.sarl.api.protocol.examples.cnp.adapter.events
+
+event Failure {
+
+	var iDp : String
+	var iDt : String
+	var accept : String
+	var outcome : String
+	
+}

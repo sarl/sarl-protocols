@@ -1,0 +1,41 @@
+package io.sarl.api.protocol.examples.cnp
+
+import io.sarl.api.core.DefaultContextInteractions
+import io.sarl.api.core.Initialize
+import io.sarl.api.core.Logging
+import io.sarl.api.localstate.KnowledgeID
+import io.sarl.api.localstate.LocalStateManager
+import io.sarl.api.protocol.ProtocolEnactment
+import io.sarl.api.protocol.ProtocolReady
+import io.sarl.api.protocol.examples.cnp.adapter.CNPRole
+import io.sarl.api.protocol.examples.cnp.adapter.contractor.ContractorProtocolCapacity
+import io.sarl.api.protocol.examples.cnp.adapter.^space.CNPSpaceSpecification
+import java.util.UUID
+
+agent ContractorAgent {
+	
+	uses ProtocolEnactment, Logging, DefaultContextInteractions, LocalStateManager, ContractorProtocolCapacity
+	
+	on Initialize {
+		loggingName = "Contractor"
+		//setSkill(new ProtocolEnactmentSkill)
+		enact(CNPSpaceSpecification, CNPRole.CONTRACTOR)
+	}
+	
+	on ProtocolReady {
+		
+		getProtocolParticipants(CNPRole.PARTICIPANT).entrySet.stream.forEach[
+			it.value.forEach[
+				setKnowledge(new KnowledgeID("task", occurrence.source.spaceID as String, it as String), typeof(String), "write paper")
+				setKnowledge(new KnowledgeID("participant", occurrence.source.spaceID as String, it as String), typeof(UUID), it)
+			]
+		]
+		
+		enabledCFPMessages.forEach [
+			sendCFPMessage(it)
+			info("I send a CFP for " + it.evt.task + " to " + it.receiver) 
+		]
+		
+	}
+	
+}

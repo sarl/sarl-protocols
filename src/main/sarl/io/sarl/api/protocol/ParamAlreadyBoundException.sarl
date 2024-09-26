@@ -1,0 +1,10 @@
+/** 
+ * 
+ */
+package io.sarl.api.protocol
+
+/** 
+ * 
+ */
+class ParamAlreadyBoundException extends Exception {
+}

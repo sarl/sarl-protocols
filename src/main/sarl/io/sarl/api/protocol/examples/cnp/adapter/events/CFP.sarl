@@ -1,0 +1,14 @@
+package io.sarl.api.protocol.examples.cnp.adapter.events
+
+event CFP {
+
+	var iDp : String
+	var iDt : String
+	var task : String
+
+	new(iDt : String, iDp : String) {
+		this.iDp = iDp
+		this.iDt = iDt
+	}
+	
+}

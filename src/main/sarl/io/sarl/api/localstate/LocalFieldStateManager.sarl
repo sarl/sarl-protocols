@@ -1,0 +1,39 @@
+package io.sarl.api.localstate
+
+import java.util.TreeMap
+import java.util.stream.Stream
+
+skill LocalFieldStateManager implements LocalStateManager {
+	
+	var localState = new TreeMap<KnowledgeID,Object>
+	
+	synchronized def getKnowledge(id : KnowledgeID, type : Class<T>) : T with T {
+		if(!localState.containsKey(id)) {
+			throw new KnowledgeMissingException
+		}
+		return localState.get(id) as T
+	}
+
+	synchronized def setKnowledge(id : KnowledgeID, type : Class<T>, value : T) with T {
+		localState.put(id, value)
+	}
+
+	synchronized def setKnowledgeIfAbsent(id : KnowledgeID, type : Class<T>, value : T) with T {
+		localState.putIfAbsent(id, value)
+	}
+
+	synchronized def isDefined(id : KnowledgeID) : boolean {
+		return localState.containsKey(id)
+	}
+
+	synchronized def removeKnowledge(id : KnowledgeID) {
+		localState.remove(id)
+	}
+	
+	synchronized def getScopesFromName(name : String) : Stream<KnowledgeID> {
+		localState.keySet.stream.filter[
+			it.name == name	
+		]
+	}
+	
+}

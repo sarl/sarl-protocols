@@ -1,0 +1,91 @@
+package io.sarl.api.protocol.examples.cnp.adapter.contractor
+
+import io.sarl.api.core.ExternalContextAccess
+import io.sarl.api.core.Logging
+import io.sarl.api.localstate.KnowledgeID
+import io.sarl.api.localstate.LocalStateManager
+import io.sarl.api.protocol.ProtocolMessage
+import io.sarl.api.protocol.ProtocolSkill
+import io.sarl.api.protocol.ProtocolSpace
+import io.sarl.api.protocol.examples.cnp.adapter.events.Accept
+import io.sarl.api.protocol.examples.cnp.adapter.events.CFP
+import io.sarl.api.protocol.examples.cnp.adapter.events.Reject
+import java.util.UUID
+import java.util.stream.Stream
+
+skill ContractorProtocolSkill implements ContractorProtocolCapacity extends ProtocolSkill {
+	
+	uses LocalStateManager, ExternalContextAccess, Logging
+
+	new (protocolSpace : ProtocolSpace) {
+		super(protocolSpace)
+	}
+	
+	synchronized def getEnabledCFPMessages : Stream<ProtocolMessage<CFP>> {
+
+		var enabledMessages = <ProtocolMessage<CFP>>newArrayList
+
+		var scopes = getScopesFromName("participant")
+		for (scope : scopes.toList) {
+			if (!scope.keys.isEmpty && protocolSpaces.anyMatch [
+				scope.keys.get(0) == it.spaceID as String
+			]) {
+				// isDefined(new KnowledgeID("p2", scope.keys)
+				if (!isBound(new KnowledgeID("task", scope.keys))) {
+					var ^space = protocolSpaces.filter[it.spaceID as String == scope.keys.get(0)].findAny.get
+					enabledMessages.add(
+						new ProtocolMessage<CFP>(
+							^space,
+							new CFP(
+								scope.keys.get(0) as String,
+								scope.keys.get(1) as String
+								//getKnowledge(new KnowledgeID("task", scope.keys), typeof(String))
+							),
+							getKnowledge(new KnowledgeID("participant", scope.keys), typeof(UUID))
+						)
+					)
+				}
+			}
+		}
+		return enabledMessages.stream
+
+		// var res = <ProtocolMessage<CFP>> newArrayList
+//		for (^space : protocolSpaces.toList) {
+//			if(^space.getRolePlayers(CNPRole.PARTICIPANT).allMatch [ it0 |
+//				!isBound(new KnowledgeID("task", ^space.spaceID as String, it0 as String))
+//			]) {
+//				for (participant : ^space.getRolePlayers(CNPRole.PARTICIPANT).toList) {
+//					res.add(new ProtocolMessage<CFP>(^space, new CFP, participant))
+//				}
+//			}
+//		}
+//		return res.stream
+	}
+	
+	def getEnabledAcceptMessages : Stream<ProtocolMessage<Accept>> {
+		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+	}
+	
+	def getEnabledRejectMessages : Stream<ProtocolMessage<Reject>> {
+		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+	}
+
+	synchronized def sendCFPMessage(m : ProtocolMessage<CFP>) {
+		var taskId = new KnowledgeID("task", m.^space.spaceID as String, m.receiver as String)
+		var task = getKnowledge(taskId, typeof(String))
+		bind(taskId)
+		m.evt.task = task
+		m.evt.iDt = m.^space.spaceID as String
+		m.evt.iDp = m.receiver as String
+		emit(m.^space, m.evt)[it.ID == m.receiver]
+	}
+	
+	def sendAcceptMessage(m : ProtocolMessage<Accept>) {
+		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+	}
+	
+	def sendRejectMessage(m : ProtocolMessage<Reject>) {
+		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+	}
+	
+}

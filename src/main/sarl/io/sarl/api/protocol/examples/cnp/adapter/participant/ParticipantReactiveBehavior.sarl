@@ -1,0 +1,31 @@
+package io.sarl.api.protocol.examples.cnp.adapter.participant
+
+import io.sarl.api.core.Logging
+import io.sarl.api.localstate.KnowledgeID
+import io.sarl.api.localstate.LocalStateManager
+import io.sarl.api.protocol.examples.cnp.adapter.events.Accept
+import io.sarl.api.protocol.examples.cnp.adapter.events.CFP
+import io.sarl.api.protocol.examples.cnp.adapter.events.Reject
+import java.util.UUID
+
+behavior ParticipantReactiveBehavior {
+	
+	uses LocalStateManager, Logging
+	
+	on CFP {
+		setKnowledge(new KnowledgeID("task", occurrence.iDt as String, occurrence.iDp as String), typeof(String),
+			occurrence.task)
+		setKnowledge(new KnowledgeID("contractor", occurrence.iDt as String, occurrence.iDp as String),
+			typeof(UUID), occurrence.source.ID)
+		info("I received a CFP for task " + occurrence.task)
+	}
+	
+	on Accept {
+		
+	}
+	
+	on Reject {
+		
+	}
+
+}

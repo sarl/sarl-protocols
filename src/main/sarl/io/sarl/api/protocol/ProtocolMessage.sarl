@@ -1,0 +1,23 @@
+package io.sarl.api.protocol
+
+import io.sarl.lang.core.Event
+import io.sarl.lang.core.EventSpace
+import java.util.UUID
+import org.eclipse.xtend.lib.annotations.Accessors
+
+class ProtocolMessage<T extends Event> {
+	
+	@Accessors
+	val ^space : EventSpace
+	@Accessors
+	val evt : T
+	@Accessors
+	val receiver : UUID
+	
+	new(^space : EventSpace, evt : T, receiver : UUID) {
+		this.^space = ^space
+		this.evt = evt
+		this.receiver = receiver
+	}
+	
+}

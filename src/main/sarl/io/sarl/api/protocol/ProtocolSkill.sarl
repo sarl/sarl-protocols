@@ -1,0 +1,85 @@
+package io.sarl.api.protocol
+
+import io.sarl.api.localstate.KnowledgeID
+import io.sarl.api.localstate.LocalStateManager
+import io.sarl.lang.core.EventSpace
+import io.sarl.lang.core.SpaceID
+import java.util.List
+import java.util.Map
+import java.util.TreeSet
+import java.util.stream.Stream
+import java.util.UUID
+import java.util.TreeMap
+
+capacity ProtocolCapacity {
+	def addProtocolSpace(^space : ProtocolSpace)
+	def getProtocolParticipants() : Map<SpaceID, Map<ProtocolRole, Stream<UUID>>>
+	def getProtocolParticipants(role : ProtocolRole) : Map<SpaceID, Stream<UUID>>
+}
+
+abstract skill ProtocolSkill implements ProtocolCapacity {
+
+	uses LocalStateManager
+	
+	val boundParams = new TreeSet<KnowledgeID>
+
+	val protocolSpaces = <ProtocolSpace>newArrayList
+
+	static class Msg {
+		public var spc : EventSpace
+		public var inParametersId : List<KnowledgeID>
+		public var outParametersId : List<KnowledgeID>
+	}
+	
+
+	new (protocolSpace : ProtocolSpace) {
+		this.protocolSpaces.add(protocolSpace)
+	}
+
+	final def addProtocolSpace(^space : ProtocolSpace) {
+		protocolSpaces.add(^space)
+	}
+
+	def getProtocolParticipants() : Map<SpaceID, Map<ProtocolRole, Stream<UUID>>> {
+		var res = new TreeMap<SpaceID, Map<ProtocolRole, Stream<UUID>>>
+		for(^space : protocolSpaces) {
+			var agents = new TreeMap<ProtocolRole,Stream<UUID>>
+			for (rolePlayers : ^space.rolePlayers.entrySet) {
+				agents.put(rolePlayers.key,rolePlayers.value.stream.map[
+					it.ID
+				])
+			}
+		}
+		return res
+	}
+
+	def getProtocolParticipants(role : ProtocolRole) : Map<SpaceID, Stream<UUID>> {
+		var res = new TreeMap<SpaceID, Stream<UUID>>
+		for(^space : protocolSpaces) {
+			res.put(^space.spaceID, ^space.getRolePlayers(role))
+		}
+		return res
+	}
+	
+	protected final def getProtocolSpaces : Stream<ProtocolSpace> {
+		return protocolSpaces.stream
+	}
+	
+	protected final def bind(id : KnowledgeID) {
+		if(boundParams.contains(id)) {
+			throw new ParamAlreadyBoundException
+		}
+		boundParams.add(id)
+	}
+
+	protected final def unbind(id : KnowledgeID) {
+		boundParams.remove(id)
+	}
+	
+	protected final def isBound(id : KnowledgeID) : boolean {
+		return isDefined(id) && boundParams.contains(id)
+	}
+	
+	//TODO: removeProtocolSpace
+	
+}

@@ -1,0 +1,21 @@
+package io.sarl.api.localstate
+
+import io.sarl.lang.core.DefaultSkill
+import java.util.stream.Stream
+
+@DefaultSkill(typeof(LocalFieldStateManager))
+capacity LocalStateManager {
+
+	def getKnowledge(id : KnowledgeID, type : Class<T>) : T with T
+	
+	def setKnowledge(id : KnowledgeID, type : Class<T>, value : T) with T
+
+	def setKnowledgeIfAbsent(id : KnowledgeID, type : Class<T>, value : T) with T
+	
+	def getScopesFromName(name : String) : Stream<KnowledgeID>
+	 
+	def isDefined(id : KnowledgeID) : boolean
+	
+	def removeKnowledge(id : KnowledgeID)
+	
+}

@@ -1,0 +1,11 @@
+package io.sarl.api.protocol.examples.cnp.adapter.events
+
+event Reject {
+
+	var iDp : String
+	var iDt : String
+	var offer : int
+	var outcome : String
+	var x : String
+	
+}

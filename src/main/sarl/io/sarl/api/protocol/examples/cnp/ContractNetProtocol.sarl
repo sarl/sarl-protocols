@@ -1,0 +1,17 @@
+package io.sarl.api.protocol.examples.cnp
+
+/*
+ContractNet {
+	role Contractor, Participant
+	parameter out ID key, out task, out outcome
+	private pdecision, offer, outcome
+   
+    Contractor -> out Participant : cfp [out IDt key, out IDp key, out task]
+	Participant -> in Contractor  : propose [in IDp key, in IDt key, in task, out offer, out pdecision]
+	Participant -> in Contractor  : refuse [in IDp key, in IDt key, in task, out outcome, out pdecision]
+	Contractor -> in Participant  : accept_prop [in IDp key, in IDt key, in offer, out accept, out x]
+	Contractor -> in Participant  : reject_prop [in IDp key, in IDt key, in offer, out outcome, out x]
+	Participant -> in Contractor  : done [in IDp key, in IDt key, in accept, out outcome]
+	Participant -> in Contractor  : failure [in IDp key, in IDt key, in accept, out outcome]
+}
+*/

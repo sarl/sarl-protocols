@@ -1,0 +1,23 @@
+package io.sarl.api.protocol.examples.cnp.adapter.participant
+
+import io.sarl.api.protocol.ProtocolCapacity
+import io.sarl.api.protocol.ProtocolMessage
+import io.sarl.api.protocol.examples.cnp.adapter.events.Done
+import io.sarl.api.protocol.examples.cnp.adapter.events.Failure
+import io.sarl.api.protocol.examples.cnp.adapter.events.Propose
+import io.sarl.api.protocol.examples.cnp.adapter.events.Refuse
+import java.util.stream.Stream
+
+capacity ParticipantProtocolCapacity extends ProtocolCapacity {
+
+	def getEnabledProposeMessages : Stream<ProtocolMessage<Propose>>
+	def getEnabledRefuseMessages : Stream<ProtocolMessage<Refuse>>
+	def getEnabledDoneMessages : Stream<ProtocolMessage<Done>>
+	def getEnabledFailureMessages : Stream<ProtocolMessage<Failure>>
+
+	def sendProposeMessage(m : ProtocolMessage<Propose>)
+	def sendRefuseMessage(m : ProtocolMessage<Refuse>)
+	def sendDoneMessage(m : ProtocolMessage<Done>)
+	def sendFailureMessage(m : ProtocolMessage<Failure>)
+
+}

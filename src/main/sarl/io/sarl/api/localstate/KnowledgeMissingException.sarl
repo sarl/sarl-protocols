@@ -1,0 +1,4 @@
+package io.sarl.api.localstate
+
+class KnowledgeMissingException extends Exception {
+}
