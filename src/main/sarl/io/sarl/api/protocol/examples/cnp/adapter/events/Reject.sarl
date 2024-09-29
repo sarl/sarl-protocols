@@ -7,5 +7,11 @@ event Reject {
 	var offer : int
 	var outcome : String
 	var x : String
+
+	new(iDt : String, iDp : String, offer : int) {
+		this.iDp = iDp
+		this.iDt = iDt
+		this.offer = offer
+	}
 	
 }

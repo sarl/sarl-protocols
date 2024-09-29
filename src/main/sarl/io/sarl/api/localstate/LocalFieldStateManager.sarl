@@ -1,7 +1,7 @@
 package io.sarl.api.localstate
 
+import java.util.List
 import java.util.TreeMap
-import java.util.stream.Stream
 
 skill LocalFieldStateManager implements LocalStateManager {
 	
@@ -30,10 +30,15 @@ skill LocalFieldStateManager implements LocalStateManager {
 		localState.remove(id)
 	}
 	
-	synchronized def getScopesFromName(name : String) : Stream<KnowledgeID> {
+	synchronized def getScopesFromName(name : String) : List<KnowledgeID> {
+		//TODO Consider using for loop instead of stream
 		localState.keySet.stream.filter[
 			it.name == name	
-		]
+		].toList
+	}
+	
+	def getLocalStateManagerLock : Object {
+		return this
 	}
 	
 }

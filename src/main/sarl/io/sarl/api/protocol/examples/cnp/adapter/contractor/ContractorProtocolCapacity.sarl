@@ -5,13 +5,13 @@ import io.sarl.api.protocol.ProtocolMessage
 import io.sarl.api.protocol.examples.cnp.adapter.events.Accept
 import io.sarl.api.protocol.examples.cnp.adapter.events.CFP
 import io.sarl.api.protocol.examples.cnp.adapter.events.Reject
-import java.util.stream.Stream
+import java.util.List
 
 capacity ContractorProtocolCapacity extends ProtocolCapacity {
 
-	def getEnabledCFPMessages : Stream<ProtocolMessage<CFP>>
-	def getEnabledAcceptMessages : Stream<ProtocolMessage<Accept>>
-	def getEnabledRejectMessages : Stream<ProtocolMessage<Reject>>
+	def getEnabledCFPMessages : List<ProtocolMessage<CFP>>
+	def getEnabledAcceptMessages : List<ProtocolMessage<Accept>>
+	def getEnabledRejectMessages : List<ProtocolMessage<Reject>>
 	
 	def sendCFPMessage(m : ProtocolMessage<CFP>)
 	def sendAcceptMessage(m : ProtocolMessage<Accept>)

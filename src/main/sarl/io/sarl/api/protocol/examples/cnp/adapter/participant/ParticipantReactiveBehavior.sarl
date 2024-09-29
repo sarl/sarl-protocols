@@ -21,11 +21,19 @@ behavior ParticipantReactiveBehavior {
 	}
 	
 	on Accept {
-		
+		setKnowledge(new KnowledgeID("accept", occurrence.iDt as String, occurrence.iDp as String), typeof(String),
+			occurrence.accept)
+		setKnowledge(new KnowledgeID("x", occurrence.iDt as String, occurrence.iDp as String), typeof(String),
+			occurrence.x)
+		info("I received an ACCEPT")
 	}
 	
 	on Reject {
-		
+		setKnowledge(new KnowledgeID("outcome", occurrence.iDt as String, occurrence.iDp as String), typeof(String),
+			occurrence.outcome)
+		setKnowledge(new KnowledgeID("x", occurrence.iDt as String, occurrence.iDp as String), typeof(String),
+			occurrence.x)
+		info("I received a REJECT")
 	}
 
 }

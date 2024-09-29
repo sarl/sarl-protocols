@@ -6,5 +6,11 @@ event Done {
 	var iDt : String
 	var accept : String
 	var outcome : String
+
+	new(iDt : String, iDp : String, accept : String) {
+		this.iDp = iDp
+		this.iDt = iDt
+		this.accept = accept
+	}
 	
 }

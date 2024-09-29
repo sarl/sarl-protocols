@@ -1,7 +1,6 @@
 package io.sarl.api.protocol.examples.cnp.adapter.contractor
 
 import io.sarl.api.core.ExternalContextAccess
-import io.sarl.api.core.Logging
 import io.sarl.api.localstate.KnowledgeID
 import io.sarl.api.localstate.LocalStateManager
 import io.sarl.api.protocol.ProtocolMessage
@@ -10,46 +9,44 @@ import io.sarl.api.protocol.ProtocolSpace
 import io.sarl.api.protocol.examples.cnp.adapter.events.Accept
 import io.sarl.api.protocol.examples.cnp.adapter.events.CFP
 import io.sarl.api.protocol.examples.cnp.adapter.events.Reject
+import java.util.List
 import java.util.UUID
-import java.util.stream.Stream
 
 skill ContractorProtocolSkill implements ContractorProtocolCapacity extends ProtocolSkill {
 	
-	uses LocalStateManager, ExternalContextAccess, Logging
+	uses LocalStateManager, ExternalContextAccess
 
 	new (protocolSpace : ProtocolSpace) {
 		super(protocolSpace)
 	}
 	
-	synchronized def getEnabledCFPMessages : Stream<ProtocolMessage<CFP>> {
-
+	def getEnabledCFPMessages : List<ProtocolMessage<CFP>> {
 		var enabledMessages = <ProtocolMessage<CFP>>newArrayList
-
 		var scopes = getScopesFromName("participant")
-		for (scope : scopes.toList) {
-			if (!scope.keys.isEmpty && protocolSpaces.anyMatch [
-				scope.keys.get(0) == it.spaceID as String
-			]) {
-				// isDefined(new KnowledgeID("p2", scope.keys)
-				if (!isBound(new KnowledgeID("task", scope.keys))) {
-					var ^space = protocolSpaces.filter[it.spaceID as String == scope.keys.get(0)].findAny.get
-					enabledMessages.add(
-						new ProtocolMessage<CFP>(
-							^space,
-							new CFP(
-								scope.keys.get(0) as String,
-								scope.keys.get(1) as String
-								//getKnowledge(new KnowledgeID("task", scope.keys), typeof(String))
-							),
-							getKnowledge(new KnowledgeID("participant", scope.keys), typeof(UUID))
+		for (scope : scopes) {
+			var ^space = scope.findSpaceMachtingScope
+			if (^space !== null) {
+				synchronized(localStateManagerLock) {
+					// isDefined(new KnowledgeID("p2", scope.keys)
+					if (!isBound(new KnowledgeID("task", scope.keys))) {
+						enabledMessages.add(
+							new ProtocolMessage<CFP>(
+								^space,
+								new CFP(
+									scope.keys.get(0) as String,
+									scope.keys.get(1) as String
+									//getKnowledge(new KnowledgeID("task", scope.keys), typeof(String))
+								),
+								getKnowledge(new KnowledgeID("participant", scope.keys), typeof(UUID))
+							)
 						)
-					)
+					}
 				}
 			}
 		}
-		return enabledMessages.stream
+		return enabledMessages
 
-		// var res = <ProtocolMessage<CFP>> newArrayList
+//		var res = <ProtocolMessage<CFP>> newArrayList
 //		for (^space : protocolSpaces.toList) {
 //			if(^space.getRolePlayers(CNPRole.PARTICIPANT).allMatch [ it0 |
 //				!isBound(new KnowledgeID("task", ^space.spaceID as String, it0 as String))
@@ -60,32 +57,105 @@ skill ContractorProtocolSkill implements ContractorProtocolCapacity extends Prot
 //			}
 //		}
 //		return res.stream
+
 	}
 	
-	def getEnabledAcceptMessages : Stream<ProtocolMessage<Accept>> {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+	def getEnabledAcceptMessages : List<ProtocolMessage<Accept>> {
+		var enabledMessages = <ProtocolMessage<Accept>>newArrayList
+		var scopes = getScopesFromName("offer")
+		for (scope : scopes) {
+			var ^space = scope.findSpaceMachtingScope
+			if (^space !== null) {
+				synchronized (localStateManagerLock) {
+					// isDefined(new KnowledgeID("p2", scope.keys)
+					if (!isBound(new KnowledgeID("accept", scope.keys)) &&
+						!isBound(new KnowledgeID("x", scope.keys))) {
+						enabledMessages.add(
+							new ProtocolMessage<Accept>(
+								^space,
+								new Accept(
+									scope.keys.get(0) as String,
+									scope.keys.get(1) as String,
+									getKnowledge(new KnowledgeID("offer", scope.keys), typeof(int))
+								),
+								getKnowledge(new KnowledgeID("participant", scope.keys), typeof(UUID))
+							)
+						)
+					}
+				}
+			}
+		}
+		return enabledMessages
 	}
 	
-	def getEnabledRejectMessages : Stream<ProtocolMessage<Reject>> {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+	def getEnabledRejectMessages : List<ProtocolMessage<Reject>> {
+		var enabledMessages = <ProtocolMessage<Reject>>newArrayList
+		var scopes = getScopesFromName("offer")
+		for (scope : scopes) {
+			var ^space = scope.findSpaceMachtingScope
+			if (^space !== null) {
+				synchronized (localStateManagerLock) {
+					// isDefined(new KnowledgeID("p2", scope.keys)
+					if (!isBound(new KnowledgeID("accept", scope.keys)) && !isBound(new KnowledgeID("x", scope.keys))) {
+						enabledMessages.add(
+							new ProtocolMessage<Reject>(
+								^space,
+								new Reject(
+									scope.keys.get(0) as String,
+									scope.keys.get(1) as String,
+									getKnowledge(new KnowledgeID("offer", scope.keys), typeof(int))
+								),
+								getKnowledge(new KnowledgeID("participant", scope.keys), typeof(UUID))
+							)
+						)
+					}
+				}
+			}
+		}
+		return enabledMessages
 	}
 
-	synchronized def sendCFPMessage(m : ProtocolMessage<CFP>) {
-		var taskId = new KnowledgeID("task", m.^space.spaceID as String, m.receiver as String)
-		var task = getKnowledge(taskId, typeof(String))
-		bind(taskId)
+	def sendCFPMessage(m : ProtocolMessage<CFP>) {
+		val taskId = new KnowledgeID("task", m.evt.iDt, m.evt.iDp)
+		var task : String
+		synchronized(localStateManagerLock) {
+			task = getKnowledge(taskId, typeof(String))
+			bind(taskId)
+		}
 		m.evt.task = task
-		m.evt.iDt = m.^space.spaceID as String
-		m.evt.iDp = m.receiver as String
 		emit(m.^space, m.evt)[it.ID == m.receiver]
 	}
 	
 	def sendAcceptMessage(m : ProtocolMessage<Accept>) {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+		var idX = new KnowledgeID("x", m.evt.iDt, m.evt.iDp)
+		var idAccept = new KnowledgeID("accept", m.evt.iDt, m.evt.iDp)
+		var x : String
+		var accept : String
+		synchronized (localStateManagerLock) {
+			x = getKnowledge(idX, typeof(String))
+			accept = getKnowledge(idAccept, typeof(String))
+			bind(idX)
+			bind(idAccept)
+		}
+		m.evt.x = x
+		m.evt.accept = accept
+		emit(m.^space, m.evt)[it.ID == m.receiver]
 	}
 	
 	def sendRejectMessage(m : ProtocolMessage<Reject>) {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+		var idX = new KnowledgeID("x", m.evt.iDt, m.evt.iDp)
+		var idOutcome = new KnowledgeID("outcome", m.evt.iDt, m.evt.iDp)
+		var x : String
+		var outcome : String
+		synchronized (localStateManagerLock) {
+			x = getKnowledge(idX, typeof(String))
+			outcome = getKnowledge(idOutcome, typeof(String))
+			bind(idX)
+			bind(idOutcome)
+		}
+		m.evt.x = x
+		m.evt.outcome = outcome
+		emit(m.^space, m.evt)[it.ID == m.receiver]
 	}
 	
 }

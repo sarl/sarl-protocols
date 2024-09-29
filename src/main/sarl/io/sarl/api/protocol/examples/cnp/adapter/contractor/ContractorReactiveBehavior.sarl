@@ -30,11 +30,15 @@ behavior ContractorReactiveBehavior {
 	}
 	
 	on Done {
-		
+		setKnowledge(new KnowledgeID("outcome", occurrence.iDt as String, occurrence.iDp as String), typeof(String),
+			occurrence.outcome)
+		info("I received a DONE")
 	}
 	
 	on Failure {
-		
+		setKnowledge(new KnowledgeID("outcome", occurrence.iDt as String, occurrence.iDp as String), typeof(String),
+			occurrence.outcome)
+		info("I received a FAILURE")
 	}
 
 }

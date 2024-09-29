@@ -33,11 +33,12 @@ agent ParticipantAgent {
 	}
 
 	on ProtocolReady {
-		var enabledProposes : List<ProtocolMessage<Propose>> = enabledProposeMessages.toList
-		var enabledRefuses : List<ProtocolMessage<Refuse>> = enabledRefuseMessages.toList
+		var enabledProposes : List<ProtocolMessage<Propose>> = enabledProposeMessages
+		var enabledRefuses : List<ProtocolMessage<Refuse>> = enabledRefuseMessages
 		while (enabledProposes.isEmpty && enabledRefuses.isEmpty) {
-			enabledProposes = enabledProposes.toList
-			enabledRefuses = enabledRefuses.toList
+			enabledProposes = enabledProposeMessages
+			enabledRefuses = enabledRefuseMessages
+			//Thread::yield
 		}
 		if (participant_number % 2 == 0) {
 			var proposeMessage = enabledProposes.get(0)

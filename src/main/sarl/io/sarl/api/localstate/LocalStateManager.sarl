@@ -1,7 +1,7 @@
 package io.sarl.api.localstate
 
 import io.sarl.lang.core.DefaultSkill
-import java.util.stream.Stream
+import java.util.List
 
 @DefaultSkill(typeof(LocalFieldStateManager))
 capacity LocalStateManager {
@@ -12,10 +12,12 @@ capacity LocalStateManager {
 
 	def setKnowledgeIfAbsent(id : KnowledgeID, type : Class<T>, value : T) with T
 	
-	def getScopesFromName(name : String) : Stream<KnowledgeID>
+	def getScopesFromName(name : String) : List<KnowledgeID>
 	 
 	def isDefined(id : KnowledgeID) : boolean
 	
 	def removeKnowledge(id : KnowledgeID)
+	
+	def getLocalStateManagerLock : Object
 	
 }
