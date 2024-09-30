@@ -17,7 +17,7 @@ behavior ContractorReactiveBehavior {
 			occurrence.offer)
 		setKnowledge(new KnowledgeID("pdecision", occurrence.iDt as String, occurrence.iDp as String), typeof(String),
 			occurrence.pDecision)
-		info("I received a PROPOSE of " + occurrence.offer + " for task " + occurrence.task + " from " + occurrence.source)
+		info("I received a PROPOSE of " + occurrence.offer + " for task " + occurrence.task + " from " + occurrence.iDp)
 	}
 
 	on Refuse {
@@ -26,7 +26,7 @@ behavior ContractorReactiveBehavior {
 		setKnowledge(new KnowledgeID("pdecision", occurrence.iDt as String, occurrence.iDp as String), typeof(String),
 			occurrence.pDecision)
 		info("I received a REFUSE of for task " + occurrence.task + " from " +
-			occurrence.source)
+			occurrence.iDp)
 	}
 	
 	on Done {

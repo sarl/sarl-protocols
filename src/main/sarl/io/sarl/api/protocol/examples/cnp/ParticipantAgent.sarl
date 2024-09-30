@@ -9,6 +9,8 @@ import io.sarl.api.protocol.ProtocolEnactment
 import io.sarl.api.protocol.ProtocolMessage
 import io.sarl.api.protocol.ProtocolReady
 import io.sarl.api.protocol.examples.cnp.adapter.CNPRole
+import io.sarl.api.protocol.examples.cnp.adapter.events.Done
+import io.sarl.api.protocol.examples.cnp.adapter.events.Failure
 import io.sarl.api.protocol.examples.cnp.adapter.events.Propose
 import io.sarl.api.protocol.examples.cnp.adapter.events.Refuse
 import io.sarl.api.protocol.examples.cnp.adapter.participant.ParticipantProtocolCapacity
@@ -57,6 +59,25 @@ agent ParticipantAgent {
 				"refuse")
 			sendRefuseMessage(refuseMessage)
 		}
+
+		var enabledDones : List<ProtocolMessage<Done>> = enabledDoneMessages
+		var enabledFailures : List<ProtocolMessage<Failure>> = enabledFailureMessages
+		while (enabledDones.isEmpty && enabledFailures.isEmpty) {
+			enabledDones = enabledDoneMessages
+			enabledFailures = enabledFailureMessages
+			// Thread::yield
+		}
+		if(Math.random >= 0.5) {
+			var done = enabledDones.get(0)
+			setKnowledge(new KnowledgeID("outcome", done.evt.iDt, done.evt.iDp), typeof(String), "done")
+			sendDoneMessage(done)
+		}
+		else {
+			var failure = enabledFailures.get(0)
+			setKnowledge(new KnowledgeID("outcome", failure.evt.iDt, failure.evt.iDp), typeof(String), "failure")
+			sendFailureMessage(failure)
+		}
+		
 	}
 	
 }
