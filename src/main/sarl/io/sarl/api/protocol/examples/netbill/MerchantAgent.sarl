@@ -1,0 +1,64 @@
+package io.sarl.api.protocol.examples.netbill
+
+import io.sarl.api.core.Initialize
+import io.sarl.api.core.Logging
+import io.sarl.api.core.SpaceCreated
+import io.sarl.api.localstate.KnowledgeID
+import io.sarl.api.localstate.LocalStateManager
+import io.sarl.api.protocol.ProtocolEnactment
+import io.sarl.api.protocol.ProtocolMessage
+import io.sarl.api.protocol.ProtocolReady
+import io.sarl.api.protocol.examples.netbill.adapter.NetbillRole
+import io.sarl.api.protocol.examples.netbill.adapter.events.Goods
+import io.sarl.api.protocol.examples.netbill.adapter.events.Quote
+import io.sarl.api.protocol.examples.netbill.adapter.events.Receipt
+import io.sarl.api.protocol.examples.netbill.adapter.merchant.MerchantProtocolCapacity
+import io.sarl.api.protocol.examples.netbill.adapter.^space.NetbillSpaceSpecification
+import java.util.List
+
+agent MerchantAgent {
+	
+	uses ProtocolEnactment, Logging, MerchantProtocolCapacity, LocalStateManager
+	
+	on Initialize {
+		loggingName = "Merchant"
+	}
+	
+	on SpaceCreated [it.spaceID.spaceSpecification == NetbillSpaceSpecification] {
+		//setSkill(new ProtocolEnactmentSkill)
+		enact(occurrence.spaceID, NetbillRole.MERCHANT)
+	}
+	
+	on ProtocolReady {
+		var enabledQuotes : List<ProtocolMessage<Quote>> = enabledQuoteMessages
+		while(enabledQuotes.isEmpty) {
+			enabledQuotes = enabledQuoteMessages
+		}
+		enabledQuotes.stream.forEach [
+			setKnowledge(new KnowledgeID("price", it.evt.id), typeof(int), 2)
+			//setKnowledge(new KnowledgeID("price", it.evt.id), typeof(int), 4)
+			sendQuoteMessage(it)
+			info("I send a QUOTE for " + it.evt.item)
+		]
+		var enabledGoods : List<ProtocolMessage<Goods>> = enabledGoodsMessages
+		while (enabledGoods.isEmpty) {
+			enabledGoods = enabledGoodsMessages
+		}
+		enabledGoods.stream.forEach [
+			setKnowledge(new KnowledgeID("shipped", it.evt.id), typeof(String), "ok")
+			sendGoodsMessage(it)
+			info("I send a GOODS for " + it.evt.item)
+		]
+		var enabledReceipts : List<ProtocolMessage<Receipt>> = enabledReceiptMessages
+		while (enabledReceipts.isEmpty) {
+			enabledReceipts = enabledReceiptMessages
+		}
+		enabledReceipts.stream.forEach [
+			setKnowledge(new KnowledgeID("chit", it.evt.id), typeof(String), "xyz")
+			setKnowledge(new KnowledgeID("done", it.evt.id), typeof(String), "ok")
+			sendReceiptMessage(it)
+			info("I send a RECEIPT for price " + it.evt.price)
+		]
+	}
+	
+}

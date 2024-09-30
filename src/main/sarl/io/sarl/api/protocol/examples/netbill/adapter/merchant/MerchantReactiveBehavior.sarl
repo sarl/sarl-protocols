@@ -1,0 +1,34 @@
+package io.sarl.api.protocol.examples.netbill.adapter.merchant
+
+import io.sarl.api.localstate.KnowledgeID
+import io.sarl.api.localstate.LocalStateManager
+import io.sarl.api.protocol.examples.netbill.adapter.events.Accept
+import io.sarl.api.protocol.examples.netbill.adapter.events.EPO
+import io.sarl.api.protocol.examples.netbill.adapter.events.Reject
+import io.sarl.api.protocol.examples.netbill.adapter.events.Request
+import java.util.UUID
+
+behavior MerchantReactiveBehavior {
+	
+	uses LocalStateManager
+	
+	on Request {
+		setKnowledge(new KnowledgeID("item", occurrence.id), typeof(String), occurrence.item)
+		setKnowledge(new KnowledgeID("customer", occurrence.id), typeof(UUID), occurrence.source.ID)
+	}
+	
+	on Accept {
+		setKnowledge(new KnowledgeID("decision", occurrence.id), typeof(String), occurrence.decision)
+		setKnowledge(new KnowledgeID("outcome", occurrence.id), typeof(String), occurrence.outcome)
+	}
+	
+	on Reject {
+		setKnowledge(new KnowledgeID("decision", occurrence.id), typeof(String), occurrence.decision)
+		setKnowledge(new KnowledgeID("done", occurrence.id), typeof(String), occurrence.done)
+	}
+	
+	on EPO {
+		setKnowledge(new KnowledgeID("cc", occurrence.id), typeof(String), occurrence.cc)
+	}
+
+}

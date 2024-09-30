@@ -6,11 +6,9 @@ import io.sarl.api.core.Schedules
 import io.sarl.api.localstate.KnowledgeID
 import io.sarl.api.localstate.LocalStateManager
 import io.sarl.api.protocol.ProtocolEnactment
-import io.sarl.api.protocol.ProtocolMessage
 import io.sarl.api.protocol.ProtocolReady
 import io.sarl.api.protocol.examples.cnp.adapter.CNPRole
 import io.sarl.api.protocol.examples.cnp.adapter.contractor.ContractorProtocolCapacity
-import io.sarl.api.protocol.examples.cnp.adapter.events.Accept
 import io.sarl.api.protocol.examples.cnp.adapter.^space.CNPSpaceSpecification
 import java.util.UUID
 

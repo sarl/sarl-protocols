@@ -1,0 +1,240 @@
+package io.sarl.api.protocol.examples.netbill.adapter.customer
+
+import io.sarl.api.core.ExternalContextAccess
+import io.sarl.api.localstate.KnowledgeID
+import io.sarl.api.localstate.LocalStateManager
+import io.sarl.api.protocol.ProtocolMessage
+import io.sarl.api.protocol.ProtocolSkill
+import io.sarl.api.protocol.ProtocolSpace
+import io.sarl.api.protocol.examples.netbill.adapter.events.Accept
+import io.sarl.api.protocol.examples.netbill.adapter.events.EPO
+import io.sarl.api.protocol.examples.netbill.adapter.events.Reject
+import io.sarl.api.protocol.examples.netbill.adapter.events.Request
+import java.util.List
+import java.util.UUID
+
+skill CustomerProtocolSkill implements CustomerProtocolCapacity extends ProtocolSkill {
+	
+	uses LocalStateManager, ExternalContextAccess
+
+	new (protocolSpace : ProtocolSpace) {
+		super(protocolSpace)
+	}
+	
+	def getEnabledRequestMessages : List<ProtocolMessage<Request>> {
+		var enabledMessages = <ProtocolMessage<Request>>newArrayList
+		var scopes = getScopesFromName("merchant")
+		for (scope : scopes) {
+			var ^space = scope.findSpaceMachtingScope
+			if (^space !== null) {
+				synchronized (localStateManagerLock) {
+					if (!isBound(new KnowledgeID("item", scope.keys))) {
+						enabledMessages.add(
+							new ProtocolMessage<Request>(
+								^space,
+								new Request(scope.keys.get(0) as String),
+								getKnowledge(new KnowledgeID("merchant", scope.keys), typeof(UUID))
+							)
+						)
+					}
+				}
+			}
+		}
+		return enabledMessages
+//		return protocolSpaces.filter [
+//			!isBound(new KnowledgeID("item", it.spaceID as String))
+//		].map[
+//			new ProtocolMessage<Request>(it, new Request)
+//		]
+	}
+
+	def getEnabledAcceptMessages : List<ProtocolMessage<Accept>> {
+		var enabledMessages = <ProtocolMessage<Accept>>newArrayList
+		var scopes = getScopesFromName("item")
+		for (scope : scopes) {
+			var ^space = scope.findSpaceMachtingScope
+			if (^space !== null) {
+				synchronized (localStateManagerLock) {
+					if (isDefined(new KnowledgeID("price", scope.keys)) &&
+						!isBound(new KnowledgeID("decision", scope.keys)) && 
+						!isBound(new KnowledgeID("outcome", scope.keys))
+					) {
+						enabledMessages.add(
+							new ProtocolMessage<Accept>(
+								^space,
+								new Accept(
+									scope.keys.get(0) as String,
+									getKnowledge(new KnowledgeID("item", scope.keys), typeof(String)),
+									getKnowledge(new KnowledgeID("price", scope.keys), typeof(int))
+								),
+								getKnowledge(new KnowledgeID("merchant", scope.keys), typeof(UUID))
+							)
+						)
+					}
+				}
+			}
+		}
+		return enabledMessages
+		// protocolSpaces.map [
+//			var m =new Msg
+//			m.spc = it
+//			m.inParametersId = #[
+//					new KnowledgeID("item", it.spaceID as String),
+//					new KnowledgeID("price", it.spaceID as String)
+//				]
+//			m.outParametersId = #[
+//					new KnowledgeID("decision", it.spaceID as String),
+//					new KnowledgeID("outcome", it.spaceID as String)
+//				]
+//			return m		
+//		].filter [
+//			it.inParametersId.stream.allMatch[it0|isDefined(it0)]
+//			&& it.outParametersId.stream.allMatch[it0|!isBound(it0)]
+//		].map [
+//			var id = it.spc.spaceID
+//			var item = getKnowledge(it.inParametersId.get(0), typeof(String))
+//			var price = getKnowledge(it.inParametersId.get(1), typeof(int))
+//			new ProtocolMessage<Accept>(
+//				it.spc, new Accept(item, price)
+//			)
+//		]
+	}
+
+	def getEnabledRejectMessages : List<ProtocolMessage<Reject>> {
+		var enabledMessages = <ProtocolMessage<Reject>>newArrayList
+		var scopes = getScopesFromName("item")
+		for (scope : scopes) {
+			var ^space = scope.findSpaceMachtingScope
+			if (^space !== null) {
+				synchronized (localStateManagerLock) {
+					if (isDefined(new KnowledgeID("price", scope.keys)) &&
+						!isBound(new KnowledgeID("decision", scope.keys)) && 
+						!isBound(new KnowledgeID("done", scope.keys))
+					) {
+						enabledMessages.add(
+							new ProtocolMessage<Reject>(
+								^space,
+								new Reject(
+									scope.keys.get(0) as String,
+									getKnowledge(new KnowledgeID("item", scope.keys), typeof(String)),
+									getKnowledge(new KnowledgeID("price", scope.keys), typeof(int))
+								),
+								getKnowledge(new KnowledgeID("merchant", scope.keys), typeof(UUID))
+							)
+						)
+					}
+				}
+			}
+		}
+		return enabledMessages
+//		protocolSpaces.map [
+//			var m = new Msg
+//			m.spc = it
+//			m.inParametersId = #[
+//				new KnowledgeID("item", it.spaceID as String),
+//				new KnowledgeID("price", it.spaceID as String)
+//			]
+//			m.outParametersId = #[
+//				new KnowledgeID("decision", it.spaceID as String),
+//				new KnowledgeID("done", it.spaceID as String)
+//			]
+//			return m
+//		].filter [
+//			it.inParametersId.stream.allMatch[it0|isDefined(it0)] && it.outParametersId.stream.allMatch [ it0 |
+//				!isBound(it0)
+//			]
+//		].map [
+//			var id = it.spc.spaceID
+//			var item = getKnowledge(it.inParametersId.get(0), typeof(String))
+//			var price = getKnowledge(it.inParametersId.get(1), typeof(int))
+//			new ProtocolMessage<Reject>(
+//				it.spc,
+//				new Reject(item, price)
+//			)
+//		]
+	}
+
+	def getEnabledEPOMessages : List<ProtocolMessage<EPO>> {
+		var enabledMessages = <ProtocolMessage<EPO>>newArrayList
+		var scopes = getScopesFromName("item")
+		for (scope : scopes) {
+			var ^space = scope.findSpaceMachtingScope
+			if (^space !== null) {
+				synchronized (localStateManagerLock) {
+					if (isDefined(new KnowledgeID("price", scope.keys)) &&
+						isDefined(new KnowledgeID("shipped", scope.keys)) &&
+						!isBound(new KnowledgeID("cc", scope.keys))) {
+						enabledMessages.add(
+							new ProtocolMessage<EPO>(
+								^space,
+								new EPO(
+									scope.keys.get(0) as String,
+									getKnowledge(new KnowledgeID("item", scope.keys), typeof(String)),
+									getKnowledge(new KnowledgeID("price", scope.keys), typeof(int)),
+									getKnowledge(new KnowledgeID("shipped", scope.keys), typeof(String))
+								),
+								getKnowledge(new KnowledgeID("merchant", scope.keys), typeof(UUID))
+							)
+						)
+					}
+				}
+			}
+		}
+		return enabledMessages
+	}
+
+	def sendRequestMessage(m : ProtocolMessage<Request>) {
+		val idItem = new KnowledgeID("item", m.evt.id)
+		var item : String
+		synchronized (localStateManagerLock) {
+			item = getKnowledge(idItem, typeof(String))
+			bind(idItem)
+		}
+		m.evt.item = item
+		emit(m.^space, m.evt)[it.ID == m.receiver]
+	}
+
+	def sendAcceptMessage(m : ProtocolMessage<Accept>) {
+		var idDecision = new KnowledgeID("decision", m.evt.id)
+		var idOutcome = new KnowledgeID("outcome", m.evt.id)
+		var decision : String
+		var outcome : String 
+		synchronized (localStateManagerLock) {
+			decision = getKnowledge(idDecision, typeof(String))
+			outcome = getKnowledge(idOutcome, typeof(String))
+			bind(idDecision)
+			bind(idOutcome)
+		}
+		m.evt.decision = decision
+		m.evt.outcome = outcome
+		emit(m.^space, m.evt)[it.ID == m.receiver]
+	}
+
+	def sendRejectMessage(m : ProtocolMessage<Reject>) {
+		var idDecision = new KnowledgeID("decision", m.evt.id)
+		var idDone = new KnowledgeID("done", m.evt.id)
+		var decision : String
+		var done : String
+		synchronized (localStateManagerLock) {
+			decision = getKnowledge(idDecision, typeof(String))
+			done = getKnowledge(idDone, typeof(String))
+			bind(idDecision)
+			bind(idDone)
+		}
+		m.evt.decision = decision
+		m.evt.done = done
+		emit(m.^space, m.evt)[it.ID == m.receiver]
+	}
+	
+	def sendEPOMessage(m : ProtocolMessage<EPO>) {
+		var idCc = new KnowledgeID("cc", m.evt.id)
+		var cc : String
+		synchronized (localStateManagerLock) {
+			cc = getKnowledge(idCc, typeof(String))
+			bind(idCc)
+		}
+		m.evt.cc = cc
+		emit(m.^space, m.evt)[it.ID == m.receiver]
+	}
+	
+}

@@ -1,0 +1,28 @@
+package io.sarl.api.protocol.examples.netbill.adapter.customer
+
+import io.sarl.api.protocol.ProtocolCapacity
+import io.sarl.api.protocol.ProtocolMessage
+import io.sarl.api.protocol.examples.netbill.adapter.events.Accept
+import io.sarl.api.protocol.examples.netbill.adapter.events.EPO
+import io.sarl.api.protocol.examples.netbill.adapter.events.Reject
+import io.sarl.api.protocol.examples.netbill.adapter.events.Request
+import java.util.List
+
+/** 
+ * parameters in id, out symptoms, in age
+ * Patient -> Doctor : Request [ in id, out symptoms, out age]
+ */
+capacity CustomerProtocolCapacity extends ProtocolCapacity {
+
+	def getEnabledRequestMessages : List<ProtocolMessage<Request>>
+	def getEnabledAcceptMessages : List<ProtocolMessage<Accept>>
+	def getEnabledRejectMessages : List<ProtocolMessage<Reject>>
+	def getEnabledEPOMessages : List<ProtocolMessage<EPO>>
+	// def getEnabledMessages : List<ProtocolMessage<Event>>
+	
+	def sendRequestMessage(m : ProtocolMessage<Request>)
+	def sendAcceptMessage(m : ProtocolMessage<Accept>)
+	def sendRejectMessage(m : ProtocolMessage<Reject>)
+	def sendEPOMessage(m : ProtocolMessage<EPO>)
+
+}

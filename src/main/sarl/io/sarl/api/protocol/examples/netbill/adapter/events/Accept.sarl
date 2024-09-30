@@ -1,0 +1,19 @@
+package io.sarl.api.protocol.examples.netbill.adapter.events
+
+event Accept {
+
+	val id : String
+	val item : String
+	val price : int
+	var decision : String
+	var outcome : String
+
+	new(id: String, item : String, price : int) {
+		this.id = id
+		this.item = item
+		this.price = price
+	}
+
+}
+
+event AcceptEnabled

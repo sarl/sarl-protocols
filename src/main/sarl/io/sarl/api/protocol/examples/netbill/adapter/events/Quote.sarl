@@ -1,0 +1,16 @@
+package io.sarl.api.protocol.examples.netbill.adapter.events
+
+event Quote {
+
+	val id : String
+	val item : String
+	var price : int
+
+	new(id : String, item : String) {
+		this.id = id
+		this.item = item
+	}
+
+}
+
+event QuoteEnabled

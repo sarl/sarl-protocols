@@ -1,0 +1,15 @@
+package io.sarl.api.protocol.examples.netbill
+
+/*
+NetBill {
+	role Customer, Merchant
+	parameter out ID key, out item, out outcome
+	Customer -> out Merchant : request [out ID key, out item]
+	Merchant -> in Customer : quote [in ID key, in item, out price]
+	Customer -> in Merchant : accept [in ID key, in item, in price, out decision, out outcome]
+	Customer -> in Merchant : reject [in ID key, in item, in price, out decision, out done]
+	Merchant -> in Customer : goods [in ID key, in item, in outcome, out shipped]
+	Customer -> in Merchant : epo [in ID key, in item, in price, in shipped, out cc]
+	Merchant -> in Customer : receipt [in ID key, in price, in cc, out chit, out done]
+}
+*/

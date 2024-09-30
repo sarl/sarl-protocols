@@ -1,0 +1,19 @@
+package io.sarl.api.protocol.examples.netbill.adapter.merchant
+
+import io.sarl.api.protocol.ProtocolCapacity
+import io.sarl.api.protocol.ProtocolMessage
+import io.sarl.api.protocol.examples.netbill.adapter.events.Goods
+import io.sarl.api.protocol.examples.netbill.adapter.events.Quote
+import io.sarl.api.protocol.examples.netbill.adapter.events.Receipt
+import java.util.List
+
+capacity MerchantProtocolCapacity extends ProtocolCapacity {
+
+	def getEnabledQuoteMessages : List<ProtocolMessage<Quote>>
+	def getEnabledGoodsMessages : List<ProtocolMessage<Goods>>
+	def getEnabledReceiptMessages : List<ProtocolMessage<Receipt>>
+	
+	def sendQuoteMessage(m : ProtocolMessage<Quote>)
+	def sendGoodsMessage(m : ProtocolMessage<Goods>)
+	def sendReceiptMessage(m : ProtocolMessage<Receipt>)
+}
