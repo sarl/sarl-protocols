@@ -37,7 +37,7 @@ agent ParticipantAgent {
 	on ProtocolReady {
 		var enabledProposes : List<ProtocolMessage<Propose>> = enabledProposeMessages
 		var enabledRefuses : List<ProtocolMessage<Refuse>> = enabledRefuseMessages
-		while (enabledProposes.isEmpty && enabledRefuses.isEmpty) {
+		while (enabledProposes.isEmpty || enabledRefuses.isEmpty) {
 			enabledProposes = enabledProposeMessages
 			enabledRefuses = enabledRefuseMessages
 			//Thread::yield
@@ -62,7 +62,7 @@ agent ParticipantAgent {
 
 		var enabledDones : List<ProtocolMessage<Done>> = enabledDoneMessages
 		var enabledFailures : List<ProtocolMessage<Failure>> = enabledFailureMessages
-		while (enabledDones.isEmpty && enabledFailures.isEmpty) {
+		while (enabledDones.isEmpty || enabledFailures.isEmpty) {
 			enabledDones = enabledDoneMessages
 			enabledFailures = enabledFailureMessages
 			// Thread::yield
