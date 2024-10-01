@@ -6,23 +6,27 @@ import io.sarl.api.protocol.examples.netbill.adapter.events.Accept
 import io.sarl.api.protocol.examples.netbill.adapter.events.EPO
 import io.sarl.api.protocol.examples.netbill.adapter.events.Reject
 import io.sarl.api.protocol.examples.netbill.adapter.events.Request
+import io.sarl.lang.core.annotation.SarlAsynchronousExecution
 import java.util.List
 
-/** 
- * parameters in id, out symptoms, in age
- * Patient -> Doctor : Request [ in id, out symptoms, out age]
- */
 capacity CustomerProtocolCapacity extends ProtocolCapacity {
 
+	@SarlAsynchronousExecution
 	def getEnabledRequestMessages : List<ProtocolMessage<Request>>
+	@SarlAsynchronousExecution
 	def getEnabledAcceptMessages : List<ProtocolMessage<Accept>>
+	@SarlAsynchronousExecution
 	def getEnabledRejectMessages : List<ProtocolMessage<Reject>>
+	@SarlAsynchronousExecution
 	def getEnabledEPOMessages : List<ProtocolMessage<EPO>>
-	// def getEnabledMessages : List<ProtocolMessage<Event>>
-	
+
+	@SarlAsynchronousExecution
 	def sendRequestMessage(m : ProtocolMessage<Request>)
+	@SarlAsynchronousExecution
 	def sendAcceptMessage(m : ProtocolMessage<Accept>)
+	@SarlAsynchronousExecution
 	def sendRejectMessage(m : ProtocolMessage<Reject>)
+	@SarlAsynchronousExecution
 	def sendEPOMessage(m : ProtocolMessage<EPO>)
 
 }

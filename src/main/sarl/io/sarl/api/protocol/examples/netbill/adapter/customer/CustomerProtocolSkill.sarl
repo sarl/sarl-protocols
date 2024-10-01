@@ -10,6 +10,7 @@ import io.sarl.api.protocol.examples.netbill.adapter.events.Accept
 import io.sarl.api.protocol.examples.netbill.adapter.events.EPO
 import io.sarl.api.protocol.examples.netbill.adapter.events.Reject
 import io.sarl.api.protocol.examples.netbill.adapter.events.Request
+import io.sarl.lang.core.annotation.SarlAsynchronousExecution
 import java.util.List
 import java.util.UUID
 
@@ -17,10 +18,7 @@ skill CustomerProtocolSkill implements CustomerProtocolCapacity extends Protocol
 	
 	uses LocalStateManager, ExternalContextAccess
 
-	new (protocolSpace : ProtocolSpace) {
-		super(protocolSpace)
-	}
-	
+	@SarlAsynchronousExecution
 	def getEnabledRequestMessages : List<ProtocolMessage<Request>> {
 		var enabledMessages = <ProtocolMessage<Request>>newArrayList
 		var scopes = getScopesFromName("merchant")
@@ -41,13 +39,9 @@ skill CustomerProtocolSkill implements CustomerProtocolCapacity extends Protocol
 			}
 		}
 		return enabledMessages
-//		return protocolSpaces.filter [
-//			!isBound(new KnowledgeID("item", it.spaceID as String))
-//		].map[
-//			new ProtocolMessage<Request>(it, new Request)
-//		]
 	}
 
+	@SarlAsynchronousExecution
 	def getEnabledAcceptMessages : List<ProtocolMessage<Accept>> {
 		var enabledMessages = <ProtocolMessage<Accept>>newArrayList
 		var scopes = getScopesFromName("item")
@@ -75,31 +69,9 @@ skill CustomerProtocolSkill implements CustomerProtocolCapacity extends Protocol
 			}
 		}
 		return enabledMessages
-		// protocolSpaces.map [
-//			var m =new Msg
-//			m.spc = it
-//			m.inParametersId = #[
-//					new KnowledgeID("item", it.spaceID as String),
-//					new KnowledgeID("price", it.spaceID as String)
-//				]
-//			m.outParametersId = #[
-//					new KnowledgeID("decision", it.spaceID as String),
-//					new KnowledgeID("outcome", it.spaceID as String)
-//				]
-//			return m		
-//		].filter [
-//			it.inParametersId.stream.allMatch[it0|isDefined(it0)]
-//			&& it.outParametersId.stream.allMatch[it0|!isBound(it0)]
-//		].map [
-//			var id = it.spc.spaceID
-//			var item = getKnowledge(it.inParametersId.get(0), typeof(String))
-//			var price = getKnowledge(it.inParametersId.get(1), typeof(int))
-//			new ProtocolMessage<Accept>(
-//				it.spc, new Accept(item, price)
-//			)
-//		]
 	}
 
+	@SarlAsynchronousExecution
 	def getEnabledRejectMessages : List<ProtocolMessage<Reject>> {
 		var enabledMessages = <ProtocolMessage<Reject>>newArrayList
 		var scopes = getScopesFromName("item")
@@ -127,33 +99,9 @@ skill CustomerProtocolSkill implements CustomerProtocolCapacity extends Protocol
 			}
 		}
 		return enabledMessages
-//		protocolSpaces.map [
-//			var m = new Msg
-//			m.spc = it
-//			m.inParametersId = #[
-//				new KnowledgeID("item", it.spaceID as String),
-//				new KnowledgeID("price", it.spaceID as String)
-//			]
-//			m.outParametersId = #[
-//				new KnowledgeID("decision", it.spaceID as String),
-//				new KnowledgeID("done", it.spaceID as String)
-//			]
-//			return m
-//		].filter [
-//			it.inParametersId.stream.allMatch[it0|isDefined(it0)] && it.outParametersId.stream.allMatch [ it0 |
-//				!isBound(it0)
-//			]
-//		].map [
-//			var id = it.spc.spaceID
-//			var item = getKnowledge(it.inParametersId.get(0), typeof(String))
-//			var price = getKnowledge(it.inParametersId.get(1), typeof(int))
-//			new ProtocolMessage<Reject>(
-//				it.spc,
-//				new Reject(item, price)
-//			)
-//		]
 	}
 
+	@SarlAsynchronousExecution
 	def getEnabledEPOMessages : List<ProtocolMessage<EPO>> {
 		var enabledMessages = <ProtocolMessage<EPO>>newArrayList
 		var scopes = getScopesFromName("item")
@@ -183,6 +131,7 @@ skill CustomerProtocolSkill implements CustomerProtocolCapacity extends Protocol
 		return enabledMessages
 	}
 
+	@SarlAsynchronousExecution
 	def sendRequestMessage(m : ProtocolMessage<Request>) {
 		val idItem = new KnowledgeID("item", m.evt.id)
 		var item : String
@@ -194,6 +143,7 @@ skill CustomerProtocolSkill implements CustomerProtocolCapacity extends Protocol
 		emit(m.^space, m.evt)[it.ID == m.receiver]
 	}
 
+	@SarlAsynchronousExecution
 	def sendAcceptMessage(m : ProtocolMessage<Accept>) {
 		var idDecision = new KnowledgeID("decision", m.evt.id)
 		var idOutcome = new KnowledgeID("outcome", m.evt.id)
@@ -210,6 +160,7 @@ skill CustomerProtocolSkill implements CustomerProtocolCapacity extends Protocol
 		emit(m.^space, m.evt)[it.ID == m.receiver]
 	}
 
+	@SarlAsynchronousExecution
 	def sendRejectMessage(m : ProtocolMessage<Reject>) {
 		var idDecision = new KnowledgeID("decision", m.evt.id)
 		var idDone = new KnowledgeID("done", m.evt.id)
@@ -225,7 +176,8 @@ skill CustomerProtocolSkill implements CustomerProtocolCapacity extends Protocol
 		m.evt.done = done
 		emit(m.^space, m.evt)[it.ID == m.receiver]
 	}
-	
+
+	@SarlAsynchronousExecution
 	def sendEPOMessage(m : ProtocolMessage<EPO>) {
 		var idCc = new KnowledgeID("cc", m.evt.id)
 		var cc : String

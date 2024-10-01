@@ -6,18 +6,27 @@ import io.sarl.api.protocol.examples.cnp.adapter.events.Done
 import io.sarl.api.protocol.examples.cnp.adapter.events.Failure
 import io.sarl.api.protocol.examples.cnp.adapter.events.Propose
 import io.sarl.api.protocol.examples.cnp.adapter.events.Refuse
+import io.sarl.lang.core.annotation.SarlAsynchronousExecution
 import java.util.List
 
 capacity ParticipantProtocolCapacity extends ProtocolCapacity {
 
+	@SarlAsynchronousExecution
 	def getEnabledProposeMessages : List<ProtocolMessage<Propose>>
+	@SarlAsynchronousExecution
 	def getEnabledRefuseMessages : List<ProtocolMessage<Refuse>>
+	@SarlAsynchronousExecution
 	def getEnabledDoneMessages : List<ProtocolMessage<Done>>
+	@SarlAsynchronousExecution
 	def getEnabledFailureMessages : List<ProtocolMessage<Failure>>
 
+	@SarlAsynchronousExecution
 	def sendProposeMessage(m : ProtocolMessage<Propose>)
+	@SarlAsynchronousExecution
 	def sendRefuseMessage(m : ProtocolMessage<Refuse>)
+	@SarlAsynchronousExecution
 	def sendDoneMessage(m : ProtocolMessage<Done>)
+	@SarlAsynchronousExecution
 	def sendFailureMessage(m : ProtocolMessage<Failure>)
 
 }

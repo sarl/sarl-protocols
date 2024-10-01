@@ -9,13 +9,15 @@ import io.sarl.api.protocol.examples.cnp.adapter.events.Done
 import io.sarl.api.protocol.examples.cnp.adapter.events.Failure
 import io.sarl.api.protocol.examples.cnp.adapter.events.Propose
 import io.sarl.api.protocol.examples.cnp.adapter.events.Refuse
+import io.sarl.lang.core.annotation.SarlAsynchronousExecution
 import java.util.List
 import java.util.UUID
 
 skill ParticipantProtocolSkill implements ParticipantProtocolCapacity extends ProtocolSkill {
 	
 	uses LocalStateManager, ExternalContextAccess
-	
+
+	@SarlAsynchronousExecution
 	def getEnabledProposeMessages : List<ProtocolMessage<Propose>> {
 		var enabledMessages = <ProtocolMessage<Propose>> newArrayList
 		var scopes = getScopesFromName("task")
@@ -43,7 +45,8 @@ skill ParticipantProtocolSkill implements ParticipantProtocolCapacity extends Pr
 		}
 		return enabledMessages
 	}
-	
+
+	@SarlAsynchronousExecution
 	def getEnabledRefuseMessages : List<ProtocolMessage<Refuse>> {
 		var enabledMessages = <ProtocolMessage<Refuse>>newArrayList
 		var scopes = getScopesFromName("task")
@@ -71,7 +74,8 @@ skill ParticipantProtocolSkill implements ParticipantProtocolCapacity extends Pr
 		}
 		return enabledMessages
 	}
-	
+
+	@SarlAsynchronousExecution
 	def getEnabledDoneMessages : List<ProtocolMessage<Done>> {
 		var enabledMessages = <ProtocolMessage<Done>>newArrayList
 		var scopes = getScopesFromName("accept")
@@ -98,7 +102,8 @@ skill ParticipantProtocolSkill implements ParticipantProtocolCapacity extends Pr
 		}
 		return enabledMessages
 	}
-	
+
+	@SarlAsynchronousExecution
 	def getEnabledFailureMessages : List<ProtocolMessage<Failure>> {
 		var enabledMessages = <ProtocolMessage<Failure>>newArrayList
 		var scopes = getScopesFromName("accept")
@@ -125,7 +130,8 @@ skill ParticipantProtocolSkill implements ParticipantProtocolCapacity extends Pr
 		}
 		return enabledMessages
 	}
-	
+
+	@SarlAsynchronousExecution
 	def sendProposeMessage(m : ProtocolMessage<Propose>) {
 		var idPDecision = new KnowledgeID("pdecision", m.evt.iDt, m.evt.iDp)
 		var idOffer = new KnowledgeID("offer", m.evt.iDt, m.evt.iDp)
@@ -141,7 +147,8 @@ skill ParticipantProtocolSkill implements ParticipantProtocolCapacity extends Pr
 		m.evt.offer = offer
 		emit(m.^space, m.evt)[it.ID == m.receiver]
 	}
-	
+
+	@SarlAsynchronousExecution
 	def sendRefuseMessage(m : ProtocolMessage<Refuse>) {
 		var idPDecision = new KnowledgeID("pdecision", m.evt.iDt, m.evt.iDp)
 		var idOutcome = new KnowledgeID("outcome", m.evt.iDt, m.evt.iDp)
@@ -157,7 +164,8 @@ skill ParticipantProtocolSkill implements ParticipantProtocolCapacity extends Pr
 		m.evt.outcome = outcome
 		emit(m.^space, m.evt)[it.ID == m.receiver]
 	}
-	
+
+	@SarlAsynchronousExecution
 	def sendDoneMessage(m : ProtocolMessage<Done>) {
 		var idOutcome = new KnowledgeID("outcome", m.evt.iDt, m.evt.iDp)
 		var outcome : String
@@ -168,7 +176,8 @@ skill ParticipantProtocolSkill implements ParticipantProtocolCapacity extends Pr
 		m.evt.outcome = outcome
 		emit(m.^space, m.evt)[it.ID == m.receiver]
 	}
-	
+
+	@SarlAsynchronousExecution
 	def sendFailureMessage(m : ProtocolMessage<Failure>) {
 		var idOutcome = new KnowledgeID("outcome", m.evt.iDt, m.evt.iDp)
 		var outcome : String

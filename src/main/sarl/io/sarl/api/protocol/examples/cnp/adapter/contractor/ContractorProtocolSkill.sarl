@@ -5,10 +5,10 @@ import io.sarl.api.localstate.KnowledgeID
 import io.sarl.api.localstate.LocalStateManager
 import io.sarl.api.protocol.ProtocolMessage
 import io.sarl.api.protocol.ProtocolSkill
-import io.sarl.api.protocol.ProtocolSpace
 import io.sarl.api.protocol.examples.cnp.adapter.events.Accept
 import io.sarl.api.protocol.examples.cnp.adapter.events.CFP
 import io.sarl.api.protocol.examples.cnp.adapter.events.Reject
+import io.sarl.lang.core.annotation.SarlAsynchronousExecution
 import java.util.List
 import java.util.UUID
 
@@ -16,10 +16,7 @@ skill ContractorProtocolSkill implements ContractorProtocolCapacity extends Prot
 	
 	uses LocalStateManager, ExternalContextAccess
 
-	new (protocolSpace : ProtocolSpace) {
-		super(protocolSpace)
-	}
-	
+	@SarlAsynchronousExecution
 	def getEnabledCFPMessages : List<ProtocolMessage<CFP>> {
 		var enabledMessages = <ProtocolMessage<CFP>>newArrayList
 		var scopes = getScopesFromName("participant")
@@ -45,21 +42,9 @@ skill ContractorProtocolSkill implements ContractorProtocolCapacity extends Prot
 			}
 		}
 		return enabledMessages
-
-//		var res = <ProtocolMessage<CFP>> newArrayList
-//		for (^space : protocolSpaces.toList) {
-//			if(^space.getRolePlayers(CNPRole.PARTICIPANT).allMatch [ it0 |
-//				!isBound(new KnowledgeID("task", ^space.spaceID as String, it0 as String))
-//			]) {
-//				for (participant : ^space.getRolePlayers(CNPRole.PARTICIPANT).toList) {
-//					res.add(new ProtocolMessage<CFP>(^space, new CFP, participant))
-//				}
-//			}
-//		}
-//		return res.stream
-
 	}
-	
+
+	@SarlAsynchronousExecution
 	def getEnabledAcceptMessages : List<ProtocolMessage<Accept>> {
 		var enabledMessages = <ProtocolMessage<Accept>>newArrayList
 		var scopes = getScopesFromName("offer")
@@ -87,7 +72,8 @@ skill ContractorProtocolSkill implements ContractorProtocolCapacity extends Prot
 		}
 		return enabledMessages
 	}
-	
+
+	@SarlAsynchronousExecution
 	def getEnabledRejectMessages : List<ProtocolMessage<Reject>> {
 		var enabledMessages = <ProtocolMessage<Reject>>newArrayList
 		var scopes = getScopesFromName("offer")
@@ -115,6 +101,7 @@ skill ContractorProtocolSkill implements ContractorProtocolCapacity extends Prot
 		return enabledMessages
 	}
 
+	@SarlAsynchronousExecution
 	def sendCFPMessage(m : ProtocolMessage<CFP>) {
 		val taskId = new KnowledgeID("task", m.evt.iDt, m.evt.iDp)
 		var task : String
@@ -125,7 +112,8 @@ skill ContractorProtocolSkill implements ContractorProtocolCapacity extends Prot
 		m.evt.task = task
 		emit(m.^space, m.evt)[it.ID == m.receiver]
 	}
-	
+
+	@SarlAsynchronousExecution
 	def sendAcceptMessage(m : ProtocolMessage<Accept>) {
 		var idX = new KnowledgeID("x", m.evt.iDt, m.evt.iDp)
 		var idAccept = new KnowledgeID("accept", m.evt.iDt, m.evt.iDp)
@@ -141,7 +129,8 @@ skill ContractorProtocolSkill implements ContractorProtocolCapacity extends Prot
 		m.evt.accept = accept
 		emit(m.^space, m.evt)[it.ID == m.receiver]
 	}
-	
+
+	@SarlAsynchronousExecution
 	def sendRejectMessage(m : ProtocolMessage<Reject>) {
 		var idX = new KnowledgeID("x", m.evt.iDt, m.evt.iDp)
 		var idOutcome = new KnowledgeID("outcome", m.evt.iDt, m.evt.iDp)
