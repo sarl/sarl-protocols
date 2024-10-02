@@ -4,7 +4,7 @@
   <artifactId>api.protocol</artifactId>
   <version>0.1</version>
   <properties>
-    <sarl.version>0.13.0</sarl.version>
+    <sarl.version>0.14.0-SNAPSHOT</sarl.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <target.jdk.version>17</target.jdk.version>
   </properties>
