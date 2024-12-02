@@ -1,0 +1,40 @@
+		// Protocol
+		{SarlBsplProtocol.annotationInfo = current}
+		modifiers+=CommonModifier*
+		'protocol' name=ValidID '{' members+=BsplMember* '}'
+
+
+//-----------------------------------------------
+// START BSPL SUPPORT
+
+BsplMember returns xtend::XtendMember:
+	{xtend::XtendMember} annotations+=XAnnotation*
+	(
+		{SarlBsplRole.annotationInfo = current}
+		'role' names+=ValidID (',' names+=ValidID)*
+	|
+		{SarlBsplParameter.annotationInfo = current}
+		('var'|'parameter') parameters+=BsplParameter (',' parameters+=BsplParameter)*
+	|
+		{SarlBsplParameter.annotationInfo = current}
+		private?='private' ('var'|'parameter')? parameters+=BsplParameter (',' parameters+=BsplParameter)*
+	|
+		{SarlBsplInteraction.annotationInfo = current}
+		from=ValidID '->' to=ValidID ':' message=ValidID '[' arguments+=BsplArgument (',' arguments+=BsplArgument)* ']'
+	)
+;
+
+BsplParameter:
+	{SarlBsplParameter}
+	modifiers+=BsplParameterModifier* name=ValidID modifiers+=BsplParameterModifier* (':' type=JvmTypeReference)? modifiers+=BsplParameterModifier*
+;
+
+BsplArgument:
+	{SarlBsplArgument}
+	modifiers+=BsplParameterModifier* name=ValidID modifiers+=BsplParameterModifier*
+;
+
+BsplParameterModifier:
+	'in' | 'out' | 'nil' | 'null' | 'key'
+;
+
