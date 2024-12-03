@@ -20,7 +20,10 @@ BsplMember returns xtend::XtendMember:
 		private?='private' ('var'|'parameter')? parameters+=BsplParameter (',' parameters+=BsplParameter)*
 	|
 		{SarlBsplInteraction.annotationInfo = current}
-		from=ValidID '->' to=ValidID ':' message=ValidID '[' arguments+=BsplArgument (',' arguments+=BsplArgument)* ']'
+		from=ValidID '->' toModifiers+=BsplParameterModifier* to=ValidID ':' message=ValidID '[' arguments+=BsplArgument (',' arguments+=BsplArgument)* ']'
+	|
+		{SarlBsplProtocolReference.annotationInfo = current}
+		name=JvmTypeReference ( '(' BsplProtocolReferenceArguments ')' )?
 	)
 ;
 
@@ -34,7 +37,15 @@ BsplArgument:
 	modifiers+=BsplParameterModifier* name=ValidID modifiers+=BsplParameterModifier*
 ;
 
+BsplProtocolReferenceArguments:
+	{SarlBsplProtocolReferenceArgument}
+	(
+		( roles+=ValidID ( ',' roles+=ValidID )* )? '|' ( arguments+=BsplArgument ( ',' arguments+=BsplArgument )* )?
+	|
+	)
+;
+
 BsplParameterModifier:
-	'in' | 'out' | 'nil' | 'null' | 'key'
+	'in' | 'out' | 'nil' | 'any' | 'opt' | 'null' | 'key'
 ;
 
