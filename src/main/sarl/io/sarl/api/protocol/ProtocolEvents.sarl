@@ -1,8 +1,0 @@
-package io.sarl.api.protocol
-
-
-event ProtocolReady
-
-event ProtocolCompleted
-
-event ProtocolFailed
