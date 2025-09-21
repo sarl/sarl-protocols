@@ -69,7 +69,9 @@ public class ProtocolReactiveBehaviorGenerationTest {
 					"public behavior R2ProtocolReactiveBehavior extends ProtocolBehavior {",
 					"}"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R2ProtocolReactiveBehavior", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R2ProtocolReactiveBehavior", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 		@Test
@@ -93,7 +95,9 @@ public class ProtocolReactiveBehaviorGenerationTest {
 					"public behavior R2ProtocolReactiveBehavior extends ProtocolBehavior {",
 					"}"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R2ProtocolReactiveBehavior", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R2ProtocolReactiveBehavior", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 		@Test
@@ -117,7 +121,9 @@ public class ProtocolReactiveBehaviorGenerationTest {
 					"package behavior R2ProtocolReactiveBehavior extends ProtocolBehavior {",
 					"}"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R2ProtocolReactiveBehavior", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R2ProtocolReactiveBehavior", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 	}
@@ -153,7 +159,9 @@ public class ProtocolReactiveBehaviorGenerationTest {
 					"public behavior R2ProtocolReactiveBehavior extends ProtocolBehavior {",
 					"}"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R2ProtocolReactiveBehavior", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R2ProtocolReactiveBehavior", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 	
 		@Test
@@ -177,7 +185,9 @@ public class ProtocolReactiveBehaviorGenerationTest {
 					"public behavior R2ProtocolReactiveBehavior extends ProtocolBehavior {",
 					"}"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R2ProtocolReactiveBehavior", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R2ProtocolReactiveBehavior", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 	
 		@Test
@@ -202,7 +212,9 @@ public class ProtocolReactiveBehaviorGenerationTest {
 					"public behavior R2ProtocolReactiveBehavior extends ProtocolBehavior {",
 					"}"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R2ProtocolReactiveBehavior", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R2ProtocolReactiveBehavior", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 	
 		@Test
@@ -227,7 +239,9 @@ public class ProtocolReactiveBehaviorGenerationTest {
 					"public behavior R2ProtocolReactiveBehavior extends ProtocolBehavior {",
 					"}"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R2ProtocolReactiveBehavior", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R2ProtocolReactiveBehavior", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 	
 		@Test
@@ -249,7 +263,9 @@ public class ProtocolReactiveBehaviorGenerationTest {
 					"public behavior R2ProtocolReactiveBehavior extends ProtocolBehavior {",
 					"}"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R2ProtocolReactiveBehavior", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R2ProtocolReactiveBehavior", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 	
 		@Test
@@ -272,7 +288,9 @@ public class ProtocolReactiveBehaviorGenerationTest {
 					"public behavior R2ProtocolReactiveBehavior extends ProtocolBehavior {",
 					"}"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R2ProtocolReactiveBehavior", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R2ProtocolReactiveBehavior", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 	
 		@Test
@@ -296,7 +314,9 @@ public class ProtocolReactiveBehaviorGenerationTest {
 					"public behavior R2ProtocolReactiveBehavior extends ProtocolBehavior {",
 					"}"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R2ProtocolReactiveBehavior", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R2ProtocolReactiveBehavior", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 	
 		@Test
@@ -321,7 +341,9 @@ public class ProtocolReactiveBehaviorGenerationTest {
 					"public behavior R2ProtocolReactiveBehavior extends ProtocolBehavior {",
 					"}"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R2ProtocolReactiveBehavior", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R2ProtocolReactiveBehavior", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 	
 		@Test
@@ -344,7 +366,9 @@ public class ProtocolReactiveBehaviorGenerationTest {
 					"public behavior R2ProtocolReactiveBehavior extends ProtocolBehavior {",
 					"}"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R2ProtocolReactiveBehavior", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R2ProtocolReactiveBehavior", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 	
 		@Test
@@ -368,7 +392,9 @@ public class ProtocolReactiveBehaviorGenerationTest {
 					"public behavior R2ProtocolReactiveBehavior extends ProtocolBehavior {",
 					"}"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R2ProtocolReactiveBehavior", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R2ProtocolReactiveBehavior", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 	
 		@Test
@@ -393,7 +419,9 @@ public class ProtocolReactiveBehaviorGenerationTest {
 					"public behavior R2ProtocolReactiveBehavior extends ProtocolBehavior {",
 					"}"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R2ProtocolReactiveBehavior", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R2ProtocolReactiveBehavior", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 	
 		@Test
@@ -424,7 +452,9 @@ public class ProtocolReactiveBehaviorGenerationTest {
 					"  }",
 					"}"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R2ProtocolReactiveBehavior", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R2ProtocolReactiveBehavior", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 	
 		@Test
@@ -456,7 +486,9 @@ public class ProtocolReactiveBehaviorGenerationTest {
 					"  }",
 					"}"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R2ProtocolReactiveBehavior", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R2ProtocolReactiveBehavior", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 	
 		@Test
@@ -489,7 +521,9 @@ public class ProtocolReactiveBehaviorGenerationTest {
 					"  }",
 					"}"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R2ProtocolReactiveBehavior", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R2ProtocolReactiveBehavior", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 	
 		@Test
@@ -523,7 +557,9 @@ public class ProtocolReactiveBehaviorGenerationTest {
 					"  }",
 					"}"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R2ProtocolReactiveBehavior", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R2ProtocolReactiveBehavior", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 	
 		@Test
@@ -555,7 +591,9 @@ public class ProtocolReactiveBehaviorGenerationTest {
 					"  }",
 					"}"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R2ProtocolReactiveBehavior", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R2ProtocolReactiveBehavior", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 	
 		@Test
@@ -588,7 +626,9 @@ public class ProtocolReactiveBehaviorGenerationTest {
 					"  }",
 					"}"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R2ProtocolReactiveBehavior", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R2ProtocolReactiveBehavior", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 	
 		@Test
@@ -622,7 +662,9 @@ public class ProtocolReactiveBehaviorGenerationTest {
 					"  }",
 					"}"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R2ProtocolReactiveBehavior", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R2ProtocolReactiveBehavior", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 	
 		@Test
@@ -656,7 +698,9 @@ public class ProtocolReactiveBehaviorGenerationTest {
 					"  }",
 					"}"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R2ProtocolReactiveBehavior", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R2ProtocolReactiveBehavior", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 	
 		@Test
@@ -692,7 +736,9 @@ public class ProtocolReactiveBehaviorGenerationTest {
 					"  }",
 					"}"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R2ProtocolReactiveBehavior", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R2ProtocolReactiveBehavior", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 	
 		@Test
@@ -729,7 +775,9 @@ public class ProtocolReactiveBehaviorGenerationTest {
 					"  }",
 					"}"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R2ProtocolReactiveBehavior", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R2ProtocolReactiveBehavior", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 	}

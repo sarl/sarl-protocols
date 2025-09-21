@@ -65,7 +65,6 @@ public class ProtocolSkillGenerationTest {
 					"package io.sarl.extensions.bspl.lang.tests",
 					"",
 					"import io.sarl.api.core.ExternalContextAccess",
-					"import io.sarl.api.naming.name.ScopedDataName",
 					"import io.sarl.api.workingmemory.WorkingMemory",
 					"import io.sarl.extensions.bspl.api.protocol.impl.ProtocolMessage",
 					"import io.sarl.extensions.bspl.api.protocol.impl.ProtocolSkill",
@@ -79,15 +78,15 @@ public class ProtocolSkillGenerationTest {
 					"  @SarlAsynchronousExecution",
 					"  override getEnabledMMessages : List<ProtocolMessage<M>> {",
 					"    val enabledMessages = <ProtocolMessage<M>>newArrayList",
-					"    for (scope : getDefinedForName(\"R2\")) {",
+					"    getDefinedForName(\"R2\").forEach [scope |",
 					"      val spaceInstance = scope.findSpaceMachtingScope",
 					"      if (spaceInstance !== null) {",
-					"        synchronized (WorkingMemoryLock) {",
+					"        synchronized (getWorkingMemoryLock) {",
 					"          val messageInstance = new M",
-					"          enabledMessages += new ProtocolMessage<M>(spaceInstance, messageInstance, new ScopedDataName(\"R2\", scope.scope).getKnowledge(typeof(UUID)))",
+					"          enabledMessages += new ProtocolMessage<M>(spaceInstance, messageInstance, scope.getKnowledge(typeof(UUID)))",
 					"        }",
 					"      }",
-					"    }",
+					"    ]",
 					"    return enabledMessages",
 					"  }",
 					"  @SarlAsynchronousExecution",
@@ -96,7 +95,9 @@ public class ProtocolSkillGenerationTest {
 					"  }",
 					"}"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolSkill", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolSkill", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 		@Test
@@ -116,7 +117,6 @@ public class ProtocolSkillGenerationTest {
 					"package io.sarl.extensions.bspl.lang.tests",
 					"",
 					"import io.sarl.api.core.ExternalContextAccess",
-					"import io.sarl.api.naming.name.ScopedDataName",
 					"import io.sarl.api.workingmemory.WorkingMemory",
 					"import io.sarl.extensions.bspl.api.protocol.impl.ProtocolMessage",
 					"import io.sarl.extensions.bspl.api.protocol.impl.ProtocolSkill",
@@ -130,15 +130,15 @@ public class ProtocolSkillGenerationTest {
 					"  @SarlAsynchronousExecution",
 					"  override getEnabledMMessages : List<ProtocolMessage<M>> {",
 					"    val enabledMessages = <ProtocolMessage<M>>newArrayList",
-					"    for (scope : getDefinedForName(\"R2\")) {",
+					"    getDefinedForName(\"R2\").forEach [scope |",
 					"      val spaceInstance = scope.findSpaceMachtingScope",
 					"      if (spaceInstance !== null) {",
-					"        synchronized (WorkingMemoryLock) {",
+					"        synchronized (getWorkingMemoryLock) {",
 					"          val messageInstance = new M",
-					"          enabledMessages += new ProtocolMessage<M>(spaceInstance, messageInstance, new ScopedDataName(\"R2\", scope.scope).getKnowledge(typeof(UUID)))",
+					"          enabledMessages += new ProtocolMessage<M>(spaceInstance, messageInstance, scope.getKnowledge(typeof(UUID)))",
 					"        }",
 					"      }",
-					"    }",
+					"    ]",
 					"    return enabledMessages",
 					"  }",
 					"  @SarlAsynchronousExecution",
@@ -147,7 +147,9 @@ public class ProtocolSkillGenerationTest {
 					"  }",
 					"}"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolSkill", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolSkill", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 		@Test
@@ -167,7 +169,6 @@ public class ProtocolSkillGenerationTest {
 					"package io.sarl.extensions.bspl.lang.tests",
 					"",
 					"import io.sarl.api.core.ExternalContextAccess",
-					"import io.sarl.api.naming.name.ScopedDataName",
 					"import io.sarl.api.workingmemory.WorkingMemory",
 					"import io.sarl.extensions.bspl.api.protocol.impl.ProtocolMessage",
 					"import io.sarl.extensions.bspl.api.protocol.impl.ProtocolSkill",
@@ -181,15 +182,15 @@ public class ProtocolSkillGenerationTest {
 					"  @SarlAsynchronousExecution",
 					"  override getEnabledMMessages : List<ProtocolMessage<M>> {",
 					"    val enabledMessages = <ProtocolMessage<M>>newArrayList",
-					"    for (scope : getDefinedForName(\"R2\")) {",
+					"    getDefinedForName(\"R2\").forEach [scope |",
 					"      val spaceInstance = scope.findSpaceMachtingScope",
 					"      if (spaceInstance !== null) {",
-					"        synchronized (WorkingMemoryLock) {",
+					"        synchronized (getWorkingMemoryLock) {",
 					"          val messageInstance = new M",
-					"          enabledMessages += new ProtocolMessage<M>(spaceInstance, messageInstance, new ScopedDataName(\"R2\", scope.scope).getKnowledge(typeof(UUID)))",
+					"          enabledMessages += new ProtocolMessage<M>(spaceInstance, messageInstance, scope.getKnowledge(typeof(UUID)))",
 					"        }",
 					"      }",
-					"    }",
+					"    ]",
 					"    return enabledMessages",
 					"  }",
 					"  @SarlAsynchronousExecution",
@@ -198,7 +199,9 @@ public class ProtocolSkillGenerationTest {
 					"  }",
 					"}"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolSkill", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolSkill", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 	}
@@ -230,7 +233,6 @@ public class ProtocolSkillGenerationTest {
 					"package io.sarl.extensions.bspl.lang.tests",
 					"",
 					"import io.sarl.api.core.ExternalContextAccess",
-					"import io.sarl.api.naming.name.ScopedDataName",
 					"import io.sarl.api.workingmemory.WorkingMemory",
 					"import io.sarl.extensions.bspl.api.protocol.impl.ProtocolMessage",
 					"import io.sarl.extensions.bspl.api.protocol.impl.ProtocolSkill",
@@ -244,15 +246,15 @@ public class ProtocolSkillGenerationTest {
 					"  @SarlAsynchronousExecution",
 					"  override getEnabledMMessages : List<ProtocolMessage<M>> {",
 					"    val enabledMessages = <ProtocolMessage<M>>newArrayList",
-					"    for (scope : getDefinedForName(\"R2\")) {",
+					"    getDefinedForName(\"R2\").forEach [scope |",
 					"      val spaceInstance = scope.findSpaceMachtingScope",
 					"      if (spaceInstance !== null) {",
-					"        synchronized (WorkingMemoryLock) {",
+					"        synchronized (getWorkingMemoryLock) {",
 					"          val messageInstance = new M",
-					"          enabledMessages += new ProtocolMessage<M>(spaceInstance, messageInstance, new ScopedDataName(\"R2\", scope.scope).getKnowledge(typeof(UUID)))",
+					"          enabledMessages += new ProtocolMessage<M>(spaceInstance, messageInstance, scope.getKnowledge(typeof(UUID)))",
 					"        }",
 					"      }",
-					"    }",
+					"    ]",
 					"    return enabledMessages",
 					"  }",
 					"  @SarlAsynchronousExecution",
@@ -261,7 +263,9 @@ public class ProtocolSkillGenerationTest {
 					"  }",
 					"}"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolSkill", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolSkill", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 		@Test
@@ -281,7 +285,6 @@ public class ProtocolSkillGenerationTest {
 					"package io.sarl.extensions.bspl.lang.tests",
 					"",
 					"import io.sarl.api.core.ExternalContextAccess",
-					"import io.sarl.api.naming.name.ScopedDataName",
 					"import io.sarl.api.workingmemory.WorkingMemory",
 					"import io.sarl.extensions.bspl.api.protocol.impl.ProtocolMessage",
 					"import io.sarl.extensions.bspl.api.protocol.impl.ProtocolSkill",
@@ -295,15 +298,15 @@ public class ProtocolSkillGenerationTest {
 					"  @SarlAsynchronousExecution",
 					"  override getEnabledMMessages : List<ProtocolMessage<M>> {",
 					"    val enabledMessages = <ProtocolMessage<M>>newArrayList",
-					"    for (scope : getDefinedForName(\"R2\")) {",
+					"    getDefinedForName(\"R2\").forEach [scope |",
 					"      val spaceInstance = scope.findSpaceMachtingScope",
 					"      if (spaceInstance !== null) {",
-					"        synchronized (WorkingMemoryLock) {",
+					"        synchronized (getWorkingMemoryLock) {",
 					"          val messageInstance = new M",
-					"          enabledMessages += new ProtocolMessage<M>(spaceInstance, messageInstance, new ScopedDataName(\"R2\", scope.scope).getKnowledge(typeof(UUID)))",
+					"          enabledMessages += new ProtocolMessage<M>(spaceInstance, messageInstance, scope.getKnowledge(typeof(UUID)))",
 					"        }",
 					"      }",
-					"    }",
+					"    ]",
 					"    return enabledMessages",
 					"  }",
 					"  @SarlAsynchronousExecution",
@@ -312,7 +315,9 @@ public class ProtocolSkillGenerationTest {
 					"  }",
 					"}"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R3ProtocolSkill", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R3ProtocolSkill", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 		@Test
@@ -333,7 +338,6 @@ public class ProtocolSkillGenerationTest {
 					"package io.sarl.extensions.bspl.lang.tests",
 					"",
 					"import io.sarl.api.core.ExternalContextAccess",
-					"import io.sarl.api.naming.name.ScopedDataName",
 					"import io.sarl.api.workingmemory.WorkingMemory",
 					"import io.sarl.extensions.bspl.api.protocol.impl.ProtocolMessage",
 					"import io.sarl.extensions.bspl.api.protocol.impl.ProtocolSkill",
@@ -347,24 +351,24 @@ public class ProtocolSkillGenerationTest {
 					"  @SarlAsynchronousExecution",
 					"  override getEnabledMMessages : List<ProtocolMessage<M>> {",
 					"    val enabledMessages = <ProtocolMessage<M>>newArrayList",
-					"    for (scope : getDefinedForName(\"R2\")) {",
+					"    getDefinedForName(\"R2\").forEach [scope |",
 					"      val spaceInstance = scope.findSpaceMachtingScope",
 					"      if (spaceInstance !== null) {",
-					"        synchronized (WorkingMemoryLock) {",
+					"        synchronized (getWorkingMemoryLock) {",
 					"          val messageInstance = new M",
-					"          enabledMessages += new ProtocolMessage<M>(spaceInstance, messageInstance, new ScopedDataName(\"R2\", scope.scope).getKnowledge(typeof(UUID)))",
+					"          enabledMessages += new ProtocolMessage<M>(spaceInstance, messageInstance, scope.getKnowledge(typeof(UUID)))",
 					"        }",
 					"      }",
-					"    }",
-					"    for (scope_1 : getDefinedForName(\"R3\")) {",
+					"    ]",
+					"    getDefinedForName(\"R3\").forEach [scope_1 |",
 					"      val spaceInstance_1 = scope_1.findSpaceMachtingScope",
 					"      if (spaceInstance_1 !== null) {",
-					"        synchronized (WorkingMemoryLock) {",
+					"        synchronized (getWorkingMemoryLock) {",
 					"          val messageInstance_1 = new M",
-					"          enabledMessages += new ProtocolMessage<M>(spaceInstance_1, messageInstance_1, new ScopedDataName(\"R3\", scope_1.scope).getKnowledge(typeof(UUID)))",
+					"          enabledMessages += new ProtocolMessage<M>(spaceInstance_1, messageInstance_1, scope_1.getKnowledge(typeof(UUID)))",
 					"        }",
 					"      }",
-					"    }",
+					"    ]",
 					"    return enabledMessages",
 					"  }",
 					"  @SarlAsynchronousExecution",
@@ -373,7 +377,9 @@ public class ProtocolSkillGenerationTest {
 					"  }",
 					"}"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolSkill", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolSkill", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 		@Test
@@ -394,7 +400,6 @@ public class ProtocolSkillGenerationTest {
 					"package io.sarl.extensions.bspl.lang.tests",
 					"",
 					"import io.sarl.api.core.ExternalContextAccess",
-					"import io.sarl.api.naming.name.ScopedDataName",
 					"import io.sarl.api.workingmemory.WorkingMemory",
 					"import io.sarl.extensions.bspl.api.protocol.impl.ProtocolMessage",
 					"import io.sarl.extensions.bspl.api.protocol.impl.ProtocolSkill",
@@ -409,15 +414,15 @@ public class ProtocolSkillGenerationTest {
 					"  @SarlAsynchronousExecution",
 					"  override getEnabledMMessages : List<ProtocolMessage<M>> {",
 					"    val enabledMessages = <ProtocolMessage<M>>newArrayList",
-					"    for (scope : getDefinedForName(\"R2\")) {",
+					"    getDefinedForName(\"R2\").forEach [scope |",
 					"      val spaceInstance = scope.findSpaceMachtingScope",
 					"      if (spaceInstance !== null) {",
-					"        synchronized (WorkingMemoryLock) {",
+					"        synchronized (getWorkingMemoryLock) {",
 					"          val messageInstance = new M",
-					"          enabledMessages += new ProtocolMessage<M>(spaceInstance, messageInstance, new ScopedDataName(\"R2\", scope.scope).getKnowledge(typeof(UUID)))",
+					"          enabledMessages += new ProtocolMessage<M>(spaceInstance, messageInstance, scope.getKnowledge(typeof(UUID)))",
 					"        }",
 					"      }",
-					"    }",
+					"    ]",
 					"    return enabledMessages",
 					"  }",
 					"  @SarlAsynchronousExecution",
@@ -428,15 +433,15 @@ public class ProtocolSkillGenerationTest {
 					"  @SarlAsynchronousExecution",
 					"  override getEnabledM2Messages : List<ProtocolMessage<M2>> {",
 					"    val enabledMessages_1 = <ProtocolMessage<M2>>newArrayList",
-					"    for (scope_1 : getDefinedForName(\"R3\")) {",
+					"    getDefinedForName(\"R3\").forEach [scope_1 |",
 					"      val spaceInstance_1 = scope_1.findSpaceMachtingScope",
 					"      if (spaceInstance_1 !== null) {",
-					"        synchronized (WorkingMemoryLock) {",
+					"        synchronized (getWorkingMemoryLock) {",
 					"          val messageInstance_1 = new M2",
-					"          enabledMessages_1 += new ProtocolMessage<M2>(spaceInstance_1, messageInstance_1, new ScopedDataName(\"R3\", scope_1.scope).getKnowledge(typeof(UUID)))",
+					"          enabledMessages_1 += new ProtocolMessage<M2>(spaceInstance_1, messageInstance_1, scope_1.getKnowledge(typeof(UUID)))",
 					"        }",
 					"      }",
-					"    }",
+					"    ]",
 					"    return enabledMessages_1",
 					"  }",
 					"  @SarlAsynchronousExecution",
@@ -445,7 +450,9 @@ public class ProtocolSkillGenerationTest {
 					"  }",
 					"}"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolSkill", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolSkill", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 		@Test
@@ -463,7 +470,6 @@ public class ProtocolSkillGenerationTest {
 					"package io.sarl.extensions.bspl.lang.tests",
 					"",
 					"import io.sarl.api.core.ExternalContextAccess",
-					"import io.sarl.api.naming.name.ScopedDataName",
 					"import io.sarl.api.workingmemory.WorkingMemory",
 					"import io.sarl.extensions.bspl.api.protocol.impl.ProtocolMessage",
 					"import io.sarl.extensions.bspl.api.protocol.impl.ProtocolSkill",
@@ -477,15 +483,15 @@ public class ProtocolSkillGenerationTest {
 					"  @SarlAsynchronousExecution",
 					"  override getEnabledMMessages : List<ProtocolMessage<M>> {",
 					"    val enabledMessages = <ProtocolMessage<M>>newArrayList",
-					"    for (scope : getDefinedForName(\"R2\")) {",
+					"    getDefinedForName(\"R2\").forEach [scope |",
 					"      val spaceInstance = scope.findSpaceMachtingScope",
 					"      if (spaceInstance !== null) {",
-					"        synchronized (WorkingMemoryLock) {",
+					"        synchronized (getWorkingMemoryLock) {",
 					"          val messageInstance = new M",
-					"          enabledMessages += new ProtocolMessage<M>(spaceInstance, messageInstance, new ScopedDataName(\"R2\", scope.scope).getKnowledge(typeof(UUID)))",
+					"          enabledMessages += new ProtocolMessage<M>(spaceInstance, messageInstance, scope.getKnowledge(typeof(UUID)))",
 					"        }",
 					"      }",
-					"    }",
+					"    ]",
 					"    return enabledMessages",
 					"  }",
 					"  @SarlAsynchronousExecution",
@@ -493,7 +499,9 @@ public class ProtocolSkillGenerationTest {
 					"    emit(message.^space, message.^event) [it.ID == message.receiver]",
 					"  }",
 					"}");
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolSkill", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolSkill", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 		@Test
@@ -526,19 +534,19 @@ public class ProtocolSkillGenerationTest {
 					"  @SarlAsynchronousExecution",
 					"  override getEnabledMMessages : List<ProtocolMessage<M>> {",
 					"    val enabledMessages = <ProtocolMessage<M>>newArrayList",
-					"    for (scope : getDefinedForName(\"R2\")) {",
+					"    getDefinedForName(\"R2\").forEach [scope |",
 					"      val spaceInstance = scope.findSpaceMachtingScope",
 					"      if (spaceInstance !== null) {",
-					"        synchronized (WorkingMemoryLock) {",
+					"        synchronized (getWorkingMemoryLock) {",
 					"          if ((new ScopedDataName(\"A1\", scope.scope).isDefined)) {",
 					"            val messageInstance = new M",
 					"            val inParamId = new ScopedDataName(\"A1\", scope.scope)",
 					"            messageInstance.A1 = inParamId.getKnowledge(typeof(double))",
-					"            enabledMessages += new ProtocolMessage<M>(spaceInstance, messageInstance, new ScopedDataName(\"R2\", scope.scope).getKnowledge(typeof(UUID)))",
+					"            enabledMessages += new ProtocolMessage<M>(spaceInstance, messageInstance, scope.getKnowledge(typeof(UUID)))",
 					"          }",
 					"        }",
 					"      }",
-					"    }",
+					"    ]",
 					"    return enabledMessages",
 					"  }",
 					"  @SarlAsynchronousExecution",
@@ -546,7 +554,9 @@ public class ProtocolSkillGenerationTest {
 					"    emit(message.^space, message.^event) [it.ID == message.receiver]",
 					"  }",
 					"}");
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolSkill", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolSkill", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 		@Test
@@ -580,21 +590,21 @@ public class ProtocolSkillGenerationTest {
 					"  @SarlAsynchronousExecution",
 					"  override getEnabledMMessages : List<ProtocolMessage<M>> {",
 					"    val enabledMessages = <ProtocolMessage<M>>newArrayList",
-					"    for (scope : getDefinedForName(\"R2\")) {",
+					"    getDefinedForName(\"R2\").forEach [scope |",
 					"      val spaceInstance = scope.findSpaceMachtingScope",
 					"      if (spaceInstance !== null) {",
-					"        synchronized (WorkingMemoryLock) {",
+					"        synchronized (getWorkingMemoryLock) {",
 					"          if ((new ScopedDataName(\"A1\", scope.scope).isDefined) && (new ScopedDataName(\"A2\", scope.scope).isDefined)) {",
 					"            val messageInstance = new M",
 					"            val inParamId = new ScopedDataName(\"A1\", scope.scope)",
 					"            messageInstance.A1 = inParamId.getKnowledge(typeof(double))",
 					"            val inParamId_1 = new ScopedDataName(\"A2\", scope.scope)",
 					"            messageInstance.A2 = inParamId_1.getKnowledge(typeof(String))",
-					"            enabledMessages += new ProtocolMessage<M>(spaceInstance, messageInstance, new ScopedDataName(\"R2\", scope.scope).getKnowledge(typeof(UUID)))",
+					"            enabledMessages += new ProtocolMessage<M>(spaceInstance, messageInstance, scope.getKnowledge(typeof(UUID)))",
 					"          }",
 					"        }",
 					"      }",
-					"    }",
+					"    ]",
 					"    return enabledMessages",
 					"  }",
 					"  @SarlAsynchronousExecution",
@@ -602,7 +612,9 @@ public class ProtocolSkillGenerationTest {
 					"    emit(message.^space, message.^event) [it.ID == message.receiver]",
 					"  }",
 					"}");
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolSkill", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolSkill", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 		@Test
@@ -637,10 +649,10 @@ public class ProtocolSkillGenerationTest {
 					"  @SarlAsynchronousExecution",
 					"  override getEnabledMMessages : List<ProtocolMessage<M>> {",
 					"    val enabledMessages = <ProtocolMessage<M>>newArrayList",
-					"    for (scope : getDefinedForName(\"R2\")) {",
+					"    getDefinedForName(\"R2\").forEach [scope |",
 					"      val spaceInstance = scope.findSpaceMachtingScope",
 					"      if (spaceInstance !== null) {",
-					"        synchronized (WorkingMemoryLock) {",
+					"        synchronized (getWorkingMemoryLock) {",
 					"          if ((new ScopedDataName(\"A1\", scope.scope).isDefined) && (new ScopedDataName(\"A2\", scope.scope).isDefined) && (new ScopedDataName(\"A3\", scope.scope).isDefined)) {",
 					"            val messageInstance = new M",
 					"            val inParamId = new ScopedDataName(\"A1\", scope.scope)",
@@ -649,11 +661,11 @@ public class ProtocolSkillGenerationTest {
 					"            messageInstance.A2 = inParamId_1.getKnowledge(typeof(String))",
 					"            val inParamId_2 = new ScopedDataName(\"A3\", scope.scope)",
 					"            messageInstance.A3 = inParamId_2.getKnowledge(typeof(boolean))",
-					"            enabledMessages += new ProtocolMessage<M>(spaceInstance, messageInstance, new ScopedDataName(\"R2\", scope.scope).getKnowledge(typeof(UUID)))",
+					"            enabledMessages += new ProtocolMessage<M>(spaceInstance, messageInstance, scope.getKnowledge(typeof(UUID)))",
 					"          }",
 					"        }",
 					"      }",
-					"    }",
+					"    ]",
 					"    return enabledMessages",
 					"  }",
 					"  @SarlAsynchronousExecution",
@@ -661,7 +673,9 @@ public class ProtocolSkillGenerationTest {
 					"    emit(message.^space, message.^event) [it.ID == message.receiver]",
 					"  }",
 					"}");
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolSkill", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolSkill", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 		@Test
@@ -694,18 +708,18 @@ public class ProtocolSkillGenerationTest {
 					"  @SarlAsynchronousExecution",
 					"  override getEnabledMMessages : List<ProtocolMessage<M>> {",
 					"    val enabledMessages = <ProtocolMessage<M>>newArrayList",
-					"    for (scope : getDefinedForName(\"R2\")) {",
+					"    getDefinedForName(\"R2\").forEach [scope |",
 					"      val spaceInstance = scope.findSpaceMachtingScope",
 					"      if (spaceInstance !== null) {",
-					"        synchronized (WorkingMemoryLock) {",
+					"        synchronized (getWorkingMemoryLock) {",
 					"          if ((new ScopedDataName(\"A1\", scope.scope).isDefined)) {",
 					"            val messageInstance = new M",
 					"            messageInstance.A1 = scope.scope.get(0) as double // A1",
-					"            enabledMessages += new ProtocolMessage<M>(spaceInstance, messageInstance, new ScopedDataName(\"R2\", scope.scope).getKnowledge(typeof(UUID)))",
+					"            enabledMessages += new ProtocolMessage<M>(spaceInstance, messageInstance, scope.getKnowledge(typeof(UUID)))",
 					"          }",
 					"        }",
 					"      }",
-					"    }",
+					"    ]",
 					"    return enabledMessages",
 					"  }",
 					"  @SarlAsynchronousExecution",
@@ -713,7 +727,9 @@ public class ProtocolSkillGenerationTest {
 					"    emit(message.^space, message.^event) [it.ID == message.receiver]",
 					"  }",
 					"}");
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolSkill", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolSkill", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 		@Test
@@ -747,20 +763,20 @@ public class ProtocolSkillGenerationTest {
 					"  @SarlAsynchronousExecution",
 					"  override getEnabledMMessages : List<ProtocolMessage<M>> {",
 					"    val enabledMessages = <ProtocolMessage<M>>newArrayList",
-					"    for (scope : getDefinedForName(\"R2\")) {",
+					"    getDefinedForName(\"R2\").forEach [scope |",
 					"      val spaceInstance = scope.findSpaceMachtingScope",
 					"      if (spaceInstance !== null) {",
-					"        synchronized (WorkingMemoryLock) {",
+					"        synchronized (getWorkingMemoryLock) {",
 					"          if ((new ScopedDataName(\"A1\", scope.scope).isDefined) && (new ScopedDataName(\"A2\", scope.scope).isDefined)) {",
 					"            val messageInstance = new M",
 					"            messageInstance.A1 = scope.scope.get(0) as double // A1",
 					"            val inParamId = new ScopedDataName(\"A2\", scope.scope)",
 					"            messageInstance.A2 = inParamId.getKnowledge(typeof(String))",
-					"            enabledMessages += new ProtocolMessage<M>(spaceInstance, messageInstance, new ScopedDataName(\"R2\", scope.scope).getKnowledge(typeof(UUID)))",
+					"            enabledMessages += new ProtocolMessage<M>(spaceInstance, messageInstance, scope.getKnowledge(typeof(UUID)))",
 					"          }",
 					"        }",
 					"      }",
-					"    }",
+					"    ]",
 					"    return enabledMessages",
 					"  }",
 					"  @SarlAsynchronousExecution",
@@ -768,7 +784,9 @@ public class ProtocolSkillGenerationTest {
 					"    emit(message.^space, message.^event) [it.ID == message.receiver]",
 					"  }",
 					"}");
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolSkill", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolSkill", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 		@Test
@@ -803,10 +821,10 @@ public class ProtocolSkillGenerationTest {
 					"  @SarlAsynchronousExecution",
 					"  override getEnabledMMessages : List<ProtocolMessage<M>> {",
 					"    val enabledMessages = <ProtocolMessage<M>>newArrayList",
-					"    for (scope : getDefinedForName(\"R2\")) {",
+					"    getDefinedForName(\"R2\").forEach [scope |",
 					"      val spaceInstance = scope.findSpaceMachtingScope",
 					"      if (spaceInstance !== null) {",
-					"        synchronized (WorkingMemoryLock) {",
+					"        synchronized (getWorkingMemoryLock) {",
 					"          if ((new ScopedDataName(\"A1\", scope.scope).isDefined) && (new ScopedDataName(\"A2\", scope.scope).isDefined) && (new ScopedDataName(\"A3\", scope.scope).isDefined)) {",
 					"            val messageInstance = new M",
 					"            messageInstance.A1 = scope.scope.get(0) as double // A1",
@@ -814,11 +832,11 @@ public class ProtocolSkillGenerationTest {
 					"            messageInstance.A2 = inParamId.getKnowledge(typeof(String))",
 					"            val inParamId_1 = new ScopedDataName(\"A3\", scope.scope)",
 					"            messageInstance.A3 = inParamId_1.getKnowledge(typeof(boolean))",
-					"            enabledMessages += new ProtocolMessage<M>(spaceInstance, messageInstance, new ScopedDataName(\"R2\", scope.scope).getKnowledge(typeof(UUID)))",
+					"            enabledMessages += new ProtocolMessage<M>(spaceInstance, messageInstance, scope.getKnowledge(typeof(UUID)))",
 					"          }",
 					"        }",
 					"      }",
-					"    }",
+					"    ]",
 					"    return enabledMessages",
 					"  }",
 					"  @SarlAsynchronousExecution",
@@ -826,7 +844,9 @@ public class ProtocolSkillGenerationTest {
 					"    emit(message.^space, message.^event) [it.ID == message.receiver]",
 					"  }",
 					"}");
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolSkill", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolSkill", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 		@Test
@@ -859,24 +879,24 @@ public class ProtocolSkillGenerationTest {
 					"  @SarlAsynchronousExecution",
 					"  override getEnabledMMessages : List<ProtocolMessage<M>> {",
 					"    val enabledMessages = <ProtocolMessage<M>>newArrayList",
-					"    for (scope : getDefinedForName(\"R2\")) {",
+					"    getDefinedForName(\"R2\").forEach [scope |",
 					"      val spaceInstance = scope.findSpaceMachtingScope",
 					"      if (spaceInstance !== null) {",
-					"        synchronized (WorkingMemoryLock) {",
+					"        synchronized (getWorkingMemoryLock) {",
 					"          if (!(new ScopedDataName(\"A\", scope.scope).isBound)) {",
 					"            val messageInstance = new M",
-					"            enabledMessages += new ProtocolMessage<M>(spaceInstance, messageInstance, new ScopedDataName(\"R2\", scope.scope).getKnowledge(typeof(UUID)))",
+					"            enabledMessages += new ProtocolMessage<M>(spaceInstance, messageInstance, scope.getKnowledge(typeof(UUID)))",
 					"          }",
 					"        }",
 					"      }",
-					"    }",
+					"    ]",
 					"    return enabledMessages",
 					"  }",
 					"  @SarlAsynchronousExecution",
 					"  override sendMMessage(message : ProtocolMessage<M>) {",
 					"    val AId = new ScopedDataName(\"A\")",
 					"    var A : Object",
-					"    synchronized (WorkingMemoryLock) {",
+					"    synchronized (getWorkingMemoryLock) {",
 					"      A = AId.getKnowledge(typeof(Object))",
 					"      AId.bind",
 					"    }",
@@ -884,7 +904,9 @@ public class ProtocolSkillGenerationTest {
 					"    emit(message.^space, message.^event) [it.ID == message.receiver]",
 					"  }",
 					"}");
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolSkill", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolSkill", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 		@Test
@@ -918,26 +940,26 @@ public class ProtocolSkillGenerationTest {
 					"  @SarlAsynchronousExecution",
 					"  override getEnabledMMessages : List<ProtocolMessage<M>> {",
 					"    val enabledMessages = <ProtocolMessage<M>>newArrayList",
-					"    for (scope : getDefinedForName(\"R2\")) {",
+					"    getDefinedForName(\"R2\").forEach [scope |",
 					"      val spaceInstance = scope.findSpaceMachtingScope",
 					"      if (spaceInstance !== null) {",
-					"        synchronized (WorkingMemoryLock) {",
+					"        synchronized (getWorkingMemoryLock) {",
 					"          if ((new ScopedDataName(\"A1\", scope.scope).isDefined) && !(new ScopedDataName(\"A2\", scope.scope).isBound)) {",
 					"            val messageInstance = new M",
 					"            val inParamId = new ScopedDataName(\"A1\", scope.scope)",
 					"            messageInstance.A1 = inParamId.getKnowledge(typeof(double))",
-					"            enabledMessages += new ProtocolMessage<M>(spaceInstance, messageInstance, new ScopedDataName(\"R2\", scope.scope).getKnowledge(typeof(UUID)))",
+					"            enabledMessages += new ProtocolMessage<M>(spaceInstance, messageInstance, scope.getKnowledge(typeof(UUID)))",
 					"          }",
 					"        }",
 					"      }",
-					"    }",
+					"    ]",
 					"    return enabledMessages",
 					"  }",
 					"  @SarlAsynchronousExecution",
 					"  override sendMMessage(message : ProtocolMessage<M>) {",
 					"    val A2Id = new ScopedDataName(\"A2\")",
 					"    var A2 : Object",
-					"    synchronized (WorkingMemoryLock) {",
+					"    synchronized (getWorkingMemoryLock) {",
 					"      A2 = A2Id.getKnowledge(typeof(Object))",
 					"      A2Id.bind",
 					"    }",
@@ -945,7 +967,9 @@ public class ProtocolSkillGenerationTest {
 					"    emit(message.^space, message.^event) [it.ID == message.receiver]",
 					"  }",
 					"}");
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolSkill", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolSkill", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 		@Test
@@ -980,28 +1004,28 @@ public class ProtocolSkillGenerationTest {
 					"  @SarlAsynchronousExecution",
 					"  override getEnabledMMessages : List<ProtocolMessage<M>> {",
 					"    val enabledMessages = <ProtocolMessage<M>>newArrayList",
-					"    for (scope : getDefinedForName(\"R2\")) {",
+					"    getDefinedForName(\"R2\").forEach [scope |",
 					"      val spaceInstance = scope.findSpaceMachtingScope",
 					"      if (spaceInstance !== null) {",
-					"        synchronized (WorkingMemoryLock) {",
+					"        synchronized (getWorkingMemoryLock) {",
 					"          if ((new ScopedDataName(\"A1\", scope.scope).isDefined) && (new ScopedDataName(\"A2\", scope.scope).isDefined) && !(new ScopedDataName(\"A3\", scope.scope).isBound)) {",
 					"            val messageInstance = new M",
 					"            val inParamId = new ScopedDataName(\"A1\", scope.scope)",
 					"            messageInstance.A1 = inParamId.getKnowledge(typeof(double))",
 					"            val inParamId_1 = new ScopedDataName(\"A2\", scope.scope)",
 					"            messageInstance.A2 = inParamId_1.getKnowledge(typeof(String))",
-					"            enabledMessages += new ProtocolMessage<M>(spaceInstance, messageInstance, new ScopedDataName(\"R2\", scope.scope).getKnowledge(typeof(UUID)))",
+					"            enabledMessages += new ProtocolMessage<M>(spaceInstance, messageInstance, scope.getKnowledge(typeof(UUID)))",
 					"          }",
 					"        }",
 					"      }",
-					"    }",
+					"    ]",
 					"    return enabledMessages",
 					"  }",
 					"  @SarlAsynchronousExecution",
 					"  override sendMMessage(message : ProtocolMessage<M>) {",
 					"    val A3Id = new ScopedDataName(\"A3\")",
 					"    var A3 : Object",
-					"    synchronized (WorkingMemoryLock) {",
+					"    synchronized (getWorkingMemoryLock) {",
 					"      A3 = A3Id.getKnowledge(typeof(Object))",
 					"      A3Id.bind",
 					"    }",
@@ -1009,7 +1033,9 @@ public class ProtocolSkillGenerationTest {
 					"    emit(message.^space, message.^event) [it.ID == message.receiver]",
 					"  }",
 					"}");
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolSkill", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolSkill", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 		@Test
@@ -1045,10 +1071,10 @@ public class ProtocolSkillGenerationTest {
 					"  @SarlAsynchronousExecution",
 					"  override getEnabledMMessages : List<ProtocolMessage<M>> {",
 					"    val enabledMessages = <ProtocolMessage<M>>newArrayList",
-					"    for (scope : getDefinedForName(\"R2\")) {",
+					"    getDefinedForName(\"R2\").forEach [scope |",
 					"      val spaceInstance = scope.findSpaceMachtingScope",
 					"      if (spaceInstance !== null) {",
-					"        synchronized (WorkingMemoryLock) {",
+					"        synchronized (getWorkingMemoryLock) {",
 					"          if ((new ScopedDataName(\"A1\", scope.scope).isDefined) && (new ScopedDataName(\"A2\", scope.scope).isDefined) && (new ScopedDataName(\"A3\", scope.scope).isDefined) && !(new ScopedDataName(\"A4\", scope.scope).isBound)) {",
 					"            val messageInstance = new M",
 					"            val inParamId = new ScopedDataName(\"A1\", scope.scope)",
@@ -1057,18 +1083,18 @@ public class ProtocolSkillGenerationTest {
 					"            messageInstance.A2 = inParamId_1.getKnowledge(typeof(String))",
 					"            val inParamId_2 = new ScopedDataName(\"A3\", scope.scope)",
 					"            messageInstance.A3 = inParamId_2.getKnowledge(typeof(boolean))",
-					"            enabledMessages += new ProtocolMessage<M>(spaceInstance, messageInstance, new ScopedDataName(\"R2\", scope.scope).getKnowledge(typeof(UUID)))",
+					"            enabledMessages += new ProtocolMessage<M>(spaceInstance, messageInstance, scope.getKnowledge(typeof(UUID)))",
 					"          }",
 					"        }",
 					"      }",
-					"    }",
+					"    ]",
 					"    return enabledMessages",
 					"  }",
 					"  @SarlAsynchronousExecution",
 					"  override sendMMessage(message : ProtocolMessage<M>) {",
 					"    val A4Id = new ScopedDataName(\"A4\")",
 					"    var A4 : Object",
-					"    synchronized (WorkingMemoryLock) {",
+					"    synchronized (getWorkingMemoryLock) {",
 					"      A4 = A4Id.getKnowledge(typeof(Object))",
 					"      A4Id.bind",
 					"    }",
@@ -1076,7 +1102,9 @@ public class ProtocolSkillGenerationTest {
 					"    emit(message.^space, message.^event) [it.ID == message.receiver]",
 					"  }",
 					"}");
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolSkill", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolSkill", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 		@Test
@@ -1110,25 +1138,25 @@ public class ProtocolSkillGenerationTest {
 					"  @SarlAsynchronousExecution",
 					"  override getEnabledMMessages : List<ProtocolMessage<M>> {",
 					"    val enabledMessages = <ProtocolMessage<M>>newArrayList",
-					"    for (scope : getDefinedForName(\"R2\")) {",
+					"    getDefinedForName(\"R2\").forEach [scope |",
 					"      val spaceInstance = scope.findSpaceMachtingScope",
 					"      if (spaceInstance !== null) {",
-					"        synchronized (WorkingMemoryLock) {",
+					"        synchronized (getWorkingMemoryLock) {",
 					"          if ((new ScopedDataName(\"A1\", scope.scope).isDefined) && !(new ScopedDataName(\"A2\", scope.scope).isBound)) {",
 					"            val messageInstance = new M",
 					"            messageInstance.A1 = scope.scope.get(0) as double // A1",
-					"            enabledMessages += new ProtocolMessage<M>(spaceInstance, messageInstance, new ScopedDataName(\"R2\", scope.scope).getKnowledge(typeof(UUID)))",
+					"            enabledMessages += new ProtocolMessage<M>(spaceInstance, messageInstance, scope.getKnowledge(typeof(UUID)))",
 					"          }",
 					"        }",
 					"      }",
-					"    }",
+					"    ]",
 					"    return enabledMessages",
 					"  }",
 					"  @SarlAsynchronousExecution",
 					"  override sendMMessage(message : ProtocolMessage<M>) {",
 					"    val A2Id = new ScopedDataName(\"A2\", message.^event.A1)",
 					"    var A2 : Object",
-					"    synchronized (WorkingMemoryLock) {",
+					"    synchronized (getWorkingMemoryLock) {",
 					"      A2 = A2Id.getKnowledge(typeof(Object))",
 					"      A2Id.bind",
 					"    }",
@@ -1136,7 +1164,9 @@ public class ProtocolSkillGenerationTest {
 					"    emit(message.^space, message.^event) [it.ID == message.receiver]",
 					"  }",
 					"}");
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolSkill", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolSkill", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 		@Test
@@ -1171,27 +1201,27 @@ public class ProtocolSkillGenerationTest {
 					"  @SarlAsynchronousExecution",
 					"  override getEnabledMMessages : List<ProtocolMessage<M>> {",
 					"    val enabledMessages = <ProtocolMessage<M>>newArrayList",
-					"    for (scope : getDefinedForName(\"R2\")) {",
+					"    getDefinedForName(\"R2\").forEach [scope |",
 					"      val spaceInstance = scope.findSpaceMachtingScope",
 					"      if (spaceInstance !== null) {",
-					"        synchronized (WorkingMemoryLock) {",
+					"        synchronized (getWorkingMemoryLock) {",
 					"          if ((new ScopedDataName(\"A1\", scope.scope).isDefined) && (new ScopedDataName(\"A2\", scope.scope).isDefined) && !(new ScopedDataName(\"A3\", scope.scope).isBound)) {",
 					"            val messageInstance = new M",
 					"            messageInstance.A1 = scope.scope.get(0) as double // A1",
 					"            val inParamId = new ScopedDataName(\"A2\", scope.scope)",
 					"            messageInstance.A2 = inParamId.getKnowledge(typeof(String))",
-					"            enabledMessages += new ProtocolMessage<M>(spaceInstance, messageInstance, new ScopedDataName(\"R2\", scope.scope).getKnowledge(typeof(UUID)))",
+					"            enabledMessages += new ProtocolMessage<M>(spaceInstance, messageInstance, scope.getKnowledge(typeof(UUID)))",
 					"          }",
 					"        }",
 					"      }",
-					"    }",
+					"    ]",
 					"    return enabledMessages",
 					"  }",
 					"  @SarlAsynchronousExecution",
 					"  override sendMMessage(message : ProtocolMessage<M>) {",
 					"    val A3Id = new ScopedDataName(\"A3\", message.^event.A1)",
 					"    var A3 : Object",
-					"    synchronized (WorkingMemoryLock) {",
+					"    synchronized (getWorkingMemoryLock) {",
 					"      A3 = A3Id.getKnowledge(typeof(Object))",
 					"      A3Id.bind",
 					"    }",
@@ -1199,7 +1229,9 @@ public class ProtocolSkillGenerationTest {
 					"    emit(message.^space, message.^event) [it.ID == message.receiver]",
 					"  }",
 					"}");
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolSkill", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolSkill", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 		@Test
@@ -1235,10 +1267,10 @@ public class ProtocolSkillGenerationTest {
 					"  @SarlAsynchronousExecution",
 					"  override getEnabledMMessages : List<ProtocolMessage<M>> {",
 					"    val enabledMessages = <ProtocolMessage<M>>newArrayList",
-					"    for (scope : getDefinedForName(\"R2\")) {",
+					"    getDefinedForName(\"R2\").forEach [scope |",
 					"      val spaceInstance = scope.findSpaceMachtingScope",
 					"      if (spaceInstance !== null) {",
-					"        synchronized (WorkingMemoryLock) {",
+					"        synchronized (getWorkingMemoryLock) {",
 					"          if ((new ScopedDataName(\"A1\", scope.scope).isDefined) && (new ScopedDataName(\"A2\", scope.scope).isDefined) && (new ScopedDataName(\"A3\", scope.scope).isDefined) && !(new ScopedDataName(\"A4\", scope.scope).isBound)) {",
 					"            val messageInstance = new M",
 					"            messageInstance.A1 = scope.scope.get(0) as double // A1",
@@ -1246,18 +1278,18 @@ public class ProtocolSkillGenerationTest {
 					"            messageInstance.A2 = inParamId.getKnowledge(typeof(String))",
 					"            val inParamId_1 = new ScopedDataName(\"A3\", scope.scope)",
 					"            messageInstance.A3 = inParamId_1.getKnowledge(typeof(boolean))",
-					"            enabledMessages += new ProtocolMessage<M>(spaceInstance, messageInstance, new ScopedDataName(\"R2\", scope.scope).getKnowledge(typeof(UUID)))",
+					"            enabledMessages += new ProtocolMessage<M>(spaceInstance, messageInstance, scope.getKnowledge(typeof(UUID)))",
 					"          }",
 					"        }",
 					"      }",
-					"    }",
+					"    ]",
 					"    return enabledMessages",
 					"  }",
 					"  @SarlAsynchronousExecution",
 					"  override sendMMessage(message : ProtocolMessage<M>) {",
 					"    val A4Id = new ScopedDataName(\"A4\", message.^event.A1)",
 					"    var A4 : Object",
-					"    synchronized (WorkingMemoryLock) {",
+					"    synchronized (getWorkingMemoryLock) {",
 					"      A4 = A4Id.getKnowledge(typeof(Object))",
 					"      A4Id.bind",
 					"    }",
@@ -1265,7 +1297,9 @@ public class ProtocolSkillGenerationTest {
 					"    emit(message.^space, message.^event) [it.ID == message.receiver]",
 					"  }",
 					"}");
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolSkill", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolSkill", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 		@Test
@@ -1301,35 +1335,35 @@ public class ProtocolSkillGenerationTest {
 					"  @SarlAsynchronousExecution",
 					"  override getEnabledMMessages : List<ProtocolMessage<M>> {",
 					"    val enabledMessages = <ProtocolMessage<M>>newArrayList",
-					"    for (scope : getDefinedForName(\"R2\")) {",
+					"    getDefinedForName(\"R2\").forEach [scope |",
 					"      val spaceInstance = scope.findSpaceMachtingScope",
 					"      if (spaceInstance !== null) {",
-					"        synchronized (WorkingMemoryLock) {",
+					"        synchronized (getWorkingMemoryLock) {",
 					"          if ((new ScopedDataName(\"A1\", scope.scope).isDefined) && !(new ScopedDataName(\"A2\", scope.scope).isBound)) {",
 					"            val messageInstance = new M",
 					"            val inParamId = new ScopedDataName(\"A1\", scope.scope)",
 					"            messageInstance.A1 = inParamId.getKnowledge(typeof(double))",
-					"            enabledMessages += new ProtocolMessage<M>(spaceInstance, messageInstance, new ScopedDataName(\"R2\", scope.scope).getKnowledge(typeof(UUID)))",
+					"            enabledMessages += new ProtocolMessage<M>(spaceInstance, messageInstance, scope.getKnowledge(typeof(UUID)))",
 					"          }",
 					"        }",
 					"      }",
-					"    }",
-					"    for (scope_1 : getDefinedForName(\"R3\")) {",
+					"    ]",
+					"    getDefinedForName(\"R3\").forEach [scope_1 |",
 					"      val spaceInstance_1 = scope_1.findSpaceMachtingScope",
 					"      if (spaceInstance_1 !== null) {",
-					"        synchronized (WorkingMemoryLock) {",
+					"        synchronized (getWorkingMemoryLock) {",
 					"          val messageInstance_1 = new M",
-					"          enabledMessages += new ProtocolMessage<M>(spaceInstance_1, messageInstance_1, new ScopedDataName(\"R3\", scope_1.scope).getKnowledge(typeof(UUID)))",
+					"          enabledMessages += new ProtocolMessage<M>(spaceInstance_1, messageInstance_1, scope_1.getKnowledge(typeof(UUID)))",
 					"        }",
 					"      }",
-					"    }",
+					"    ]",
 					"    return enabledMessages",
 					"  }",
 					"  @SarlAsynchronousExecution",
 					"  override sendMMessage(message : ProtocolMessage<M>) {",
 					"    val A2Id = new ScopedDataName(\"A2\")",
 					"    var A2 : Object",
-					"    synchronized (WorkingMemoryLock) {",
+					"    synchronized (getWorkingMemoryLock) {",
 					"      A2 = A2Id.getKnowledge(typeof(Object))",
 					"      A2Id.bind",
 					"    }",
@@ -1337,7 +1371,9 @@ public class ProtocolSkillGenerationTest {
 					"    emit(message.^space, message.^event) [it.ID == message.receiver]",
 					"  }",
 					"}");
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolSkill", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolSkill", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 		@Test
@@ -1374,21 +1410,21 @@ public class ProtocolSkillGenerationTest {
 					"  @SarlAsynchronousExecution",
 					"  override getEnabledMMessages : List<ProtocolMessage<M>> {",
 					"    val enabledMessages = <ProtocolMessage<M>>newArrayList",
-					"    for (scope : getDefinedForName(\"R2\")) {",
+					"    getDefinedForName(\"R2\").forEach [scope |",
 					"      val spaceInstance = scope.findSpaceMachtingScope",
 					"      if (spaceInstance !== null) {",
-					"        synchronized (WorkingMemoryLock) {",
+					"        synchronized (getWorkingMemoryLock) {",
 					"          if ((new ScopedDataName(\"A1\", scope.scope).isDefined) && (new ScopedDataName(\"A2\", scope.scope).isDefined) && !(new ScopedDataName(\"A5\", scope.scope).isBound) && (new ScopedDataName(\"A3\", scope.scope).isDefined) && !(new ScopedDataName(\"A4\", scope.scope).isBound)) {",
 					"            val messageInstance = new M",
 					"            messageInstance.A1 = scope.scope.get(0) as double // A1",
 					"            val inParamId = new ScopedDataName(\"A2\", scope.scope)",
 					"            messageInstance.A2 = inParamId.getKnowledge(typeof(String))",
 					"            messageInstance.A3 = scope.scope.get(1) as boolean // A3",
-					"            enabledMessages += new ProtocolMessage<M>(spaceInstance, messageInstance, new ScopedDataName(\"R2\", scope.scope).getKnowledge(typeof(UUID)))",
+					"            enabledMessages += new ProtocolMessage<M>(spaceInstance, messageInstance, scope.getKnowledge(typeof(UUID)))",
 					"          }",
 					"        }",
 					"      }",
-					"    }",
+					"    ]",
 					"    return enabledMessages",
 					"  }",
 					"  @SarlAsynchronousExecution",
@@ -1397,7 +1433,7 @@ public class ProtocolSkillGenerationTest {
 					"    var A4 : Object",
 					"    val A5Id = new ScopedDataName(\"A5\", message.^event.A1, message.^event.A3)",
 					"    var A5 : int",
-					"    synchronized (WorkingMemoryLock) {",
+					"    synchronized (getWorkingMemoryLock) {",
 					"      A4 = A4Id.getKnowledge(typeof(Object))",
 					"      A5 = A5Id.getKnowledge(typeof(int))",
 					"      A4Id.bind",
@@ -1408,7 +1444,9 @@ public class ProtocolSkillGenerationTest {
 					"    emit(message.^space, message.^event) [it.ID == message.receiver]",
 					"  }",
 					"}");
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolSkill", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolSkill", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 		@Test
@@ -1446,36 +1484,36 @@ public class ProtocolSkillGenerationTest {
 					"  @SarlAsynchronousExecution",
 					"  override getEnabledMMessages : List<ProtocolMessage<M>> {",
 					"    val enabledMessages = <ProtocolMessage<M>>newArrayList",
-					"    for (scope : getDefinedForName(\"R2\")) {",
+					"    getDefinedForName(\"R2\").forEach [scope |",
 					"      val spaceInstance = scope.findSpaceMachtingScope",
 					"      if (spaceInstance !== null) {",
-					"        synchronized (WorkingMemoryLock) {",
+					"        synchronized (getWorkingMemoryLock) {",
 					"          if ((new ScopedDataName(\"A1\", scope.scope).isDefined) && (new ScopedDataName(\"A2\", scope.scope).isDefined) && !(new ScopedDataName(\"A5\", scope.scope).isBound) && (new ScopedDataName(\"A3\", scope.scope).isDefined) && !(new ScopedDataName(\"A4\", scope.scope).isBound)) {",
 					"            val messageInstance = new M",
 					"            messageInstance.A1 = scope.scope.get(0) as double // A1",
 					"            val inParamId = new ScopedDataName(\"A2\", scope.scope)",
 					"            messageInstance.A2 = inParamId.getKnowledge(typeof(String))",
 					"            messageInstance.A3 = scope.scope.get(1) as boolean // A3",
-					"            enabledMessages += new ProtocolMessage<M>(spaceInstance, messageInstance, new ScopedDataName(\"R2\", scope.scope).getKnowledge(typeof(UUID)))",
+					"            enabledMessages += new ProtocolMessage<M>(spaceInstance, messageInstance, scope.getKnowledge(typeof(UUID)))",
 					"          }",
 					"        }",
 					"      }",
-					"    }",
-					"    for (scope_1 : getDefinedForName(\"R3\")) {",
+					"    ]",
+					"    getDefinedForName(\"R3\").forEach [scope_1 |",
 					"      val spaceInstance_1 = scope_1.findSpaceMachtingScope",
 					"      if (spaceInstance_1 !== null) {",
-					"        synchronized (WorkingMemoryLock) {",
+					"        synchronized (getWorkingMemoryLock) {",
 					"          if ((new ScopedDataName(\"A1\", scope_1.scope).isDefined) && (new ScopedDataName(\"A2\", scope_1.scope).isDefined) && !(new ScopedDataName(\"A5\", scope_1.scope).isBound) && (new ScopedDataName(\"A3\", scope_1.scope).isDefined) && !(new ScopedDataName(\"A4\", scope_1.scope).isBound)) {",
 					"            val messageInstance_1 = new M",
 					"            messageInstance_1.A1 = scope_1.scope.get(0) as double // A1",
 					"            val inParamId_1 = new ScopedDataName(\"A2\", scope_1.scope)",
 					"            messageInstance_1.A2 = inParamId_1.getKnowledge(typeof(String))",
 					"            messageInstance_1.A3 = scope_1.scope.get(1) as boolean // A3",
-					"            enabledMessages += new ProtocolMessage<M>(spaceInstance_1, messageInstance_1, new ScopedDataName(\"R3\", scope_1.scope).getKnowledge(typeof(UUID)))",
+					"            enabledMessages += new ProtocolMessage<M>(spaceInstance_1, messageInstance_1, scope_1.getKnowledge(typeof(UUID)))",
 					"          }",
 					"        }",
 					"      }",
-					"    }",
+					"    ]",
 					"    return enabledMessages",
 					"  }",
 					"  @SarlAsynchronousExecution",
@@ -1484,7 +1522,7 @@ public class ProtocolSkillGenerationTest {
 					"    var A4 : Object",
 					"    val A5Id = new ScopedDataName(\"A5\", message.^event.A1, message.^event.A3)",
 					"    var A5 : int",
-					"    synchronized (WorkingMemoryLock) {",
+					"    synchronized (getWorkingMemoryLock) {",
 					"      A4 = A4Id.getKnowledge(typeof(Object))",
 					"      A5 = A5Id.getKnowledge(typeof(int))",
 					"      A4Id.bind",
@@ -1495,7 +1533,9 @@ public class ProtocolSkillGenerationTest {
 					"    emit(message.^space, message.^event) [it.ID == message.receiver]",
 					"  }",
 					"}");
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolSkill", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolSkill", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 	}
@@ -1540,18 +1580,18 @@ public class ProtocolSkillGenerationTest {
 					"  @SarlAsynchronousExecution",
 					"  override getEnabledMMessages : List<ProtocolMessage<M>> {",
 					"    val enabledMessages = <ProtocolMessage<M>>newArrayList",
-					"    for (scope : getDefinedForName(\"R2\")) {",
+					"    getDefinedForName(\"R2\").forEach [scope |",
 					"      val spaceInstance = scope.findSpaceMachtingScope",
 					"      if (spaceInstance !== null) {",
-					"        synchronized (WorkingMemoryLock) {",
+					"        synchronized (getWorkingMemoryLock) {",
 					"          if ((new ScopedDataName(\"A1\", scope.scope).isDefined)) {",
 					"            val messageInstance = new M",
 					"            // Ignoring private parameter: A1",
-					"            enabledMessages += new ProtocolMessage<M>(spaceInstance, messageInstance, new ScopedDataName(\"R2\", scope.scope).getKnowledge(typeof(UUID)))",
+					"            enabledMessages += new ProtocolMessage<M>(spaceInstance, messageInstance, scope.getKnowledge(typeof(UUID)))",
 					"          }",
 					"        }",
 					"      }",
-					"    }",
+					"    ]",
 					"    return enabledMessages",
 					"  }",
 					"  @SarlAsynchronousExecution",
@@ -1559,7 +1599,9 @@ public class ProtocolSkillGenerationTest {
 					"    emit(message.^space, message.^event) [it.ID == message.receiver]",
 					"  }",
 					"}");
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolSkill", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolSkill", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 		@Test
@@ -1593,20 +1635,20 @@ public class ProtocolSkillGenerationTest {
 					"  @SarlAsynchronousExecution",
 					"  override getEnabledMMessages : List<ProtocolMessage<M>> {",
 					"    val enabledMessages = <ProtocolMessage<M>>newArrayList",
-					"    for (scope : getDefinedForName(\"R2\")) {",
+					"    getDefinedForName(\"R2\").forEach [scope |",
 					"      val spaceInstance = scope.findSpaceMachtingScope",
 					"      if (spaceInstance !== null) {",
-					"        synchronized (WorkingMemoryLock) {",
+					"        synchronized (getWorkingMemoryLock) {",
 					"          if ((new ScopedDataName(\"A1\", scope.scope).isDefined) && (new ScopedDataName(\"A2\", scope.scope).isDefined)) {",
 					"            val messageInstance = new M",
 					"            val inParamId = new ScopedDataName(\"A1\", scope.scope)",
 					"            messageInstance.A1 = inParamId.getKnowledge(typeof(double))",
 					"            // Ignoring private parameter: A2",
-					"            enabledMessages += new ProtocolMessage<M>(spaceInstance, messageInstance, new ScopedDataName(\"R2\", scope.scope).getKnowledge(typeof(UUID)))",
+					"            enabledMessages += new ProtocolMessage<M>(spaceInstance, messageInstance, scope.getKnowledge(typeof(UUID)))",
 					"          }",
 					"        }",
 					"      }",
-					"    }",
+					"    ]",
 					"    return enabledMessages",
 					"  }",
 					"  @SarlAsynchronousExecution",
@@ -1614,7 +1656,9 @@ public class ProtocolSkillGenerationTest {
 					"    emit(message.^space, message.^event) [it.ID == message.receiver]",
 					"  }",
 					"}");
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolSkill", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolSkill", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 		@Test
@@ -1649,10 +1693,10 @@ public class ProtocolSkillGenerationTest {
 					"  @SarlAsynchronousExecution",
 					"  override getEnabledMMessages : List<ProtocolMessage<M>> {",
 					"    val enabledMessages = <ProtocolMessage<M>>newArrayList",
-					"    for (scope : getDefinedForName(\"R2\")) {",
+					"    getDefinedForName(\"R2\").forEach [scope |",
 					"      val spaceInstance = scope.findSpaceMachtingScope",
 					"      if (spaceInstance !== null) {",
-					"        synchronized (WorkingMemoryLock) {",
+					"        synchronized (getWorkingMemoryLock) {",
 					"          if ((new ScopedDataName(\"A1\", scope.scope).isDefined) && (new ScopedDataName(\"A2\", scope.scope).isDefined) && (new ScopedDataName(\"A3\", scope.scope).isDefined)) {",
 					"            val messageInstance = new M",
 					"            val inParamId = new ScopedDataName(\"A1\", scope.scope)",
@@ -1660,11 +1704,11 @@ public class ProtocolSkillGenerationTest {
 					"            // Ignoring private parameter: A2",
 					"            val inParamId_1 = new ScopedDataName(\"A3\", scope.scope)",
 					"            messageInstance.A3 = inParamId_1.getKnowledge(typeof(boolean))",
-					"            enabledMessages += new ProtocolMessage<M>(spaceInstance, messageInstance, new ScopedDataName(\"R2\", scope.scope).getKnowledge(typeof(UUID)))",
+					"            enabledMessages += new ProtocolMessage<M>(spaceInstance, messageInstance, scope.getKnowledge(typeof(UUID)))",
 					"          }",
 					"        }",
 					"      }",
-					"    }",
+					"    ]",
 					"    return enabledMessages",
 					"  }",
 					"  @SarlAsynchronousExecution",
@@ -1672,7 +1716,9 @@ public class ProtocolSkillGenerationTest {
 					"    emit(message.^space, message.^event) [it.ID == message.receiver]",
 					"  }",
 					"}");
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolSkill", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolSkill", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 		@Test
@@ -1705,18 +1751,18 @@ public class ProtocolSkillGenerationTest {
 					"  @SarlAsynchronousExecution",
 					"  override getEnabledMMessages : List<ProtocolMessage<M>> {",
 					"    val enabledMessages = <ProtocolMessage<M>>newArrayList",
-					"    for (scope : getDefinedForName(\"R2\")) {",
+					"    getDefinedForName(\"R2\").forEach [scope |",
 					"      val spaceInstance = scope.findSpaceMachtingScope",
 					"      if (spaceInstance !== null) {",
-					"        synchronized (WorkingMemoryLock) {",
+					"        synchronized (getWorkingMemoryLock) {",
 					"          if ((new ScopedDataName(\"A1\", scope.scope).isDefined)) {",
 					"            val messageInstance = new M",
 					"            // Ignoring private parameter: A1",
-					"            enabledMessages += new ProtocolMessage<M>(spaceInstance, messageInstance, new ScopedDataName(\"R2\", scope.scope).getKnowledge(typeof(UUID)))",
+					"            enabledMessages += new ProtocolMessage<M>(spaceInstance, messageInstance, scope.getKnowledge(typeof(UUID)))",
 					"          }",
 					"        }",
 					"      }",
-					"    }",
+					"    ]",
 					"    return enabledMessages",
 					"  }",
 					"  @SarlAsynchronousExecution",
@@ -1724,7 +1770,9 @@ public class ProtocolSkillGenerationTest {
 					"    emit(message.^space, message.^event) [it.ID == message.receiver]",
 					"  }",
 					"}");
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolSkill", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolSkill", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 		@Test
@@ -1758,19 +1806,19 @@ public class ProtocolSkillGenerationTest {
 					"  @SarlAsynchronousExecution",
 					"  override getEnabledMMessages : List<ProtocolMessage<M>> {",
 					"    val enabledMessages = <ProtocolMessage<M>>newArrayList",
-					"    for (scope : getDefinedForName(\"R2\")) {",
+					"    getDefinedForName(\"R2\").forEach [scope |",
 					"      val spaceInstance = scope.findSpaceMachtingScope",
 					"      if (spaceInstance !== null) {",
-					"        synchronized (WorkingMemoryLock) {",
+					"        synchronized (getWorkingMemoryLock) {",
 					"          if ((new ScopedDataName(\"A1\", scope.scope).isDefined) && (new ScopedDataName(\"A2\", scope.scope).isDefined)) {",
 					"            val messageInstance = new M",
 					"            messageInstance.A1 = scope.scope.get(0) as double // A1",
 					"            // Ignoring private parameter: A2",
-					"            enabledMessages += new ProtocolMessage<M>(spaceInstance, messageInstance, new ScopedDataName(\"R2\", scope.scope).getKnowledge(typeof(UUID)))",
+					"            enabledMessages += new ProtocolMessage<M>(spaceInstance, messageInstance, scope.getKnowledge(typeof(UUID)))",
 					"          }",
 					"        }",
 					"      }",
-					"    }",
+					"    ]",
 					"    return enabledMessages",
 					"  }",
 					"  @SarlAsynchronousExecution",
@@ -1778,7 +1826,9 @@ public class ProtocolSkillGenerationTest {
 					"    emit(message.^space, message.^event) [it.ID == message.receiver]",
 					"  }",
 					"}");
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolSkill", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolSkill", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 		@Test
@@ -1813,21 +1863,21 @@ public class ProtocolSkillGenerationTest {
 					"  @SarlAsynchronousExecution",
 					"  override getEnabledMMessages : List<ProtocolMessage<M>> {",
 					"    val enabledMessages = <ProtocolMessage<M>>newArrayList",
-					"    for (scope : getDefinedForName(\"R2\")) {",
+					"    getDefinedForName(\"R2\").forEach [scope |",
 					"      val spaceInstance = scope.findSpaceMachtingScope",
 					"      if (spaceInstance !== null) {",
-					"        synchronized (WorkingMemoryLock) {",
+					"        synchronized (getWorkingMemoryLock) {",
 					"          if ((new ScopedDataName(\"A1\", scope.scope).isDefined) && (new ScopedDataName(\"A2\", scope.scope).isDefined) && (new ScopedDataName(\"A3\", scope.scope).isDefined)) {",
 					"            val messageInstance = new M",
 					"            messageInstance.A1 = scope.scope.get(0) as double // A1",
 					"            // Ignoring private parameter: A2",
 					"            val inParamId = new ScopedDataName(\"A3\", scope.scope)",
 					"            messageInstance.A3 = inParamId.getKnowledge(typeof(boolean))",
-					"            enabledMessages += new ProtocolMessage<M>(spaceInstance, messageInstance, new ScopedDataName(\"R2\", scope.scope).getKnowledge(typeof(UUID)))",
+					"            enabledMessages += new ProtocolMessage<M>(spaceInstance, messageInstance, scope.getKnowledge(typeof(UUID)))",
 					"          }",
 					"        }",
 					"      }",
-					"    }",
+					"    ]",
 					"    return enabledMessages",
 					"  }",
 					"  @SarlAsynchronousExecution",
@@ -1835,7 +1885,9 @@ public class ProtocolSkillGenerationTest {
 					"    emit(message.^space, message.^event) [it.ID == message.receiver]",
 					"  }",
 					"}");
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolSkill", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolSkill", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 		@Test
@@ -1868,24 +1920,24 @@ public class ProtocolSkillGenerationTest {
 					"  @SarlAsynchronousExecution",
 					"  override getEnabledMMessages : List<ProtocolMessage<M>> {",
 					"    val enabledMessages = <ProtocolMessage<M>>newArrayList",
-					"    for (scope : getDefinedForName(\"R2\")) {",
+					"    getDefinedForName(\"R2\").forEach [scope |",
 					"      val spaceInstance = scope.findSpaceMachtingScope",
 					"      if (spaceInstance !== null) {",
-					"        synchronized (WorkingMemoryLock) {",
+					"        synchronized (getWorkingMemoryLock) {",
 					"          if (!(new ScopedDataName(\"A\", scope.scope).isBound)) {",
 					"            val messageInstance = new M",
-					"            enabledMessages += new ProtocolMessage<M>(spaceInstance, messageInstance, new ScopedDataName(\"R2\", scope.scope).getKnowledge(typeof(UUID)))",
+					"            enabledMessages += new ProtocolMessage<M>(spaceInstance, messageInstance, scope.getKnowledge(typeof(UUID)))",
 					"          }",
 					"        }",
 					"      }",
-					"    }",
+					"    ]",
 					"    return enabledMessages",
 					"  }",
 					"  @SarlAsynchronousExecution",
 					"  override sendMMessage(message : ProtocolMessage<M>) {",
 					"    val AId = new ScopedDataName(\"A\")",
 					"    var A : Object",
-					"    synchronized (WorkingMemoryLock) {",
+					"    synchronized (getWorkingMemoryLock) {",
 					"      A = AId.getKnowledge(typeof(Object))",
 					"      AId.bind",
 					"    }",
@@ -1893,7 +1945,9 @@ public class ProtocolSkillGenerationTest {
 					"    emit(message.^space, message.^event) [it.ID == message.receiver]",
 					"  }",
 					"}");
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolSkill", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolSkill", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 		@Test
@@ -1927,25 +1981,25 @@ public class ProtocolSkillGenerationTest {
 					"  @SarlAsynchronousExecution",
 					"  override getEnabledMMessages : List<ProtocolMessage<M>> {",
 					"    val enabledMessages = <ProtocolMessage<M>>newArrayList",
-					"    for (scope : getDefinedForName(\"R2\")) {",
+					"    getDefinedForName(\"R2\").forEach [scope |",
 					"      val spaceInstance = scope.findSpaceMachtingScope",
 					"      if (spaceInstance !== null) {",
-					"        synchronized (WorkingMemoryLock) {",
+					"        synchronized (getWorkingMemoryLock) {",
 					"          if ((new ScopedDataName(\"A1\", scope.scope).isDefined) && !(new ScopedDataName(\"A2\", scope.scope).isBound)) {",
 					"            val messageInstance = new M",
 					"            // Ignoring private parameter: A1",
-					"            enabledMessages += new ProtocolMessage<M>(spaceInstance, messageInstance, new ScopedDataName(\"R2\", scope.scope).getKnowledge(typeof(UUID)))",
+					"            enabledMessages += new ProtocolMessage<M>(spaceInstance, messageInstance, scope.getKnowledge(typeof(UUID)))",
 					"          }",
 					"        }",
 					"      }",
-					"    }",
+					"    ]",
 					"    return enabledMessages",
 					"  }",
 					"  @SarlAsynchronousExecution",
 					"  override sendMMessage(message : ProtocolMessage<M>) {",
 					"    val A2Id = new ScopedDataName(\"A2\")",
 					"    var A2 : Object",
-					"    synchronized (WorkingMemoryLock) {",
+					"    synchronized (getWorkingMemoryLock) {",
 					"      A2 = A2Id.getKnowledge(typeof(Object))",
 					"      A2Id.bind",
 					"    }",
@@ -1953,7 +2007,9 @@ public class ProtocolSkillGenerationTest {
 					"    emit(message.^space, message.^event) [it.ID == message.receiver]",
 					"  }",
 					"}");
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolSkill", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolSkill", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 		@Test
@@ -1988,27 +2044,27 @@ public class ProtocolSkillGenerationTest {
 					"  @SarlAsynchronousExecution",
 					"  override getEnabledMMessages : List<ProtocolMessage<M>> {",
 					"    val enabledMessages = <ProtocolMessage<M>>newArrayList",
-					"    for (scope : getDefinedForName(\"R2\")) {",
+					"    getDefinedForName(\"R2\").forEach [scope |",
 					"      val spaceInstance = scope.findSpaceMachtingScope",
 					"      if (spaceInstance !== null) {",
-					"        synchronized (WorkingMemoryLock) {",
+					"        synchronized (getWorkingMemoryLock) {",
 					"          if ((new ScopedDataName(\"A1\", scope.scope).isDefined) && (new ScopedDataName(\"A2\", scope.scope).isDefined) && !(new ScopedDataName(\"A3\", scope.scope).isBound)) {",
 					"            val messageInstance = new M",
 					"            val inParamId = new ScopedDataName(\"A1\", scope.scope)",
 					"            messageInstance.A1 = inParamId.getKnowledge(typeof(double))",
 					"            // Ignoring private parameter: A2",
-					"            enabledMessages += new ProtocolMessage<M>(spaceInstance, messageInstance, new ScopedDataName(\"R2\", scope.scope).getKnowledge(typeof(UUID)))",
+					"            enabledMessages += new ProtocolMessage<M>(spaceInstance, messageInstance, scope.getKnowledge(typeof(UUID)))",
 					"          }",
 					"        }",
 					"      }",
-					"    }",
+					"    ]",
 					"    return enabledMessages",
 					"  }",
 					"  @SarlAsynchronousExecution",
 					"  override sendMMessage(message : ProtocolMessage<M>) {",
 					"    val A3Id = new ScopedDataName(\"A3\")",
 					"    var A3 : Object",
-					"    synchronized (WorkingMemoryLock) {",
+					"    synchronized (getWorkingMemoryLock) {",
 					"      A3 = A3Id.getKnowledge(typeof(Object))",
 					"      A3Id.bind",
 					"    }",
@@ -2016,7 +2072,9 @@ public class ProtocolSkillGenerationTest {
 					"    emit(message.^space, message.^event) [it.ID == message.receiver]",
 					"  }",
 					"}");
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolSkill", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolSkill", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 		@Test
@@ -2052,10 +2110,10 @@ public class ProtocolSkillGenerationTest {
 					"  @SarlAsynchronousExecution",
 					"  override getEnabledMMessages : List<ProtocolMessage<M>> {",
 					"    val enabledMessages = <ProtocolMessage<M>>newArrayList",
-					"    for (scope : getDefinedForName(\"R2\")) {",
+					"    getDefinedForName(\"R2\").forEach [scope |",
 					"      val spaceInstance = scope.findSpaceMachtingScope",
 					"      if (spaceInstance !== null) {",
-					"        synchronized (WorkingMemoryLock) {",
+					"        synchronized (getWorkingMemoryLock) {",
 					"          if ((new ScopedDataName(\"A1\", scope.scope).isDefined) && (new ScopedDataName(\"A2\", scope.scope).isDefined) && (new ScopedDataName(\"A3\", scope.scope).isDefined) && !(new ScopedDataName(\"A4\", scope.scope).isBound)) {",
 					"            val messageInstance = new M",
 					"            val inParamId = new ScopedDataName(\"A1\", scope.scope)",
@@ -2063,18 +2121,18 @@ public class ProtocolSkillGenerationTest {
 					"            val inParamId_1 = new ScopedDataName(\"A2\", scope.scope)",
 					"            messageInstance.A2 = inParamId_1.getKnowledge(typeof(String))",
 					"            // Ignoring private parameter: A3",
-					"            enabledMessages += new ProtocolMessage<M>(spaceInstance, messageInstance, new ScopedDataName(\"R2\", scope.scope).getKnowledge(typeof(UUID)))",
+					"            enabledMessages += new ProtocolMessage<M>(spaceInstance, messageInstance, scope.getKnowledge(typeof(UUID)))",
 					"          }",
 					"        }",
 					"      }",
-					"    }",
+					"    ]",
 					"    return enabledMessages",
 					"  }",
 					"  @SarlAsynchronousExecution",
 					"  override sendMMessage(message : ProtocolMessage<M>) {",
 					"    val A4Id = new ScopedDataName(\"A4\")",
 					"    var A4 : Object",
-					"    synchronized (WorkingMemoryLock) {",
+					"    synchronized (getWorkingMemoryLock) {",
 					"      A4 = A4Id.getKnowledge(typeof(Object))",
 					"      A4Id.bind",
 					"    }",
@@ -2082,7 +2140,9 @@ public class ProtocolSkillGenerationTest {
 					"    emit(message.^space, message.^event) [it.ID == message.receiver]",
 					"  }",
 					"}");
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolSkill", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolSkill", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 		@Test
@@ -2116,25 +2176,25 @@ public class ProtocolSkillGenerationTest {
 					"  @SarlAsynchronousExecution",
 					"  override getEnabledMMessages : List<ProtocolMessage<M>> {",
 					"    val enabledMessages = <ProtocolMessage<M>>newArrayList",
-					"    for (scope : getDefinedForName(\"R2\")) {",
+					"    getDefinedForName(\"R2\").forEach [scope |",
 					"      val spaceInstance = scope.findSpaceMachtingScope",
 					"      if (spaceInstance !== null) {",
-					"        synchronized (WorkingMemoryLock) {",
+					"        synchronized (getWorkingMemoryLock) {",
 					"          if ((new ScopedDataName(\"A1\", scope.scope).isDefined) && !(new ScopedDataName(\"A2\", scope.scope).isBound)) {",
 					"            val messageInstance = new M",
 					"            // Ignoring private parameter: A1",
-					"            enabledMessages += new ProtocolMessage<M>(spaceInstance, messageInstance, new ScopedDataName(\"R2\", scope.scope).getKnowledge(typeof(UUID)))",
+					"            enabledMessages += new ProtocolMessage<M>(spaceInstance, messageInstance, scope.getKnowledge(typeof(UUID)))",
 					"          }",
 					"        }",
 					"      }",
-					"    }",
+					"    ]",
 					"    return enabledMessages",
 					"  }",
 					"  @SarlAsynchronousExecution",
 					"  override sendMMessage(message : ProtocolMessage<M>) {",
 					"    val A2Id = new ScopedDataName(\"A2\", message.^event.A1)",
 					"    var A2 : Object",
-					"    synchronized (WorkingMemoryLock) {",
+					"    synchronized (getWorkingMemoryLock) {",
 					"      A2 = A2Id.getKnowledge(typeof(Object))",
 					"      A2Id.bind",
 					"    }",
@@ -2142,7 +2202,9 @@ public class ProtocolSkillGenerationTest {
 					"    emit(message.^space, message.^event) [it.ID == message.receiver]",
 					"  }",
 					"}");
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolSkill", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolSkill", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 		@Test
@@ -2177,26 +2239,26 @@ public class ProtocolSkillGenerationTest {
 					"  @SarlAsynchronousExecution",
 					"  override getEnabledMMessages : List<ProtocolMessage<M>> {",
 					"    val enabledMessages = <ProtocolMessage<M>>newArrayList",
-					"    for (scope : getDefinedForName(\"R2\")) {",
+					"    getDefinedForName(\"R2\").forEach [scope |",
 					"      val spaceInstance = scope.findSpaceMachtingScope",
 					"      if (spaceInstance !== null) {",
-					"        synchronized (WorkingMemoryLock) {",
+					"        synchronized (getWorkingMemoryLock) {",
 					"          if ((new ScopedDataName(\"A1\", scope.scope).isDefined) && (new ScopedDataName(\"A2\", scope.scope).isDefined) && !(new ScopedDataName(\"A3\", scope.scope).isBound)) {",
 					"            val messageInstance = new M",
 					"            // Ignoring private parameter: A1",
 					"            // Ignoring private parameter: A2",
-					"            enabledMessages += new ProtocolMessage<M>(spaceInstance, messageInstance, new ScopedDataName(\"R2\", scope.scope).getKnowledge(typeof(UUID)))",
+					"            enabledMessages += new ProtocolMessage<M>(spaceInstance, messageInstance, scope.getKnowledge(typeof(UUID)))",
 					"          }",
 					"        }",
 					"      }",
-					"    }",
+					"    ]",
 					"    return enabledMessages",
 					"  }",
 					"  @SarlAsynchronousExecution",
 					"  override sendMMessage(message : ProtocolMessage<M>) {",
 					"    val A3Id = new ScopedDataName(\"A3\", message.^event.A1)",
 					"    var A3 : Object",
-					"    synchronized (WorkingMemoryLock) {",
+					"    synchronized (getWorkingMemoryLock) {",
 					"      A3 = A3Id.getKnowledge(typeof(Object))",
 					"      A3Id.bind",
 					"    }",
@@ -2204,7 +2266,9 @@ public class ProtocolSkillGenerationTest {
 					"    emit(message.^space, message.^event) [it.ID == message.receiver]",
 					"  }",
 					"}");
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolSkill", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolSkill", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 		@Test
@@ -2240,28 +2304,28 @@ public class ProtocolSkillGenerationTest {
 					"  @SarlAsynchronousExecution",
 					"  override getEnabledMMessages : List<ProtocolMessage<M>> {",
 					"    val enabledMessages = <ProtocolMessage<M>>newArrayList",
-					"    for (scope : getDefinedForName(\"R2\")) {",
+					"    getDefinedForName(\"R2\").forEach [scope |",
 					"      val spaceInstance = scope.findSpaceMachtingScope",
 					"      if (spaceInstance !== null) {",
-					"        synchronized (WorkingMemoryLock) {",
+					"        synchronized (getWorkingMemoryLock) {",
 					"          if ((new ScopedDataName(\"A1\", scope.scope).isDefined) && (new ScopedDataName(\"A2\", scope.scope).isDefined) && (new ScopedDataName(\"A3\", scope.scope).isDefined) && !(new ScopedDataName(\"A4\", scope.scope).isBound)) {",
 					"            val messageInstance = new M",
 					"            messageInstance.A1 = scope.scope.get(0) as double // A1",
 					"            // Ignoring private parameter: A2",
 					"            val inParamId = new ScopedDataName(\"A3\", scope.scope)",
 					"            messageInstance.A3 = inParamId.getKnowledge(typeof(boolean))",
-					"            enabledMessages += new ProtocolMessage<M>(spaceInstance, messageInstance, new ScopedDataName(\"R2\", scope.scope).getKnowledge(typeof(UUID)))",
+					"            enabledMessages += new ProtocolMessage<M>(spaceInstance, messageInstance, scope.getKnowledge(typeof(UUID)))",
 					"          }",
 					"        }",
 					"      }",
-					"    }",
+					"    ]",
 					"    return enabledMessages",
 					"  }",
 					"  @SarlAsynchronousExecution",
 					"  override sendMMessage(message : ProtocolMessage<M>) {",
 					"    val A4Id = new ScopedDataName(\"A4\", message.^event.A1)",
 					"    var A4 : Object",
-					"    synchronized (WorkingMemoryLock) {",
+					"    synchronized (getWorkingMemoryLock) {",
 					"      A4 = A4Id.getKnowledge(typeof(Object))",
 					"      A4Id.bind",
 					"    }",
@@ -2269,7 +2333,9 @@ public class ProtocolSkillGenerationTest {
 					"    emit(message.^space, message.^event) [it.ID == message.receiver]",
 					"  }",
 					"}");
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolSkill", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolSkill", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 		@Test
@@ -2305,34 +2371,34 @@ public class ProtocolSkillGenerationTest {
 					"  @SarlAsynchronousExecution",
 					"  override getEnabledMMessages : List<ProtocolMessage<M>> {",
 					"    val enabledMessages = <ProtocolMessage<M>>newArrayList",
-					"    for (scope : getDefinedForName(\"R2\")) {",
+					"    getDefinedForName(\"R2\").forEach [scope |",
 					"      val spaceInstance = scope.findSpaceMachtingScope",
 					"      if (spaceInstance !== null) {",
-					"        synchronized (WorkingMemoryLock) {",
+					"        synchronized (getWorkingMemoryLock) {",
 					"          if ((new ScopedDataName(\"A1\", scope.scope).isDefined) && !(new ScopedDataName(\"A2\", scope.scope).isBound)) {",
 					"            val messageInstance = new M",
 					"            // Ignoring private parameter: A1",
-					"            enabledMessages += new ProtocolMessage<M>(spaceInstance, messageInstance, new ScopedDataName(\"R2\", scope.scope).getKnowledge(typeof(UUID)))",
+					"            enabledMessages += new ProtocolMessage<M>(spaceInstance, messageInstance, scope.getKnowledge(typeof(UUID)))",
 					"          }",
 					"        }",
 					"      }",
-					"    }",
-					"    for (scope_1 : getDefinedForName(\"R3\")) {",
+					"    ]",
+					"    getDefinedForName(\"R3\").forEach [scope_1 |",
 					"      val spaceInstance_1 = scope_1.findSpaceMachtingScope",
 					"      if (spaceInstance_1 !== null) {",
-					"        synchronized (WorkingMemoryLock) {",
+					"        synchronized (getWorkingMemoryLock) {",
 					"          val messageInstance_1 = new M",
-					"          enabledMessages += new ProtocolMessage<M>(spaceInstance_1, messageInstance_1, new ScopedDataName(\"R3\", scope_1.scope).getKnowledge(typeof(UUID)))",
+					"          enabledMessages += new ProtocolMessage<M>(spaceInstance_1, messageInstance_1, scope_1.getKnowledge(typeof(UUID)))",
 					"        }",
 					"      }",
-					"    }",
+					"    ]",
 					"    return enabledMessages",
 					"  }",
 					"  @SarlAsynchronousExecution",
 					"  override sendMMessage(message : ProtocolMessage<M>) {",
 					"    val A2Id = new ScopedDataName(\"A2\")",
 					"    var A2 : Object",
-					"    synchronized (WorkingMemoryLock) {",
+					"    synchronized (getWorkingMemoryLock) {",
 					"      A2 = A2Id.getKnowledge(typeof(Object))",
 					"      A2Id.bind",
 					"    }",
@@ -2340,7 +2406,9 @@ public class ProtocolSkillGenerationTest {
 					"    emit(message.^space, message.^event) [it.ID == message.receiver]",
 					"  }",
 					"}");
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolSkill", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolSkill", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 		@Test
@@ -2377,20 +2445,20 @@ public class ProtocolSkillGenerationTest {
 					"  @SarlAsynchronousExecution",
 					"  override getEnabledMMessages : List<ProtocolMessage<M>> {",
 					"    val enabledMessages = <ProtocolMessage<M>>newArrayList",
-					"    for (scope : getDefinedForName(\"R2\")) {",
+					"    getDefinedForName(\"R2\").forEach [scope |",
 					"      val spaceInstance = scope.findSpaceMachtingScope",
 					"      if (spaceInstance !== null) {",
-					"        synchronized (WorkingMemoryLock) {",
+					"        synchronized (getWorkingMemoryLock) {",
 					"          if ((new ScopedDataName(\"A1\", scope.scope).isDefined) && (new ScopedDataName(\"A2\", scope.scope).isDefined) && !(new ScopedDataName(\"A5\", scope.scope).isBound) && (new ScopedDataName(\"A3\", scope.scope).isDefined) && !(new ScopedDataName(\"A4\", scope.scope).isBound)) {",
 					"            val messageInstance = new M",
 					"            messageInstance.A1 = scope.scope.get(0) as double // A1",
 					"            // Ignoring private parameter: A2",
 					"            messageInstance.A3 = scope.scope.get(1) as boolean // A3",
-					"            enabledMessages += new ProtocolMessage<M>(spaceInstance, messageInstance, new ScopedDataName(\"R2\", scope.scope).getKnowledge(typeof(UUID)))",
+					"            enabledMessages += new ProtocolMessage<M>(spaceInstance, messageInstance, scope.getKnowledge(typeof(UUID)))",
 					"          }",
 					"        }",
 					"      }",
-					"    }",
+					"    ]",
 					"    return enabledMessages",
 					"  }",
 					"  @SarlAsynchronousExecution",
@@ -2399,7 +2467,7 @@ public class ProtocolSkillGenerationTest {
 					"    var A4 : Object",
 					"    val A5Id = new ScopedDataName(\"A5\", message.^event.A1, message.^event.A3)",
 					"    var A5 : int",
-					"    synchronized (WorkingMemoryLock) {",
+					"    synchronized (getWorkingMemoryLock) {",
 					"      A4 = A4Id.getKnowledge(typeof(Object))",
 					"      A5 = A5Id.getKnowledge(typeof(int))",
 					"      A4Id.bind",
@@ -2410,7 +2478,9 @@ public class ProtocolSkillGenerationTest {
 					"    emit(message.^space, message.^event) [it.ID == message.receiver]",
 					"  }",
 					"}");
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolSkill", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolSkill", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 		@Test
@@ -2448,34 +2518,34 @@ public class ProtocolSkillGenerationTest {
 					"  @SarlAsynchronousExecution",
 					"  override getEnabledMMessages : List<ProtocolMessage<M>> {",
 					"    val enabledMessages = <ProtocolMessage<M>>newArrayList",
-					"    for (scope : getDefinedForName(\"R2\")) {",
+					"    getDefinedForName(\"R2\").forEach [scope |",
 					"      val spaceInstance = scope.findSpaceMachtingScope",
 					"      if (spaceInstance !== null) {",
-					"        synchronized (WorkingMemoryLock) {",
+					"        synchronized (getWorkingMemoryLock) {",
 					"          if ((new ScopedDataName(\"A1\", scope.scope).isDefined) && (new ScopedDataName(\"A2\", scope.scope).isDefined) && !(new ScopedDataName(\"A5\", scope.scope).isBound) && (new ScopedDataName(\"A3\", scope.scope).isDefined) && !(new ScopedDataName(\"A4\", scope.scope).isBound)) {",
 					"            val messageInstance = new M",
 					"            messageInstance.A1 = scope.scope.get(0) as double // A1",
 					"            // Ignoring private parameter: A2",
 					"            messageInstance.A3 = scope.scope.get(1) as boolean // A3",
-					"            enabledMessages += new ProtocolMessage<M>(spaceInstance, messageInstance, new ScopedDataName(\"R2\", scope.scope).getKnowledge(typeof(UUID)))",
+					"            enabledMessages += new ProtocolMessage<M>(spaceInstance, messageInstance, scope.getKnowledge(typeof(UUID)))",
 					"          }",
 					"        }",
 					"      }",
-					"    }",
-					"    for (scope_1 : getDefinedForName(\"R3\")) {",
+					"    ]",
+					"    getDefinedForName(\"R3\").forEach [scope_1 |",
 					"      val spaceInstance_1 = scope_1.findSpaceMachtingScope",
 					"      if (spaceInstance_1 !== null) {",
-					"        synchronized (WorkingMemoryLock) {",
+					"        synchronized (getWorkingMemoryLock) {",
 					"          if ((new ScopedDataName(\"A1\", scope_1.scope).isDefined) && (new ScopedDataName(\"A2\", scope_1.scope).isDefined) && !(new ScopedDataName(\"A5\", scope_1.scope).isBound) && (new ScopedDataName(\"A3\", scope_1.scope).isDefined) && !(new ScopedDataName(\"A4\", scope_1.scope).isBound)) {",
 					"            val messageInstance_1 = new M",
 					"            messageInstance_1.A1 = scope_1.scope.get(0) as double // A1",
 					"            // Ignoring private parameter: A2",
 					"            messageInstance_1.A3 = scope_1.scope.get(1) as boolean // A3",
-					"            enabledMessages += new ProtocolMessage<M>(spaceInstance_1, messageInstance_1, new ScopedDataName(\"R3\", scope_1.scope).getKnowledge(typeof(UUID)))",
+					"            enabledMessages += new ProtocolMessage<M>(spaceInstance_1, messageInstance_1, scope_1.getKnowledge(typeof(UUID)))",
 					"          }",
 					"        }",
 					"      }",
-					"    }",
+					"    ]",
 					"    return enabledMessages",
 					"  }",
 					"  @SarlAsynchronousExecution",
@@ -2484,7 +2554,7 @@ public class ProtocolSkillGenerationTest {
 					"    var A4 : Object",
 					"    val A5Id = new ScopedDataName(\"A5\", message.^event.A1, message.^event.A3)",
 					"    var A5 : int",
-					"    synchronized (WorkingMemoryLock) {",
+					"    synchronized (getWorkingMemoryLock) {",
 					"      A4 = A4Id.getKnowledge(typeof(Object))",
 					"      A5 = A5Id.getKnowledge(typeof(int))",
 					"      A4Id.bind",
@@ -2495,7 +2565,9 @@ public class ProtocolSkillGenerationTest {
 					"    emit(message.^space, message.^event) [it.ID == message.receiver]",
 					"  }",
 					"}");
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolSkill", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolSkill", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 	}
@@ -2540,24 +2612,24 @@ public class ProtocolSkillGenerationTest {
 					"  @SarlAsynchronousExecution",
 					"  override getEnabledMMessages : List<ProtocolMessage<M>> {",
 					"    val enabledMessages = <ProtocolMessage<M>>newArrayList",
-					"    for (scope : getDefinedForName(\"R2\")) {",
+					"    getDefinedForName(\"R2\").forEach [scope |",
 					"      val spaceInstance = scope.findSpaceMachtingScope",
 					"      if (spaceInstance !== null) {",
-					"        synchronized (WorkingMemoryLock) {",
+					"        synchronized (getWorkingMemoryLock) {",
 					"          if (!(new ScopedDataName(\"P1\", scope.scope).isBound)) {",
 					"            val messageInstance = new M",
-					"            enabledMessages += new ProtocolMessage<M>(spaceInstance, messageInstance, new ScopedDataName(\"R2\", scope.scope).getKnowledge(typeof(UUID)))",
+					"            enabledMessages += new ProtocolMessage<M>(spaceInstance, messageInstance, scope.getKnowledge(typeof(UUID)))",
 					"          }",
 					"        }",
 					"      }",
-					"    }",
+					"    ]",
 					"    return enabledMessages",
 					"  }",
 					"  @SarlAsynchronousExecution",
 					"  override sendMMessage(message : ProtocolMessage<M>) {",
 					"    val P1Id = new ScopedDataName(\"P1\")",
 					"    var P1 : Object",
-					"    synchronized (WorkingMemoryLock) {",
+					"    synchronized (getWorkingMemoryLock) {",
 					"      P1 = P1Id.getKnowledge(typeof(Object))",
 					"      P1Id.bind",
 					"    }",
@@ -2566,7 +2638,9 @@ public class ProtocolSkillGenerationTest {
 					"  }",
 					"}"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolSkill", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolSkill", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 		@Test
@@ -2599,19 +2673,19 @@ public class ProtocolSkillGenerationTest {
 					"  @SarlAsynchronousExecution",
 					"  override getEnabledMMessages : List<ProtocolMessage<M>> {",
 					"    val enabledMessages = <ProtocolMessage<M>>newArrayList",
-					"    for (scope : getDefinedForName(\"R2\")) {",
+					"    getDefinedForName(\"R2\").forEach [scope |",
 					"      val spaceInstance = scope.findSpaceMachtingScope",
 					"      if (spaceInstance !== null) {",
-					"        synchronized (WorkingMemoryLock) {",
+					"        synchronized (getWorkingMemoryLock) {",
 					"          if ((new ScopedDataName(\"P1\", scope.scope).isDefined)) {",
 					"            val messageInstance = new M",
 					"            val inParamId = new ScopedDataName(\"P1\", scope.scope)",
 					"            messageInstance.P1 = inParamId.getKnowledge(typeof(Object))",
-					"            enabledMessages += new ProtocolMessage<M>(spaceInstance, messageInstance, new ScopedDataName(\"R2\", scope.scope).getKnowledge(typeof(UUID)))",
+					"            enabledMessages += new ProtocolMessage<M>(spaceInstance, messageInstance, scope.getKnowledge(typeof(UUID)))",
 					"          }",
 					"        }",
 					"      }",
-					"    }",
+					"    ]",
 					"    return enabledMessages",
 					"  }",
 					"  @SarlAsynchronousExecution",
@@ -2620,7 +2694,9 @@ public class ProtocolSkillGenerationTest {
 					"  }",
 					"}"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolSkill", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolSkill", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 		@Test
@@ -2653,26 +2729,26 @@ public class ProtocolSkillGenerationTest {
 					"  @SarlAsynchronousExecution",
 					"  override getEnabledMMessages : List<ProtocolMessage<M>> {",
 					"    val enabledMessages = <ProtocolMessage<M>>newArrayList",
-					"    for (scope : getDefinedForName(\"R2\")) {",
+					"    getDefinedForName(\"R2\").forEach [scope |",
 					"      val spaceInstance = scope.findSpaceMachtingScope",
 					"      if (spaceInstance !== null) {",
-					"        synchronized (WorkingMemoryLock) {",
+					"        synchronized (getWorkingMemoryLock) {",
 					"          val messageInstance = new M",
 					"          val inParamId = new ScopedDataName(\"P1\", scope.scope)",
 					"          if (inParamId.isDefined) {",
 					"            messageInstance.P1 = inParamId.getKnowledge(typeof(Object))",
 					"          }",
-					"          enabledMessages += new ProtocolMessage<M>(spaceInstance, messageInstance, new ScopedDataName(\"R2\", scope.scope).getKnowledge(typeof(UUID)))",
+					"          enabledMessages += new ProtocolMessage<M>(spaceInstance, messageInstance, scope.getKnowledge(typeof(UUID)))",
 					"        }",
 					"      }",
-					"    }",
+					"    ]",
 					"    return enabledMessages",
 					"  }",
 					"  @SarlAsynchronousExecution",
 					"  override sendMMessage(message : ProtocolMessage<M>) {",
 					"    val P1Id = new ScopedDataName(\"P1\")",
 					"    var P1 : Object",
-					"    synchronized (WorkingMemoryLock) {",
+					"    synchronized (getWorkingMemoryLock) {",
 					"      P1 = P1Id.getKnowledge(typeof(Object))",
 					"      P1Id.bind",
 					"    }",
@@ -2681,7 +2757,9 @@ public class ProtocolSkillGenerationTest {
 					"  }",
 					"}"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolSkill", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolSkill", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 		@Test
@@ -2714,17 +2792,17 @@ public class ProtocolSkillGenerationTest {
 					"  @SarlAsynchronousExecution",
 					"  override getEnabledMMessages : List<ProtocolMessage<M>> {",
 					"    val enabledMessages = <ProtocolMessage<M>>newArrayList",
-					"    for (scope : getDefinedForName(\"R2\")) {",
+					"    getDefinedForName(\"R2\").forEach [scope |",
 					"      val spaceInstance = scope.findSpaceMachtingScope",
 					"      if (spaceInstance !== null) {",
-					"        synchronized (WorkingMemoryLock) {",
+					"        synchronized (getWorkingMemoryLock) {",
 					"          if (!(new ScopedDataName(\"P1\", scope.scope).isDefined)) {",
 					"            val messageInstance = new M",
-					"            enabledMessages += new ProtocolMessage<M>(spaceInstance, messageInstance, new ScopedDataName(\"R2\", scope.scope).getKnowledge(typeof(UUID)))",
+					"            enabledMessages += new ProtocolMessage<M>(spaceInstance, messageInstance, scope.getKnowledge(typeof(UUID)))",
 					"          }",
 					"        }",
 					"      }",
-					"    }",
+					"    ]",
 					"    return enabledMessages",
 					"  }",
 					"  @SarlAsynchronousExecution",
@@ -2733,7 +2811,9 @@ public class ProtocolSkillGenerationTest {
 					"  }",
 					"}"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolSkill", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolSkill", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 		@Test
@@ -2766,19 +2846,19 @@ public class ProtocolSkillGenerationTest {
 					"  @SarlAsynchronousExecution",
 					"  override getEnabledMMessages : List<ProtocolMessage<M>> {",
 					"    val enabledMessages = <ProtocolMessage<M>>newArrayList",
-					"    for (scope : getDefinedForName(\"R2\")) {",
+					"    getDefinedForName(\"R2\").forEach [scope |",
 					"      val spaceInstance = scope.findSpaceMachtingScope",
 					"      if (spaceInstance !== null) {",
-					"        synchronized (WorkingMemoryLock) {",
+					"        synchronized (getWorkingMemoryLock) {",
 					"          val messageInstance = new M",
 					"          val inParamId = new ScopedDataName(\"P1\", scope.scope)",
 					"          if (inParamId.isDefined) {",
 					"            messageInstance.P1 = inParamId.getKnowledge(typeof(Object))",
 					"          }",
-					"          enabledMessages += new ProtocolMessage<M>(spaceInstance, messageInstance, new ScopedDataName(\"R2\", scope.scope).getKnowledge(typeof(UUID)))",
+					"          enabledMessages += new ProtocolMessage<M>(spaceInstance, messageInstance, scope.getKnowledge(typeof(UUID)))",
 					"        }",
 					"      }",
-					"    }",
+					"    ]",
 					"    return enabledMessages",
 					"  }",
 					"  @SarlAsynchronousExecution",
@@ -2787,7 +2867,9 @@ public class ProtocolSkillGenerationTest {
 					"  }",
 					"}"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolSkill", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolSkill", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 	}

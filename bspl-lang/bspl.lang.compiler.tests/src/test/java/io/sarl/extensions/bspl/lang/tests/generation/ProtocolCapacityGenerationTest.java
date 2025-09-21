@@ -78,7 +78,9 @@ public class ProtocolCapacityGenerationTest {
 					"  def sendMMessage(m : ProtocolMessage<M>)",
 					"}"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolCapacity", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolCapacity", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 		@Test
@@ -111,7 +113,9 @@ public class ProtocolCapacityGenerationTest {
 					"  def sendMMessage(m : ProtocolMessage<M>)",
 					"}"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolCapacity", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolCapacity", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 		@Test
@@ -144,7 +148,9 @@ public class ProtocolCapacityGenerationTest {
 					"  def sendMMessage(m : ProtocolMessage<M>)",
 					"}"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolCapacity", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolCapacity", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 	}
@@ -189,7 +195,9 @@ public class ProtocolCapacityGenerationTest {
 					"  def sendMMessage(m : ProtocolMessage<M>)",
 					"}"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolCapacity", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolCapacity", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 	
 		@Test
@@ -223,7 +231,9 @@ public class ProtocolCapacityGenerationTest {
 					"  def sendMMessage(m : ProtocolMessage<M>)",
 					"}"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolCapacity", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolCapacity", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 	
 		@Test
@@ -257,7 +267,9 @@ public class ProtocolCapacityGenerationTest {
 					"  def sendMMessage(m : ProtocolMessage<M>)",
 					"}"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R3ProtocolCapacity", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R3ProtocolCapacity", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 	
 		@Test
@@ -292,7 +304,9 @@ public class ProtocolCapacityGenerationTest {
 					"  def sendMMessage(m : ProtocolMessage<M>)",
 					"}"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolCapacity", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolCapacity", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 	
 		@Test
@@ -333,7 +347,9 @@ public class ProtocolCapacityGenerationTest {
 					"  def sendM2Message(m : ProtocolMessage<M2>)",
 					"}"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolCapacity", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.R1ProtocolCapacity", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 	}

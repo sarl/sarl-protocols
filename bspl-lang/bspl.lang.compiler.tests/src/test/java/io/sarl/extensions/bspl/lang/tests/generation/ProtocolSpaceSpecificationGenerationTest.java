@@ -61,7 +61,9 @@ public class ProtocolSpaceSpecificationGenerationTest extends AbstractBsplTest {
 				"  }",
 				"}"
 				);
-		getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.PROTOSpaceSpecification", expected);
+		getCompileHelper()
+			.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.PROTOSpaceSpecification", expected)
+			.assertNoErrorsInTargetLanguage();
 	}
 
 	@Test
@@ -88,7 +90,9 @@ public class ProtocolSpaceSpecificationGenerationTest extends AbstractBsplTest {
 				"  }",
 				"}"
 				);
-		getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.PROTOSpaceSpecification", expected);
+		getCompileHelper()
+			.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.PROTOSpaceSpecification", expected)
+			.assertNoErrorsInTargetLanguage();
 	}
 
 	@Test
@@ -115,7 +119,9 @@ public class ProtocolSpaceSpecificationGenerationTest extends AbstractBsplTest {
 				"  }",
 				"}"
 				);
-		getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.PROTOSpaceSpecification", expected);
+		getCompileHelper()
+			.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.PROTOSpaceSpecification", expected)
+			.assertNoErrorsInTargetLanguage();
 	}
 
 	@Test
@@ -142,7 +148,9 @@ public class ProtocolSpaceSpecificationGenerationTest extends AbstractBsplTest {
 				"  }",
 				"}"
 				);
-		getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.PROTOSpaceSpecification", expected);
+		getCompileHelper()
+			.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.PROTOSpaceSpecification", expected)
+			.assertNoErrorsInTargetLanguage();
 	}
 
 	@Test
@@ -169,7 +177,9 @@ public class ProtocolSpaceSpecificationGenerationTest extends AbstractBsplTest {
 				"  }",
 				"}"
 				);
-		getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.PROTOSpaceSpecification", expected);
+		getCompileHelper()
+			.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.PROTOSpaceSpecification", expected)
+			.assertNoErrorsInTargetLanguage();
 	}
 
 	@Test
@@ -196,7 +206,9 @@ public class ProtocolSpaceSpecificationGenerationTest extends AbstractBsplTest {
 				"  }",
 				"}"
 				);
-		getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.PROTOSpaceSpecification", expected);
+		getCompileHelper()
+			.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.PROTOSpaceSpecification", expected)
+			.assertNoErrorsInTargetLanguage();
 	}
 
 }

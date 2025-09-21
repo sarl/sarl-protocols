@@ -65,7 +65,9 @@ public class ProtocolMessageGenerationTest {
 					"import io.sarl.extensions.bspl.api.protocol.events.ProtocolEvent",
 					"",
 					"public event M extends ProtocolEvent");
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.messages.M", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.messages.M", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 		@Test
@@ -85,7 +87,9 @@ public class ProtocolMessageGenerationTest {
 					"import io.sarl.extensions.bspl.api.protocol.events.ProtocolEvent",
 					"",
 					"public event M extends ProtocolEvent");
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.messages.M", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.messages.M", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 		@Test
@@ -105,7 +109,9 @@ public class ProtocolMessageGenerationTest {
 					"import io.sarl.extensions.bspl.api.protocol.events.ProtocolEvent",
 					"",
 					"package event M extends ProtocolEvent");
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.messages.M", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.messages.M", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 	}
@@ -137,7 +143,9 @@ public class ProtocolMessageGenerationTest {
 					"import io.sarl.extensions.bspl.api.protocol.events.ProtocolEvent",
 					"",
 					"public event M extends ProtocolEvent");
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.messages.M", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.messages.M", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 		@Test
@@ -161,7 +169,9 @@ public class ProtocolMessageGenerationTest {
 					"  var A1 : double",
 					"}"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.messages.M", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.messages.M", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 		@Test
@@ -187,7 +197,9 @@ public class ProtocolMessageGenerationTest {
 					"  var A2 : String",
 					"}"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.messages.M", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.messages.M", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 		@Test
@@ -215,7 +227,9 @@ public class ProtocolMessageGenerationTest {
 					"  var A3 : boolean",
 					"}"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.messages.M", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.messages.M", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 		@Test
@@ -239,7 +253,9 @@ public class ProtocolMessageGenerationTest {
 					"  var A1 : double",
 					"}"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.messages.M", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.messages.M", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 		@Test
@@ -265,7 +281,9 @@ public class ProtocolMessageGenerationTest {
 					"  var A2 : String",
 					"}"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.messages.M", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.messages.M", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 		@Test
@@ -293,7 +311,9 @@ public class ProtocolMessageGenerationTest {
 					"  var A3 : boolean",
 					"}"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.messages.M", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.messages.M", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 		@Test
@@ -317,7 +337,9 @@ public class ProtocolMessageGenerationTest {
 					"  var A : Object",
 					"}"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.messages.M", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.messages.M", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 		@Test
@@ -343,7 +365,9 @@ public class ProtocolMessageGenerationTest {
 					"  var A2 : Object",
 					"}"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.messages.M", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.messages.M", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 		@Test
@@ -371,7 +395,9 @@ public class ProtocolMessageGenerationTest {
 					"  var A3 : Object",
 					"}"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.messages.M", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.messages.M", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 		@Test
@@ -401,7 +427,9 @@ public class ProtocolMessageGenerationTest {
 					"  var A4 : Object",
 					"}"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.messages.M", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.messages.M", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 		@Test
@@ -427,7 +455,9 @@ public class ProtocolMessageGenerationTest {
 					"  var A2 : Object",
 					"}"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.messages.M", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.messages.M", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 		@Test
@@ -455,7 +485,9 @@ public class ProtocolMessageGenerationTest {
 					"  var A3 : Object",
 					"}"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.messages.M", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.messages.M", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 		@Test
@@ -485,7 +517,9 @@ public class ProtocolMessageGenerationTest {
 					"  var A4 : Object",
 					"}"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.messages.M", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.messages.M", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 		@Test
@@ -513,7 +547,9 @@ public class ProtocolMessageGenerationTest {
 					"  var A2 : Object",
 					"}"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.messages.M", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.messages.M", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 	}
@@ -547,7 +583,9 @@ public class ProtocolMessageGenerationTest {
 					"",
 					"public event M extends ProtocolEvent"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.messages.M", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.messages.M", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 		@Test
@@ -572,7 +610,9 @@ public class ProtocolMessageGenerationTest {
 					"  var A2 : String",
 					"}"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.messages.M", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.messages.M", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 		@Test
@@ -599,7 +639,9 @@ public class ProtocolMessageGenerationTest {
 					"  var A3 : boolean",
 					"}"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.messages.M", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.messages.M", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 		@Test
@@ -621,7 +663,9 @@ public class ProtocolMessageGenerationTest {
 					"",
 					"public event M extends ProtocolEvent"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.messages.M", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.messages.M", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 		@Test
@@ -646,7 +690,9 @@ public class ProtocolMessageGenerationTest {
 					"  var A1 : double",
 					"}"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.messages.M", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.messages.M", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 		@Test
@@ -673,7 +719,9 @@ public class ProtocolMessageGenerationTest {
 					"  var A2 : String",
 					"}"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.messages.M", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.messages.M", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 		@Test
@@ -695,7 +743,9 @@ public class ProtocolMessageGenerationTest {
 					"",
 					"public event M extends ProtocolEvent"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.messages.M", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.messages.M", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 		@Test
@@ -718,7 +768,9 @@ public class ProtocolMessageGenerationTest {
 					"",
 					"public event M extends ProtocolEvent"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.messages.M", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.messages.M", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 		@Test
@@ -745,7 +797,9 @@ public class ProtocolMessageGenerationTest {
 					"  var A3 : Object",
 					"}"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.messages.M", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.messages.M", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 		@Test
@@ -773,7 +827,9 @@ public class ProtocolMessageGenerationTest {
 					"  var A4 : Object",
 					"}"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.messages.M", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.messages.M", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 		@Test
@@ -798,7 +854,9 @@ public class ProtocolMessageGenerationTest {
 					"  var A2 : Object",
 					"}"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.messages.M", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.messages.M", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 		@Test
@@ -825,7 +883,9 @@ public class ProtocolMessageGenerationTest {
 					"  var A3 : Object",
 					"}"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.messages.M", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.messages.M", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 		@Test
@@ -854,7 +914,9 @@ public class ProtocolMessageGenerationTest {
 					"  var A4 : Object",
 					"}"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.messages.M", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.messages.M", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 		@Test
@@ -881,7 +943,9 @@ public class ProtocolMessageGenerationTest {
 					"  var A2 : Object",
 					"}"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.messages.M", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.messages.M", expected)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 	}

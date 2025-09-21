@@ -86,7 +86,9 @@ public class ProtocolRoleEnumerationGenerationTest {
 					"  };",
 					"}"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.PROTORole", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.PROTORole", expected, true)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 		@Test
@@ -127,7 +129,9 @@ public class ProtocolRoleEnumerationGenerationTest {
 					"  };",
 					"}"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.PROTORole", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.PROTORole", expected, true)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 
@@ -169,7 +173,9 @@ public class ProtocolRoleEnumerationGenerationTest {
 					"  };",
 					"}"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.PROTORole", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.PROTORole", expected, true)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 	}
@@ -222,7 +228,9 @@ public class ProtocolRoleEnumerationGenerationTest {
 					"  };",
 					"}"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.PROTORole", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.PROTORole", expected, true)
+				.assertNoErrorsInTargetLanguage();
 		}
 	
 		@Test
@@ -275,7 +283,9 @@ public class ProtocolRoleEnumerationGenerationTest {
 					"  };",
 					"}"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.PROTORole", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.PROTORole", expected, true)
+				.assertNoErrorsInTargetLanguage();
 		}
 	
 		@Test
@@ -326,7 +336,9 @@ public class ProtocolRoleEnumerationGenerationTest {
 					"  };",
 					"}"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.PROTORole", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.PROTORole", expected, true)
+				.assertNoErrorsInTargetLanguage();
 		}
 	
 		@Test
@@ -390,7 +402,9 @@ public class ProtocolRoleEnumerationGenerationTest {
 					"  };",
 					"}"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.PROTORole", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.PROTORole", expected, true)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 	}
@@ -448,7 +462,9 @@ public class ProtocolRoleEnumerationGenerationTest {
 					"  };",
 					"}"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.PROTORole", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.PROTORole", expected, true)
+				.assertNoErrorsInTargetLanguage();
 		}
 	
 		@Test
@@ -494,7 +510,9 @@ public class ProtocolRoleEnumerationGenerationTest {
 					"  };",
 					"}"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.PROTORole", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.PROTORole", expected, true)
+				.assertNoErrorsInTargetLanguage();
 		}
 	
 		@Test
@@ -541,7 +559,9 @@ public class ProtocolRoleEnumerationGenerationTest {
 					"  };",
 					"}"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.PROTORole", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.PROTORole", expected, true)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 		@Test
@@ -588,7 +608,9 @@ public class ProtocolRoleEnumerationGenerationTest {
 					"  };",
 					"}"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.PROTORole", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.PROTORole", expected, true)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 		@Test
@@ -635,7 +657,9 @@ public class ProtocolRoleEnumerationGenerationTest {
 					"  };",
 					"}"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.PROTORole", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.PROTORole", expected, true)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 		@Test
@@ -682,7 +706,9 @@ public class ProtocolRoleEnumerationGenerationTest {
 					"  };",
 					"}"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.PROTORole", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.PROTORole", expected, true)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 		@Test
@@ -723,7 +749,9 @@ public class ProtocolRoleEnumerationGenerationTest {
 					"  };",
 					"}"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.PROTORole", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.PROTORole", expected, true)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 	}
@@ -787,7 +815,9 @@ public class ProtocolRoleEnumerationGenerationTest {
 					"  };",
 					"}"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.PROTORole", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.PROTORole", expected, true)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 		@Test
@@ -839,7 +869,9 @@ public class ProtocolRoleEnumerationGenerationTest {
 					"  };",
 					"}"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.PROTORole", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.PROTORole", expected, true)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 		@Test
@@ -892,7 +924,9 @@ public class ProtocolRoleEnumerationGenerationTest {
 					"  };",
 					"}"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.PROTORole", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.PROTORole", expected, true)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 		@Test
@@ -945,7 +979,9 @@ public class ProtocolRoleEnumerationGenerationTest {
 					"  };",
 					"}"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.PROTORole", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.PROTORole", expected, true)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 		@Test
@@ -998,7 +1034,9 @@ public class ProtocolRoleEnumerationGenerationTest {
 					"  };",
 					"}"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.PROTORole", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.PROTORole", expected, true)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 		@Test
@@ -1051,7 +1089,9 @@ public class ProtocolRoleEnumerationGenerationTest {
 					"  };",
 					"}"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.PROTORole", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.PROTORole", expected, true)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 		@Test
@@ -1095,7 +1135,9 @@ public class ProtocolRoleEnumerationGenerationTest {
 					"  };",
 					"}"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.PROTORole", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.PROTORole", expected, true)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 		@Test
@@ -1139,7 +1181,9 @@ public class ProtocolRoleEnumerationGenerationTest {
 					"  };",
 					"}"
 					);
-			getCompileHelper().assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.PROTORole", expected);
+			getCompileHelper()
+				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.PROTORole", expected, true)
+				.assertNoErrorsInTargetLanguage();
 		}
 
 	}

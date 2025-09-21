@@ -111,10 +111,10 @@ public class BsplProtocolSkillGeneratorFragment {
 			final var varScope = receiver.declareSyntheticVariable(role, "scope"); //$NON-NLS-1$
 			final var varSpace = receiver.declareSyntheticVariable(role, "spaceInstance"); //$NON-NLS-1$
 			receiver
-			.newLine().append("for (").append(varScope).append(" : getDefinedForName(\"").append(receiverName).append("\")) {").increaseIndentation() //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+			.newLine().append("getDefinedForName(\"").append(receiverName).append("\").forEach [").append(varScope).append(" |").increaseIndentation() //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 			.newLine().append("val ").append(varSpace).append(" = ").append(varScope).append(".findSpaceMachtingScope") //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 			.newLine().append("if (").append(varSpace).append(" !== null) {").increaseIndentation() //$NON-NLS-1$ //$NON-NLS-2$
-			.newLine().append("synchronized (WorkingMemoryLock) {").increaseIndentation(); //$NON-NLS-1$
+			.newLine().append("synchronized (getWorkingMemoryLock) {").increaseIndentation(); //$NON-NLS-1$
 
 			for (final var messageInstance : messageMapping.getValue()) {
 				final var guardParams = messageInstance.getArguments().stream().filter(it -> !it.isOptional() && !it.isAny()).collect(Collectors.toList());
@@ -184,8 +184,7 @@ public class BsplProtocolSkillGeneratorFragment {
 					}
 				}
 				receiver.newLine().append(varEnabledMessages).append(" += new ").append(names.getProtocolMessageGenericInterface()).append("<").append(messageType3) //$NON-NLS-1$ //$NON-NLS-2$
-				.append(">(").append(varSpace).append(", ").append(varMessageInstance).append(", new ").append(names.getKnowledgeNameGenericInterface()).append("(\"") //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
-				.append(receiverName).append("\", ").append(varScope).append(".scope).getKnowledge(typeof(").append(UUID.class).append(")))"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				.append(">(").append(varSpace).append(", ").append(varMessageInstance).append(", ").append(varScope).append(".getKnowledge(typeof(").append(UUID.class).append(")))"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
 
 				if (!guardParams.isEmpty()) {
 					receiver.decreaseIndentation().newLine().append("}"); //$NON-NLS-1$
@@ -194,7 +193,7 @@ public class BsplProtocolSkillGeneratorFragment {
 
 			receiver.decreaseIndentation().newLine().append("}") //$NON-NLS-1$
 			.decreaseIndentation().newLine().append("}") //$NON-NLS-1$
-			.decreaseIndentation().newLine().append("}"); //$NON-NLS-1$
+			.decreaseIndentation().newLine().append("]"); //$NON-NLS-1$
 		}
 
 		receiver
@@ -245,7 +244,7 @@ public class BsplProtocolSkillGeneratorFragment {
 				context.appendTypeReferenceOrObject(receiver, role, () -> parameters.get(outParam.getName()).getType());
 			}
 
-			receiver.newLine().append("synchronized (WorkingMemoryLock) {").increaseIndentation(); //$NON-NLS-1$
+			receiver.newLine().append("synchronized (getWorkingMemoryLock) {").increaseIndentation(); //$NON-NLS-1$
 
 			for (final var outParam : outParams) {
 				final var outParamNames = variables.get(outParam.getName());
