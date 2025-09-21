@@ -1,0 +1,357 @@
+/*
+ * $Id$
+ *
+ * SARL is an general-purpose agent programming language.
+ * More details on http://www.sarl.io
+ *
+ * Copyright (C) 2014-2025 SARL.io, the Original Authors and Main Authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package io.sarl.extensions.bspl.api.protocol.tests.impl
+
+import io.sarl.api.core.spaces.SpaceParticipantListener
+import io.sarl.api.naming.name.ScopedDataName
+import io.sarl.api.workingmemory.AbstractWorkingMemory
+import io.sarl.extensions.bspl.api.protocol.impl.ProtocolRole
+import io.sarl.extensions.bspl.api.protocol.impl.ProtocolSkill
+import io.sarl.extensions.bspl.api.protocol.impl.ProtocolSpace
+import io.sarl.lang.core.Address
+import io.sarl.lang.core.Agent
+import io.sarl.lang.core.AgentTrait
+import io.sarl.lang.core.Event
+import io.sarl.lang.core.EventListener
+import io.sarl.lang.core.EventSpaceSpecification
+import io.sarl.lang.core.Scope
+import io.sarl.lang.core.SpaceID
+import java.util.UUID
+import java.util.logging.Logger
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.DisplayName
+import org.junit.jupiter.api.Test
+
+import static extension org.junit.jupiter.api.Assertions.*
+import static extension org.mockito.Mockito.*
+
+/**
+ * @author $Author: sgalland$
+ * @version $FullVersion$
+ * @mavengroupid $GroupId$
+ * @mavenartifactid $ArtifactId$
+ * @since 1.0
+ */
+@DisplayName("ProtocolSkill with 1 space")
+class ProtocolSkill1SpaceTest {
+
+	static val TYPE = typeof(EventSpaceSpecification)
+
+	var spaceId : SpaceID
+
+	var spaceParticipantListener : SpaceParticipantListener
+
+	var role : ProtocolRole
+
+	var ^space : ProtocolSpace
+
+	var v : ScopedDataName
+
+	var w : ScopedDataName
+
+	var test : ProtocolSkillMock
+
+	@BeforeEach
+	def setUp : void {
+		this.v = typeof(ScopedDataName).mock
+		this.w = typeof(ScopedDataName).mock
+		this.spaceId = new SpaceID(UUID::randomUUID, UUID::randomUUID, TYPE)
+		this.spaceParticipantListener = typeof(SpaceParticipantListener).mock
+		this.role = typeof(ProtocolRole).mock
+		this.role.maxCardinality.when.thenReturn(2)
+		this.^space = new ProtocolSpace("TESTING-PROTOCOL", this.spaceId, this.spaceParticipantListener, [typeof(Logger).mock], this.role) {
+			
+			protected override emitLocally(^event : Event, scope : Scope<? super Address>) {
+				//
+			}
+			
+		}
+		this.test = new ProtocolSkillMock(this.^space)
+	}
+
+	private def installWorkingMemory(defining : boolean = true) : void {
+		var memory = typeof(AbstractWorkingMemory).mock
+		memory.isDefined(this.v).when.thenReturn(defining)
+		memory.isDefined(this.w).when.thenReturn(defining)
+		this.test.owner = new AgentMock(memory)
+	}
+
+	@Test
+	@DisplayName("getProtocolParticipants - 0 participant")
+	def getProtocolParticipants_1_0 : void {
+		this.test.protocolParticipants.empty.assertTrue
+	}
+
+	@Test
+	@DisplayName("getProtocolParticipants - 1 participant")
+	def getProtocolParticipants_1_1 : void {
+		var participant = typeof(EventListener).mock
+		participant.ID.when.thenReturn(UUID::randomUUID)
+		
+		this.^space.register(this.role, participant)
+		
+		var actual = this.test.protocolParticipants
+		
+		actual.assertNotNull
+		1.assertEquals(actual.size)
+		var sp0 = actual.get(this.spaceId)
+		sp0.assertNotNull
+		1.assertEquals(sp0.size)
+		var r0 = sp0.get(this.^role)
+		r0.assertNotNull
+		var t0 = r0.toArray
+		1.assertEquals(t0.size)
+		#[participant.ID].assertArrayEquals(t0)
+	}
+
+	@Test
+	@DisplayName("getProtocolParticipants - 2 participants")
+	def getProtocolParticipants_1_2 : void {
+		var participant0 = typeof(EventListener).mock
+		participant0.ID.when.thenReturn(UUID::randomUUID)
+		this.^space.register(this.role, participant0)
+
+		var participant1 = typeof(EventListener).mock
+		participant1.ID.when.thenReturn(UUID::randomUUID)
+		this.^space.register(this.role, participant1)
+
+		var actual = this.test.protocolParticipants
+
+		actual.assertNotNull
+		1.assertEquals(actual.size)
+		var sp0 = actual.get(this.spaceId)
+		sp0.assertNotNull
+		1.assertEquals(sp0.size)
+		var r0 = sp0.get(this.^role)
+		r0.assertNotNull
+		var t0 = r0.toArray
+		2.assertEquals(t0.size)
+		#[participant0.ID, participant1.ID].assertArrayEquals(t0)
+	}
+
+	@Test
+	@DisplayName("getProtocolParticipants(r) - 0 participant")
+	def getProtocolParticipantsRole_1_0 : void {
+		this.test.getProtocolParticipants(this.role).empty.assertTrue
+	}
+
+	@Test
+	@DisplayName("getProtocolParticipants(r) - 1 participant")
+	def getProtocolParticipantsRole_1_1 : void {
+		var participant = typeof(EventListener).mock
+		participant.ID.when.thenReturn(UUID::randomUUID)
+
+		this.^space.register(this.role, participant)
+
+		var actual = this.test.getProtocolParticipants(this.role)
+
+		actual.assertNotNull
+		1.assertEquals(actual.size)
+		var r0 = actual.get(this.spaceId)
+		r0.assertNotNull
+		var t0 = r0.toArray
+		1.assertEquals(t0.size)
+		#[participant.ID].assertArrayEquals(t0)
+	}
+
+	@Test
+	@DisplayName("getProtocolParticipants(r) - 2 participants")
+	def getProtocolParticipantsRole_1_2 : void {
+		var participant0 = typeof(EventListener).mock
+		participant0.ID.when.thenReturn(UUID::randomUUID)
+		this.^space.register(this.role, participant0)
+
+		var participant1 = typeof(EventListener).mock
+		participant1.ID.when.thenReturn(UUID::randomUUID)
+		this.^space.register(this.role, participant1)
+
+		var actual = this.test.getProtocolParticipants(this.role)
+
+		actual.assertNotNull
+		1.assertEquals(actual.size)
+		var r0 = actual.get(this.spaceId)
+		r0.assertNotNull
+		var t0 = r0.toArray
+		2.assertEquals(t0.size)
+		#[participant0.ID, participant1.ID].assertArrayEquals(t0)
+	}
+
+	@Test
+	@DisplayName("bind(null)")
+	def bind_null : void {
+		typeof(AssertionError).assertThrows [
+			this.test.bind(null)
+		]
+	}
+
+	@Test
+	@DisplayName("bind(v)")
+	def bind_v : void {
+		installWorkingMemory
+		this.test.isBound(this.v).assertFalse
+		this.test.bind(this.v)
+		this.test.isBound(this.v).assertTrue
+	}
+
+	@Test
+	@DisplayName("unbind(null)")
+	def unbind_null : void {
+		typeof(AssertionError).assertThrows [
+			this.test.unbind(null)
+		]
+	}
+
+	@Test
+	@DisplayName("unbind(v)")
+	def unbind_v : void {
+		installWorkingMemory
+		this.test.bind(this.v)
+		this.test.bind(this.w)
+		this.test.unbind(this.v)
+		this.test.isBound(this.v).assertFalse
+		this.test.isBound(this.w).assertTrue
+	}
+
+	@Test
+	@DisplayName("unbind(x)")
+	def unbind_x : void {
+		installWorkingMemory
+		var x = typeof(ScopedDataName).mock
+		this.test.bind(this.v)
+		this.test.bind(this.w)
+		this.test.unbind(x)
+		this.test.isBound(this.v).assertTrue
+		this.test.isBound(this.w).assertTrue
+	}
+	
+	@Test
+	@DisplayName("isBound(null)")
+	def isBound_null_notdefined : void {
+		typeof(AssertionError).assertThrows [
+			this.test.isBound(null).assertFalse
+		]
+	}
+
+	@Test
+	@DisplayName("isBound(v) - not defined")
+	def isBound_v_notdefined : void {
+		installWorkingMemory(false)
+		this.test.bind(this.v)
+		this.test.bind(this.w)
+		this.test.isBound(this.v).assertFalse
+	}
+
+	@Test
+	@DisplayName("isBound(w) - not defined")
+	def isBound_w_notdefined : void {
+		installWorkingMemory(false)
+		this.test.bind(this.v)
+		this.test.bind(this.w)
+		this.test.isBound(this.w).assertFalse
+	}
+
+	@Test
+	@DisplayName("isBound(x) - not defined")
+	def isBound_x_notdefined : void {
+		installWorkingMemory(false)
+		var x = typeof(ScopedDataName).mock
+		this.test.bind(this.v)
+		this.test.bind(this.w)
+		this.test.isBound(x).assertFalse
+	}
+
+	@Test
+	@DisplayName("isBound(v) - defined")
+	def isBound_v_defined : void {
+		installWorkingMemory
+		this.test.bind(this.v)
+		this.test.bind(this.w)
+		this.test.isBound(v).assertTrue
+	}
+
+	@Test
+	@DisplayName("isBound(w) - defined")
+	def isBound_w_defined : void {
+		installWorkingMemory
+		this.test.bind(this.v)
+		this.test.bind(this.w)
+		this.test.isBound(w).assertTrue
+	}
+
+	@Test
+	@DisplayName("isBound(x) - defined")
+	def isBound_x_defined : void {
+		installWorkingMemory
+		var x = typeof(ScopedDataName).mock
+		this.test.bind(this.v)
+		this.test.bind(this.w)
+		this.test.isBound(x).assertFalse
+	}
+
+	@Test
+	@DisplayName("findSpaceMachtingScope(null)")
+	def findSpaceMachtingScope_null : void {
+		this.test.findSpaceMachtingScope(null).assertNull
+	}
+
+	@Test
+	@DisplayName("findSpaceMachtingScope(not expected)")
+	def findSpaceMachtingScope_notExpected : void {
+		var key = new ScopedDataName(UUID::randomUUID.toString, "x")
+		this.test.findSpaceMachtingScope(key).assertNull
+	}
+
+	@Test
+	@DisplayName("findSpaceMachtingScope(expected)")
+	def findSpaceMachtingScope_expected : void {
+		var key = new ScopedDataName(this.spaceId.ID.toString, "x")
+		var actual = this.test.findSpaceMachtingScope(key)
+		actual.assertNotNull
+		this.^space.assertSame(actual)
+	}
+
+	@SuppressWarnings("unnecessary_modifier")
+	private static class ProtocolSkillMock extends ProtocolSkill {
+		public override bind(id : ScopedDataName) {
+			super.bind(id)
+		}
+
+		public override unbind(id : ScopedDataName) {
+			super.unbind(id)
+		}
+
+		public def isBound(id : ScopedDataName) : boolean {
+			super.isBound(id)
+		}
+		
+		public def findSpaceMachtingScope(scope : ScopedDataName) : ProtocolSpace {
+			super.findSpaceMachtingScope(scope)
+		}
+
+		public def setOwner(^agent : Agent) {
+			var method = typeof(AgentTrait).getDeclaredMethod("setOwner", typeof(Agent))
+			method.accessible = true
+			method.invoke(this, ^agent)
+		}
+	}
+
+}

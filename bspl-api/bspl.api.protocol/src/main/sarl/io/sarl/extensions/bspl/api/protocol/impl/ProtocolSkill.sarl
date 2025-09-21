@@ -1,0 +1,173 @@
+/*
+ * $Id$
+ *
+ * SARL is an general-purpose agent programming language.
+ * More details on http://www.sarl.io
+ *
+ * Copyright (C) 2014-2025 SARL.io, the Original Authors and Main Authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package io.sarl.extensions.bspl.api.protocol.impl
+
+import io.sarl.extensions.bspl.api.protocol.impl.ProtocolRole
+import io.sarl.lang.core.SpaceID
+import java.util.Map
+import java.util.UUID
+import java.util.stream.Stream
+import io.sarl.api.naming.name.ScopedDataName
+import io.sarl.api.workingmemory.WorkingMemory
+
+/**
+ * Abstract implementation of a general protocol skill. It represents the super type for all
+ * the skills dedicated to specific BSPL protocols.
+ *
+ * <p>The protocol skill is unique for a single agent (because of the unicity of skills
+ * from the SARL metamodel). Therefore, the protocol skill could manage multiple
+ * protocol instances.
+ *
+ * <p>This skill provides protocol-independent functions to the agents.
+ * The protocol-specific functions are provided by the sub-skills.
+ *
+ * @author $Author: stedeschi$
+ * @author $Author: sgalland$
+ * @author $Author: mbaldoni$
+ * @author $Author: cbaroglio$
+ * @author $Author: rmicalizio$
+ * @version $FullVersion$
+ * @mavengroupid $GroupId$
+ * @mavenartifactid $ArtifactId$
+ * @since 1.0
+ */
+abstract skill ProtocolSkill implements ProtocolCapacity {
+
+	uses WorkingMemory
+	
+	val boundParams = <ScopedDataName>newTreeSet(null)
+
+	val protocolSpaces = <ProtocolSpace>newArrayList
+
+	/** Constructor with an initial protocol instance.
+	 *
+	 * @param protocolSpace the initial space that is supporting the protocol instance.
+	 */
+	new (protocolSpace : ProtocolSpace) {
+		this.protocolSpaces.add(protocolSpace)
+	}
+
+	override addProtocolSpace(protocolSpace : ProtocolSpace) {
+		synchronized (this.protocolSpaces) {
+			this.protocolSpaces.add(protocolSpace)
+		}
+	}
+
+	override getProtocolParticipants: Map<SpaceID, Map<ProtocolRole, Stream<UUID>>> {
+		var res = <SpaceID, Map<ProtocolRole, Stream<UUID>>>newTreeMap [a, b | a <=> b]
+		synchronized (this.protocolSpaces) {
+			for (^space : this.protocolSpaces) {
+				val agents = newTreeMap(ProtocolRole::COMPARATOR_SINGLETON)
+				for (rolePlayers : ^space.rolePlayers.entrySet) {
+					val list = rolePlayers.value
+					if (!list.empty) {
+						agents.put(rolePlayers.key, rolePlayers.value.stream.map[it.ID])
+					}
+				}
+				if (!agents.empty) {
+					res.put(^space.spaceID, agents)
+				}
+			}
+		}
+		return res
+	}
+
+	override getProtocolParticipants(role : ProtocolRole) : Map<SpaceID, Stream<UUID>> {
+		val res = <SpaceID, Stream<UUID>>newTreeMap(null)
+		synchronized (this.protocolSpaces) {
+			for (^space : protocolSpaces) {
+				val stream = ^space.getRolePlayers(role)
+				if (stream.findAny.isPresent) {
+					res.put(^space.spaceID, ^space.getRolePlayers(role))
+				}
+			}
+		}
+		return res
+	}
+	
+	/** Bind a knowledge according to the BSPL specification.
+	 *
+	 * @param id the identifier of the knowledge to bind.
+	 * @throws ParameterAlreadyBoundException the parameter/knowledge is already bound. It is not allowed in BSPL specification.
+	 */
+	protected def bind(id : ScopedDataName) {
+		assert id !== null
+		synchronized (this.boundParams) {
+			if (!this.boundParams.add(id)) {
+				throw new ParameterAlreadyBoundException(id)
+			}
+		}
+	}
+
+	/** Unbind a knowledge according to the BSPL specification.
+	 *
+	 * @param id the identifier of the knowledge to unbind.
+	 */
+	protected def unbind(id : ScopedDataName) : void {
+		assert id !== null
+		synchronized (this.boundParams) {
+			this.boundParams.remove(id)
+		}
+	}
+	
+	/** Replies if the given knowledge is bound.
+	 *
+	 * @param id the identifier of the knowledge to search for.
+	 * @return {@code true} if the parameter with the given identifier is bound.
+	 */
+	protected def isBound(id : ScopedDataName) : boolean {
+		assert id !== null
+		if (id.isDefined) {
+			synchronized (this.boundParams) {
+				return this.boundParams.contains(id)
+			}
+		}
+		return false
+	}
+
+	/** Replies the protocol instance that corresponds to the scope of the
+	 * given knowledge identifier, i.e., the first key of the given identifier.
+	 *
+	 * @param id the identifier of the knowledge to search for.
+	 * @return the protocol instance or {@code null}.
+	 */
+	protected def findSpaceMachtingScope(scope : ScopedDataName) : ProtocolSpace {
+		if (scope === null || scope.scope.isEmpty) {
+			return null
+		}
+		val spaceIDStr = scope.scope.get(0)
+		if (!spaceIDStr.isNullOrEmpty) {
+			val spaceID = UUID::fromString(spaceIDStr)
+			synchronized (this.protocolSpaces) {
+				for (^space : protocolSpaces) {
+					if (^space.spaceID.ID == spaceID) {
+						return ^space
+					}
+				}
+			}
+		}
+		return null
+	}
+
+	//TODO: removeProtocolSpace
+	
+}

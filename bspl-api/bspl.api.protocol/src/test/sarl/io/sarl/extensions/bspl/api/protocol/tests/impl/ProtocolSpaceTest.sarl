@@ -1,0 +1,336 @@
+/*
+ * $Id$
+ *
+ * SARL is an general-purpose agent programming language.
+ * More details on http://www.sarl.io
+ *
+ * Copyright (C) 2014-2025 SARL.io, the Original Authors and Main Authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package io.sarl.extensions.bspl.api.protocol.tests.impl
+
+import io.sarl.api.core.spaces.SpaceParticipantListener
+import io.sarl.extensions.bspl.api.protocol.impl.ProtocolRole
+import io.sarl.extensions.bspl.api.protocol.impl.ProtocolSpace
+import io.sarl.extensions.bspl.api.protocol.impl.UnexpectedRoleException
+import io.sarl.extensions.bspl.api.protocol.impl.UnexpectedRolePlayerException
+import io.sarl.lang.core.Address
+import io.sarl.lang.core.Event
+import io.sarl.lang.core.EventListener
+import io.sarl.lang.core.EventSpaceSpecification
+import io.sarl.lang.core.Scope
+import io.sarl.lang.core.SpaceID
+import java.util.UUID
+import java.util.logging.Logger
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.DisplayName
+import org.junit.jupiter.api.Test
+
+import static extension org.junit.jupiter.api.Assertions.*
+import static extension org.mockito.Mockito.*
+
+/**
+ * @author $Author: sgalland$
+ * @version $FullVersion$
+ * @mavengroupid $GroupId$
+ * @mavenartifactid $ArtifactId$
+ * @since 1.0
+ */
+@DisplayName("ProtocolSpace with 1 space")
+class ProtocolSpaceTest {
+
+	static val TYPE = typeof(EventSpaceSpecification)
+
+	var spaceId : SpaceID
+
+	var spaceParticipantListener : SpaceParticipantListener
+
+	var role : ProtocolRole
+
+	var test : ProtocolSpace
+
+	@BeforeEach
+	def setUp : void {
+		this.spaceId = new SpaceID(UUID::randomUUID, UUID::randomUUID, TYPE)
+		this.spaceParticipantListener = typeof(SpaceParticipantListener).mock
+		this.role = typeof(ProtocolRole).mock
+		this.role.maxCardinality.when.thenReturn(2)
+		this.test = new ProtocolSpace("TEST-PROTOCOL", this.spaceId, this.spaceParticipantListener, [typeof(Logger).mock], this.role) {
+
+			protected override emitLocally(^event : Event, scope : Scope<? super Address>) {
+				//
+			}
+
+		}
+	}
+
+	@Test
+	@DisplayName("getProtocolName")
+	def getProtocolName : void {
+		"TEST-PROTOCOL".equals(this.test.getProtocolName)
+	}
+
+	@Test
+	@DisplayName("getRolePlayers")
+	def getRolePlayers : void {
+		var sp = this.test.getRolePlayers
+		1.equals(sp.size)
+		var list = sp.get(this.role)
+		list.assertNotNull
+		1.equals(list.size)
+		list.empty.assertTrue
+	}
+
+	@Test
+	@DisplayName("getRolePlayers(null) - 0 participant")
+	def getRolePlayers_0_null : void {
+		var sp = this.test.getRolePlayers(null)
+		sp.assertNotNull
+		var t = sp.toArray
+		t.empty.assertTrue
+	}
+
+	@Test
+	@DisplayName("getRolePlayers(r) - 0 participant")
+	def getRolePlayers_0_r : void {
+		var sp = this.test.getRolePlayers(this.role)
+		sp.assertNotNull
+		var t = sp.toArray
+		t.empty.assertTrue
+	}
+
+	@Test
+	@DisplayName("getRolePlayers(x) - 0 participant")
+	def getRolePlayers_0_x : void {
+		var x = typeof(ProtocolRole).mock
+		var sp = this.test.getRolePlayers(x)
+		sp.assertNotNull
+		var t = sp.toArray
+		t.empty.assertTrue
+	}
+
+	@Test
+	@DisplayName("getRolePlayers(null) - 1 participant")
+	def getRolePlayers_1_null : void {
+		var participant0 = typeof(EventListener).mock
+		participant0.ID.when.thenReturn(UUID::randomUUID)
+		this.test.register(this.role, participant0)
+
+		var sp = this.test.getRolePlayers(null)
+		sp.assertNotNull
+		var t = sp.toArray
+		t.empty.assertTrue
+	}
+
+	@Test
+	@DisplayName("getRolePlayers(r) - 1 participant")
+	def getRolePlayers_1_r : void {
+		var participant0 = typeof(EventListener).mock
+		var pid = UUID::randomUUID
+		participant0.ID.when.thenReturn(pid)
+		this.test.register(this.role, participant0)
+
+		var sp = this.test.getRolePlayers(this.role)
+		sp.assertNotNull
+		var t = sp.toArray
+		#[pid].assertArrayEquals(t)
+	}
+
+	@Test
+	@DisplayName("getRolePlayers(x) - 1 participant")
+	def getRolePlayers_1_x : void {
+		var participant0 = typeof(EventListener).mock
+		participant0.ID.when.thenReturn(UUID::randomUUID)
+		this.test.register(this.role, participant0)
+
+		var x = typeof(ProtocolRole).mock
+		var sp = this.test.getRolePlayers(x)
+		sp.assertNotNull
+		var t = sp.toArray
+		t.empty.assertTrue
+	}
+
+	@Test
+	@DisplayName("getRolePlayers(null) - 2 participants")
+	def getRolePlayers_2_null : void {
+		var participant0 = typeof(EventListener).mock
+		participant0.ID.when.thenReturn(UUID::randomUUID)
+		this.test.register(this.role, participant0)
+
+		var participant1 = typeof(EventListener).mock
+		participant1.ID.when.thenReturn(UUID::randomUUID)
+		this.test.register(this.role, participant1)
+
+		var sp = this.test.getRolePlayers(null)
+		sp.assertNotNull
+		var t = sp.toArray
+		t.empty.assertTrue
+	}
+
+	@Test
+	@DisplayName("getRolePlayers(r) - 2 participants")
+	def getRolePlayers_2_r : void {
+		var participant0 = typeof(EventListener).mock
+		var pid0 = UUID::randomUUID
+		participant0.ID.when.thenReturn(pid0)
+		this.test.register(this.role, participant0)
+
+		var participant1 = typeof(EventListener).mock
+		var pid1 = UUID::randomUUID
+		participant1.ID.when.thenReturn(pid1)
+		this.test.register(this.role, participant1)
+
+		var sp = this.test.getRolePlayers(this.role)
+		sp.assertNotNull
+		var t = sp.toArray
+		#[pid0, pid1].assertArrayEquals(t)
+	}
+
+	@Test
+	@DisplayName("getRolePlayers(x) - 2 participants")
+	def getRolePlayers_2_x : void {
+		var participant0 = typeof(EventListener).mock
+		participant0.ID.when.thenReturn(UUID::randomUUID)
+		this.test.register(this.role, participant0)
+
+		var participant1 = typeof(EventListener).mock
+		participant1.ID.when.thenReturn(UUID::randomUUID)
+		this.test.register(this.role, participant1)
+
+		var x = typeof(ProtocolRole).mock
+		var sp = this.test.getRolePlayers(x)
+		sp.assertNotNull
+		var t = sp.toArray
+		t.empty.assertTrue
+	}
+
+	@Test
+	@DisplayName("register(null)")
+	def register_null : void {
+		var participant0 = typeof(EventListener).mock
+		participant0.ID.when.thenReturn(UUID::randomUUID)
+
+		typeof(AssertionError).assertThrows [
+			this.test.register(null, participant0)
+		]
+	}
+
+	@Test
+	@DisplayName("register(r)")
+	def register_r : void {
+		var participant0 = typeof(EventListener).mock
+		var pid0 = UUID::randomUUID
+		participant0.ID.when.thenReturn(pid0)
+
+		this.test.register(this.role, participant0)
+
+		var sp = this.test.getRolePlayers(this.role)
+		sp.assertNotNull
+		var t = sp.toArray
+		#[pid0].assertArrayEquals(t)
+	}
+
+	@Test
+	@DisplayName("register(x)")
+	def register_x : void {
+		var participant0 = typeof(EventListener).mock
+		var pid0 = UUID::randomUUID
+		participant0.ID.when.thenReturn(pid0)
+	
+		var x = typeof(ProtocolRole).mock
+		x.name.when.thenReturn("X-ROLE")
+
+		typeof(UnexpectedRoleException).assertThrows [
+			this.test.register(x, participant0)
+		]
+	}
+
+	@Test
+	@DisplayName("unregister(null)")
+	def unregister_null : void {
+		var participant0 = typeof(EventListener).mock
+		participant0.ID.when.thenReturn(UUID::randomUUID)
+
+		typeof(AssertionError).assertThrows [
+			this.test.unregister(null, participant0)
+		]
+	}
+
+	@Test
+	@DisplayName("unregister(r, p)")
+	def unregister_r_p : void {
+		var participant0 = typeof(EventListener).mock
+		var pid0 = UUID::randomUUID
+		participant0.ID.when.thenReturn(pid0)
+		this.test.register(this.role, participant0)
+
+		this.test.unregister(this.role, participant0)
+
+		var sp = this.test.getRolePlayers(this.role)
+		sp.assertNotNull
+		var t = sp.toArray
+		t.empty.assertTrue
+	}
+
+	@Test
+	@DisplayName("unregister(r, op)")
+	def unregister_r_op : void {
+		var participant0 = typeof(EventListener).mock
+		var pid0 = UUID::randomUUID
+		participant0.ID.when.thenReturn(pid0)
+		this.test.register(this.role, participant0)
+
+		var participant1 = typeof(EventListener).mock
+		var pid1 = UUID::randomUUID
+		participant1.ID.when.thenReturn(pid1)
+
+		typeof(UnexpectedRolePlayerException).assertThrows [
+			this.test.unregister(this.role, participant1)
+		]
+	}
+
+	@Test
+	@DisplayName("unregister(x, p)")
+	def unregister_x_p : void {
+		var participant0 = typeof(EventListener).mock
+		var pid0 = UUID::randomUUID
+		participant0.ID.when.thenReturn(pid0)
+		this.test.register(this.role, participant0)
+		val x = typeof(ProtocolRole).mock
+
+		typeof(UnexpectedRoleException).assertThrows [
+			this.test.unregister(x, participant0)
+		]
+	}
+
+	@Test
+	@DisplayName("unregister(x, op)")
+	def unregister_x_op : void {
+		var participant0 = typeof(EventListener).mock
+		var pid0 = UUID::randomUUID
+		participant0.ID.when.thenReturn(pid0)
+		this.test.register(this.role, participant0)
+		val x = typeof(ProtocolRole).mock
+
+		var participant1 = typeof(EventListener).mock
+		var pid1 = UUID::randomUUID
+		participant1.ID.when.thenReturn(pid1)
+
+		typeof(UnexpectedRoleException).assertThrows [
+			this.test.unregister(x, participant1)
+		]
+	}
+
+}
