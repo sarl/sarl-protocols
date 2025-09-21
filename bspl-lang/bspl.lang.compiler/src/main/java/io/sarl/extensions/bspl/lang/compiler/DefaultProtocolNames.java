@@ -51,14 +51,32 @@ import io.sarl.extensions.bspl.lang.bspl.BsplProtocolRole;
  * @version $FullVersion$
  * @mavengroupid $GroupId$
  * @mavenartifactid $ArtifactId$
- * @since 0.15
+ * @since 1.0
  */
 @Singleton
 public class DefaultProtocolNames implements IProtocolNames {
 
+	private static final String ANONYMOUS_NAME = "$Anonymous$"; //$NON-NLS-1$
+	
 	@Inject
 	private CommonTypeComputationServices typeServices;
-	
+
+	/** Change the services for accessible the type system.
+	 *
+	 * @param typeServices the services.
+	 */
+	public void setCommonTypeComputationServices(CommonTypeComputationServices typeServices) {
+		this.typeServices = typeServices;
+	}
+
+	/** Replies the services for accessible the type system.
+	 *
+	 * @return the services.
+	 */
+	public CommonTypeComputationServices getCommonTypeComputationServices() {
+		return this.typeServices;
+	}
+
 	@Override
 	public Class<?> getProtocolRoleGenericInterface() {
 		return ProtocolRole.class;
@@ -108,26 +126,57 @@ public class DefaultProtocolNames implements IProtocolNames {
 	public Class<?> getAgentWorkingMemoryGenericInterface() {
 		return WorkingMemory.class;
 	}
+
+	private static void appendName(StringBuilder output, String name) {
+		if (Strings.isEmpty(name)) {
+			output.append(ANONYMOUS_NAME);
+		} else {
+			final var pn = name.trim(); 
+			if (Strings.isEmpty(pn)) {
+				output.append(ANONYMOUS_NAME);
+			} else {
+				output.append(pn);
+			}
+		}
+	}
 	
 	@Override
 	public String getProtocolRoleEnumerationName(String protocolName) {
 		final var basename = new StringBuilder();
-		basename.append(protocolName).append("Role"); //$NON-NLS-1$
+		appendName(basename, protocolName);
+		basename.append("Role"); //$NON-NLS-1$
 		return basename.toString();
 	}
 	
 	@Override
 	public LightweightTypeReference getProtocolRoleEnumeration(String packageName, BsplProtocol protocol) {
+		String name;
+		if (protocol == null) {
+			name = ANONYMOUS_NAME;
+		} else {
+			name = protocol.getName();
+			if (Strings.isEmpty(name)) {
+				name = ANONYMOUS_NAME;
+			} else {
+				name = name.trim();
+				if (Strings.isEmpty(name)) {
+					name = ANONYMOUS_NAME;
+				}
+			}
+ 		}
 		final var fullName = new StringBuilder();
-		appendAdapterPackageName(packageName, protocol.getName(), fullName);
-		fullName.append(".").append(getProtocolRoleEnumerationName(protocol.getName())); //$NON-NLS-1$
+		if (appendAdapterPackageName(false, packageName, name, fullName)) {
+			fullName.append("."); //$NON-NLS-1$
+		}
+		fullName.append(getProtocolRoleEnumerationName(name));
 		return ensureType(fullName.toString(), protocol);
 	}
 
 	@Override
 	public String getProtocolSpaceSpecificationName(String protocolName) {
 		final var basename = new StringBuilder();
-		basename.append(protocolName).append("SpaceSpecification"); //$NON-NLS-1$
+		appendName(basename, protocolName);
+		basename.append("SpaceSpecification"); //$NON-NLS-1$
 		return basename.toString();
 	}
 
@@ -143,7 +192,8 @@ public class DefaultProtocolNames implements IProtocolNames {
 	}
 
 	private LightweightTypeReference ensureType(String typeName, EObject context) {
-		final var declaredType = this.typeServices.getTypeReferences().findDeclaredType(typeName, context);
+		final var references = this.typeServices.getTypeReferences();
+		final var declaredType = references.findDeclaredType(typeName, context);
 		if (declaredType != null) {
 			return toLightweightTypeReference(declaredType, context, this.typeServices);
 		}
@@ -162,102 +212,137 @@ public class DefaultProtocolNames implements IProtocolNames {
 	@Override
 	public String getProtocolCapacityName(String packageName, String protocolName, BsplProtocolRole role) {
 		final var basename = new StringBuilder();
-		basename.append(role.getName()).append("ProtocolCapacity"); //$NON-NLS-1$
+		appendName(basename, role == null ? null : role.getName());
+		basename.append("ProtocolCapacity"); //$NON-NLS-1$
 		return basename.toString();
 	}
 
 	@Override
 	public LightweightTypeReference getProtocolCapacity(String packageName, String protocolName, BsplProtocolRole role) {
 		final var fullName = new StringBuilder();
-		appendAdapterPackageName(packageName, protocolName, fullName);
-		fullName.append(".").append(getProtocolCapacityName(packageName, protocolName, role)); //$NON-NLS-1$
+		if (appendAdapterPackageName(false, packageName, protocolName, fullName)) {
+			fullName.append("."); //$NON-NLS-1$
+		}
+		fullName.append(getProtocolCapacityName(packageName, protocolName, role));
 		return ensureType(fullName.toString(), role);
 	}
 
 	@Override
 	public String getProtocolSkillName(String packageName, String protocolName, BsplProtocolRole role) {
 		final var basename = new StringBuilder();
-		basename.append(role.getName()).append("ProtocolSkill"); //$NON-NLS-1$
+		appendName(basename, role == null ? null : role.getName());
+		basename.append("ProtocolSkill"); //$NON-NLS-1$
 		return basename.toString();
 	}
 
 	@Override
 	public LightweightTypeReference getProtocolSkill(String packageName, String protocolName, BsplProtocolRole role) {
 		final var fullName = new StringBuilder();
-		appendAdapterPackageName(packageName, protocolName, fullName);
-		fullName.append(".").append(getProtocolSkillName(packageName, protocolName, role)); //$NON-NLS-1$
+		if (appendAdapterPackageName(false, packageName, protocolName, fullName)) {
+			fullName.append("."); //$NON-NLS-1$
+		}
+		fullName.append(getProtocolSkillName(packageName, protocolName, role));
 		return ensureType(fullName.toString(), role);
 	}
 
 	@Override
 	public String getProtocolBehaviorName(String packageName, String protocolName, BsplProtocolRole role) {
 		final var basename = new StringBuilder();
-		basename.append(role.getName()).append("ProtocolReactiveBehavior"); //$NON-NLS-1$
+		appendName(basename, role == null ? null : role.getName());
+		basename.append("ProtocolReactiveBehavior"); //$NON-NLS-1$
 		return basename.toString();
 	}
 
 	@Override
 	public LightweightTypeReference getProtocolBehavior(String packageName, String protocolName, BsplProtocolRole role) {
 		final var fullName = new StringBuilder();
-		appendAdapterPackageName(packageName, protocolName, fullName);
-		fullName.append(".").append(getProtocolBehaviorName(packageName, protocolName, role)); //$NON-NLS-1$
+		if (appendAdapterPackageName(false, packageName, protocolName, fullName)) {
+			fullName.append("."); //$NON-NLS-1$
+		}
+		fullName.append(getProtocolBehaviorName(packageName, protocolName, role));
 		return ensureType(fullName.toString(), role);
 	}
 
 	@Override
 	public String getEnabledMessageListFunctionName(String messageName) {
 		final var fullName = new StringBuilder();
-		fullName.append("getEnabled").append(messageName).append("Messages"); //$NON-NLS-1$ //$NON-NLS-2$
+		fullName.append("getEnabled"); //$NON-NLS-1$
+		appendName(fullName, messageName);
+		fullName.append("Messages"); //$NON-NLS-1$
 		return fullName.toString();
 	}
 	
 	@Override
 	public String getProtocolMessageQualifiedName(String packageName, String protocolName, String messageName) {
 		final var fullName = new StringBuilder();
-		appendAdapterPackageName(packageName, protocolName, fullName);
-		fullName.append(".messages.").append(messageName); //$NON-NLS-1$
+		appendAdapterPackageName(true, packageName, protocolName, fullName);
+		fullName.append(".messages."); //$NON-NLS-1$
+		appendName(fullName, messageName);
 		return fullName.toString();
 	}
 
 	@Override
 	public String getProtocolMessagePackageName(String packageName, String protocolName, String messageName) {
 		final var fullName = new StringBuilder();
-		appendAdapterPackageName(packageName, protocolName, fullName);
+		appendAdapterPackageName(true, packageName, protocolName, fullName);
 		fullName.append(".messages"); //$NON-NLS-1$
 		return fullName.toString();
 	}
 
 	@Override
 	public String getProtocolMessageName(String packageName, String protocolName, String messageName) {
-		return messageName;
+		if (Strings.isEmpty(messageName)) {
+			return ANONYMOUS_NAME;
+		}
+		final var mn = messageName.trim();
+		if (Strings.isEmpty(mn)) {
+			return ANONYMOUS_NAME;
+		}
+		return mn;
 	}
 
 	@Override
 	public String getGetEnabledMessagesFunctionName(String messageName) {
 		final var fullName = new StringBuilder();
-		fullName.append("getEnabled").append(messageName).append("Messages"); //$NON-NLS-1$ //$NON-NLS-2$
+		fullName.append("getEnabled"); //$NON-NLS-1$
+		appendName(fullName, messageName);
+		fullName.append("Messages"); //$NON-NLS-1$
 		return fullName.toString();
 	}
 
 	@Override
 	public String getSendMessageFunctionName(String messageName) {
 		final var fullName = new StringBuilder();
-		fullName.append("send").append(messageName).append("Message"); //$NON-NLS-1$ //$NON-NLS-2$
+		fullName.append("send"); //$NON-NLS-1$
+		appendName(fullName, messageName);
+		fullName.append("Message"); //$NON-NLS-1$
 		return fullName.toString();
 	}
 
-	private static void appendAdapterPackageName(String packageName, String protocolName, StringBuilder receiver) {
-		if (!Strings.isEmpty(packageName)) {
-			receiver.append(packageName);
+	private static boolean appendAdapterPackageName(boolean mandatoryPackage, String packageName, String protocolName, StringBuilder receiver) {
+		boolean packageNameAppended = false;
+		if (packageName != null) {
+			final var trimed = packageName.trim();
+			if (!Strings.isEmpty(trimed)) {
+				receiver.append(trimed);
+				packageNameAppended = true;
+			} else if (mandatoryPackage) {
+				receiver.append(ANONYMOUS_NAME);
+				packageNameAppended = true;
+			}
+		} else if (mandatoryPackage) {
+			receiver.append(ANONYMOUS_NAME);
+			packageNameAppended = true;
 		}
 		// Do not put the adapters in a subpackage to avoid the creation of "shadow" packages.
 		// receiver.append(protocolName.toLowerCase()).append("_adapters"); //$NON-NLS-1$
+		return packageNameAppended;
 	}
 
 	@Override
 	public String getProtocolAdapterPackageName(String packageName, String protocolName) {
 		final var fn = new StringBuilder();
-		appendAdapterPackageName(packageName, protocolName, fn);
+		appendAdapterPackageName(false, packageName, protocolName, fn);
 		return fn.toString();
 	}
 	
