@@ -134,30 +134,25 @@ public class BSPLGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		
 		//Protocol returns BsplProtocol:
 		//    {BsplProtocol}
-		//    // Recognize the original syntax for BSPL
 		//    modifiers+=ProtocolVisibilityModifier* 'protocol'? name=ValidID '{'
 		//        ( 'role'? members+=ProtocolRole (',' members+=ProtocolRole)* )*
 		//        ( members+=ProtocolFirstParameter ( ',' members+=ProtocolFollowingParameter )* )*
 		//        ( members+=ProtocolMessage )*
-		//        /*( members+=ProtocolCall )**/
 		//    '}'
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//{BsplProtocol}
-		//// Recognize the original syntax for BSPL
 		//modifiers+=ProtocolVisibilityModifier* 'protocol'? name=ValidID '{'
 		//    ( 'role'? members+=ProtocolRole (',' members+=ProtocolRole)* )*
 		//    ( members+=ProtocolFirstParameter ( ',' members+=ProtocolFollowingParameter )* )*
 		//    ( members+=ProtocolMessage )*
-		//    /*( members+=ProtocolCall )**/
 		//'}'
 		public Group getGroup() { return cGroup; }
 		
 		//{BsplProtocol}
 		public Action getBsplProtocolAction_0() { return cBsplProtocolAction_0; }
 		
-		//// Recognize the original syntax for BSPL
 		//modifiers+=ProtocolVisibilityModifier*
 		public Assignment getModifiersAssignment_1() { return cModifiersAssignment_1; }
 		
@@ -227,7 +222,6 @@ public class BSPLGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		//ProtocolMessage
 		public RuleCall getMembersProtocolMessageParserRuleCall_7_0() { return cMembersProtocolMessageParserRuleCall_7_0; }
 		
-		//    /*( members+=ProtocolCall )**/
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_8() { return cRightCurlyBracketKeyword_8; }
 	}
@@ -677,12 +671,6 @@ public class BSPLGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		private final Assignment cModifiersAssignment_3 = (Assignment)cGroup.eContents().get(3);
 		private final Keyword cModifiersKeyKeyword_3_0 = (Keyword)cModifiersAssignment_3.eContents().get(0);
 		
-		///*ProtocolCall returns BsplProtocolProtocolCall:
-		//    {BsplProtocolProtocolCall}
-		//    target=JvmTypeReference '('
-		//        ( roles+=ValidID (',' roles+=ValidID)* )? ('|' ( arguments+=ArgumentDef (',' arguments+=ArgumentDef)* )?)?
-		//    ')'
-		//;*/
 		//ArgumentDef returns BsplProtocolArgument:
 		//    {BsplProtocolArgument}
 		//    modifiers+=ParameterModifier* name=ValidID modifiers+='key'?
@@ -879,12 +867,10 @@ public class BSPLGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 	
 	//Protocol returns BsplProtocol:
 	//    {BsplProtocol}
-	//    // Recognize the original syntax for BSPL
 	//    modifiers+=ProtocolVisibilityModifier* 'protocol'? name=ValidID '{'
 	//        ( 'role'? members+=ProtocolRole (',' members+=ProtocolRole)* )*
 	//        ( members+=ProtocolFirstParameter ( ',' members+=ProtocolFollowingParameter )* )*
 	//        ( members+=ProtocolMessage )*
-	//        /*( members+=ProtocolCall )**/
 	//    '}'
 	//;
 	public ProtocolElements getProtocolAccess() {
@@ -952,12 +938,6 @@ public class BSPLGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		return getProtocolMessageAccess().getRule();
 	}
 	
-	///*ProtocolCall returns BsplProtocolProtocolCall:
-	//    {BsplProtocolProtocolCall}
-	//    target=JvmTypeReference '('
-	//        ( roles+=ValidID (',' roles+=ValidID)* )? ('|' ( arguments+=ArgumentDef (',' arguments+=ArgumentDef)* )?)?
-	//    ')'
-	//;*/
 	//ArgumentDef returns BsplProtocolArgument:
 	//    {BsplProtocolArgument}
 	//    modifiers+=ParameterModifier* name=ValidID modifiers+='key'?

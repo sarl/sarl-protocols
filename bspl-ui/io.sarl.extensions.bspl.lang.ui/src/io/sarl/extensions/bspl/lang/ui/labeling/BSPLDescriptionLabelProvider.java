@@ -23,23 +23,101 @@
  */
 package io.sarl.extensions.bspl.lang.ui.labeling;
 
+import com.google.inject.Inject;
+import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.ui.labeling.XbaseDescriptionLabelProvider;
+import org.eclipse.xtext.xbase.ui.labeling.XbaseImageAdornments;
+
+import io.sarl.extensions.bspl.lang.bspl.BsplProtocol;
+import io.sarl.extensions.bspl.lang.bspl.BsplProtocolMessage;
+import io.sarl.extensions.bspl.lang.bspl.BsplProtocolParameter;
+import io.sarl.extensions.bspl.lang.bspl.BsplProtocolRole;
+import io.sarl.extensions.bspl.lang.bspl.BsplProtocolSpecification;
 
 /**
- * Provides labels for IEObjectDescriptions and IResourceDescriptions.
- * 
- * See https://www.eclipse.org/Xtext/documentation/310_eclipse_support.html#label-provider
+ * Provides labels for a IEObjectDescriptions and IResourceDescriptions.
+ *
+ * @author $Author: sgalland$
+ * @version $FullVersion$
+ * @mavengroupid $GroupId$
+ * @mavenartifactid $ArtifactId$
+ * @since 0.15
+ * @see "http://www.eclipse.org/Xtext/documentation.html#labelProvider"
  */
+@SuppressWarnings("restriction")
 public class BSPLDescriptionLabelProvider extends XbaseDescriptionLabelProvider {
 
-	// Labels and icons can be computed like this:
-//	@Override
-//	public String text(IEObjectDescription ele) {
-//		return ele.getName().toString();
-//	}
-//	
-//	@Override
-//	public String image(IEObjectDescription ele) {
-//		return ele.getEClass().getName() + ".gif";
-//	}
+	@Inject
+	private BSPLImages images;
+
+	@Inject
+	private IJvmModelAssociations jvmModelAssociations;
+
+	@Inject
+	private XbaseImageAdornments adornments;
+
+	@Override
+	public Object image(IEObjectDescription element) {
+		return doGetImage(element.getEObjectOrProxy());
+	}
+
+	/** Replies the image for a BSPL specification.
+	 *
+	 * @param specification the BSPL specification.
+	 * @return the image descriptor.
+	 */
+	public ImageDescriptor image(BsplProtocolSpecification specification) {
+		return this.images.forFile();
+	}
+
+	/** Replies the image for a protocol.
+	 *
+	 * @param protocol describes the protocol.
+	 * @return the image descriptor.
+	 */
+	public ImageDescriptor image(BsplProtocol protocol) {
+		final var jvmElement = this.jvmModelAssociations.getPrimaryJvmElement(protocol);
+		final var adornments = jvmElement instanceof JvmIdentifiableElement id ? this.adornments.get(id) : 0;
+		return this.images.forProtocol(BSPLImages.toJvmVisibility(protocol), adornments);
+	}
+
+	/** Replies the image for a protocol role.
+	 *
+	 * @param role describes the protocol role.
+	 * @return the image descriptor.
+	 */
+	public ImageDescriptor image(BsplProtocolRole role) {
+		final var jvmElement = this.jvmModelAssociations.getPrimaryJvmElement(role);
+		final var adornments = jvmElement instanceof JvmIdentifiableElement id ? this.adornments.get(id) : 0;
+		return this.images.forRole(adornments);
+	}
+
+	/** Replies the image for a protocol parameter.
+	 *
+	 * @param role describes the protocol parameter.
+	 * @return the image descriptor.
+	 */
+	public ImageDescriptor image(BsplProtocolParameter parameter) {
+		final var jvmElement = this.jvmModelAssociations.getPrimaryJvmElement(parameter);
+		final var adornments = jvmElement instanceof JvmIdentifiableElement id ? this.adornments.get(id) : 0;
+		if (parameter.isKey()) {
+			return this.images.forKeyParameter(BSPLImages.toJvmVisibility(parameter), adornments);
+		}
+		return this.images.forParameter(BSPLImages.toJvmVisibility(parameter), adornments);
+	}
+
+	/** Replies the image for a protocol message.
+	 *
+	 * @param message describes the protocol message.
+	 * @return the image descriptor.
+	 */
+	public ImageDescriptor image(BsplProtocolMessage message) {
+		final var jvmElement = this.jvmModelAssociations.getPrimaryJvmElement(message);
+		final var adornments = jvmElement instanceof JvmIdentifiableElement id ? this.adornments.get(id) : 0;
+		return this.images.forMessage(adornments);
+	}
+
 }

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="io.sarl.bspl.lang.feature"
+      id="io.sarl.extensions.bspl.lang.feature"
       label="BSPL Feature"
-      version="0.15.0.qualifier"
-      plugin="io.sarl.bspl.lang.ui">
+      version="1.0.0.qualifier"
+      plugin="io.sarl.extensions.bspl.lang.ui">
 
    <description url="http://www.sarl.io/about/">
       Contains the plugins for BSPL programs
@@ -222,35 +222,27 @@
    </url>
 
    <plugin
-         id="io.sarl.bspl.bspl.api.memory"
+         id="io.sarl.extensions.bspl.bspl.api.protocol"
          version="0.0.0"/>
 
    <plugin
-         id="io.sarl.bspl.bspl.api.protocol"
+         id="io.sarl.extensions.bspl.bspl.lang.compiler"
          version="0.0.0"/>
 
    <plugin
-         id="io.sarl.bspl.bspl.lang.compiler"
+         id="io.sarl.extensions.bspl.lang.ide"
          version="0.0.0"/>
 
    <plugin
-         id="io.sarl.bspl.lang.ide"
+         id="io.sarl.extensions.bspl.lang.ui"
          version="0.0.0"/>
 
    <plugin
-         id="io.sarl.bspl.lang.ui"
+         id="io.sarl.extensions.bspl.lang.ui.tests"
          version="0.0.0"/>
 
    <plugin
-         id="io.sarl.bspl.lang.ui.tests"
-         version="0.0.0"/>
-
-   <plugin
-         id="io.sarl.bspl.eclipse"
-         version="0.0.0"/>
-
-   <plugin
-         id="io.sarl.bspl.bspl.sdk"
+         id="io.sarl.extensions.bspl.eclipse"
          version="0.0.0"/>
 
 </feature>

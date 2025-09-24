@@ -23,14 +23,102 @@
  */
 package io.sarl.extensions.bspl.lang.ui;
 
+import com.google.inject.Binder;
+import com.google.inject.name.Names;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
+import org.eclipse.xtext.builder.preferences.BuilderConfigurationBlock;
+import org.eclipse.xtext.generator.IContextualOutputConfigurationProvider;
+import org.eclipse.xtext.ui.editor.IXtextEditorCallback;
+import org.eclipse.xtext.ui.editor.XtextEditor;
+import org.eclipse.xtext.ui.editor.outline.IOutlineTreeProvider;
+import org.eclipse.xtext.ui.editor.outline.impl.IOutlineTreeStructureProvider;
+import org.eclipse.xtext.ui.editor.outline.impl.OutlineFilterAndSorter;
+import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreInitializer;
+
+import io.sarl.apputils.uiextensions.outputconfig.IContextualOutputConfigurationProvider3;
+import io.sarl.extensions.bspl.lang.ui.builder.BSPLEclipseOutputConfigurationProvider;
+import io.sarl.extensions.bspl.lang.ui.editor.BSPLNatureAddingEditorCallback;
+import io.sarl.extensions.bspl.lang.ui.editor.BSPLStandardEditor;
+import io.sarl.extensions.bspl.lang.ui.outline.BSPLOutlineNodeComparator;
+import io.sarl.extensions.bspl.lang.ui.outline.BSPLOutlinePage;
+import io.sarl.extensions.bspl.lang.ui.outline.BSPLOutlineTreeProvider;
+import io.sarl.extensions.bspl.lang.ui.preferences.BSPLBuilderConfigurationBlock;
+import io.sarl.extensions.bspl.lang.ui.preferences.BSPLPreferenceStoreInitializer;
 
 /**
  * Use this class to register components to be used within the Eclipse IDE.
+ *
+ * @author $Author: sgalland$
+ * @version $FullVersion$
+ * @mavengroupid $GroupId$
+ * @mavenartifactid $ArtifactId$
+ * @since 0.15
  */
+@SuppressWarnings("restriction")
 public class BSPLUiModule extends AbstractBSPLUiModule {
 
 	public BSPLUiModule(AbstractUIPlugin plugin) {
 		super(plugin);
 	}
+
+	@Override
+	public Class<? extends IXtextEditorCallback> bindIXtextEditorCallback() {
+		return BSPLNatureAddingEditorCallback.class;
+	}
+
+	@Override
+	public void configureSmartCaretPreferenceInitializer(Binder binder) {
+		binder.bind(IPreferenceStoreInitializer.class).annotatedWith(Names.named("smartCaretPreferenceInitializer")) //$NON-NLS-1$
+			.to(BSPLPreferenceStoreInitializer.class);
+	}
+
+	@Override
+	public void configureIPreferenceStoreInitializer(Binder binder) {
+		binder.bind(IPreferenceStoreInitializer.class).annotatedWith(Names.named("RefactoringPreferences")) //$NON-NLS-1$
+			.to(BSPLPreferenceStoreInitializer.class);
+	}
+
+	@Override
+	public Class<? extends IOutlineTreeProvider> bindIOutlineTreeProvider() {
+		return BSPLOutlineTreeProvider.class;
+	}
+	
+	@Override
+	public Class<? extends IOutlineTreeStructureProvider> bindIOutlineTreeStructureProvider() {
+		return BSPLOutlineTreeProvider.class;
+	}
+
+	@Override
+	public Class<? extends OutlineFilterAndSorter.IComparator> bindOutlineFilterAndSorter$IComparator() {
+		return BSPLOutlineNodeComparator.class;
+	}
+
+	@Override
+	public Class<? extends IContentOutlinePage> bindIContentOutlinePage() {
+		return BSPLOutlinePage.class;
+	}
+
+	@Override
+	public Class<? extends XtextEditor> bindXtextEditor() {
+		return BSPLStandardEditor.class;
+	}
+
+	@Override
+	public Class<? extends BuilderConfigurationBlock> bindBuilderConfigurationBlock() {
+		return BSPLBuilderConfigurationBlock.class;
+	}
+
+	@Override
+	public Class<? extends IContextualOutputConfigurationProvider> bindIContextualOutputConfigurationProvider() {
+		return BSPLEclipseOutputConfigurationProvider.class;
+	}
+
+	@SuppressWarnings("static-method")
+	public void configureIContextualOutputConfigurationProvider3_for_BSPL(Binder binder) {
+		binder.bind(IContextualOutputConfigurationProvider3.class)
+			.annotatedWith(Names.named("bspl")) //$NON-NLS-1$
+			.to(BSPLEclipseOutputConfigurationProvider.class);
+	}
+
 }

@@ -23,29 +23,266 @@
  */
 package io.sarl.extensions.bspl.lang.ui.labeling;
 
+import java.text.MessageFormat;
+import java.util.Collections;
+import java.util.concurrent.locks.ReentrantLock;
+
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
+import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.jface.viewers.StyledString;
+import org.eclipse.swt.graphics.Image;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.util.Exceptions;
+import org.eclipse.xtext.util.PolymorphicDispatcher;
+import org.eclipse.xtext.util.PolymorphicDispatcher.ErrorHandler;
+import org.eclipse.xtext.util.Strings;
+import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
+import org.eclipse.xtext.xbase.typesystem.references.StandardTypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
+import org.eclipse.xtext.xbase.ui.labeling.XbaseImageAdornments;
 import org.eclipse.xtext.xbase.ui.labeling.XbaseLabelProvider;
+import org.eclipse.xtext.xbase.validation.UIStrings;
+
+import io.sarl.extensions.bspl.lang.bspl.BsplProtocol;
+import io.sarl.extensions.bspl.lang.bspl.BsplProtocolMessage;
+import io.sarl.extensions.bspl.lang.bspl.BsplProtocolParameter;
+import io.sarl.extensions.bspl.lang.bspl.BsplProtocolRole;
+import io.sarl.extensions.bspl.lang.bspl.BsplProtocolSpecification;
 
 /**
- * Provides labels for EObjects.
- * 
- * See https://www.eclipse.org/Xtext/documentation/310_eclipse_support.html#label-provider
+ * Provides labels for a EObjects.
+ *
+ * @author $Author: sgalland$
+ * @version $FullVersion$
+ * @mavengroupid $GroupId$
+ * @mavenartifactid $ArtifactId$
+ * @since 0.15
+ * @see "https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#label-provider"
  */
+@SuppressWarnings("restriction")
+@Singleton
 public class BSPLLabelProvider extends XbaseLabelProvider {
+
+	@Inject
+	private BSPLImages images;
+
+	@Inject
+	private IJvmModelAssociations jvmModelAssociations;
+
+	@Inject
+	private XbaseImageAdornments adornments;
+
+	@Inject
+	private UIStrings uiStrings;
+
+	@Inject
+	private CommonTypeComputationServices services;
+
+	private final ReentrantLock imageDescriptorLock = new ReentrantLock();
+
+	private final PolymorphicDispatcher<ImageDescriptor> imageDescriptorDispatcher;
 
 	@Inject
 	public BSPLLabelProvider(AdapterFactoryLabelProvider delegate) {
 		super(delegate);
+		this.imageDescriptorDispatcher = new PolymorphicDispatcher<>(
+				"imageDescriptor", //$NON-NLS-1$
+				1, 1,
+				Collections.singletonList(this),
+				new ErrorHandler<ImageDescriptor>() {
+					@Override
+					public ImageDescriptor handle(Object[] params, Throwable exception) {
+						return handleImageDescriptorError(params, exception);
+					}
+				});
 	}
 
-	// Labels and icons can be computed like this:
-	
-//	String text(Greeting ele) {
-//		return "A greeting to " + ele.getName();
-//	}
-//
-//	String image(Greeting ele) {
-//		return "Greeting.gif";
-//	}
+	/** Invoked when an image descriptor cannot be found.
+	 *
+	 * @param params the parameters given to the method polymorphic dispatcher.
+	 * @param exception the cause of the error.
+	 * @return the image descriptor for the error.
+	 */
+	protected ImageDescriptor handleImageDescriptorError(Object[] params, Throwable exception) {
+		if (exception instanceof NullPointerException) {
+			final var defaultImage = getDefaultImage();
+			if (defaultImage instanceof ImageDescriptor cvalue) {
+				return cvalue;
+			}
+			if (defaultImage instanceof Image cvalue) {
+				return ImageDescriptor.createFromImage(cvalue);
+			}
+			return super.imageDescriptor(params[0]);
+		}
+		return Exceptions.throwUncheckedException(exception);
+	}
+
+	/** Get the image descriptor for the given element.
+	 *
+	 * @param element the element.
+	 * @return the image descriptor.
+	 */
+	protected ImageDescriptor doGetImageDescriptor(Object element) {
+		return this.imageDescriptorDispatcher.invoke(element);
+	}
+
+	@Override
+	protected ImageDescriptor imageDescriptor(Object element) {
+		if (this.imageDescriptorLock.isLocked()) {
+			return super.imageDescriptor(element);
+		}
+		this.imageDescriptorLock.lock();
+		try {
+			return doGetImageDescriptor(element);
+		} finally {
+			this.imageDescriptorLock.unlock();
+		}
+	}
+
+	/** Replies the image for the given element.
+	 *
+	 * <p>This function is a Xtext dispatch function for {@link #imageDescriptor(Object)}.
+	 *
+	 * @param specification the element.
+	 * @return the image descriptor.
+	 * @see #imageDescriptor(Object)
+	 */
+	protected ImageDescriptor imageDescriptor(BsplProtocolSpecification specification) {
+		return this.images.forFile();
+	}
+
+	/** Replies the image for the given element.
+	 *
+	 * <p>This function is a Xtext dispatch function for {@link #imageDescriptor(Object)}.
+	 *
+	 * @param element the element.
+	 * @return the image descriptor.
+	 * @see #imageDescriptor(Object)
+	 */
+	protected ImageDescriptor imageDescriptor(BsplProtocol element) {
+		final var jvmElement = this.jvmModelAssociations.getPrimaryJvmElement(element);
+		final var adornments = jvmElement instanceof JvmIdentifiableElement id ? this.adornments.get(id) : 0;
+		return this.images.forProtocol(BSPLImages.toJvmVisibility(element), adornments);
+	}
+
+	/** Replies the image for the given element.
+	 *
+	 * <p>This function is a Xtext dispatch function for {@link #imageDescriptor(Object)}.
+	 *
+	 * @param element the element.
+	 * @return the image descriptor.
+	 * @see #imageDescriptor(Object)
+	 */
+	protected ImageDescriptor imageDescriptor(BsplProtocolRole element) {
+		final var jvmElement = this.jvmModelAssociations.getPrimaryJvmElement(element);
+		final var adornments = jvmElement instanceof JvmIdentifiableElement id ? this.adornments.get(id) : 0;
+		return this.images.forRole(adornments);
+	}
+
+	/** Replies the image for the given element.
+	 *
+	 * <p>This function is a Xtext dispatch function for {@link #imageDescriptor(Object)}.
+	 *
+	 * @param element the element.
+	 * @return the image descriptor.
+	 * @see #imageDescriptor(Object)
+	 */
+	protected ImageDescriptor imageDescriptor(BsplProtocolParameter element) {
+		final var jvmElement = this.jvmModelAssociations.getPrimaryJvmElement(element);
+		final var adornments = jvmElement instanceof JvmIdentifiableElement id ? this.adornments.get(id) : 0;
+		if (element.isKey()) {
+			return this.images.forKeyParameter(BSPLImages.toJvmVisibility(element), adornments);
+		}
+		return this.images.forParameter(BSPLImages.toJvmVisibility(element), adornments);
+	}
+
+	/** Replies the image for the given element.
+	 *
+	 * <p>This function is a Xtext dispatch function for {@link #imageDescriptor(Object)}.
+	 *
+	 * @param element the element.
+	 * @return the image descriptor.
+	 * @see #imageDescriptor(Object)
+	 */
+	protected ImageDescriptor imageDescriptor(BsplProtocolMessage element) {
+		final var jvmElement = this.jvmModelAssociations.getPrimaryJvmElement(element);
+		final var adornments = jvmElement instanceof JvmIdentifiableElement id ? this.adornments.get(id) : 0;
+		return this.images.forMessage(adornments);
+	}
+
+	/** Create a string representation of the given element.
+	 *
+	 * @param reference the element.
+	 * @return the string representation.
+	 */
+	protected StyledString getHumanReadableName(JvmTypeReference reference) {
+		if (reference == null) {
+			return new StyledString("Object"); //$NON-NLS-1$
+		}
+		final var name = this.uiStrings.referenceToString(reference, "Object"); //$NON-NLS-1$
+		return convertToStyledString(name);
+	}
+
+	/** Replies the text for the given element.
+	 *
+	 * @param element the element.
+	 * @return the text.
+	 */
+	protected StyledString text(JvmTypeReference element) {
+		return getHumanReadableName(element);
+	}
+
+	/** Replies the text for the given element.
+	 *
+	 * @param element the element.
+	 * @return the text.
+	 */
+	protected StyledString text(BsplProtocol element) {
+		return convertToStyledString(element.getName());
+	}
+
+	/** Replies the text for the given element.
+	 *
+	 * @param element the element.
+	 * @return the text.
+	 */
+	protected StyledString text(BsplProtocolRole element) {
+		return convertToStyledString(element.getName());
+	}
+
+	/** Replies the text for the given element.
+	 *
+	 * @param element the element.
+	 * @return the text.
+	 */
+	protected StyledString text(BsplProtocolParameter element) {
+		final var declaredType = element.getType();
+		final String label;
+		if (declaredType != null) {
+			final var owner = new StandardTypeReferenceOwner(this.services, element);
+			final var typeString = owner.toLightweightTypeReference(declaredType).getHumanReadableName();
+			if (!Strings.isEmpty(typeString)) {
+				label = MessageFormat.format(Messages.BSPLImages_1, element.getName(), typeString);
+			} else {
+				label = element.getName();
+			}
+		} else {
+			label = element.getName();
+		}
+		return convertToStyledString(label);
+	}
+
+	/** Replies the text for the given element.
+	 *
+	 * @param element the element.
+	 * @return the text.
+	 */
+	protected StyledString text(BsplProtocolMessage element) {
+		final var text = MessageFormat.format(Messages.BSPLImages_0, element.getMessage(), element.getFrom(), element.getTo());
+		return convertToStyledString(text);
+	}
+
 }

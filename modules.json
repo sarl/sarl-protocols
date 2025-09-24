@@ -19,17 +19,15 @@
 			"upgrade-mvn-plugins": true,
 			"in-maven-central": true,
 			"releasable": true
-		}
-	],
-	"without-extension-disable": [
+		},
 		{
-			"module": "ui",
+			"module": "bspl-ui",
 			"name": "Eclipse-based tools and development environment for BSPL",
 			"build": true,
 			"clean": true,
 			"apidoc": false,
 			"upgrade-mvn-plugins": true,
-			"upgrade-mvn-plugins-eclipse": [ "sarl-bspl-target-platform" ],
+			"upgrade-mvn-plugins-eclipse": [ "sarl-bspl-target-platform.target" ],
 			"in-maven-central": false,
 			"releasable": true
 		}

@@ -3,12 +3,12 @@
 	<modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>io.sarl.bspl</groupId>
+    <groupId>io.sarl.extensions.bspl</groupId>
     <artifactId>bspl-ui</artifactId>
-    <version>0.15.0-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
   </parent>
 
-	<artifactId>io.sarl.bspl.lang.feature</artifactId>
+	<artifactId>io.sarl.extensions.bspl.lang.feature</artifactId>
 	<packaging>eclipse-feature</packaging>
 	<name>BSPL Feature</name>
 	<description>Contains the plugins for BSPL programs</description>

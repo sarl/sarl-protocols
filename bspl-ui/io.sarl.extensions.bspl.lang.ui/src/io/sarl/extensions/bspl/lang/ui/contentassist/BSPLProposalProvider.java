@@ -23,10 +23,14 @@
  */
 package io.sarl.extensions.bspl.lang.ui.contentassist;
 
-
-/**
- * See https://www.eclipse.org/Xtext/documentation/310_eclipse_support.html#content-assist
- * on how to customize the content assistant.
- */
+/** Provides proposal for the content assist mechanism.
+*
+* @author $Author: sgalland$
+* @version $FullVersion$
+* @mavengroupid $GroupId$
+* @mavenartifactid $ArtifactId$
+* @since 0.15
+*/
 public class BSPLProposalProvider extends AbstractBSPLProposalProvider {
+	//
 }

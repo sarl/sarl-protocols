@@ -35,12 +35,10 @@ ProtocolSpecification returns BsplProtocolSpecification:
 
 Protocol returns BsplProtocol:
 	{BsplProtocol}
-	// Recognize the original syntax for BSPL
 	modifiers+=ProtocolVisibilityModifier* 'protocol'? name=ValidID '{'
 		( 'role'? members+=ProtocolRole (',' members+=ProtocolRole)* )*
 		( members+=ProtocolFirstParameter ( ',' members+=ProtocolFollowingParameter )* )*
 		( members+=ProtocolMessage )*
-		/*( members+=ProtocolCall )**/
 	'}'
 ;
 
@@ -72,13 +70,6 @@ ProtocolMessage returns BsplProtocolMessage:
 			':' message=ValidID 
 			( '[' ( arguments+=ArgumentDef (',' arguments+=ArgumentDef)* )?  ']' )?
 ;
-
-/*ProtocolCall returns BsplProtocolProtocolCall:
-	{BsplProtocolProtocolCall}
-	target=JvmTypeReference '('
-		( roles+=ValidID (',' roles+=ValidID)* )? ('|' ( arguments+=ArgumentDef (',' arguments+=ArgumentDef)* )?)?
-	')'
-;*/
 
 ArgumentDef returns BsplProtocolArgument:
 	{BsplProtocolArgument}

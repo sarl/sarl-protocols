@@ -31,15 +31,28 @@ import org.eclipse.xtext.ui.codemining.AbstractXtextCodeMiningProvider;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.IAcceptor;
 
+/**
+ * Provider of components for code mining.
+ *
+ * <p>Code Mining shows inline annotations in the text editor that are not part of the text
+ * itself, but derived from its contents. It can be very helpful to leverage code
+ * minings for example to show inferred types, parameter names for literals and
+ * other kind of meta information.
+ *
+ * @author $Author: sgalland$
+ * @version $FullVersion$
+ * @mavengroupid $GroupId$
+ * @mavenartifactid $ArtifactId$
+ * @since 0.15
+ * @see "https://blogs.itemis.com/en/code-mining-support-in-xtext"
+ */
 @SuppressWarnings("restriction")
 public class BSPLCodeMiningProvider extends AbstractXtextCodeMiningProvider {
 	@Override
 	protected void createCodeMinings(IDocument document, XtextResource resource, CancelIndicator indicator,
 		IAcceptor<? super ICodeMining> acceptor) throws BadLocationException {
-		
 		// TODO: implement me
 		// use acceptor.accept(super.createNewLineHeaderCodeMining(...)) to add a new code mining to the final list
-		
 		// example:
 		// acceptor.accept(createNewLineHeaderCodeMining(1, document, "Header annotation"));
 	}

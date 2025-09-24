@@ -28,4 +28,5 @@ package io.sarl.extensions.bspl.lang.ide;
  * Use this class to register ide components.
  */
 public class BSPLIdeModule extends AbstractBSPLIdeModule {
+	//
 }

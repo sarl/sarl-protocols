@@ -1,18 +1,18 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>io.sarl.bspl</groupId>
+  <groupId>io.sarl.extensions.bspl</groupId>
   <artifactId>bspl-ui</artifactId>
-  <version>0.15.0-SNAPSHOT</version>
+  <version>1.0.0-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>SARL-BSPL UI</name>
   <description>Definition of the SARL-BSPL UI</description>
   <url>http://www.sarl.io</url>
   <modules>
-    <module>io.sarl.bspl.lang.ide</module>
-    <module>io.sarl.bspl.lang.ui</module>
-    <module>io.sarl.bspl.lang.ui.tests</module>
-    <module>io.sarl.bspl.eclipse</module>
-    <module>io.sarl.bspl.lang.feature</module>
+    <module>io.sarl.extensions.bspl.lang.ide</module>
+    <module>io.sarl.extensions.bspl.lang.ui</module>
+    <module>io.sarl.extensions.bspl.lang.ui.tests</module>
+    <module>io.sarl.extensions.bspl.eclipse</module>
+    <module>io.sarl.extensions.bspl.lang.feature</module>
   </modules>
   <properties>
     <tycho.scmUrl>${sarl.scm.url}</tycho.scmUrl>
@@ -137,12 +137,6 @@
             <id>plugin-source</id>
             <goals>
               <goal>plugin-source</goal>
-            </goals>
-          </execution>
-          <execution>
-            <id>feature-source</id>
-            <goals>
-              <goal>feature-source</goal>
             </goals>
           </execution>
         </executions>

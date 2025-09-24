@@ -1,30 +1,19 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>io.sarl.bspl</groupId>
+    <groupId>io.sarl.extensions.bspl</groupId>
     <artifactId>bspl-ui</artifactId>
-    <version>0.15.0-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
   </parent>
-  <artifactId>io.sarl.bspl.eclipse</artifactId>
+  <artifactId>io.sarl.extensions.bspl.eclipse</artifactId>
   <name>Eclipse Tools for BSPL</name>
   <description>Eclipse components for BSPL</description>
   <packaging>eclipse-plugin</packaging>
   <properties>
-    <bspl.main.bundle>io.sarl.bspl.bspl.sdk</bspl.main.bundle>
-    <bspl.all.bundles>io.sarl.bspl.bspl.sdk</bspl.all.bundles>
+    <bspl.main.bundle>io.sarl.extensions.bspl.bspl.sdk</bspl.main.bundle>
+    <bspl.all.bundles>io.sarl.extensions.bspl.bspl.sdk</bspl.all.bundles>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <groupId>io.sarl.bom</groupId>
-        <artifactId>sarl-bspl-bom</artifactId>
-        <version>${project.version}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
   <build>
     <extensions>
       <extension>
@@ -123,7 +112,7 @@
             </goals>
             <configuration>
               <encoding>${project.build.sourceEncoding}</encoding>
-              <file>${project.basedir}/src/io/sarl/bspl/eclipse/buildpath/bspl-bundles.properties</file>
+              <file>${project.basedir}/src/io/sarl/extensions/bspl/eclipse/buildpath/bspl-bundles.properties</file>
               <regexFlags>
                 <regexFlag>MULTILINE</regexFlag>
               </regexFlags>

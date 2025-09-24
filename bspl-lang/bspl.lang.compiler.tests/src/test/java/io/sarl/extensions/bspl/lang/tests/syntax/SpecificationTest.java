@@ -65,7 +65,7 @@ public class SpecificationTest {
 		@DisplayName("Public visibility")
 		public void publicVisibility() throws Exception {
 			var bspl = specification(
-					"package io.sarl.bspl.lang.compiler.tests.fake",
+					"package io.sarl.extensions.bspl.lang.compiler.tests.fake",
 					"public PROTO {",
 					"  role A, B",
 					"  parameter out o",
@@ -78,7 +78,7 @@ public class SpecificationTest {
 		@DisplayName("Package visibility")
 		public void packageVisibility() throws Exception {
 			var bspl = specification(
-					"package io.sarl.bspl.lang.compiler.tests.fake",
+					"package io.sarl.extensions.bspl.lang.compiler.tests.fake",
 					"package PROTO {",
 					"  role A, B",
 					"  parameter out o",
@@ -91,7 +91,7 @@ public class SpecificationTest {
 		@DisplayName("Public+package visibility")
 		public void publicPackageVisibility() throws Exception {
 			var bspl = specification(
-					"package io.sarl.bspl.lang.compiler.tests.fake",
+					"package io.sarl.extensions.bspl.lang.compiler.tests.fake",
 					"public package PROTO {",
 					"  role A, B",
 					"  parameter out o",
@@ -108,7 +108,7 @@ public class SpecificationTest {
 		@DisplayName("Package+public visibility")
 		public void packagePublicVisibility() throws Exception {
 			var bspl = specification(
-					"package io.sarl.bspl.lang.compiler.tests.fake",
+					"package io.sarl.extensions.bspl.lang.compiler.tests.fake",
 					"package public PROTO {",
 					"  role A, B",
 					"  parameter out o",
@@ -125,7 +125,7 @@ public class SpecificationTest {
 		@DisplayName("Public+public visibility")
 		public void publicPublicVisibility() throws Exception {
 			var bspl = specification(
-					"package io.sarl.bspl.lang.compiler.tests.fake",
+					"package io.sarl.extensions.bspl.lang.compiler.tests.fake",
 					"public public PROTO {",
 					"  role A, B",
 					"  parameter out o",
@@ -142,7 +142,7 @@ public class SpecificationTest {
 		@DisplayName("Package+package visibility")
 		public void packagePackageVisibility() throws Exception {
 			var bspl = specification(
-					"package io.sarl.bspl.lang.compiler.tests.fake",
+					"package io.sarl.extensions.bspl.lang.compiler.tests.fake",
 					"package package PROTO {",
 					"  role A, B",
 					"  parameter out o",
@@ -159,7 +159,7 @@ public class SpecificationTest {
 		@DisplayName("Public+package+public visibility")
 		public void publicPackagePublicVisibility() throws Exception {
 			var bspl = specification(
-					"package io.sarl.bspl.lang.compiler.tests.fake",
+					"package io.sarl.extensions.bspl.lang.compiler.tests.fake",
 					"public package public PROTO {",
 					"  role A, B",
 					"  parameter out o",
@@ -180,7 +180,7 @@ public class SpecificationTest {
 		@DisplayName("Package+public+package visibility")
 		public void packagePublicPackageVisibility() throws Exception {
 			var bspl = specification(
-					"package io.sarl.bspl.lang.compiler.tests.fake",
+					"package io.sarl.extensions.bspl.lang.compiler.tests.fake",
 					"package public package PROTO {",
 					"  role A, B",
 					"  parameter out o",
@@ -251,7 +251,7 @@ public class SpecificationTest {
 		@DisplayName("w/ package w/o import")
 		public void withPackageWithoutImport() throws Exception {
 			var bspl = specification(
-					"package io.sarl.bspl.lang.compiler.tests.fake protocol",
+					"package io.sarl.extensions.bspl.lang.compiler.tests.fake protocol",
 					"PROTO { }");
 			validate(bspl).assertError(
 					BsplPackage.eINSTANCE.getBsplProtocol(),
@@ -284,7 +284,7 @@ public class SpecificationTest {
 		@DisplayName("w/ package w/ import")
 		public void withPackageWithImport() throws Exception {
 			var bspl = specification(
-					"package io.sarl.bspl.lang.compiler.tests.fake",
+					"package io.sarl.extensions.bspl.lang.compiler.tests.fake",
 					"import java.lang.Integer",
 					"protocol PROTO { }");
 			validate(bspl)
@@ -407,7 +407,7 @@ public class SpecificationTest {
 		@DisplayName("w/ package w/o import")
 		public void withPackageWithoutImport() throws Exception {
 			var bspl = specification(
-					"package io.sarl.bspl.lang.compiler.tests.fake protocol",
+					"package io.sarl.extensions.bspl.lang.compiler.tests.fake protocol",
 					"PROTO1 { } PROTO2 { }");
 			validate(bspl)
 			.assertError(
@@ -449,7 +449,7 @@ public class SpecificationTest {
 		@DisplayName("w/ package w/ import")
 		public void withPackageWithImport() throws Exception {
 			var bspl = specification(
-					"package io.sarl.bspl.lang.compiler.tests.fake",
+					"package io.sarl.extensions.bspl.lang.compiler.tests.fake",
 					"import java.lang.Integer",
 					"protocol PROTO1 { } protocol PROTO2 { }");
 			validate(bspl)
@@ -471,7 +471,7 @@ public class SpecificationTest {
 		@DisplayName("Duplicate protocol")
 		public void duplicateProtocol() throws Exception {
 			var bspl = specification(
-					"package io.sarl.bspl.lang.compiler.tests.fake",
+					"package io.sarl.extensions.bspl.lang.compiler.tests.fake",
 					"protocol PROTO1 {",
 					"  role R1",
 					"  R1 -> R1 : M",

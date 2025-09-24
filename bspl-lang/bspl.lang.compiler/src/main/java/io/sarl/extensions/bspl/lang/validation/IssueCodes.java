@@ -36,7 +36,7 @@ public final class IssueCodes {
 
 	/** Prefix related to SARL for the issue codes.
 	 */
-	protected static final String ISSUE_CODE_PREFIX = "io.sarl.bspl.lang.validation.IssueCodes."; //$NON-NLS-1$
+	protected static final String ISSUE_CODE_PREFIX = "io.sarl.extensions.bspl.lang.validation.IssueCodes."; //$NON-NLS-1$
 
 	/** A protocol is defined multiple times.
 	 */
