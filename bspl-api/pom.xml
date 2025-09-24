@@ -9,6 +9,7 @@
   <url>http://www.sarl.io/extensions/bspl</url>
   <modules>
     <module>bspl.api.protocol</module>
+    <module>bspl.sdk</module>
   </modules>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

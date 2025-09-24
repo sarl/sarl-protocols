@@ -58,7 +58,7 @@ public class BSPLEclipsePlugin extends AbstractUIPlugin {
 
 	/** Identifier of the plugin.
 	 */
-	public static final String PLUGIN_ID = "io.sarl.bspl.eclipse"; //$NON-NLS-1$
+	public static final String PLUGIN_ID = "io.sarl.extensions.bspl.eclipse"; //$NON-NLS-1$
 
 	private static BSPLEclipsePlugin instance;
 
