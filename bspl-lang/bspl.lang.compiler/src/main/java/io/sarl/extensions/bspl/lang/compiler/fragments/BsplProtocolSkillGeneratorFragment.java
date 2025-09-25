@@ -29,8 +29,10 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.UUID;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
+import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.lib.Pair;
@@ -58,6 +60,18 @@ import io.sarl.lang.core.annotation.SarlAsynchronousExecution;
  */
 @Singleton
 public class BsplProtocolSkillGeneratorFragment {
+
+	private static Supplier<JvmTypeReference> getParameterType(Map<String, BsplProtocolParameter> parameters, String parameterName) {
+		return () -> {
+			if (!Strings.isEmpty(parameterName)) {
+				final var value = parameters.get(parameterName);
+				if (value != null) {
+					return value.getType();
+				}
+			}
+			return null;
+		};
+	}
 
 	/** Run the pre-stage actions for the BSPL role's skill.
 	 *
@@ -158,7 +172,7 @@ public class BsplProtocolSkillGeneratorFragment {
 							if (inoptParam.isKey()) {
 								receiver.newLine().append(varMessageInstance).append(".").append(inParamName).append(" = "); //$NON-NLS-1$ //$NON-NLS-2$
 								receiver.append(varScope).append(".scope.get(").append(Integer.toString(keyIndex)).append(") as "); //$NON-NLS-1$ //$NON-NLS-2$
-								context.appendTypeReferenceOrObject(receiver, role, () -> parameters.get(inParamName).getType());
+								context.appendTypeReferenceOrObject(receiver, role, getParameterType(parameters, inParamName));
 								receiver.append(" // ").append(inParamName); //$NON-NLS-1$
 								++keyIndex;
 							} else {
@@ -172,7 +186,7 @@ public class BsplProtocolSkillGeneratorFragment {
 								receiver.newLine()
 									.append(varMessageInstance).append(".").append(inParamName).append(" = ") //$NON-NLS-1$ //$NON-NLS-2$
 									.append(varInParamId).append(".getKnowledge(typeof("); //$NON-NLS-1$
-								context.appendTypeReferenceOrObject(receiver, role, () -> parameters.get(inParamName).getType());
+								context.appendTypeReferenceOrObject(receiver, role, getParameterType(parameters, inParamName));
 								receiver.append("))"); //$NON-NLS-1$
 								if (inoptParam.isAny() || inoptParam.isOptional()) {
 									receiver.decreaseIndentation().newLine().append("}"); //$NON-NLS-1$
@@ -241,7 +255,7 @@ public class BsplProtocolSkillGeneratorFragment {
 
 				receiver.append(")") //$NON-NLS-1$
 				.newLine().append("var ").append(valueName).append(" : "); //$NON-NLS-1$ //$NON-NLS-2$
-				context.appendTypeReferenceOrObject(receiver, role, () -> parameters.get(outParam.getName()).getType());
+				context.appendTypeReferenceOrObject(receiver, role, getParameterType(parameters, outParam.getName()));
 			}
 
 			receiver.newLine().append("synchronized (getWorkingMemoryLock) {").increaseIndentation(); //$NON-NLS-1$
@@ -251,7 +265,7 @@ public class BsplProtocolSkillGeneratorFragment {
 				final var idName = outParamNames.getKey();
 				final var valueName = outParamNames.getValue();
 				receiver.newLine().append(valueName).append(" = ").append(idName).append(".getKnowledge(typeof("); //$NON-NLS-1$ //$NON-NLS-2$
-				context.appendTypeReferenceOrObject(receiver, role, () -> parameters.get(outParam.getName()).getType());
+				context.appendTypeReferenceOrObject(receiver, role, getParameterType(parameters, outParam.getName()));
 				receiver.append("))"); //$NON-NLS-1$
 			}
 

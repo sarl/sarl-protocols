@@ -28,8 +28,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.TreeSet;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
+import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure0;
@@ -56,6 +58,18 @@ import io.sarl.lang.core.util.OutParameter;
  */
 @Singleton
 public class BsplProtocolReactiveBehaviorGeneratorFragment {
+
+	private static Supplier<JvmTypeReference> getParameterType(Map<String, BsplProtocolParameter> parameters, String parameterName) {
+		return () -> {
+			if (!Strings.isEmpty(parameterName)) {
+				final var value = parameters.get(parameterName);
+				if (value != null) {
+					return value.getType();
+				}
+			}
+			return null;
+		};
+	}
 
 	/** Run the pre-stage actions for the BSPL role's reactive behavior.
 	 *
@@ -111,10 +125,10 @@ public class BsplProtocolReactiveBehaviorGeneratorFragment {
 									.append(Strings.convertToJavaString(outParam.getName())).append("\""); //$NON-NLS-1$
 								for (final var key : inKeys) {
 									receiver.append(", occurrence.").append(key.getName()).append(" as "); //$NON-NLS-1$ //$NON-NLS-2$
-									context.appendTypeReferenceOrObject(receiver, role, () -> parametersMapping.get(key.getName()).getType());
+									context.appendTypeReferenceOrObject(receiver, role, getParameterType(parametersMapping, key.getName()));
 								}
 								receiver.append(").setKnowledge(typeof("); //$NON-NLS-1$
-								context.appendTypeReferenceOrObject(receiver, role, () -> parametersMapping.get(outParam.getName()).getType());
+								context.appendTypeReferenceOrObject(receiver, role, getParameterType(parametersMapping, outParam.getName()));
 								receiver.append("), occurrence.").append(outParam.getName()).append(")"); //$NON-NLS-1$ //$NON-NLS-2$
 							}
 						}

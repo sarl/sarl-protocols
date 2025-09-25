@@ -31,9 +31,11 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
+import org.osgi.framework.BundleException;
 
 import io.sarl.apputils.eclipseextensions.buildpath.AbstractSARLBasedClasspathContainer;
 import io.sarl.apputils.eclipseextensions.buildpath.SARLBundleBuildPath;
+import io.sarl.apputils.uiextensions.BundleNotFoundException;
 import io.sarl.apputils.uiextensions.Bundles;
 import io.sarl.apputils.uiextensions.Bundles.IBundleDependencies;
 
@@ -131,22 +133,26 @@ public class BSPLClasspathContainer extends AbstractSARLBasedClasspathContainer 
 	/** Replies the standard classpath for running the BSPL API.
 	 *
 	 * @return the classpath.
+	 * @throws BundleException if a bundle cannot be resolved.
 	 */
-	public static IBundleDependencies getBsplClasspath() {
+	public static IBundleDependencies getBsplClasspath() throws BundleException {
 		final var bundle = Platform.getBundle(BSPL_MAIN_BUNDLE_ID);
+		if (bundle == null) {
+			throw new BundleNotFoundException(BSPL_MAIN_BUNDLE_ID);
+		}
 		final var resolvedBundles = Bundles.resolveBundleDependencies(bundle);
 		return resolvedBundles;
 	}
 
 	@Override
-	protected void updateBundleList(Set<String> entries) {
+	protected void updateBundleList(Set<String> entries) throws BundleException {
 		for (final var symbolicName : getBsplClasspath().getTransitiveSymbolicNames(false)) {
 			entries.add(symbolicName);
 		}
 	}
 
 	@Override
-	protected void updateClasspathEntries(Set<IClasspathEntry> entries) {
+	protected void updateClasspathEntries(Set<IClasspathEntry> entries) throws BundleException {
 		for (final var cpe : getBsplClasspath().getTransitiveClasspathEntries(false)) {
 			entries.add(cpe);
 		}

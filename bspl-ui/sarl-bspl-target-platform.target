@@ -74,11 +74,21 @@
 			  </dependency>
 		  </dependencies>
 	  </location>
-	  <location includeDependencyDepth="none" includeSource="true" missingManifest="generate" type="Maven">
+	  <location includeDependencyDepth="none" includeDependencyScopes="compile" includeSource="true" missingManifest="generate" type="Maven">
 		  <dependencies>
 			  <dependency>
 				  <groupId>io.sarl.apputils</groupId>
 				  <artifactId>uiextensions</artifactId>
+				  <version>1.0.0-SNAPSHOT</version>
+				  <type>jar</type>
+			  </dependency>
+		  </dependencies>
+	  </location>
+	  <location includeDependencyDepth="infinite" includeDependencyScopes="compile,provided,runtime,system" includeSource="true" missingManifest="generate" type="Maven">
+		  <dependencies>
+			  <dependency>
+				  <groupId>io.sarl.extensions.bspl</groupId>
+				  <artifactId>bspl.sdk</artifactId>
 				  <version>1.0.0-SNAPSHOT</version>
 				  <type>jar</type>
 			  </dependency>

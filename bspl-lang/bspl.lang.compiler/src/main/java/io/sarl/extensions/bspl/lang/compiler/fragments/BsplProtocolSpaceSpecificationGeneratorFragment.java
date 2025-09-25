@@ -23,6 +23,8 @@ package io.sarl.extensions.bspl.lang.compiler.fragments;
 
 import java.io.IOException;
 
+import org.eclipse.xtext.util.Strings;
+
 import com.google.inject.Singleton;
 
 import io.sarl.extensions.bspl.lang.bspl.BsplProtocol;
@@ -76,9 +78,15 @@ public class BsplProtocolSpaceSpecificationGeneratorFragment {
 		content.append("class ").append(specificationName) //$NON-NLS-1$
 			.append(" extends ").append(names.getProtocolSpaceSpecificationGenericInterface()) //$NON-NLS-1$
 			.append(" {").increaseIndentation() //$NON-NLS-1$
+
 			.newLine().append("override getRoles : ").append(names.getProtocolRoleGenericInterface().arrayType()).append(" {").increaseIndentation() //$NON-NLS-1$ //$NON-NLS-2$
 			.newLine().append(roleEnumeration).append(".values") //$NON-NLS-1$
 			.decreaseIndentation().newLine().append("}") //$NON-NLS-1$
+			
+			.newLine().newLine().append("override getProtocolName : ").append(String.class).append(" {").increaseIndentation() //$NON-NLS-1$ //$NON-NLS-2$
+			.newLine().append("\"").append(Strings.convertToJavaString(context.getEnclosingTypeName())).append("\"") //$NON-NLS-1$ //$NON-NLS-2$
+			.decreaseIndentation().newLine().append("}") //$NON-NLS-1$
+
 			.decreaseIndentation().newLine().append("}"); //$NON-NLS-1$
 
 		context.createSarlFile(context.getSource(), specificationPackageName, specificationName, importManager, content);

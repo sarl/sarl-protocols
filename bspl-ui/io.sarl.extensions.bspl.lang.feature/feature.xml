@@ -245,4 +245,8 @@
          id="io.sarl.extensions.bspl.eclipse"
          version="0.0.0"/>
 
+   <plugin
+         id="io.sarl.extensions.bspl.bspl.sdk"
+         version="0.0.0"/>
+
 </feature>

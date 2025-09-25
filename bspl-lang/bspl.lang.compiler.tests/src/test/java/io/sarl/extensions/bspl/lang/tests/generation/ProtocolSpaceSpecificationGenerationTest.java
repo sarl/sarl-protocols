@@ -59,6 +59,10 @@ public class ProtocolSpaceSpecificationGenerationTest extends AbstractBsplTest {
 				"  override getRoles : ProtocolRole[] {",
 				"    PROTORole.values",
 				"  }",
+				"  ",
+				"  override getProtocolName : String {",
+				"    \"PROTO\"",
+				"  }",
 				"}"
 				);
 		getCompileHelper()
@@ -87,6 +91,10 @@ public class ProtocolSpaceSpecificationGenerationTest extends AbstractBsplTest {
 				"public class PROTOSpaceSpecification extends AbstractProtocolSpaceSpecification {",
 				"  override getRoles : ProtocolRole[] {",
 				"    PROTORole.values",
+				"  }",
+				"  ",
+				"  override getProtocolName : String {",
+				"    \"PROTO\"",
 				"  }",
 				"}"
 				);
@@ -117,6 +125,10 @@ public class ProtocolSpaceSpecificationGenerationTest extends AbstractBsplTest {
 				"  override getRoles : ProtocolRole[] {",
 				"    PROTORole.values",
 				"  }",
+				"  ",
+				"  override getProtocolName : String {",
+				"    \"PROTO\"",
+				"  }",
 				"}"
 				);
 		getCompileHelper()
@@ -145,6 +157,10 @@ public class ProtocolSpaceSpecificationGenerationTest extends AbstractBsplTest {
 				"public class PROTOSpaceSpecification extends AbstractProtocolSpaceSpecification {",
 				"  override getRoles : ProtocolRole[] {",
 				"    PROTORole.values",
+				"  }",
+				"  ",
+				"  override getProtocolName : String {",
+				"    \"PROTO\"",
 				"  }",
 				"}"
 				);
@@ -175,6 +191,10 @@ public class ProtocolSpaceSpecificationGenerationTest extends AbstractBsplTest {
 				"  override getRoles : ProtocolRole[] {",
 				"    PROTORole.values",
 				"  }",
+				"  ",
+				"  override getProtocolName : String {",
+				"    \"PROTO\"",
+				"  }",
 				"}"
 				);
 		getCompileHelper()
@@ -203,6 +223,10 @@ public class ProtocolSpaceSpecificationGenerationTest extends AbstractBsplTest {
 				"package class PROTOSpaceSpecification extends AbstractProtocolSpaceSpecification {",
 				"  override getRoles : ProtocolRole[] {",
 				"    PROTORole.values",
+				"  }",
+				"  ",
+				"  override getProtocolName : String {",
+				"    \"PROTO\"",
 				"  }",
 				"}"
 				);
