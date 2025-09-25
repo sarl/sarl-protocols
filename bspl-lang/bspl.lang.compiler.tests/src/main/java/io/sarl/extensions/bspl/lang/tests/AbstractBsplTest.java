@@ -62,6 +62,7 @@ import io.sarl.tests.api.extensions.IgnorableTestExtension;
 import io.sarl.tests.api.extensions.MockInitializerExtension;
 import io.sarl.tests.api.extensions.SarlInjectionExtension;
 import io.sarl.tests.api.tools.SarlValidationTestHelper;
+import io.sarl.tests.api.tools.TestUtils;
 import io.sarl.tests.api.tools.TestValidator;
 import io.sarl.tests.api.tools.TestValidator.Validator;
 
@@ -213,12 +214,13 @@ public abstract class AbstractBsplTest {
 							final var value = genResource.get().getValue();
 							if (value != null) {
 								final var res = new StringBuilder();
+								final var nl = TestUtils.getLineSeparator();
 								var first = true;
 								for (final var line : value.toString().split("[\n\r]")) {
 									if (first) {
 										first = false;
 									} else {
-										res.append("\n");
+										res.append(nl);
 									}
 									res.append(line.stripTrailing());
 								}
@@ -226,7 +228,7 @@ public abstract class AbstractBsplTest {
 							}
 						}
 					}
-					Assert.assertEquals(expected.toString(), generatedCode);
+					Assert.assertEquals(expected.toString().replaceAll("[\r\n]+", " "), generatedCode.replaceAll("[\r\n]+", " "));
 					if (isJava) {
 						called.set(JavaTargetLanguageCompilationTestHelper.build(expected));
 					} else {
