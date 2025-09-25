@@ -5,6 +5,9 @@ import sys
 import subprocess
 import argparse
 
+# Fix the bug of ANSI colors on terminal for Windows terminals
+os.system('')
+
 parser = argparse.ArgumentParser()
 parser.add_argument('args', nargs=argparse.REMAINDER)
 args = parser.parse_args()
