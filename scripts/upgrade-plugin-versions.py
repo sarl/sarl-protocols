@@ -21,7 +21,7 @@ cmd = cmd + [
 cmd = cmd + args.args
 
 #print(str(cmd))
-retcode = subprocess.call(cmd)
+completed = subprocess.run(cmd)
 
-sys.exit(retcode)
+sys.exit(completed.returncode)
 
