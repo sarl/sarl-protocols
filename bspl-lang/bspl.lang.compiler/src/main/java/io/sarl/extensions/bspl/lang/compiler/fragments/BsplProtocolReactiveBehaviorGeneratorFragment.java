@@ -117,20 +117,13 @@ public class BsplProtocolReactiveBehaviorGeneratorFragment {
 					receiver.newLine().newLine().append("on ").append(messageType0).append(" {").increaseIndentation(); //$NON-NLS-1$ //$NON-NLS-2$
 					
 					if (!outParams.isEmpty()) {
-						final var params = parameters.stream().collect(Collectors.toMap(it -> it.getName(), it -> it));
 						for (final var outParam : outParams) {
-							final var param = params.get(outParam.getName());
-							if (param == null || !param.isPrivateVisibility()) {
-								receiver.newLine().append("new ").append(names.getKnowledgeNameGenericInterface()).append("(\"") //$NON-NLS-1$ //$NON-NLS-2$
-									.append(Strings.convertToJavaString(outParam.getName())).append("\""); //$NON-NLS-1$
-								for (final var key : inKeys) {
-									receiver.append(", occurrence.").append(key.getName()).append(" as "); //$NON-NLS-1$ //$NON-NLS-2$
-									context.appendTypeReferenceOrObject(receiver, role, getParameterType(parametersMapping, key.getName()));
-								}
-								receiver.append(").setKnowledge(typeof("); //$NON-NLS-1$
-								context.appendTypeReferenceOrObject(receiver, role, getParameterType(parametersMapping, outParam.getName()));
-								receiver.append("), occurrence.").append(outParam.getName()).append(")"); //$NON-NLS-1$ //$NON-NLS-2$
+							receiver.newLine().append("new ").append(names.getKnowledgeNameGenericInterface()).append("("); //$NON-NLS-1$ //$NON-NLS-2$
+							for (final var key : inKeys) {
+								receiver.append("occurrence.").append(key.getName()).append("?.toString, \""); //$NON-NLS-1$ //$NON-NLS-2$
 							}
+							receiver.append(Strings.convertToJavaString(outParam.getName())).append("\""); //$NON-NLS-1$
+							receiver.append(").setKnowledge(occurrence.").append(outParam.getName()).append(")"); //$NON-NLS-1$ //$NON-NLS-2$
 						}
 					}
 

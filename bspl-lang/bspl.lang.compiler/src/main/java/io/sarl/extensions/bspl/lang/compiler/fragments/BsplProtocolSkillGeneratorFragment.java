@@ -145,9 +145,10 @@ public class BsplProtocolSkillGeneratorFragment {
 						if (guardParam.isNil() || guardParam.isOutput()) {
 							receiver.append("!"); //$NON-NLS-1$
 						}
-						receiver.append("(new ").append(names.getKnowledgeNameGenericInterface()).append("(\"") //$NON-NLS-1$ //$NON-NLS-2$
+						receiver.append("(new ").append(names.getKnowledgeNameGenericInterface()).append("(") //$NON-NLS-1$ //$NON-NLS-2$
+						.append(varScope).append(".scope, \"") //$NON-NLS-1$ //$NON-NLS-2$
 						.append(Strings.convertToJavaString(guardParam.getName()))
-						.append("\", ").append(varScope).append(".scope)."); //$NON-NLS-1$ //$NON-NLS-2$
+						.append("\")");
 						if (guardParam.isOutput()) {
 							receiver.append("isBound"); //$NON-NLS-1$
 						} else {
@@ -167,33 +168,29 @@ public class BsplProtocolSkillGeneratorFragment {
 					var keyIndex = 0;
 					for (final var inoptParam : inoptParams) {
 						final var inParamName = Strings.convertToJavaString(inoptParam.getName());
-						final var parameter = parameters.get(inParamName);
-						if (parameter == null || !parameter.isPrivateVisibility()) {
-							if (inoptParam.isKey()) {
-								receiver.newLine().append(varMessageInstance).append(".").append(inParamName).append(" = "); //$NON-NLS-1$ //$NON-NLS-2$
-								receiver.append(varScope).append(".scope.get(").append(Integer.toString(keyIndex)).append(") as "); //$NON-NLS-1$ //$NON-NLS-2$
-								context.appendTypeReferenceOrObject(receiver, role, getParameterType(parameters, inParamName));
-								receiver.append(" // ").append(inParamName); //$NON-NLS-1$
-								++keyIndex;
-							} else {
-								final var varInParamId = receiver.declareSyntheticVariable(role, "inParamId"); //$NON-NLS-1$
-								receiver.newLine()
-									.append("val ").append(varInParamId).append(" = new ").append(names.getKnowledgeNameGenericInterface()).append("(\"").append(inParamName) //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-									.append("\", ").append(varScope).append(".scope)"); //$NON-NLS-1$ //$NON-NLS-2$
-								if (inoptParam.isAny() || inoptParam.isOptional()) {
-									receiver.newLine().append("if (").append(varInParamId).append(".isDefined) {").increaseIndentation(); //$NON-NLS-1$ //$NON-NLS-2$
-								}
-								receiver.newLine()
-									.append(varMessageInstance).append(".").append(inParamName).append(" = ") //$NON-NLS-1$ //$NON-NLS-2$
-									.append(varInParamId).append(".getKnowledge(typeof("); //$NON-NLS-1$
-								context.appendTypeReferenceOrObject(receiver, role, getParameterType(parameters, inParamName));
-								receiver.append("))"); //$NON-NLS-1$
-								if (inoptParam.isAny() || inoptParam.isOptional()) {
-									receiver.decreaseIndentation().newLine().append("}"); //$NON-NLS-1$
-								}
-							}
+						if (inoptParam.isKey()) {
+							receiver.newLine().append(varMessageInstance).append(".").append(inParamName).append(" = "); //$NON-NLS-1$ //$NON-NLS-2$
+							receiver.append(varScope).append(".scope.get(").append(Integer.toString(keyIndex)).append(") as "); //$NON-NLS-1$ //$NON-NLS-2$
+							context.appendTypeReferenceOrObject(receiver, role, getParameterType(parameters, inParamName));
+							receiver.append(" // ").append(inParamName); //$NON-NLS-1$
+							++keyIndex;
 						} else {
-							receiver.newLine().append("// Ignoring private parameter: ").append(inParamName); //$NON-NLS-1$
+							final var varInParamId = receiver.declareSyntheticVariable(role, "inParamId"); //$NON-NLS-1$
+							receiver.newLine()
+								.append("val ").append(varInParamId).append(" = new ").append(names.getKnowledgeNameGenericInterface()).append("(").append(varScope).append(".scope+#[\"") //$NON-NLS-1$ //$NON-NLS-2$
+								.append(inParamName) //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+								.append("\"])");
+							if (inoptParam.isAny() || inoptParam.isOptional()) {
+								receiver.newLine().append("if (").append(varInParamId).append(".isDefined) {").increaseIndentation(); //$NON-NLS-1$ //$NON-NLS-2$
+							}
+							receiver.newLine()
+								.append(varMessageInstance).append(".").append(inParamName).append(" = ") //$NON-NLS-1$ //$NON-NLS-2$
+								.append(varInParamId).append(".getKnowledge(typeof("); //$NON-NLS-1$
+							context.appendTypeReferenceOrObject(receiver, role, getParameterType(parameters, inParamName));
+							receiver.append("))"); //$NON-NLS-1$
+							if (inoptParam.isAny() || inoptParam.isOptional()) {
+								receiver.decreaseIndentation().newLine().append("}"); //$NON-NLS-1$
+							}
 						}
 					}
 				}
@@ -245,13 +242,15 @@ public class BsplProtocolSkillGeneratorFragment {
 				final var idName = receiver.declareSyntheticVariable(role, outParam.getName() + "Id"); //$NON-NLS-1$
 				final var valueName = receiver.declareSyntheticVariable(role, outParam.getName());
 				variables.put(outParam.getName(), Pair.of(idName, valueName));
-				receiver.newLine().append("val ").append(idName).append(" = new ").append(names.getKnowledgeNameGenericInterface()).append("(\"").append(Strings.convertToJavaString(outParam.getName())).append("\""); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+				receiver.newLine().append("val ").append(idName).append(" = new ").append(names.getKnowledgeNameGenericInterface()).append("(");
 				if (!inKeys.isEmpty()) {
 					for (final var inKey : inKeys) {
-						receiver.append(", "); //$NON-NLS-1$
 						receiver.append("message.^event.").append(inKey.getName()); //$NON-NLS-1$
+						receiver.append(", "); //$NON-NLS-1$
 					}
 				}
+				receiver.append("\"").append(Strings.convertToJavaString(outParam.getName())).append("\""); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+				
 
 				receiver.append(")") //$NON-NLS-1$
 				.newLine().append("var ").append(valueName).append(" : "); //$NON-NLS-1$ //$NON-NLS-2$

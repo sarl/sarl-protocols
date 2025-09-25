@@ -75,14 +75,12 @@ public class BsplProtocolMessageGeneratorFragment {
 			var hasContent = false;
 			for (final var argument : arguments) {
 				final var param = params.get(argument);
-				if (param == null || !param.isPrivateVisibility()) {
-					if (!hasContent) {
-						hasContent = true;
-						receiver.append(" {").increaseIndentation(); //$NON-NLS-1$
-					}
-					receiver.newLine().append("var ").append(argument).append(" : "); //$NON-NLS-1$ //$NON-NLS-2$
-					context.appendTypeReferenceOrObject(receiver, param, param == null ? null : param::getType);
+				if (!hasContent) {
+					hasContent = true;
+					receiver.append(" {").increaseIndentation(); //$NON-NLS-1$
 				}
+				receiver.newLine().append("var ").append(argument).append(" : "); //$NON-NLS-1$ //$NON-NLS-2$
+				context.appendTypeReferenceOrObject(receiver, param, param == null ? null : param::getType);
 			}
 			return Boolean.valueOf(hasContent);
 		});
