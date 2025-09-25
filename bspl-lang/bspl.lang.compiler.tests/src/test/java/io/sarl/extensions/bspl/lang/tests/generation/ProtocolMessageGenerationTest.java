@@ -581,7 +581,9 @@ public class ProtocolMessageGenerationTest {
 					"",
 					"import io.sarl.extensions.bspl.api.protocol.events.ProtocolEvent",
 					"",
-					"public event M extends ProtocolEvent"
+					"public event M extends ProtocolEvent {",
+					"  var A1 : double",
+					"}"
 					);
 			getCompileHelper()
 				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.messages.M", expected)
@@ -607,6 +609,7 @@ public class ProtocolMessageGenerationTest {
 					"import io.sarl.extensions.bspl.api.protocol.events.ProtocolEvent",
 					"",
 					"public event M extends ProtocolEvent {",
+					"  var A1 : double",
 					"  var A2 : String",
 					"}"
 					);
@@ -636,6 +639,7 @@ public class ProtocolMessageGenerationTest {
 					"",
 					"public event M extends ProtocolEvent {",
 					"  var A1 : double",
+					"  var A2 : String",
 					"  var A3 : boolean",
 					"}"
 					);
@@ -661,7 +665,9 @@ public class ProtocolMessageGenerationTest {
 					"",
 					"import io.sarl.extensions.bspl.api.protocol.events.ProtocolEvent",
 					"",
-					"public event M extends ProtocolEvent"
+					"public event M extends ProtocolEvent {",
+					"  var A1 : double",
+					"}"
 					);
 			getCompileHelper()
 				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.messages.M", expected)
@@ -688,6 +694,7 @@ public class ProtocolMessageGenerationTest {
 					"",
 					"public event M extends ProtocolEvent {",
 					"  var A1 : double",
+					"  var A2 : String",
 					"}"
 					);
 			getCompileHelper()
@@ -717,6 +724,7 @@ public class ProtocolMessageGenerationTest {
 					"public event M extends ProtocolEvent {",
 					"  var A1 : double",
 					"  var A2 : String",
+					"  var A3 : boolean",
 					"}"
 					);
 			getCompileHelper()
@@ -741,7 +749,9 @@ public class ProtocolMessageGenerationTest {
 					"",
 					"import io.sarl.extensions.bspl.api.protocol.events.ProtocolEvent",
 					"",
-					"public event M extends ProtocolEvent"
+					"public event M extends ProtocolEvent {",
+					"  var A : Object",
+					"}"
 					);
 			getCompileHelper()
 				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.messages.M", expected)
@@ -766,7 +776,10 @@ public class ProtocolMessageGenerationTest {
 					"",
 					"import io.sarl.extensions.bspl.api.protocol.events.ProtocolEvent",
 					"",
-					"public event M extends ProtocolEvent"
+					"public event M extends ProtocolEvent {",
+					"  var A1 : double",
+					"  var A2 : Object",
+					"}"
 					);
 			getCompileHelper()
 				.assertCompilesTo(source, "io.sarl.extensions.bspl.lang.tests.messages.M", expected)
@@ -794,6 +807,7 @@ public class ProtocolMessageGenerationTest {
 					"",
 					"public event M extends ProtocolEvent {",
 					"  var A1 : double",
+					"  var A2 : String",
 					"  var A3 : Object",
 					"}"
 					);
@@ -823,7 +837,9 @@ public class ProtocolMessageGenerationTest {
 					"import io.sarl.extensions.bspl.api.protocol.events.ProtocolEvent",
 					"",
 					"public event M extends ProtocolEvent {",
+					"  var A1 : double",
 					"  var A2 : String",
+					"  var A3 : boolean",
 					"  var A4 : Object",
 					"}"
 					);
@@ -851,6 +867,7 @@ public class ProtocolMessageGenerationTest {
 					"import io.sarl.extensions.bspl.api.protocol.events.ProtocolEvent",
 					"",
 					"public event M extends ProtocolEvent {",
+					"  var A1 : double",
 					"  var A2 : Object",
 					"}"
 					);
@@ -880,6 +897,7 @@ public class ProtocolMessageGenerationTest {
 					"",
 					"public event M extends ProtocolEvent {",
 					"  var A1 : double",
+					"  var A2 : String",
 					"  var A3 : Object",
 					"}"
 					);
@@ -911,6 +929,7 @@ public class ProtocolMessageGenerationTest {
 					"public event M extends ProtocolEvent {",
 					"  var A1 : double",
 					"  var A2 : String",
+					"  var A3 : boolean",
 					"  var A4 : Object",
 					"}"
 					);
@@ -940,6 +959,7 @@ public class ProtocolMessageGenerationTest {
 					"import io.sarl.extensions.bspl.api.protocol.events.ProtocolEvent",
 					"",
 					"public event M extends ProtocolEvent {",
+					"  var A1 : double",
 					"  var A2 : Object",
 					"}"
 					);

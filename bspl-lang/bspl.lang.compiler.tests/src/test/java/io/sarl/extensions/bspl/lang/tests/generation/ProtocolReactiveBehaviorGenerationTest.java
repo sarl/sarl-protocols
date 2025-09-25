@@ -448,7 +448,7 @@ public class ProtocolReactiveBehaviorGenerationTest {
 					"  uses WorkingMemory",
 					"",
 					"  on M {",
-					"    new ScopedDataName(\"A\").setKnowledge(typeof(Object), occurrence.A)",
+					"    new ScopedDataName(\"A\").setKnowledge(occurrence.A)",
 					"  }",
 					"}"
 					);
@@ -482,7 +482,7 @@ public class ProtocolReactiveBehaviorGenerationTest {
 					"  uses WorkingMemory",
 					"",
 					"  on M {",
-					"    new ScopedDataName(\"A2\").setKnowledge(typeof(Object), occurrence.A2)",
+					"    new ScopedDataName(\"A2\").setKnowledge(occurrence.A2)",
 					"  }",
 					"}"
 					);
@@ -517,7 +517,7 @@ public class ProtocolReactiveBehaviorGenerationTest {
 					"  uses WorkingMemory",
 					"",
 					"  on M {",
-					"    new ScopedDataName(\"A3\").setKnowledge(typeof(Object), occurrence.A3)",
+					"    new ScopedDataName(\"A3\").setKnowledge(occurrence.A3)",
 					"  }",
 					"}"
 					);
@@ -553,7 +553,7 @@ public class ProtocolReactiveBehaviorGenerationTest {
 					"  uses WorkingMemory",
 					"",
 					"  on M {",
-					"    new ScopedDataName(\"A4\").setKnowledge(typeof(Object), occurrence.A4)",
+					"    new ScopedDataName(\"A4\").setKnowledge(occurrence.A4)",
 					"  }",
 					"}"
 					);
@@ -587,7 +587,7 @@ public class ProtocolReactiveBehaviorGenerationTest {
 					"  uses WorkingMemory",
 					"",
 					"  on M {",
-					"    new ScopedDataName(\"A2\", occurrence.A1 as double).setKnowledge(typeof(Object), occurrence.A2)",
+					"    new ScopedDataName(occurrence.A1?.toString, \"A2\").setKnowledge(occurrence.A2)",
 					"  }",
 					"}"
 					);
@@ -622,7 +622,7 @@ public class ProtocolReactiveBehaviorGenerationTest {
 					"  uses WorkingMemory",
 					"",
 					"  on M {",
-					"    new ScopedDataName(\"A3\", occurrence.A1 as double).setKnowledge(typeof(Object), occurrence.A3)",
+					"    new ScopedDataName(occurrence.A1?.toString, \"A3\").setKnowledge(occurrence.A3)",
 					"  }",
 					"}"
 					);
@@ -658,7 +658,7 @@ public class ProtocolReactiveBehaviorGenerationTest {
 					"  uses WorkingMemory",
 					"",
 					"  on M {",
-					"    new ScopedDataName(\"A4\", occurrence.A1 as double).setKnowledge(typeof(Object), occurrence.A4)",
+					"    new ScopedDataName(occurrence.A1?.toString, \"A4\").setKnowledge(occurrence.A4)",
 					"  }",
 					"}"
 					);
@@ -694,7 +694,7 @@ public class ProtocolReactiveBehaviorGenerationTest {
 					"  uses WorkingMemory",
 					"",
 					"  on M {",
-					"    new ScopedDataName(\"A2\").setKnowledge(typeof(Object), occurrence.A2)",
+					"    new ScopedDataName(\"A2\").setKnowledge(occurrence.A2)",
 					"  }",
 					"}"
 					);
@@ -731,8 +731,8 @@ public class ProtocolReactiveBehaviorGenerationTest {
 					"  uses WorkingMemory",
 					"",
 					"  on M {",
-					"    new ScopedDataName(\"A4\", occurrence.A1 as double, occurrence.A3 as boolean).setKnowledge(typeof(Object), occurrence.A4)",
-					"    new ScopedDataName(\"A5\", occurrence.A1 as double, occurrence.A3 as boolean).setKnowledge(typeof(int), occurrence.A5)",
+					"    new ScopedDataName(occurrence.A1?.toString, occurrence.A3?.toString, \"A4\").setKnowledge(occurrence.A4)",
+					"    new ScopedDataName(occurrence.A1?.toString, occurrence.A3?.toString, \"A5\").setKnowledge(occurrence.A5)",
 					"  }",
 					"}"
 					);
@@ -770,8 +770,8 @@ public class ProtocolReactiveBehaviorGenerationTest {
 					"  uses WorkingMemory",
 					"",
 					"  on M {",
-					"    new ScopedDataName(\"A4\", occurrence.A1 as double, occurrence.A3 as boolean).setKnowledge(typeof(Object), occurrence.A4)",
-					"    new ScopedDataName(\"A5\", occurrence.A1 as double, occurrence.A3 as boolean).setKnowledge(typeof(int), occurrence.A5)",
+					"    new ScopedDataName(occurrence.A1?.toString, occurrence.A3?.toString, \"A4\").setKnowledge(occurrence.A4)",
+					"    new ScopedDataName(occurrence.A1?.toString, occurrence.A3?.toString, \"A5\").setKnowledge(occurrence.A5)",
 					"  }",
 					"}"
 					);
