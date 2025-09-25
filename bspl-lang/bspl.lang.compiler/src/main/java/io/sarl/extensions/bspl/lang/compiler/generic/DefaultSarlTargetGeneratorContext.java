@@ -54,7 +54,7 @@ import com.google.inject.Injector;
  * @version $FullVersion$
  * @mavengroupid $GroupId$
  * @mavenartifactid $ArtifactId$
- * @since 0.15
+ * @since 1.0
  */
 public class DefaultSarlTargetGeneratorContext<NP> implements ISarlTargetGeneratorContext<NP> {
 

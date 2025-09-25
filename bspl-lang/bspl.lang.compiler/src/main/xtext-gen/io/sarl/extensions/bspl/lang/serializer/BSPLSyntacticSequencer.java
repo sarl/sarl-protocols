@@ -41,10 +41,10 @@ import org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer;
 public class BSPLSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected BSPLGrammarAccess grammarAccess;
-	protected AbstractElementAlias match_ProtocolFirstParameter_ParameterKeyword_0_1_1_q;
-	protected AbstractElementAlias match_ProtocolFirstParameter_ParameterKeyword_1_1_q;
 	protected AbstractElementAlias match_ProtocolMessage___LeftSquareBracketKeyword_8_0_RightSquareBracketKeyword_8_2__q;
 	protected AbstractElementAlias match_ProtocolSpecification_SemicolonKeyword_1_2_q;
+	protected AbstractElementAlias match_Protocol_ParameterKeyword_6_0_1_q;
+	protected AbstractElementAlias match_Protocol_ParameterKeyword_6_1_1_q;
 	protected AbstractElementAlias match_Protocol_ProtocolKeyword_2_q;
 	protected AbstractElementAlias match_Protocol_RoleKeyword_5_0_q;
 	protected AbstractElementAlias match_XAnnotation___LeftParenthesisKeyword_3_0_RightParenthesisKeyword_3_2__q;
@@ -58,10 +58,10 @@ public class BSPLSyntacticSequencer extends AbstractSyntacticSequencer {
 	@Inject
 	protected void init(IGrammarAccess access) {
 		grammarAccess = (BSPLGrammarAccess) access;
-		match_ProtocolFirstParameter_ParameterKeyword_0_1_1_q = new TokenAlias(false, true, grammarAccess.getProtocolFirstParameterAccess().getParameterKeyword_0_1_1());
-		match_ProtocolFirstParameter_ParameterKeyword_1_1_q = new TokenAlias(false, true, grammarAccess.getProtocolFirstParameterAccess().getParameterKeyword_1_1());
 		match_ProtocolMessage___LeftSquareBracketKeyword_8_0_RightSquareBracketKeyword_8_2__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getProtocolMessageAccess().getLeftSquareBracketKeyword_8_0()), new TokenAlias(false, false, grammarAccess.getProtocolMessageAccess().getRightSquareBracketKeyword_8_2()));
 		match_ProtocolSpecification_SemicolonKeyword_1_2_q = new TokenAlias(false, true, grammarAccess.getProtocolSpecificationAccess().getSemicolonKeyword_1_2());
+		match_Protocol_ParameterKeyword_6_0_1_q = new TokenAlias(false, true, grammarAccess.getProtocolAccess().getParameterKeyword_6_0_1());
+		match_Protocol_ParameterKeyword_6_1_1_q = new TokenAlias(false, true, grammarAccess.getProtocolAccess().getParameterKeyword_6_1_1());
 		match_Protocol_ProtocolKeyword_2_q = new TokenAlias(false, true, grammarAccess.getProtocolAccess().getProtocolKeyword_2());
 		match_Protocol_RoleKeyword_5_0_q = new TokenAlias(false, true, grammarAccess.getProtocolAccess().getRoleKeyword_5_0());
 		match_XAnnotation___LeftParenthesisKeyword_3_0_RightParenthesisKeyword_3_2__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getXAnnotationAccess().getLeftParenthesisKeyword_3_0()), new TokenAlias(false, false, grammarAccess.getXAnnotationAccess().getRightParenthesisKeyword_3_2()));
@@ -110,14 +110,14 @@ public class BSPLSyntacticSequencer extends AbstractSyntacticSequencer {
 		List<INode> transitionNodes = collectNodes(fromNode, toNode);
 		for (AbstractElementAlias syntax : transition.getAmbiguousSyntaxes()) {
 			List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
-			if (match_ProtocolFirstParameter_ParameterKeyword_0_1_1_q.equals(syntax))
-				emit_ProtocolFirstParameter_ParameterKeyword_0_1_1_q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if (match_ProtocolFirstParameter_ParameterKeyword_1_1_q.equals(syntax))
-				emit_ProtocolFirstParameter_ParameterKeyword_1_1_q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if (match_ProtocolMessage___LeftSquareBracketKeyword_8_0_RightSquareBracketKeyword_8_2__q.equals(syntax))
+			if (match_ProtocolMessage___LeftSquareBracketKeyword_8_0_RightSquareBracketKeyword_8_2__q.equals(syntax))
 				emit_ProtocolMessage___LeftSquareBracketKeyword_8_0_RightSquareBracketKeyword_8_2__q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_ProtocolSpecification_SemicolonKeyword_1_2_q.equals(syntax))
 				emit_ProtocolSpecification_SemicolonKeyword_1_2_q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_Protocol_ParameterKeyword_6_0_1_q.equals(syntax))
+				emit_Protocol_ParameterKeyword_6_0_1_q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_Protocol_ParameterKeyword_6_1_1_q.equals(syntax))
+				emit_Protocol_ParameterKeyword_6_1_1_q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_Protocol_ProtocolKeyword_2_q.equals(syntax))
 				emit_Protocol_ProtocolKeyword_2_q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_Protocol_RoleKeyword_5_0_q.equals(syntax))
@@ -140,36 +140,6 @@ public class BSPLSyntacticSequencer extends AbstractSyntacticSequencer {
 		}
 	}
 
-	/**
-	 * <pre>
-	 * Ambiguous syntax:
-	 *     'parameter'?
-	 *
-	 * This ambiguous syntax occurs at:
-	 *     modifiers+='private' (ambiguity) modifiers+=ParameterModifier
-	 *     modifiers+='private' (ambiguity) name=ValidID
-	 
-	 * </pre>
-	 */
-	protected void emit_ProtocolFirstParameter_ParameterKeyword_0_1_1_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
-		acceptNodes(transition, nodes);
-	}
-	
-	/**
-	 * <pre>
-	 * Ambiguous syntax:
-	 *     'parameter'?
-	 *
-	 * This ambiguous syntax occurs at:
-	 *     modifiers+='public' (ambiguity) modifiers+=ParameterModifier
-	 *     modifiers+='public' (ambiguity) name=ValidID
-	 
-	 * </pre>
-	 */
-	protected void emit_ProtocolFirstParameter_ParameterKeyword_1_1_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
-		acceptNodes(transition, nodes);
-	}
-	
 	/**
 	 * <pre>
 	 * Ambiguous syntax:
@@ -197,6 +167,42 @@ public class BSPLSyntacticSequencer extends AbstractSyntacticSequencer {
 	 * </pre>
 	 */
 	protected void emit_ProtocolSpecification_SemicolonKeyword_1_2_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * <pre>
+	 * Ambiguous syntax:
+	 *     'parameter'?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     members+=ProtocolParameter 'private' (ambiguity) members+=ProtocolPrivateParameter
+	 *     members+=ProtocolPrivateParameter 'private' (ambiguity) members+=ProtocolPrivateParameter
+	 *     members+=ProtocolPublicParameter 'private' (ambiguity) members+=ProtocolPrivateParameter
+	 *     members+=ProtocolRole 'private' (ambiguity) members+=ProtocolPrivateParameter
+	 *     name=ValidID '{' 'private' (ambiguity) members+=ProtocolPrivateParameter
+	 
+	 * </pre>
+	 */
+	protected void emit_Protocol_ParameterKeyword_6_0_1_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * <pre>
+	 * Ambiguous syntax:
+	 *     'parameter'?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     members+=ProtocolParameter 'public' (ambiguity) members+=ProtocolPublicParameter
+	 *     members+=ProtocolPrivateParameter 'public' (ambiguity) members+=ProtocolPublicParameter
+	 *     members+=ProtocolPublicParameter 'public' (ambiguity) members+=ProtocolPublicParameter
+	 *     members+=ProtocolRole 'public' (ambiguity) members+=ProtocolPublicParameter
+	 *     name=ValidID '{' 'public' (ambiguity) members+=ProtocolPublicParameter
+	 
+	 * </pre>
+	 */
+	protected void emit_Protocol_ParameterKeyword_6_1_1_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	

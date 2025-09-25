@@ -23,7 +23,7 @@ package io.sarl.extensions.bspl.lang.bspl.impl;
 
 /**
  * <!-- begin-user-doc -->
- * Custom implementation of the BSPL arguments.
+ * Custom implementation of the BSPL "public" parameter declaration.
  * <!-- end-user-doc -->
  *
  * <p>The following features are implemented:
@@ -42,7 +42,7 @@ package io.sarl.extensions.bspl.lang.bspl.impl;
  * @mavenartifactid $ArtifactId$
  * @since 1.0
  */
-public class BsplProtocolArgumentImplCustom extends BsplProtocolArgumentImpl {
+public class BsplProtocolPrivateParameterImplCustom extends BsplProtocolPrivateParameterImpl {
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -50,38 +50,9 @@ public class BsplProtocolArgumentImplCustom extends BsplProtocolArgumentImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected BsplProtocolArgumentImplCustom() {
+	protected BsplProtocolPrivateParameterImplCustom() {
 		super();
-	}
-
-	@Override
-	public boolean isInput() {
-		return CustomEObjects.isInputModifier(getModifiers());
-	}
-
-	@Override
-	public boolean isKey() {
-		return CustomEObjects.isKeyModifier(getModifiers());
-	}
-
-	@Override
-	public boolean isAny() {
-		return CustomEObjects.isAnyModifier(getModifiers());
-	}
-
-	@Override
-	public boolean isNil() {
-		return CustomEObjects.isNilModifier(getModifiers());
-	}
-
-	@Override
-	public boolean isOptional() {
-		return CustomEObjects.isOptionalModifier(getModifiers());
-	}
-
-	@Override
-	public boolean isOutput() {
-		return CustomEObjects.isOutputModifier(getModifiers());
+		getModifiers().add("private"); //$NON-NLS-1$
 	}
 
 }

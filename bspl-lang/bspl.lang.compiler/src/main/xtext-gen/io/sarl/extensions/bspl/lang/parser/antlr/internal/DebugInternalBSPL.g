@@ -52,10 +52,27 @@ ruleProtocol:
 		)*
 	)*
 	(
-		ruleProtocolFirstParameter
+		'private'
+		'parameter'?
+		ruleProtocolPrivateParameter
 		(
 			','
-			ruleProtocolFollowingParameter
+			ruleProtocolPrivateParameter
+		)*
+		    |
+		'public'
+		'parameter'?
+		ruleProtocolPublicParameter
+		(
+			','
+			ruleProtocolPublicParameter
+		)*
+		    |
+		'parameter'
+		ruleProtocolParameter
+		(
+			','
+			ruleProtocolParameter
 		)*
 	)*
 	ruleProtocolMessage
@@ -77,48 +94,34 @@ ruleProtocolRole:
 	)?
 ;
 
-// Rule ProtocolFirstParameter
-ruleProtocolFirstParameter:
+// Rule ProtocolPrivateParameter
+ruleProtocolPrivateParameter:
+	ruleParameterModifier
+	*
+	ruleValidID
 	(
-		'private'
-		'parameter'?
-		ruleParameterModifier
-		*
-		ruleValidID
-		(
-			':'
-			ruleJvmTypeReference
-		)?
-		'key'
-		?
-		    |
-		'public'
-		'parameter'?
-		ruleParameterModifier
-		*
-		ruleValidID
-		(
-			':'
-			ruleJvmTypeReference
-		)?
-		'key'
-		?
-		    |
-		'parameter'
-		ruleParameterModifier
-		*
-		ruleValidID
-		(
-			':'
-			ruleJvmTypeReference
-		)?
-		'key'
-		?
-	)
+		':'
+		ruleJvmTypeReference
+	)?
+	'key'
+	?
 ;
 
-// Rule ProtocolFollowingParameter
-ruleProtocolFollowingParameter:
+// Rule ProtocolPublicParameter
+ruleProtocolPublicParameter:
+	ruleParameterModifier
+	*
+	ruleValidID
+	(
+		':'
+		ruleJvmTypeReference
+	)?
+	'key'
+	?
+;
+
+// Rule ProtocolParameter
+ruleProtocolParameter:
 	ruleParameterModifier
 	*
 	ruleValidID

@@ -131,7 +131,7 @@ public interface BsplPackage extends EPackage
 	 * @see io.sarl.extensions.bspl.lang.bspl.impl.BsplPackageImpl#getBsplAnnotationTarget()
 	 * @generated
 	 */
-	int BSPL_ANNOTATION_TARGET = 8;
+	int BSPL_ANNOTATION_TARGET = 10;
 
 	/**
 	 * The number of structural features of the '<em>Annotation Target</em>' class.
@@ -391,6 +391,116 @@ public interface BsplPackage extends EPackage
 	int BSPL_PROTOCOL_PARAMETER_FEATURE_COUNT = BSPL_PROTOCOL_MEMBER_FEATURE_COUNT + 2;
 
 	/**
+	 * The meta object id for the '{@link io.sarl.extensions.bspl.lang.bspl.impl.BsplProtocolPrivateParameterImpl <em>Protocol Private Parameter</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see io.sarl.extensions.bspl.lang.bspl.impl.BsplProtocolPrivateParameterImpl
+	 * @see io.sarl.extensions.bspl.lang.bspl.impl.BsplPackageImpl#getBsplProtocolPrivateParameter()
+	 * @generated
+	 */
+	int BSPL_PROTOCOL_PRIVATE_PARAMETER = 6;
+
+	/**
+	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BSPL_PROTOCOL_PRIVATE_PARAMETER__ANNOTATIONS = BSPL_PROTOCOL_PARAMETER__ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Modifiers</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BSPL_PROTOCOL_PRIVATE_PARAMETER__MODIFIERS = BSPL_PROTOCOL_PARAMETER__MODIFIERS;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BSPL_PROTOCOL_PRIVATE_PARAMETER__TYPE = BSPL_PROTOCOL_PARAMETER__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BSPL_PROTOCOL_PRIVATE_PARAMETER__NAME = BSPL_PROTOCOL_PARAMETER__NAME;
+
+	/**
+	 * The number of structural features of the '<em>Protocol Private Parameter</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BSPL_PROTOCOL_PRIVATE_PARAMETER_FEATURE_COUNT = BSPL_PROTOCOL_PARAMETER_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link io.sarl.extensions.bspl.lang.bspl.impl.BsplProtocolPublicParameterImpl <em>Protocol Public Parameter</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see io.sarl.extensions.bspl.lang.bspl.impl.BsplProtocolPublicParameterImpl
+	 * @see io.sarl.extensions.bspl.lang.bspl.impl.BsplPackageImpl#getBsplProtocolPublicParameter()
+	 * @generated
+	 */
+	int BSPL_PROTOCOL_PUBLIC_PARAMETER = 7;
+
+	/**
+	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BSPL_PROTOCOL_PUBLIC_PARAMETER__ANNOTATIONS = BSPL_PROTOCOL_PARAMETER__ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Modifiers</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BSPL_PROTOCOL_PUBLIC_PARAMETER__MODIFIERS = BSPL_PROTOCOL_PARAMETER__MODIFIERS;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BSPL_PROTOCOL_PUBLIC_PARAMETER__TYPE = BSPL_PROTOCOL_PARAMETER__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BSPL_PROTOCOL_PUBLIC_PARAMETER__NAME = BSPL_PROTOCOL_PARAMETER__NAME;
+
+	/**
+	 * The number of structural features of the '<em>Protocol Public Parameter</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BSPL_PROTOCOL_PUBLIC_PARAMETER_FEATURE_COUNT = BSPL_PROTOCOL_PARAMETER_FEATURE_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link io.sarl.extensions.bspl.lang.bspl.impl.BsplProtocolMessageImpl <em>Protocol Message</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -398,7 +508,7 @@ public interface BsplPackage extends EPackage
 	 * @see io.sarl.extensions.bspl.lang.bspl.impl.BsplPackageImpl#getBsplProtocolMessage()
 	 * @generated
 	 */
-	int BSPL_PROTOCOL_MESSAGE = 6;
+	int BSPL_PROTOCOL_MESSAGE = 8;
 
 	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -471,7 +581,7 @@ public interface BsplPackage extends EPackage
 	 * @see io.sarl.extensions.bspl.lang.bspl.impl.BsplPackageImpl#getBsplProtocolProtocolCall()
 	 * @generated
 	 */
-	int BSPL_PROTOCOL_PROTOCOL_CALL = 7;
+	int BSPL_PROTOCOL_PROTOCOL_CALL = 9;
 
 	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -763,6 +873,26 @@ public interface BsplPackage extends EPackage
 	 * @generated
 	 */
 	EAttribute getBsplProtocolParameter_Name();
+
+	/**
+	 * Returns the meta object for class '{@link io.sarl.extensions.bspl.lang.bspl.BsplProtocolPrivateParameter <em>Protocol Private Parameter</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Protocol Private Parameter</em>'.
+	 * @see io.sarl.extensions.bspl.lang.bspl.BsplProtocolPrivateParameter
+	 * @generated
+	 */
+	EClass getBsplProtocolPrivateParameter();
+
+	/**
+	 * Returns the meta object for class '{@link io.sarl.extensions.bspl.lang.bspl.BsplProtocolPublicParameter <em>Protocol Public Parameter</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Protocol Public Parameter</em>'.
+	 * @see io.sarl.extensions.bspl.lang.bspl.BsplProtocolPublicParameter
+	 * @generated
+	 */
+	EClass getBsplProtocolPublicParameter();
 
 	/**
 	 * Returns the meta object for class '{@link io.sarl.extensions.bspl.lang.bspl.BsplProtocolMessage <em>Protocol Message</em>}'.
@@ -1081,6 +1211,26 @@ public interface BsplPackage extends EPackage
 		 * @generated
 		 */
 		EAttribute BSPL_PROTOCOL_PARAMETER__NAME = eINSTANCE.getBsplProtocolParameter_Name();
+
+		/**
+		 * The meta object literal for the '{@link io.sarl.extensions.bspl.lang.bspl.impl.BsplProtocolPrivateParameterImpl <em>Protocol Private Parameter</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see io.sarl.extensions.bspl.lang.bspl.impl.BsplProtocolPrivateParameterImpl
+		 * @see io.sarl.extensions.bspl.lang.bspl.impl.BsplPackageImpl#getBsplProtocolPrivateParameter()
+		 * @generated
+		 */
+		EClass BSPL_PROTOCOL_PRIVATE_PARAMETER = eINSTANCE.getBsplProtocolPrivateParameter();
+
+		/**
+		 * The meta object literal for the '{@link io.sarl.extensions.bspl.lang.bspl.impl.BsplProtocolPublicParameterImpl <em>Protocol Public Parameter</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see io.sarl.extensions.bspl.lang.bspl.impl.BsplProtocolPublicParameterImpl
+		 * @see io.sarl.extensions.bspl.lang.bspl.impl.BsplPackageImpl#getBsplProtocolPublicParameter()
+		 * @generated
+		 */
+		EClass BSPL_PROTOCOL_PUBLIC_PARAMETER = eINSTANCE.getBsplProtocolPublicParameter();
 
 		/**
 		 * The meta object literal for the '{@link io.sarl.extensions.bspl.lang.bspl.impl.BsplProtocolMessageImpl <em>Protocol Message</em>}' class.

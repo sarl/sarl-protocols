@@ -35,6 +35,10 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BSPL.ecore#//BsplProtocolParameter/key"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BSPL.ecore#//BsplProtocolParameter/type"/>
     </genClasses>
+    <genClasses ecoreClass="BSPL.ecore#//BsplProtocolPrivateParameter">
+    </genClasses>
+    <genClasses ecoreClass="BSPL.ecore#//BsplProtocolPublicParameter">
+    </genClasses>
     <genClasses ecoreClass="BSPL.ecore#//BsplProtocolMessage">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BSPL.ecore#//BsplProtocolMessage/from"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BSPL.ecore#//BsplProtocolMessage/to"/>

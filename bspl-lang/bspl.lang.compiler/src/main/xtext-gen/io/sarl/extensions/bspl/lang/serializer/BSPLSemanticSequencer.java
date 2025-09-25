@@ -29,6 +29,8 @@ import io.sarl.extensions.bspl.lang.bspl.BsplProtocol;
 import io.sarl.extensions.bspl.lang.bspl.BsplProtocolArgument;
 import io.sarl.extensions.bspl.lang.bspl.BsplProtocolMessage;
 import io.sarl.extensions.bspl.lang.bspl.BsplProtocolParameter;
+import io.sarl.extensions.bspl.lang.bspl.BsplProtocolPrivateParameter;
+import io.sarl.extensions.bspl.lang.bspl.BsplProtocolPublicParameter;
 import io.sarl.extensions.bspl.lang.bspl.BsplProtocolRole;
 import io.sarl.extensions.bspl.lang.bspl.BsplProtocolSpecification;
 import io.sarl.extensions.bspl.lang.services.BSPLGrammarAccess;
@@ -113,15 +115,14 @@ public class BSPLSemanticSequencer extends XbaseWithAnnotationsSemanticSequencer
 				sequence_ProtocolMessage(context, (BsplProtocolMessage) semanticObject); 
 				return; 
 			case BsplPackage.BSPL_PROTOCOL_PARAMETER:
-				if (rule == grammarAccess.getProtocolFirstParameterRule()) {
-					sequence_ProtocolFirstParameter(context, (BsplProtocolParameter) semanticObject); 
-					return; 
-				}
-				else if (rule == grammarAccess.getProtocolFollowingParameterRule()) {
-					sequence_ProtocolFollowingParameter(context, (BsplProtocolParameter) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_ProtocolParameter(context, (BsplProtocolParameter) semanticObject); 
+				return; 
+			case BsplPackage.BSPL_PROTOCOL_PRIVATE_PARAMETER:
+				sequence_ProtocolPrivateParameter(context, (BsplProtocolPrivateParameter) semanticObject); 
+				return; 
+			case BsplPackage.BSPL_PROTOCOL_PUBLIC_PARAMETER:
+				sequence_ProtocolPublicParameter(context, (BsplProtocolPublicParameter) semanticObject); 
+				return; 
 			case BsplPackage.BSPL_PROTOCOL_ROLE:
 				sequence_ProtocolRole(context, (BsplProtocolRole) semanticObject); 
 				return; 
@@ -450,38 +451,6 @@ public class BSPLSemanticSequencer extends XbaseWithAnnotationsSemanticSequencer
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     ProtocolFirstParameter returns BsplProtocolParameter
-	 *
-	 * Constraint:
-	 *     (
-	 *         (modifiers+='private' modifiers+=ParameterModifier* name=ValidID type=JvmTypeReference? modifiers+='key'?) | 
-	 *         (modifiers+='public' modifiers+=ParameterModifier* name=ValidID type=JvmTypeReference? modifiers+='key'?) | 
-	 *         (modifiers+=ParameterModifier* name=ValidID type=JvmTypeReference? modifiers+='key'?)
-	 *     )
-	 * </pre>
-	 */
-	protected void sequence_ProtocolFirstParameter(ISerializationContext context, BsplProtocolParameter semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * <pre>
-	 * Contexts:
-	 *     ProtocolFollowingParameter returns BsplProtocolParameter
-	 *
-	 * Constraint:
-	 *     (modifiers+=ParameterModifier* name=ValidID type=JvmTypeReference? modifiers+='key'?)
-	 * </pre>
-	 */
-	protected void sequence_ProtocolFollowingParameter(ISerializationContext context, BsplProtocolParameter semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * <pre>
-	 * Contexts:
 	 *     ProtocolMessage returns BsplProtocolMessage
 	 *
 	 * Constraint:
@@ -496,6 +465,48 @@ public class BSPLSemanticSequencer extends XbaseWithAnnotationsSemanticSequencer
 	 * </pre>
 	 */
 	protected void sequence_ProtocolMessage(ISerializationContext context, BsplProtocolMessage semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     ProtocolParameter returns BsplProtocolParameter
+	 *
+	 * Constraint:
+	 *     (modifiers+=ParameterModifier* name=ValidID type=JvmTypeReference? modifiers+='key'?)
+	 * </pre>
+	 */
+	protected void sequence_ProtocolParameter(ISerializationContext context, BsplProtocolParameter semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     ProtocolPrivateParameter returns BsplProtocolPrivateParameter
+	 *
+	 * Constraint:
+	 *     (modifiers+=ParameterModifier* name=ValidID type=JvmTypeReference? modifiers+='key'?)
+	 * </pre>
+	 */
+	protected void sequence_ProtocolPrivateParameter(ISerializationContext context, BsplProtocolPrivateParameter semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     ProtocolPublicParameter returns BsplProtocolPublicParameter
+	 *
+	 * Constraint:
+	 *     (modifiers+=ParameterModifier* name=ValidID type=JvmTypeReference? modifiers+='key'?)
+	 * </pre>
+	 */
+	protected void sequence_ProtocolPublicParameter(ISerializationContext context, BsplProtocolPublicParameter semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -538,7 +549,11 @@ public class BSPLSemanticSequencer extends XbaseWithAnnotationsSemanticSequencer
 	 *         modifiers+=ProtocolVisibilityModifier* 
 	 *         name=ValidID 
 	 *         (members+=ProtocolRole members+=ProtocolRole*)* 
-	 *         (members+=ProtocolFirstParameter members+=ProtocolFollowingParameter*)* 
+	 *         (
+	 *             (members+=ProtocolPrivateParameter members+=ProtocolPrivateParameter*) | 
+	 *             (members+=ProtocolPublicParameter members+=ProtocolPublicParameter*) | 
+	 *             (members+=ProtocolParameter members+=ProtocolParameter*)
+	 *         )* 
 	 *         members+=ProtocolMessage*
 	 *     )
 	 * </pre>

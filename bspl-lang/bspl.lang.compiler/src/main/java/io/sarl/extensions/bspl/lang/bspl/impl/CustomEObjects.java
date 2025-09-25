@@ -30,7 +30,7 @@ import java.util.Collection;
  * @version $FullVersion$
  * @mavengroupid $GroupId$
  * @mavenartifactid $ArtifactId$
- * @since 0.15
+ * @since 1.0
  */
 public final class CustomEObjects {
 

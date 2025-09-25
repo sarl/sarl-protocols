@@ -126,6 +126,16 @@ public class BsplAdapterFactory extends AdapterFactoryImpl
 				return createBsplProtocolParameterAdapter();
 			}
 			@Override
+			public Adapter caseBsplProtocolPrivateParameter(BsplProtocolPrivateParameter object)
+			{
+				return createBsplProtocolPrivateParameterAdapter();
+			}
+			@Override
+			public Adapter caseBsplProtocolPublicParameter(BsplProtocolPublicParameter object)
+			{
+				return createBsplProtocolPublicParameterAdapter();
+			}
+			@Override
 			public Adapter caseBsplProtocolMessage(BsplProtocolMessage object)
 			{
 				return createBsplProtocolMessageAdapter();
@@ -248,6 +258,36 @@ public class BsplAdapterFactory extends AdapterFactoryImpl
 	 * @generated
 	 */
 	public Adapter createBsplProtocolParameterAdapter()
+	{
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link io.sarl.extensions.bspl.lang.bspl.BsplProtocolPrivateParameter <em>Protocol Private Parameter</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see io.sarl.extensions.bspl.lang.bspl.BsplProtocolPrivateParameter
+	 * @generated
+	 */
+	public Adapter createBsplProtocolPrivateParameterAdapter()
+	{
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link io.sarl.extensions.bspl.lang.bspl.BsplProtocolPublicParameter <em>Protocol Public Parameter</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see io.sarl.extensions.bspl.lang.bspl.BsplProtocolPublicParameter
+	 * @generated
+	 */
+	public Adapter createBsplProtocolPublicParameterAdapter()
 	{
 		return null;
 	}

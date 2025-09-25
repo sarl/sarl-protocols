@@ -44,7 +44,7 @@ import io.sarl.extensions.bspl.lang.bspl.BsplAnnotationTarget;
  * @version $FullVersion$
  * @mavengroupid $GroupId$
  * @mavenartifactid $ArtifactId$
- * @since 0.15
+ * @since 1.0
  */
 @Singleton
 public class DefaultProgrammaticWarningSuppressor implements IProgrammaticWarningSuppressor {

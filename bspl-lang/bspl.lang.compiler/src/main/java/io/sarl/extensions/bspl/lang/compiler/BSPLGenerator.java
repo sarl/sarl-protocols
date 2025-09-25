@@ -43,7 +43,7 @@ import io.sarl.extensions.bspl.lang.compiler.generic.ISarlTargetGeneratorContext
  * @version $FullVersion$
  * @mavengroupid $GroupId$
  * @mavenartifactid $ArtifactId$
- * @since 0.15
+ * @since 1.0
  */
 public class BSPLGenerator extends AbstractSarlTargetGenerator<IProtocolNames> {
 

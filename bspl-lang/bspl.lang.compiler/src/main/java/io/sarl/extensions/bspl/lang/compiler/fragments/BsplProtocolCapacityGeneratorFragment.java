@@ -45,7 +45,7 @@ import io.sarl.lang.core.annotation.SarlAsynchronousExecution;
  * @version $FullVersion$
  * @mavengroupid $GroupId$
  * @mavenartifactid $ArtifactId$
- * @since 0.15
+ * @since 1.0
  */
 @Singleton
 public class BsplProtocolCapacityGeneratorFragment {

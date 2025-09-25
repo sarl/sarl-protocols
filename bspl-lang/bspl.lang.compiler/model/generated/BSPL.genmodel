@@ -37,5 +37,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BSPL.ecore#//BsplProtocolArgument/modifiers"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BSPL.ecore#//BsplProtocolArgument/name"/>
     </genClasses>
+    <genClasses ecoreClass="BSPL.ecore#//BsplProtocolPrivateParameter"/>
+    <genClasses ecoreClass="BSPL.ecore#//BsplProtocolPublicParameter"/>
   </genPackages>
 </genmodel:GenModel>

@@ -38,7 +38,7 @@ import io.sarl.extensions.bspl.lang.validation.StandardBsplConfigurableIssueCode
  * @version $FullVersion$
  * @mavengroupid $GroupId$
  * @mavenartifactid $ArtifactId$
- * @since 0.15
+ * @since 1.0
  */
 @SuppressWarnings("static-method")
 public class BSPLRuntimeModule extends AbstractBSPLRuntimeModule {

@@ -31,7 +31,9 @@ import io.sarl.extensions.bspl.lang.bspl.BsplProtocolArgument;
 import io.sarl.extensions.bspl.lang.bspl.BsplProtocolMember;
 import io.sarl.extensions.bspl.lang.bspl.BsplProtocolMessage;
 import io.sarl.extensions.bspl.lang.bspl.BsplProtocolParameter;
+import io.sarl.extensions.bspl.lang.bspl.BsplProtocolPrivateParameter;
 import io.sarl.extensions.bspl.lang.bspl.BsplProtocolProtocolCall;
+import io.sarl.extensions.bspl.lang.bspl.BsplProtocolPublicParameter;
 import io.sarl.extensions.bspl.lang.bspl.BsplProtocolRole;
 import io.sarl.extensions.bspl.lang.bspl.BsplProtocolSpecification;
 
@@ -100,6 +102,20 @@ public class BsplPackageImpl extends EPackageImpl implements BsplPackage
 	 * @generated
 	 */
 	private EClass bsplProtocolParameterEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass bsplProtocolPrivateParameterEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass bsplProtocolPublicParameterEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -438,6 +454,28 @@ public class BsplPackageImpl extends EPackageImpl implements BsplPackage
 	 * @generated
 	 */
 	@Override
+	public EClass getBsplProtocolPrivateParameter()
+	{
+		return bsplProtocolPrivateParameterEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getBsplProtocolPublicParameter()
+	{
+		return bsplProtocolPublicParameterEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getBsplProtocolMessage()
 	{
 		return bsplProtocolMessageEClass;
@@ -601,6 +639,10 @@ public class BsplPackageImpl extends EPackageImpl implements BsplPackage
 		createEReference(bsplProtocolParameterEClass, BSPL_PROTOCOL_PARAMETER__TYPE);
 		createEAttribute(bsplProtocolParameterEClass, BSPL_PROTOCOL_PARAMETER__NAME);
 
+		bsplProtocolPrivateParameterEClass = createEClass(BSPL_PROTOCOL_PRIVATE_PARAMETER);
+
+		bsplProtocolPublicParameterEClass = createEClass(BSPL_PROTOCOL_PUBLIC_PARAMETER);
+
 		bsplProtocolMessageEClass = createEClass(BSPL_PROTOCOL_MESSAGE);
 		createEAttribute(bsplProtocolMessageEClass, BSPL_PROTOCOL_MESSAGE__TO);
 		createEReference(bsplProtocolMessageEClass, BSPL_PROTOCOL_MESSAGE__ARGUMENTS);
@@ -653,6 +695,8 @@ public class BsplPackageImpl extends EPackageImpl implements BsplPackage
 		bsplProtocolMemberEClass.getESuperTypes().add(this.getBsplAnnotationTarget());
 		bsplProtocolRoleEClass.getESuperTypes().add(this.getBsplProtocolMember());
 		bsplProtocolParameterEClass.getESuperTypes().add(this.getBsplProtocolMember());
+		bsplProtocolPrivateParameterEClass.getESuperTypes().add(this.getBsplProtocolParameter());
+		bsplProtocolPublicParameterEClass.getESuperTypes().add(this.getBsplProtocolParameter());
 		bsplProtocolMessageEClass.getESuperTypes().add(this.getBsplProtocolMember());
 		bsplProtocolProtocolCallEClass.getESuperTypes().add(this.getBsplProtocolMember());
 
@@ -746,6 +790,14 @@ public class BsplPackageImpl extends EPackageImpl implements BsplPackage
 		addEOperation(bsplProtocolParameterEClass, ecorePackage.getEBoolean(), "isOptional", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		addEOperation(bsplProtocolParameterEClass, ecorePackage.getEBoolean(), "isKey", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEClass(bsplProtocolPrivateParameterEClass, BsplProtocolPrivateParameter.class, "BsplProtocolPrivateParameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		addEOperation(bsplProtocolPrivateParameterEClass, theTypesPackage.getJvmVisibility(), "getSpecifiedVisibility", 1, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEClass(bsplProtocolPublicParameterEClass, BsplProtocolPublicParameter.class, "BsplProtocolPublicParameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		addEOperation(bsplProtocolPublicParameterEClass, theTypesPackage.getJvmVisibility(), "getSpecifiedVisibility", 1, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(bsplProtocolMessageEClass, BsplProtocolMessage.class, "BsplProtocolMessage", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getBsplProtocolMessage_To(), ecorePackage.getEString(), "to", null, 0, 1, BsplProtocolMessage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

@@ -35,7 +35,7 @@ import org.eclipse.xtext.validation.IssueSeverities;
  * @version $FullVersion$
  * @mavengroupid $GroupId$
  * @mavenartifactid $ArtifactId$
- * @since 0.15
+ * @since 1.0
  */
 @ImplementedBy(DefaultProgrammaticWarningSuppressor.class)
 public interface IProgrammaticWarningSuppressor {

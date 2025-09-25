@@ -29,7 +29,7 @@ import static io.sarl.extensions.bspl.lang.validation.IssueCodes.REQUIRED_OUT_PA
 import static io.sarl.extensions.bspl.lang.validation.IssueCodes.REQUIRED_OUT_PARAMETER_IN_MESSAGES;
 import static io.sarl.extensions.bspl.lang.validation.IssueCodes.UNDEFINED_PROTOCOL_PARAMETER;
 import static io.sarl.extensions.bspl.lang.validation.IssueCodes.UNUSED_PROTOCOL_PARAMETER;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
@@ -1173,6 +1173,86 @@ public class ParameterProtocolTest {
 	public class PublicTest extends AbstractBsplTest {
 
 		@Test
+		@DisplayName("Public modifier for multiple parameters")
+		public void publicModifierMultipleParameters() throws Exception {
+			var bspl = specification(
+					"package io.sarl.extensions.bspl.lang.tests",
+					"protocol PROTO {",
+					"  role R1, R2",
+					"  public parameter P1, P2, P3",
+					"  parameter P4",
+					"  R1 -> R2 : M [out P1]",
+					"}");
+			var params = bspl.getBsplProtocols().get(0).getParameters();
+			assertNotNull(params);
+			assertEquals(4, params.size());
+
+			var param0 = params.get(0);
+			assertNull(param0.getType());
+			assertEquals("P1", param0.getName());
+			assertTrue(param0.isInput());
+			assertFalse(param0.isKey());
+			assertTrue(param0.isAny());
+			assertFalse(param0.isNil());
+			assertFalse(param0.isOptional());
+			assertTrue(param0.isOutput());
+			assertSame(JvmVisibility.PUBLIC, param0.getSpecifiedVisibility());
+			assertSame(JvmVisibility.PUBLIC, param0.getVisibility());
+			assertTrue(param0.isPublicVisibility());
+			assertFalse(param0.isProtectedVisibility());
+			assertFalse(param0.isPackageVisibility());
+			assertFalse(param0.isPrivateVisibility());
+
+			var param1 = params.get(1);
+			assertNull(param1.getType());
+			assertEquals("P2", param1.getName());
+			assertTrue(param1.isInput());
+			assertFalse(param1.isKey());
+			assertTrue(param1.isAny());
+			assertFalse(param1.isNil());
+			assertFalse(param1.isOptional());
+			assertTrue(param1.isOutput());
+			assertSame(JvmVisibility.PUBLIC, param1.getSpecifiedVisibility());
+			assertSame(JvmVisibility.PUBLIC, param1.getVisibility());
+			assertTrue(param1.isPublicVisibility());
+			assertFalse(param1.isProtectedVisibility());
+			assertFalse(param1.isPackageVisibility());
+			assertFalse(param1.isPrivateVisibility());
+
+			var param2 = params.get(2);
+			assertNull(param2.getType());
+			assertEquals("P3", param2.getName());
+			assertTrue(param2.isInput());
+			assertFalse(param2.isKey());
+			assertTrue(param2.isAny());
+			assertFalse(param2.isNil());
+			assertFalse(param2.isOptional());
+			assertTrue(param2.isOutput());
+			assertSame(JvmVisibility.PUBLIC, param2.getSpecifiedVisibility());
+			assertSame(JvmVisibility.PUBLIC, param2.getVisibility());
+			assertTrue(param2.isPublicVisibility());
+			assertFalse(param2.isProtectedVisibility());
+			assertFalse(param2.isPackageVisibility());
+			assertFalse(param2.isPrivateVisibility());
+
+			var param3 = params.get(3);
+			assertNull(param3.getType());
+			assertEquals("P4", param3.getName());
+			assertTrue(param3.isInput());
+			assertFalse(param3.isKey());
+			assertTrue(param3.isAny());
+			assertFalse(param3.isNil());
+			assertFalse(param3.isOptional());
+			assertTrue(param3.isOutput());
+			assertNull(param3.getSpecifiedVisibility());
+			assertSame(JvmVisibility.PUBLIC, param3.getVisibility());
+			assertTrue(param3.isPublicVisibility());
+			assertFalse(param3.isProtectedVisibility());
+			assertFalse(param3.isPackageVisibility());
+			assertFalse(param3.isPrivateVisibility());
+		}
+
+		@Test
 		@DisplayName("Public parameter modifiers")
 		public void publicParameterModifiers() throws Exception {
 			var bspl = specification(
@@ -1663,6 +1743,86 @@ public class ParameterProtocolTest {
 	@Nested
 	@DisplayName("Public parameter w/ type")
 	public class PublicTypeTest extends AbstractBsplTest {
+
+		@Test
+		@DisplayName("Public modifier for multiple typed parameters")
+		public void publicModifierMultipleTypedParameters() throws Exception {
+			var bspl = specification(
+					"package io.sarl.extensions.bspl.lang.tests",
+					"protocol PROTO {",
+					"  role R1, R2",
+					"  public parameter P1 : String, P2 : int, P3",
+					"  parameter P4 : Object",
+					"  R1 -> R2 : M [out P1]",
+					"}");
+			var params = bspl.getBsplProtocols().get(0).getParameters();
+			assertNotNull(params);
+			assertEquals(4, params.size());
+
+			var param0 = params.get(0);
+			assertEquals(String.class.getName(), param0.getType().getIdentifier());
+			assertEquals("P1", param0.getName());
+			assertTrue(param0.isInput());
+			assertFalse(param0.isKey());
+			assertTrue(param0.isAny());
+			assertFalse(param0.isNil());
+			assertFalse(param0.isOptional());
+			assertTrue(param0.isOutput());
+			assertSame(JvmVisibility.PUBLIC, param0.getSpecifiedVisibility());
+			assertSame(JvmVisibility.PUBLIC, param0.getVisibility());
+			assertTrue(param0.isPublicVisibility());
+			assertFalse(param0.isProtectedVisibility());
+			assertFalse(param0.isPackageVisibility());
+			assertFalse(param0.isPrivateVisibility());
+
+			var param1 = params.get(1);
+			assertEquals(int.class.getName(), param1.getType().getIdentifier());
+			assertEquals("P2", param1.getName());
+			assertTrue(param1.isInput());
+			assertFalse(param1.isKey());
+			assertTrue(param1.isAny());
+			assertFalse(param1.isNil());
+			assertFalse(param1.isOptional());
+			assertTrue(param1.isOutput());
+			assertSame(JvmVisibility.PUBLIC, param1.getSpecifiedVisibility());
+			assertSame(JvmVisibility.PUBLIC, param1.getVisibility());
+			assertTrue(param1.isPublicVisibility());
+			assertFalse(param1.isProtectedVisibility());
+			assertFalse(param1.isPackageVisibility());
+			assertFalse(param1.isPrivateVisibility());
+
+			var param2 = params.get(2);
+			assertNull(param2.getType());
+			assertEquals("P3", param2.getName());
+			assertTrue(param2.isInput());
+			assertFalse(param2.isKey());
+			assertTrue(param2.isAny());
+			assertFalse(param2.isNil());
+			assertFalse(param2.isOptional());
+			assertTrue(param2.isOutput());
+			assertSame(JvmVisibility.PUBLIC, param2.getSpecifiedVisibility());
+			assertSame(JvmVisibility.PUBLIC, param2.getVisibility());
+			assertTrue(param2.isPublicVisibility());
+			assertFalse(param2.isProtectedVisibility());
+			assertFalse(param2.isPackageVisibility());
+			assertFalse(param2.isPrivateVisibility());
+
+			var param3 = params.get(3);
+			assertEquals(Object.class.getName(), param3.getType().getIdentifier());
+			assertEquals("P4", param3.getName());
+			assertTrue(param3.isInput());
+			assertFalse(param3.isKey());
+			assertTrue(param3.isAny());
+			assertFalse(param3.isNil());
+			assertFalse(param3.isOptional());
+			assertTrue(param3.isOutput());
+			assertNull(param3.getSpecifiedVisibility());
+			assertSame(JvmVisibility.PUBLIC, param3.getVisibility());
+			assertTrue(param3.isPublicVisibility());
+			assertFalse(param3.isProtectedVisibility());
+			assertFalse(param3.isPackageVisibility());
+			assertFalse(param3.isPrivateVisibility());
+		}
 
 		@Test
 		@DisplayName("Public parameter modifiers")
@@ -2334,6 +2494,86 @@ public class ParameterProtocolTest {
 	public class PrivateTest extends AbstractBsplTest {
 
 		@Test
+		@DisplayName("Private modifier for multiple parameters")
+		public void privateModifierMultipleParameters() throws Exception {
+			var bspl = specification(
+					"package io.sarl.extensions.bspl.lang.tests",
+					"protocol PROTO {",
+					"  role R1, R2",
+					"  private parameter P1, P2, P3",
+					"  parameter P4",
+					"  R1 -> R2 : M [out P1]",
+					"}");
+			var params = bspl.getBsplProtocols().get(0).getParameters();
+			assertNotNull(params);
+			assertEquals(4, params.size());
+
+			var param0 = params.get(0);
+			assertNull(param0.getType());
+			assertEquals("P1", param0.getName());
+			assertTrue(param0.isInput());
+			assertFalse(param0.isKey());
+			assertTrue(param0.isAny());
+			assertFalse(param0.isNil());
+			assertFalse(param0.isOptional());
+			assertTrue(param0.isOutput());
+			assertSame(JvmVisibility.PRIVATE, param0.getSpecifiedVisibility());
+			assertSame(JvmVisibility.PRIVATE, param0.getVisibility());
+			assertFalse(param0.isPublicVisibility());
+			assertFalse(param0.isProtectedVisibility());
+			assertFalse(param0.isPackageVisibility());
+			assertTrue(param0.isPrivateVisibility());
+
+			var param1 = params.get(1);
+			assertNull(param1.getType());
+			assertEquals("P2", param1.getName());
+			assertTrue(param1.isInput());
+			assertFalse(param1.isKey());
+			assertTrue(param1.isAny());
+			assertFalse(param1.isNil());
+			assertFalse(param1.isOptional());
+			assertTrue(param1.isOutput());
+			assertSame(JvmVisibility.PRIVATE, param1.getSpecifiedVisibility());
+			assertSame(JvmVisibility.PRIVATE, param1.getVisibility());
+			assertFalse(param1.isPublicVisibility());
+			assertFalse(param1.isProtectedVisibility());
+			assertFalse(param1.isPackageVisibility());
+			assertTrue(param1.isPrivateVisibility());
+
+			var param2 = params.get(2);
+			assertNull(param2.getType());
+			assertEquals("P3", param2.getName());
+			assertTrue(param2.isInput());
+			assertFalse(param2.isKey());
+			assertTrue(param2.isAny());
+			assertFalse(param2.isNil());
+			assertFalse(param2.isOptional());
+			assertTrue(param2.isOutput());
+			assertSame(JvmVisibility.PRIVATE, param2.getSpecifiedVisibility());
+			assertSame(JvmVisibility.PRIVATE, param2.getVisibility());
+			assertFalse(param2.isPublicVisibility());
+			assertFalse(param2.isProtectedVisibility());
+			assertFalse(param2.isPackageVisibility());
+			assertTrue(param2.isPrivateVisibility());
+
+			var param3 = params.get(3);
+			assertNull(param3.getType());
+			assertEquals("P4", param3.getName());
+			assertTrue(param3.isInput());
+			assertFalse(param3.isKey());
+			assertTrue(param3.isAny());
+			assertFalse(param3.isNil());
+			assertFalse(param3.isOptional());
+			assertTrue(param3.isOutput());
+			assertNull(param3.getSpecifiedVisibility());
+			assertSame(JvmVisibility.PUBLIC, param3.getVisibility());
+			assertTrue(param3.isPublicVisibility());
+			assertFalse(param3.isProtectedVisibility());
+			assertFalse(param3.isPackageVisibility());
+			assertFalse(param3.isPrivateVisibility());
+		}
+
+		@Test
 		@DisplayName("Private parameter modifiers")
 		public void privateParameterModifiers() throws Exception {
 			var bspl = specification(
@@ -2797,6 +3037,86 @@ public class ParameterProtocolTest {
 	@Nested
 	@DisplayName("Private parameter w/ type")
 	public class PrivateTypeTest extends AbstractBsplTest {
+
+		@Test
+		@DisplayName("Private modifier for multiple typed parameters")
+		public void privateModifierMultipleTypedParameters() throws Exception {
+			var bspl = specification(
+					"package io.sarl.extensions.bspl.lang.tests",
+					"protocol PROTO {",
+					"  role R1, R2",
+					"  private parameter P1 : String, P2 : int, P3",
+					"  parameter P4 : Object",
+					"  R1 -> R2 : M [out P1]",
+					"}");
+			var params = bspl.getBsplProtocols().get(0).getParameters();
+			assertNotNull(params);
+			assertEquals(4, params.size());
+
+			var param0 = params.get(0);
+			assertEquals(String.class.getName(), param0.getType().getIdentifier());
+			assertEquals("P1", param0.getName());
+			assertTrue(param0.isInput());
+			assertFalse(param0.isKey());
+			assertTrue(param0.isAny());
+			assertFalse(param0.isNil());
+			assertFalse(param0.isOptional());
+			assertTrue(param0.isOutput());
+			assertSame(JvmVisibility.PRIVATE, param0.getSpecifiedVisibility());
+			assertSame(JvmVisibility.PRIVATE, param0.getVisibility());
+			assertFalse(param0.isPublicVisibility());
+			assertFalse(param0.isProtectedVisibility());
+			assertFalse(param0.isPackageVisibility());
+			assertTrue(param0.isPrivateVisibility());
+
+			var param1 = params.get(1);
+			assertEquals(int.class.getName(), param1.getType().getIdentifier());
+			assertEquals("P2", param1.getName());
+			assertTrue(param1.isInput());
+			assertFalse(param1.isKey());
+			assertTrue(param1.isAny());
+			assertFalse(param1.isNil());
+			assertFalse(param1.isOptional());
+			assertTrue(param1.isOutput());
+			assertSame(JvmVisibility.PRIVATE, param1.getSpecifiedVisibility());
+			assertSame(JvmVisibility.PRIVATE, param1.getVisibility());
+			assertFalse(param1.isPublicVisibility());
+			assertFalse(param1.isProtectedVisibility());
+			assertFalse(param1.isPackageVisibility());
+			assertTrue(param1.isPrivateVisibility());
+
+			var param2 = params.get(2);
+			assertNull(param2.getType());
+			assertEquals("P3", param2.getName());
+			assertTrue(param2.isInput());
+			assertFalse(param2.isKey());
+			assertTrue(param2.isAny());
+			assertFalse(param2.isNil());
+			assertFalse(param2.isOptional());
+			assertTrue(param2.isOutput());
+			assertSame(JvmVisibility.PRIVATE, param2.getSpecifiedVisibility());
+			assertSame(JvmVisibility.PRIVATE, param2.getVisibility());
+			assertFalse(param2.isPublicVisibility());
+			assertFalse(param2.isProtectedVisibility());
+			assertFalse(param2.isPackageVisibility());
+			assertTrue(param2.isPrivateVisibility());
+
+			var param3 = params.get(3);
+			assertEquals(Object.class.getName(), param3.getType().getIdentifier());
+			assertEquals("P4", param3.getName());
+			assertTrue(param3.isInput());
+			assertFalse(param3.isKey());
+			assertTrue(param3.isAny());
+			assertFalse(param3.isNil());
+			assertFalse(param3.isOptional());
+			assertTrue(param3.isOutput());
+			assertNull(param3.getSpecifiedVisibility());
+			assertSame(JvmVisibility.PUBLIC, param3.getVisibility());
+			assertTrue(param3.isPublicVisibility());
+			assertFalse(param3.isProtectedVisibility());
+			assertFalse(param3.isPackageVisibility());
+			assertFalse(param3.isPrivateVisibility());
+		}
 
 		@Test
 		@DisplayName("Private parameter modifiers")

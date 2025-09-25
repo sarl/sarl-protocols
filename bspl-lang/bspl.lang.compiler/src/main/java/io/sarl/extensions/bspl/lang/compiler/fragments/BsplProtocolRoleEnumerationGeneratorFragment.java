@@ -46,7 +46,7 @@ import io.sarl.lang.core.Skill;
  * @version $FullVersion$
  * @mavengroupid $GroupId$
  * @mavenartifactid $ArtifactId$
- * @since 0.15
+ * @since 1.0
  */
 @Singleton
 public class BsplProtocolRoleEnumerationGeneratorFragment {

@@ -34,7 +34,7 @@ import com.google.inject.ImplementedBy;
  * @version $FullVersion$
  * @mavengroupid $GroupId$
  * @mavenartifactid $ArtifactId$
- * @since 0.15
+ * @since 1.0
  */
 @ImplementedBy(DefaultSarlTargetGeneratorContextFactory.class)
 public interface ISarlTargetGeneratorContextFactory {

@@ -121,13 +121,33 @@ public class BSPLGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		private final Keyword cCommaKeyword_5_2_0 = (Keyword)cGroup_5_2.eContents().get(0);
 		private final Assignment cMembersAssignment_5_2_1 = (Assignment)cGroup_5_2.eContents().get(1);
 		private final RuleCall cMembersProtocolRoleParserRuleCall_5_2_1_0 = (RuleCall)cMembersAssignment_5_2_1.eContents().get(0);
-		private final Group cGroup_6 = (Group)cGroup.eContents().get(6);
-		private final Assignment cMembersAssignment_6_0 = (Assignment)cGroup_6.eContents().get(0);
-		private final RuleCall cMembersProtocolFirstParameterParserRuleCall_6_0_0 = (RuleCall)cMembersAssignment_6_0.eContents().get(0);
-		private final Group cGroup_6_1 = (Group)cGroup_6.eContents().get(1);
-		private final Keyword cCommaKeyword_6_1_0 = (Keyword)cGroup_6_1.eContents().get(0);
-		private final Assignment cMembersAssignment_6_1_1 = (Assignment)cGroup_6_1.eContents().get(1);
-		private final RuleCall cMembersProtocolFollowingParameterParserRuleCall_6_1_1_0 = (RuleCall)cMembersAssignment_6_1_1.eContents().get(0);
+		private final Alternatives cAlternatives_6 = (Alternatives)cGroup.eContents().get(6);
+		private final Group cGroup_6_0 = (Group)cAlternatives_6.eContents().get(0);
+		private final Keyword cPrivateKeyword_6_0_0 = (Keyword)cGroup_6_0.eContents().get(0);
+		private final Keyword cParameterKeyword_6_0_1 = (Keyword)cGroup_6_0.eContents().get(1);
+		private final Assignment cMembersAssignment_6_0_2 = (Assignment)cGroup_6_0.eContents().get(2);
+		private final RuleCall cMembersProtocolPrivateParameterParserRuleCall_6_0_2_0 = (RuleCall)cMembersAssignment_6_0_2.eContents().get(0);
+		private final Group cGroup_6_0_3 = (Group)cGroup_6_0.eContents().get(3);
+		private final Keyword cCommaKeyword_6_0_3_0 = (Keyword)cGroup_6_0_3.eContents().get(0);
+		private final Assignment cMembersAssignment_6_0_3_1 = (Assignment)cGroup_6_0_3.eContents().get(1);
+		private final RuleCall cMembersProtocolPrivateParameterParserRuleCall_6_0_3_1_0 = (RuleCall)cMembersAssignment_6_0_3_1.eContents().get(0);
+		private final Group cGroup_6_1 = (Group)cAlternatives_6.eContents().get(1);
+		private final Keyword cPublicKeyword_6_1_0 = (Keyword)cGroup_6_1.eContents().get(0);
+		private final Keyword cParameterKeyword_6_1_1 = (Keyword)cGroup_6_1.eContents().get(1);
+		private final Assignment cMembersAssignment_6_1_2 = (Assignment)cGroup_6_1.eContents().get(2);
+		private final RuleCall cMembersProtocolPublicParameterParserRuleCall_6_1_2_0 = (RuleCall)cMembersAssignment_6_1_2.eContents().get(0);
+		private final Group cGroup_6_1_3 = (Group)cGroup_6_1.eContents().get(3);
+		private final Keyword cCommaKeyword_6_1_3_0 = (Keyword)cGroup_6_1_3.eContents().get(0);
+		private final Assignment cMembersAssignment_6_1_3_1 = (Assignment)cGroup_6_1_3.eContents().get(1);
+		private final RuleCall cMembersProtocolPublicParameterParserRuleCall_6_1_3_1_0 = (RuleCall)cMembersAssignment_6_1_3_1.eContents().get(0);
+		private final Group cGroup_6_2 = (Group)cAlternatives_6.eContents().get(2);
+		private final Keyword cParameterKeyword_6_2_0 = (Keyword)cGroup_6_2.eContents().get(0);
+		private final Assignment cMembersAssignment_6_2_1 = (Assignment)cGroup_6_2.eContents().get(1);
+		private final RuleCall cMembersProtocolParameterParserRuleCall_6_2_1_0 = (RuleCall)cMembersAssignment_6_2_1.eContents().get(0);
+		private final Group cGroup_6_2_2 = (Group)cGroup_6_2.eContents().get(2);
+		private final Keyword cCommaKeyword_6_2_2_0 = (Keyword)cGroup_6_2_2.eContents().get(0);
+		private final Assignment cMembersAssignment_6_2_2_1 = (Assignment)cGroup_6_2_2.eContents().get(1);
+		private final RuleCall cMembersProtocolParameterParserRuleCall_6_2_2_1_0 = (RuleCall)cMembersAssignment_6_2_2_1.eContents().get(0);
 		private final Assignment cMembersAssignment_7 = (Assignment)cGroup.eContents().get(7);
 		private final RuleCall cMembersProtocolMessageParserRuleCall_7_0 = (RuleCall)cMembersAssignment_7.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_8 = (Keyword)cGroup.eContents().get(8);
@@ -136,7 +156,12 @@ public class BSPLGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		//    {BsplProtocol}
 		//    modifiers+=ProtocolVisibilityModifier* 'protocol'? name=ValidID '{'
 		//        ( 'role'? members+=ProtocolRole (',' members+=ProtocolRole)* )*
-		//        ( members+=ProtocolFirstParameter ( ',' members+=ProtocolFollowingParameter )* )*
+		//        ( ( 'private' 'parameter'? members+=ProtocolPrivateParameter ( ',' members+=ProtocolPrivateParameter )* )
+		//          |
+		//          ( 'public' 'parameter'? members+=ProtocolPublicParameter ( ',' members+=ProtocolPublicParameter )* )
+		//          |
+		//          ( 'parameter' members+=ProtocolParameter ( ',' members+=ProtocolParameter )* )
+		//        )*
 		//        ( members+=ProtocolMessage )*
 		//    '}'
 		//;
@@ -145,7 +170,12 @@ public class BSPLGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		//{BsplProtocol}
 		//modifiers+=ProtocolVisibilityModifier* 'protocol'? name=ValidID '{'
 		//    ( 'role'? members+=ProtocolRole (',' members+=ProtocolRole)* )*
-		//    ( members+=ProtocolFirstParameter ( ',' members+=ProtocolFollowingParameter )* )*
+		//    ( ( 'private' 'parameter'? members+=ProtocolPrivateParameter ( ',' members+=ProtocolPrivateParameter )* )
+		//      |
+		//      ( 'public' 'parameter'? members+=ProtocolPublicParameter ( ',' members+=ProtocolPublicParameter )* )
+		//      |
+		//      ( 'parameter' members+=ProtocolParameter ( ',' members+=ProtocolParameter )* )
+		//    )*
 		//    ( members+=ProtocolMessage )*
 		//'}'
 		public Group getGroup() { return cGroup; }
@@ -195,26 +225,91 @@ public class BSPLGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		//ProtocolRole
 		public RuleCall getMembersProtocolRoleParserRuleCall_5_2_1_0() { return cMembersProtocolRoleParserRuleCall_5_2_1_0; }
 		
-		//( members+=ProtocolFirstParameter ( ',' members+=ProtocolFollowingParameter )* )*
-		public Group getGroup_6() { return cGroup_6; }
+		//( ( 'private' 'parameter'? members+=ProtocolPrivateParameter ( ',' members+=ProtocolPrivateParameter )* )
+		//  |
+		//  ( 'public' 'parameter'? members+=ProtocolPublicParameter ( ',' members+=ProtocolPublicParameter )* )
+		//  |
+		//  ( 'parameter' members+=ProtocolParameter ( ',' members+=ProtocolParameter )* )
+		//)*
+		public Alternatives getAlternatives_6() { return cAlternatives_6; }
 		
-		//members+=ProtocolFirstParameter
-		public Assignment getMembersAssignment_6_0() { return cMembersAssignment_6_0; }
+		//( 'private' 'parameter'? members+=ProtocolPrivateParameter ( ',' members+=ProtocolPrivateParameter )* )
+		public Group getGroup_6_0() { return cGroup_6_0; }
 		
-		//ProtocolFirstParameter
-		public RuleCall getMembersProtocolFirstParameterParserRuleCall_6_0_0() { return cMembersProtocolFirstParameterParserRuleCall_6_0_0; }
+		//'private'
+		public Keyword getPrivateKeyword_6_0_0() { return cPrivateKeyword_6_0_0; }
 		
-		//( ',' members+=ProtocolFollowingParameter )*
-		public Group getGroup_6_1() { return cGroup_6_1; }
+		//'parameter'?
+		public Keyword getParameterKeyword_6_0_1() { return cParameterKeyword_6_0_1; }
+		
+		//members+=ProtocolPrivateParameter
+		public Assignment getMembersAssignment_6_0_2() { return cMembersAssignment_6_0_2; }
+		
+		//ProtocolPrivateParameter
+		public RuleCall getMembersProtocolPrivateParameterParserRuleCall_6_0_2_0() { return cMembersProtocolPrivateParameterParserRuleCall_6_0_2_0; }
+		
+		//( ',' members+=ProtocolPrivateParameter )*
+		public Group getGroup_6_0_3() { return cGroup_6_0_3; }
 		
 		//','
-		public Keyword getCommaKeyword_6_1_0() { return cCommaKeyword_6_1_0; }
+		public Keyword getCommaKeyword_6_0_3_0() { return cCommaKeyword_6_0_3_0; }
 		
-		//members+=ProtocolFollowingParameter
-		public Assignment getMembersAssignment_6_1_1() { return cMembersAssignment_6_1_1; }
+		//members+=ProtocolPrivateParameter
+		public Assignment getMembersAssignment_6_0_3_1() { return cMembersAssignment_6_0_3_1; }
 		
-		//ProtocolFollowingParameter
-		public RuleCall getMembersProtocolFollowingParameterParserRuleCall_6_1_1_0() { return cMembersProtocolFollowingParameterParserRuleCall_6_1_1_0; }
+		//ProtocolPrivateParameter
+		public RuleCall getMembersProtocolPrivateParameterParserRuleCall_6_0_3_1_0() { return cMembersProtocolPrivateParameterParserRuleCall_6_0_3_1_0; }
+		
+		//( 'public' 'parameter'? members+=ProtocolPublicParameter ( ',' members+=ProtocolPublicParameter )* )
+		public Group getGroup_6_1() { return cGroup_6_1; }
+		
+		//'public'
+		public Keyword getPublicKeyword_6_1_0() { return cPublicKeyword_6_1_0; }
+		
+		//'parameter'?
+		public Keyword getParameterKeyword_6_1_1() { return cParameterKeyword_6_1_1; }
+		
+		//members+=ProtocolPublicParameter
+		public Assignment getMembersAssignment_6_1_2() { return cMembersAssignment_6_1_2; }
+		
+		//ProtocolPublicParameter
+		public RuleCall getMembersProtocolPublicParameterParserRuleCall_6_1_2_0() { return cMembersProtocolPublicParameterParserRuleCall_6_1_2_0; }
+		
+		//( ',' members+=ProtocolPublicParameter )*
+		public Group getGroup_6_1_3() { return cGroup_6_1_3; }
+		
+		//','
+		public Keyword getCommaKeyword_6_1_3_0() { return cCommaKeyword_6_1_3_0; }
+		
+		//members+=ProtocolPublicParameter
+		public Assignment getMembersAssignment_6_1_3_1() { return cMembersAssignment_6_1_3_1; }
+		
+		//ProtocolPublicParameter
+		public RuleCall getMembersProtocolPublicParameterParserRuleCall_6_1_3_1_0() { return cMembersProtocolPublicParameterParserRuleCall_6_1_3_1_0; }
+		
+		//( 'parameter' members+=ProtocolParameter ( ',' members+=ProtocolParameter )* )
+		public Group getGroup_6_2() { return cGroup_6_2; }
+		
+		//'parameter'
+		public Keyword getParameterKeyword_6_2_0() { return cParameterKeyword_6_2_0; }
+		
+		//members+=ProtocolParameter
+		public Assignment getMembersAssignment_6_2_1() { return cMembersAssignment_6_2_1; }
+		
+		//ProtocolParameter
+		public RuleCall getMembersProtocolParameterParserRuleCall_6_2_1_0() { return cMembersProtocolParameterParserRuleCall_6_2_1_0; }
+		
+		//( ',' members+=ProtocolParameter )*
+		public Group getGroup_6_2_2() { return cGroup_6_2_2; }
+		
+		//','
+		public Keyword getCommaKeyword_6_2_2_0() { return cCommaKeyword_6_2_2_0; }
+		
+		//members+=ProtocolParameter
+		public Assignment getMembersAssignment_6_2_2_1() { return cMembersAssignment_6_2_2_1; }
+		
+		//ProtocolParameter
+		public RuleCall getMembersProtocolParameterParserRuleCall_6_2_2_1_0() { return cMembersProtocolParameterParserRuleCall_6_2_2_1_0; }
 		
 		//( members+=ProtocolMessage )*
 		public Assignment getMembersAssignment_7() { return cMembersAssignment_7; }
@@ -287,211 +382,124 @@ public class BSPLGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		//']'
 		public Keyword getRightSquareBracketKeyword_2_3() { return cRightSquareBracketKeyword_2_3; }
 	}
-	public class ProtocolFirstParameterElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "io.sarl.extensions.bspl.lang.BSPL.ProtocolFirstParameter");
-		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
-		private final Action cBsplProtocolParameterAction_0_0 = (Action)cGroup_0.eContents().get(0);
-		private final Group cGroup_0_1 = (Group)cGroup_0.eContents().get(1);
-		private final Assignment cModifiersAssignment_0_1_0 = (Assignment)cGroup_0_1.eContents().get(0);
-		private final Keyword cModifiersPrivateKeyword_0_1_0_0 = (Keyword)cModifiersAssignment_0_1_0.eContents().get(0);
-		private final Keyword cParameterKeyword_0_1_1 = (Keyword)cGroup_0_1.eContents().get(1);
-		private final Assignment cModifiersAssignment_0_1_2 = (Assignment)cGroup_0_1.eContents().get(2);
-		private final RuleCall cModifiersParameterModifierParserRuleCall_0_1_2_0 = (RuleCall)cModifiersAssignment_0_1_2.eContents().get(0);
-		private final Assignment cNameAssignment_0_1_3 = (Assignment)cGroup_0_1.eContents().get(3);
-		private final RuleCall cNameValidIDParserRuleCall_0_1_3_0 = (RuleCall)cNameAssignment_0_1_3.eContents().get(0);
-		private final Group cGroup_0_1_4 = (Group)cGroup_0_1.eContents().get(4);
-		private final Keyword cColonKeyword_0_1_4_0 = (Keyword)cGroup_0_1_4.eContents().get(0);
-		private final Assignment cTypeAssignment_0_1_4_1 = (Assignment)cGroup_0_1_4.eContents().get(1);
-		private final RuleCall cTypeJvmTypeReferenceParserRuleCall_0_1_4_1_0 = (RuleCall)cTypeAssignment_0_1_4_1.eContents().get(0);
-		private final Assignment cModifiersAssignment_0_1_5 = (Assignment)cGroup_0_1.eContents().get(5);
-		private final Keyword cModifiersKeyKeyword_0_1_5_0 = (Keyword)cModifiersAssignment_0_1_5.eContents().get(0);
-		private final Group cGroup_1 = (Group)cAlternatives.eContents().get(1);
-		private final Assignment cModifiersAssignment_1_0 = (Assignment)cGroup_1.eContents().get(0);
-		private final Keyword cModifiersPublicKeyword_1_0_0 = (Keyword)cModifiersAssignment_1_0.eContents().get(0);
-		private final Keyword cParameterKeyword_1_1 = (Keyword)cGroup_1.eContents().get(1);
-		private final Assignment cModifiersAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
-		private final RuleCall cModifiersParameterModifierParserRuleCall_1_2_0 = (RuleCall)cModifiersAssignment_1_2.eContents().get(0);
-		private final Assignment cNameAssignment_1_3 = (Assignment)cGroup_1.eContents().get(3);
-		private final RuleCall cNameValidIDParserRuleCall_1_3_0 = (RuleCall)cNameAssignment_1_3.eContents().get(0);
-		private final Group cGroup_1_4 = (Group)cGroup_1.eContents().get(4);
-		private final Keyword cColonKeyword_1_4_0 = (Keyword)cGroup_1_4.eContents().get(0);
-		private final Assignment cTypeAssignment_1_4_1 = (Assignment)cGroup_1_4.eContents().get(1);
-		private final RuleCall cTypeJvmTypeReferenceParserRuleCall_1_4_1_0 = (RuleCall)cTypeAssignment_1_4_1.eContents().get(0);
-		private final Assignment cModifiersAssignment_1_5 = (Assignment)cGroup_1.eContents().get(5);
-		private final Keyword cModifiersKeyKeyword_1_5_0 = (Keyword)cModifiersAssignment_1_5.eContents().get(0);
-		private final Group cGroup_2 = (Group)cAlternatives.eContents().get(2);
-		private final Keyword cParameterKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
-		private final Assignment cModifiersAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
-		private final RuleCall cModifiersParameterModifierParserRuleCall_2_1_0 = (RuleCall)cModifiersAssignment_2_1.eContents().get(0);
-		private final Assignment cNameAssignment_2_2 = (Assignment)cGroup_2.eContents().get(2);
-		private final RuleCall cNameValidIDParserRuleCall_2_2_0 = (RuleCall)cNameAssignment_2_2.eContents().get(0);
-		private final Group cGroup_2_3 = (Group)cGroup_2.eContents().get(3);
-		private final Keyword cColonKeyword_2_3_0 = (Keyword)cGroup_2_3.eContents().get(0);
-		private final Assignment cTypeAssignment_2_3_1 = (Assignment)cGroup_2_3.eContents().get(1);
-		private final RuleCall cTypeJvmTypeReferenceParserRuleCall_2_3_1_0 = (RuleCall)cTypeAssignment_2_3_1.eContents().get(0);
-		private final Assignment cModifiersAssignment_2_4 = (Assignment)cGroup_2.eContents().get(4);
-		private final Keyword cModifiersKeyKeyword_2_4_0 = (Keyword)cModifiersAssignment_2_4.eContents().get(0);
+	public class ProtocolPrivateParameterElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "io.sarl.extensions.bspl.lang.BSPL.ProtocolPrivateParameter");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cBsplProtocolPrivateParameterAction_0 = (Action)cGroup.eContents().get(0);
+		private final Assignment cModifiersAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cModifiersParameterModifierParserRuleCall_1_0 = (RuleCall)cModifiersAssignment_1.eContents().get(0);
+		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cNameValidIDParserRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
+		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
+		private final Keyword cColonKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
+		private final Assignment cTypeAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
+		private final RuleCall cTypeJvmTypeReferenceParserRuleCall_3_1_0 = (RuleCall)cTypeAssignment_3_1.eContents().get(0);
+		private final Assignment cModifiersAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final Keyword cModifiersKeyKeyword_4_0 = (Keyword)cModifiersAssignment_4.eContents().get(0);
 		
-		//ProtocolFirstParameter returns BsplProtocolParameter:
-		//    {BsplProtocolParameter}
-		//    (
-		//        modifiers+='private' 'parameter'? modifiers+=ParameterModifier* name=ValidID (':' type=JvmTypeReference)? modifiers+='key'?
-		//    ) | (
-		//        modifiers+='public' 'parameter'? modifiers+=ParameterModifier* name=ValidID (':' type=JvmTypeReference)? modifiers+='key'?
-		//    ) | (
-		//        'parameter' modifiers+=ParameterModifier* name=ValidID (':' type=JvmTypeReference)? modifiers+='key'?
-		//    )
+		//ProtocolPrivateParameter returns BsplProtocolParameter:
+		//    {BsplProtocolPrivateParameter}
+		//    modifiers+=ParameterModifier* name=ValidID (':' type=JvmTypeReference)? modifiers+='key'?
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{BsplProtocolParameter}
-		//(
-		//    modifiers+='private' 'parameter'? modifiers+=ParameterModifier* name=ValidID (':' type=JvmTypeReference)? modifiers+='key'?
-		//) | (
-		//    modifiers+='public' 'parameter'? modifiers+=ParameterModifier* name=ValidID (':' type=JvmTypeReference)? modifiers+='key'?
-		//) | (
-		//    'parameter' modifiers+=ParameterModifier* name=ValidID (':' type=JvmTypeReference)? modifiers+='key'?
-		//)
-		public Alternatives getAlternatives() { return cAlternatives; }
+		//{BsplProtocolPrivateParameter}
+		//modifiers+=ParameterModifier* name=ValidID (':' type=JvmTypeReference)? modifiers+='key'?
+		public Group getGroup() { return cGroup; }
 		
-		//{BsplProtocolParameter}
-		//(
-		//    modifiers+='private' 'parameter'? modifiers+=ParameterModifier* name=ValidID (':' type=JvmTypeReference)? modifiers+='key'?
-		//)
-		public Group getGroup_0() { return cGroup_0; }
-		
-		//{BsplProtocolParameter}
-		public Action getBsplProtocolParameterAction_0_0() { return cBsplProtocolParameterAction_0_0; }
-		
-		//(
-		//    modifiers+='private' 'parameter'? modifiers+=ParameterModifier* name=ValidID (':' type=JvmTypeReference)? modifiers+='key'?
-		//)
-		public Group getGroup_0_1() { return cGroup_0_1; }
-		
-		//modifiers+='private'
-		public Assignment getModifiersAssignment_0_1_0() { return cModifiersAssignment_0_1_0; }
-		
-		//'private'
-		public Keyword getModifiersPrivateKeyword_0_1_0_0() { return cModifiersPrivateKeyword_0_1_0_0; }
-		
-		//'parameter'?
-		public Keyword getParameterKeyword_0_1_1() { return cParameterKeyword_0_1_1; }
+		//{BsplProtocolPrivateParameter}
+		public Action getBsplProtocolPrivateParameterAction_0() { return cBsplProtocolPrivateParameterAction_0; }
 		
 		//modifiers+=ParameterModifier*
-		public Assignment getModifiersAssignment_0_1_2() { return cModifiersAssignment_0_1_2; }
+		public Assignment getModifiersAssignment_1() { return cModifiersAssignment_1; }
 		
 		//ParameterModifier
-		public RuleCall getModifiersParameterModifierParserRuleCall_0_1_2_0() { return cModifiersParameterModifierParserRuleCall_0_1_2_0; }
+		public RuleCall getModifiersParameterModifierParserRuleCall_1_0() { return cModifiersParameterModifierParserRuleCall_1_0; }
 		
 		//name=ValidID
-		public Assignment getNameAssignment_0_1_3() { return cNameAssignment_0_1_3; }
+		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
 		
 		//ValidID
-		public RuleCall getNameValidIDParserRuleCall_0_1_3_0() { return cNameValidIDParserRuleCall_0_1_3_0; }
+		public RuleCall getNameValidIDParserRuleCall_2_0() { return cNameValidIDParserRuleCall_2_0; }
 		
 		//(':' type=JvmTypeReference)?
-		public Group getGroup_0_1_4() { return cGroup_0_1_4; }
+		public Group getGroup_3() { return cGroup_3; }
 		
 		//':'
-		public Keyword getColonKeyword_0_1_4_0() { return cColonKeyword_0_1_4_0; }
+		public Keyword getColonKeyword_3_0() { return cColonKeyword_3_0; }
 		
 		//type=JvmTypeReference
-		public Assignment getTypeAssignment_0_1_4_1() { return cTypeAssignment_0_1_4_1; }
+		public Assignment getTypeAssignment_3_1() { return cTypeAssignment_3_1; }
 		
 		//JvmTypeReference
-		public RuleCall getTypeJvmTypeReferenceParserRuleCall_0_1_4_1_0() { return cTypeJvmTypeReferenceParserRuleCall_0_1_4_1_0; }
+		public RuleCall getTypeJvmTypeReferenceParserRuleCall_3_1_0() { return cTypeJvmTypeReferenceParserRuleCall_3_1_0; }
 		
 		//modifiers+='key'?
-		public Assignment getModifiersAssignment_0_1_5() { return cModifiersAssignment_0_1_5; }
+		public Assignment getModifiersAssignment_4() { return cModifiersAssignment_4; }
 		
 		//'key'
-		public Keyword getModifiersKeyKeyword_0_1_5_0() { return cModifiersKeyKeyword_0_1_5_0; }
-		
-		//(
-		//       modifiers+='public' 'parameter'? modifiers+=ParameterModifier* name=ValidID (':' type=JvmTypeReference)? modifiers+='key'?
-		//   )
-		public Group getGroup_1() { return cGroup_1; }
-		
-		//modifiers+='public'
-		public Assignment getModifiersAssignment_1_0() { return cModifiersAssignment_1_0; }
-		
-		//'public'
-		public Keyword getModifiersPublicKeyword_1_0_0() { return cModifiersPublicKeyword_1_0_0; }
-		
-		//'parameter'?
-		public Keyword getParameterKeyword_1_1() { return cParameterKeyword_1_1; }
-		
-		//modifiers+=ParameterModifier*
-		public Assignment getModifiersAssignment_1_2() { return cModifiersAssignment_1_2; }
-		
-		//ParameterModifier
-		public RuleCall getModifiersParameterModifierParserRuleCall_1_2_0() { return cModifiersParameterModifierParserRuleCall_1_2_0; }
-		
-		//name=ValidID
-		public Assignment getNameAssignment_1_3() { return cNameAssignment_1_3; }
-		
-		//ValidID
-		public RuleCall getNameValidIDParserRuleCall_1_3_0() { return cNameValidIDParserRuleCall_1_3_0; }
-		
-		//(':' type=JvmTypeReference)?
-		public Group getGroup_1_4() { return cGroup_1_4; }
-		
-		//':'
-		public Keyword getColonKeyword_1_4_0() { return cColonKeyword_1_4_0; }
-		
-		//type=JvmTypeReference
-		public Assignment getTypeAssignment_1_4_1() { return cTypeAssignment_1_4_1; }
-		
-		//JvmTypeReference
-		public RuleCall getTypeJvmTypeReferenceParserRuleCall_1_4_1_0() { return cTypeJvmTypeReferenceParserRuleCall_1_4_1_0; }
-		
-		//modifiers+='key'?
-		public Assignment getModifiersAssignment_1_5() { return cModifiersAssignment_1_5; }
-		
-		//'key'
-		public Keyword getModifiersKeyKeyword_1_5_0() { return cModifiersKeyKeyword_1_5_0; }
-		
-		//(
-		//       'parameter' modifiers+=ParameterModifier* name=ValidID (':' type=JvmTypeReference)? modifiers+='key'?
-		//   )
-		public Group getGroup_2() { return cGroup_2; }
-		
-		//'parameter'
-		public Keyword getParameterKeyword_2_0() { return cParameterKeyword_2_0; }
-		
-		//modifiers+=ParameterModifier*
-		public Assignment getModifiersAssignment_2_1() { return cModifiersAssignment_2_1; }
-		
-		//ParameterModifier
-		public RuleCall getModifiersParameterModifierParserRuleCall_2_1_0() { return cModifiersParameterModifierParserRuleCall_2_1_0; }
-		
-		//name=ValidID
-		public Assignment getNameAssignment_2_2() { return cNameAssignment_2_2; }
-		
-		//ValidID
-		public RuleCall getNameValidIDParserRuleCall_2_2_0() { return cNameValidIDParserRuleCall_2_2_0; }
-		
-		//(':' type=JvmTypeReference)?
-		public Group getGroup_2_3() { return cGroup_2_3; }
-		
-		//':'
-		public Keyword getColonKeyword_2_3_0() { return cColonKeyword_2_3_0; }
-		
-		//type=JvmTypeReference
-		public Assignment getTypeAssignment_2_3_1() { return cTypeAssignment_2_3_1; }
-		
-		//JvmTypeReference
-		public RuleCall getTypeJvmTypeReferenceParserRuleCall_2_3_1_0() { return cTypeJvmTypeReferenceParserRuleCall_2_3_1_0; }
-		
-		//modifiers+='key'?
-		public Assignment getModifiersAssignment_2_4() { return cModifiersAssignment_2_4; }
-		
-		//'key'
-		public Keyword getModifiersKeyKeyword_2_4_0() { return cModifiersKeyKeyword_2_4_0; }
+		public Keyword getModifiersKeyKeyword_4_0() { return cModifiersKeyKeyword_4_0; }
 	}
-	public class ProtocolFollowingParameterElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "io.sarl.extensions.bspl.lang.BSPL.ProtocolFollowingParameter");
+	public class ProtocolPublicParameterElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "io.sarl.extensions.bspl.lang.BSPL.ProtocolPublicParameter");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cBsplProtocolPublicParameterAction_0 = (Action)cGroup.eContents().get(0);
+		private final Assignment cModifiersAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cModifiersParameterModifierParserRuleCall_1_0 = (RuleCall)cModifiersAssignment_1.eContents().get(0);
+		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cNameValidIDParserRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
+		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
+		private final Keyword cColonKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
+		private final Assignment cTypeAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
+		private final RuleCall cTypeJvmTypeReferenceParserRuleCall_3_1_0 = (RuleCall)cTypeAssignment_3_1.eContents().get(0);
+		private final Assignment cModifiersAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final Keyword cModifiersKeyKeyword_4_0 = (Keyword)cModifiersAssignment_4.eContents().get(0);
+		
+		//ProtocolPublicParameter returns BsplProtocolParameter:
+		//    {BsplProtocolPublicParameter}
+		//    modifiers+=ParameterModifier* name=ValidID (':' type=JvmTypeReference)? modifiers+='key'?
+		//;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//{BsplProtocolPublicParameter}
+		//modifiers+=ParameterModifier* name=ValidID (':' type=JvmTypeReference)? modifiers+='key'?
+		public Group getGroup() { return cGroup; }
+		
+		//{BsplProtocolPublicParameter}
+		public Action getBsplProtocolPublicParameterAction_0() { return cBsplProtocolPublicParameterAction_0; }
+		
+		//modifiers+=ParameterModifier*
+		public Assignment getModifiersAssignment_1() { return cModifiersAssignment_1; }
+		
+		//ParameterModifier
+		public RuleCall getModifiersParameterModifierParserRuleCall_1_0() { return cModifiersParameterModifierParserRuleCall_1_0; }
+		
+		//name=ValidID
+		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
+		
+		//ValidID
+		public RuleCall getNameValidIDParserRuleCall_2_0() { return cNameValidIDParserRuleCall_2_0; }
+		
+		//(':' type=JvmTypeReference)?
+		public Group getGroup_3() { return cGroup_3; }
+		
+		//':'
+		public Keyword getColonKeyword_3_0() { return cColonKeyword_3_0; }
+		
+		//type=JvmTypeReference
+		public Assignment getTypeAssignment_3_1() { return cTypeAssignment_3_1; }
+		
+		//JvmTypeReference
+		public RuleCall getTypeJvmTypeReferenceParserRuleCall_3_1_0() { return cTypeJvmTypeReferenceParserRuleCall_3_1_0; }
+		
+		//modifiers+='key'?
+		public Assignment getModifiersAssignment_4() { return cModifiersAssignment_4; }
+		
+		//'key'
+		public Keyword getModifiersKeyKeyword_4_0() { return cModifiersKeyKeyword_4_0; }
+	}
+	public class ProtocolParameterElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "io.sarl.extensions.bspl.lang.BSPL.ProtocolParameter");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cBsplProtocolParameterAction_0 = (Action)cGroup.eContents().get(0);
 		private final Assignment cModifiersAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -505,7 +513,7 @@ public class BSPLGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		private final Assignment cModifiersAssignment_4 = (Assignment)cGroup.eContents().get(4);
 		private final Keyword cModifiersKeyKeyword_4_0 = (Keyword)cModifiersAssignment_4.eContents().get(0);
 		
-		//ProtocolFollowingParameter returns BsplProtocolParameter:
+		//ProtocolParameter returns BsplProtocolParameter:
 		//    {BsplProtocolParameter}
 		//    modifiers+=ParameterModifier* name=ValidID (':' type=JvmTypeReference)? modifiers+='key'?
 		//;
@@ -779,8 +787,9 @@ public class BSPLGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 	private final ProtocolSpecificationElements pProtocolSpecification;
 	private final ProtocolElements pProtocol;
 	private final ProtocolRoleElements pProtocolRole;
-	private final ProtocolFirstParameterElements pProtocolFirstParameter;
-	private final ProtocolFollowingParameterElements pProtocolFollowingParameter;
+	private final ProtocolPrivateParameterElements pProtocolPrivateParameter;
+	private final ProtocolPublicParameterElements pProtocolPublicParameter;
+	private final ProtocolParameterElements pProtocolParameter;
 	private final ProtocolMessageElements pProtocolMessage;
 	private final ArgumentDefElements pArgumentDef;
 	private final ParameterModifierElements pParameterModifier;
@@ -807,8 +816,9 @@ public class BSPLGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		this.pProtocolSpecification = new ProtocolSpecificationElements();
 		this.pProtocol = new ProtocolElements();
 		this.pProtocolRole = new ProtocolRoleElements();
-		this.pProtocolFirstParameter = new ProtocolFirstParameterElements();
-		this.pProtocolFollowingParameter = new ProtocolFollowingParameterElements();
+		this.pProtocolPrivateParameter = new ProtocolPrivateParameterElements();
+		this.pProtocolPublicParameter = new ProtocolPublicParameterElements();
+		this.pProtocolParameter = new ProtocolParameterElements();
 		this.pProtocolMessage = new ProtocolMessageElements();
 		this.pArgumentDef = new ArgumentDefElements();
 		this.pParameterModifier = new ParameterModifierElements();
@@ -869,7 +879,12 @@ public class BSPLGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 	//    {BsplProtocol}
 	//    modifiers+=ProtocolVisibilityModifier* 'protocol'? name=ValidID '{'
 	//        ( 'role'? members+=ProtocolRole (',' members+=ProtocolRole)* )*
-	//        ( members+=ProtocolFirstParameter ( ',' members+=ProtocolFollowingParameter )* )*
+	//        ( ( 'private' 'parameter'? members+=ProtocolPrivateParameter ( ',' members+=ProtocolPrivateParameter )* )
+	//          |
+	//          ( 'public' 'parameter'? members+=ProtocolPublicParameter ( ',' members+=ProtocolPublicParameter )* )
+	//          |
+	//          ( 'parameter' members+=ProtocolParameter ( ',' members+=ProtocolParameter )* )
+	//        )*
 	//        ( members+=ProtocolMessage )*
 	//    '}'
 	//;
@@ -893,34 +908,40 @@ public class BSPLGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		return getProtocolRoleAccess().getRule();
 	}
 	
-	//ProtocolFirstParameter returns BsplProtocolParameter:
-	//    {BsplProtocolParameter}
-	//    (
-	//        modifiers+='private' 'parameter'? modifiers+=ParameterModifier* name=ValidID (':' type=JvmTypeReference)? modifiers+='key'?
-	//    ) | (
-	//        modifiers+='public' 'parameter'? modifiers+=ParameterModifier* name=ValidID (':' type=JvmTypeReference)? modifiers+='key'?
-	//    ) | (
-	//        'parameter' modifiers+=ParameterModifier* name=ValidID (':' type=JvmTypeReference)? modifiers+='key'?
-	//    )
+	//ProtocolPrivateParameter returns BsplProtocolParameter:
+	//    {BsplProtocolPrivateParameter}
+	//    modifiers+=ParameterModifier* name=ValidID (':' type=JvmTypeReference)? modifiers+='key'?
 	//;
-	public ProtocolFirstParameterElements getProtocolFirstParameterAccess() {
-		return pProtocolFirstParameter;
+	public ProtocolPrivateParameterElements getProtocolPrivateParameterAccess() {
+		return pProtocolPrivateParameter;
 	}
 	
-	public ParserRule getProtocolFirstParameterRule() {
-		return getProtocolFirstParameterAccess().getRule();
+	public ParserRule getProtocolPrivateParameterRule() {
+		return getProtocolPrivateParameterAccess().getRule();
 	}
 	
-	//ProtocolFollowingParameter returns BsplProtocolParameter:
+	//ProtocolPublicParameter returns BsplProtocolParameter:
+	//    {BsplProtocolPublicParameter}
+	//    modifiers+=ParameterModifier* name=ValidID (':' type=JvmTypeReference)? modifiers+='key'?
+	//;
+	public ProtocolPublicParameterElements getProtocolPublicParameterAccess() {
+		return pProtocolPublicParameter;
+	}
+	
+	public ParserRule getProtocolPublicParameterRule() {
+		return getProtocolPublicParameterAccess().getRule();
+	}
+	
+	//ProtocolParameter returns BsplProtocolParameter:
 	//    {BsplProtocolParameter}
 	//    modifiers+=ParameterModifier* name=ValidID (':' type=JvmTypeReference)? modifiers+='key'?
 	//;
-	public ProtocolFollowingParameterElements getProtocolFollowingParameterAccess() {
-		return pProtocolFollowingParameter;
+	public ProtocolParameterElements getProtocolParameterAccess() {
+		return pProtocolParameter;
 	}
 	
-	public ParserRule getProtocolFollowingParameterRule() {
-		return getProtocolFollowingParameterAccess().getRule();
+	public ParserRule getProtocolParameterRule() {
+		return getProtocolParameterAccess().getRule();
 	}
 	
 	//ProtocolMessage returns BsplProtocolMessage:

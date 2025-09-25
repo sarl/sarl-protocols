@@ -1185,10 +1185,11 @@ public class InternalBSPLLexer extends Lexer {
         try {
             int _type = T__64;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBSPL.g:62:7: ( '[' )
-            // InternalBSPL.g:62:9: '['
+            // InternalBSPL.g:62:7: ( 'private' )
+            // InternalBSPL.g:62:9: 'private'
             {
-            match('['); 
+            match("private"); 
+
 
             }
 
@@ -1205,10 +1206,11 @@ public class InternalBSPLLexer extends Lexer {
         try {
             int _type = T__65;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBSPL.g:63:7: ( ']' )
-            // InternalBSPL.g:63:9: ']'
+            // InternalBSPL.g:63:7: ( 'parameter' )
+            // InternalBSPL.g:63:9: 'parameter'
             {
-            match(']'); 
+            match("parameter"); 
+
 
             }
 
@@ -1225,11 +1227,10 @@ public class InternalBSPLLexer extends Lexer {
         try {
             int _type = T__66;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBSPL.g:64:7: ( 'parameter' )
-            // InternalBSPL.g:64:9: 'parameter'
+            // InternalBSPL.g:64:7: ( '[' )
+            // InternalBSPL.g:64:9: '['
             {
-            match("parameter"); 
-
+            match('['); 
 
             }
 
@@ -1246,10 +1247,10 @@ public class InternalBSPLLexer extends Lexer {
         try {
             int _type = T__67;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBSPL.g:65:7: ( ':' )
-            // InternalBSPL.g:65:9: ':'
+            // InternalBSPL.g:65:7: ( ']' )
+            // InternalBSPL.g:65:9: ']'
             {
-            match(':'); 
+            match(']'); 
 
             }
 
@@ -1266,10 +1267,10 @@ public class InternalBSPLLexer extends Lexer {
         try {
             int _type = T__68;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBSPL.g:66:7: ( '@' )
-            // InternalBSPL.g:66:9: '@'
+            // InternalBSPL.g:66:7: ( ':' )
+            // InternalBSPL.g:66:9: ':'
             {
-            match('@'); 
+            match(':'); 
 
             }
 
@@ -1286,10 +1287,10 @@ public class InternalBSPLLexer extends Lexer {
         try {
             int _type = T__69;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBSPL.g:67:7: ( '(' )
-            // InternalBSPL.g:67:9: '('
+            // InternalBSPL.g:67:7: ( '@' )
+            // InternalBSPL.g:67:9: '@'
             {
-            match('('); 
+            match('@'); 
 
             }
 
@@ -1306,10 +1307,10 @@ public class InternalBSPLLexer extends Lexer {
         try {
             int _type = T__70;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBSPL.g:68:7: ( ')' )
-            // InternalBSPL.g:68:9: ')'
+            // InternalBSPL.g:68:7: ( '(' )
+            // InternalBSPL.g:68:9: '('
             {
-            match(')'); 
+            match('('); 
 
             }
 
@@ -1326,10 +1327,10 @@ public class InternalBSPLLexer extends Lexer {
         try {
             int _type = T__71;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBSPL.g:69:7: ( '#' )
-            // InternalBSPL.g:69:9: '#'
+            // InternalBSPL.g:69:7: ( ')' )
+            // InternalBSPL.g:69:9: ')'
             {
-            match('#'); 
+            match(')'); 
 
             }
 
@@ -1346,11 +1347,10 @@ public class InternalBSPLLexer extends Lexer {
         try {
             int _type = T__72;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBSPL.g:70:7: ( 'instanceof' )
-            // InternalBSPL.g:70:9: 'instanceof'
+            // InternalBSPL.g:70:7: ( '#' )
+            // InternalBSPL.g:70:9: '#'
             {
-            match("instanceof"); 
-
+            match('#'); 
 
             }
 
@@ -1367,10 +1367,10 @@ public class InternalBSPLLexer extends Lexer {
         try {
             int _type = T__73;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBSPL.g:71:7: ( 'as' )
-            // InternalBSPL.g:71:9: 'as'
+            // InternalBSPL.g:71:7: ( 'instanceof' )
+            // InternalBSPL.g:71:9: 'instanceof'
             {
-            match("as"); 
+            match("instanceof"); 
 
 
             }
@@ -1388,10 +1388,10 @@ public class InternalBSPLLexer extends Lexer {
         try {
             int _type = T__74;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBSPL.g:72:7: ( 'if' )
-            // InternalBSPL.g:72:9: 'if'
+            // InternalBSPL.g:72:7: ( 'as' )
+            // InternalBSPL.g:72:9: 'as'
             {
-            match("if"); 
+            match("as"); 
 
 
             }
@@ -1409,10 +1409,10 @@ public class InternalBSPLLexer extends Lexer {
         try {
             int _type = T__75;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBSPL.g:73:7: ( 'else' )
-            // InternalBSPL.g:73:9: 'else'
+            // InternalBSPL.g:73:7: ( 'if' )
+            // InternalBSPL.g:73:9: 'if'
             {
-            match("else"); 
+            match("if"); 
 
 
             }
@@ -1430,10 +1430,10 @@ public class InternalBSPLLexer extends Lexer {
         try {
             int _type = T__76;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBSPL.g:74:7: ( 'switch' )
-            // InternalBSPL.g:74:9: 'switch'
+            // InternalBSPL.g:74:7: ( 'else' )
+            // InternalBSPL.g:74:9: 'else'
             {
-            match("switch"); 
+            match("else"); 
 
 
             }
@@ -1451,10 +1451,10 @@ public class InternalBSPLLexer extends Lexer {
         try {
             int _type = T__77;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBSPL.g:75:7: ( 'default' )
-            // InternalBSPL.g:75:9: 'default'
+            // InternalBSPL.g:75:7: ( 'switch' )
+            // InternalBSPL.g:75:9: 'switch'
             {
-            match("default"); 
+            match("switch"); 
 
 
             }
@@ -1472,10 +1472,10 @@ public class InternalBSPLLexer extends Lexer {
         try {
             int _type = T__78;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBSPL.g:76:7: ( 'case' )
-            // InternalBSPL.g:76:9: 'case'
+            // InternalBSPL.g:76:7: ( 'default' )
+            // InternalBSPL.g:76:9: 'default'
             {
-            match("case"); 
+            match("default"); 
 
 
             }
@@ -1493,10 +1493,10 @@ public class InternalBSPLLexer extends Lexer {
         try {
             int _type = T__79;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBSPL.g:77:7: ( 'for' )
-            // InternalBSPL.g:77:9: 'for'
+            // InternalBSPL.g:77:7: ( 'case' )
+            // InternalBSPL.g:77:9: 'case'
             {
-            match("for"); 
+            match("case"); 
 
 
             }
@@ -1514,10 +1514,10 @@ public class InternalBSPLLexer extends Lexer {
         try {
             int _type = T__80;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBSPL.g:78:7: ( 'while' )
-            // InternalBSPL.g:78:9: 'while'
+            // InternalBSPL.g:78:7: ( 'for' )
+            // InternalBSPL.g:78:9: 'for'
             {
-            match("while"); 
+            match("for"); 
 
 
             }
@@ -1535,10 +1535,10 @@ public class InternalBSPLLexer extends Lexer {
         try {
             int _type = T__81;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBSPL.g:79:7: ( 'do' )
-            // InternalBSPL.g:79:9: 'do'
+            // InternalBSPL.g:79:7: ( 'while' )
+            // InternalBSPL.g:79:9: 'while'
             {
-            match("do"); 
+            match("while"); 
 
 
             }
@@ -1556,10 +1556,10 @@ public class InternalBSPLLexer extends Lexer {
         try {
             int _type = T__82;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBSPL.g:80:7: ( 'new' )
-            // InternalBSPL.g:80:9: 'new'
+            // InternalBSPL.g:80:7: ( 'do' )
+            // InternalBSPL.g:80:9: 'do'
             {
-            match("new"); 
+            match("do"); 
 
 
             }
@@ -1577,10 +1577,10 @@ public class InternalBSPLLexer extends Lexer {
         try {
             int _type = T__83;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBSPL.g:81:7: ( 'null' )
-            // InternalBSPL.g:81:9: 'null'
+            // InternalBSPL.g:81:7: ( 'new' )
+            // InternalBSPL.g:81:9: 'new'
             {
-            match("null"); 
+            match("new"); 
 
 
             }
@@ -1598,10 +1598,10 @@ public class InternalBSPLLexer extends Lexer {
         try {
             int _type = T__84;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBSPL.g:82:7: ( 'typeof' )
-            // InternalBSPL.g:82:9: 'typeof'
+            // InternalBSPL.g:82:7: ( 'null' )
+            // InternalBSPL.g:82:9: 'null'
             {
-            match("typeof"); 
+            match("null"); 
 
 
             }
@@ -1619,10 +1619,10 @@ public class InternalBSPLLexer extends Lexer {
         try {
             int _type = T__85;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBSPL.g:83:7: ( 'throw' )
-            // InternalBSPL.g:83:9: 'throw'
+            // InternalBSPL.g:83:7: ( 'typeof' )
+            // InternalBSPL.g:83:9: 'typeof'
             {
-            match("throw"); 
+            match("typeof"); 
 
 
             }
@@ -1640,10 +1640,10 @@ public class InternalBSPLLexer extends Lexer {
         try {
             int _type = T__86;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBSPL.g:84:7: ( 'return' )
-            // InternalBSPL.g:84:9: 'return'
+            // InternalBSPL.g:84:7: ( 'throw' )
+            // InternalBSPL.g:84:9: 'throw'
             {
-            match("return"); 
+            match("throw"); 
 
 
             }
@@ -1661,10 +1661,10 @@ public class InternalBSPLLexer extends Lexer {
         try {
             int _type = T__87;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBSPL.g:85:7: ( 'try' )
-            // InternalBSPL.g:85:9: 'try'
+            // InternalBSPL.g:85:7: ( 'return' )
+            // InternalBSPL.g:85:9: 'return'
             {
-            match("try"); 
+            match("return"); 
 
 
             }
@@ -1682,10 +1682,10 @@ public class InternalBSPLLexer extends Lexer {
         try {
             int _type = T__88;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBSPL.g:86:7: ( 'finally' )
-            // InternalBSPL.g:86:9: 'finally'
+            // InternalBSPL.g:86:7: ( 'try' )
+            // InternalBSPL.g:86:9: 'try'
             {
-            match("finally"); 
+            match("try"); 
 
 
             }
@@ -1703,10 +1703,10 @@ public class InternalBSPLLexer extends Lexer {
         try {
             int _type = T__89;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBSPL.g:87:7: ( 'synchronized' )
-            // InternalBSPL.g:87:9: 'synchronized'
+            // InternalBSPL.g:87:7: ( 'finally' )
+            // InternalBSPL.g:87:9: 'finally'
             {
-            match("synchronized"); 
+            match("finally"); 
 
 
             }
@@ -1724,10 +1724,10 @@ public class InternalBSPLLexer extends Lexer {
         try {
             int _type = T__90;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBSPL.g:88:7: ( 'catch' )
-            // InternalBSPL.g:88:9: 'catch'
+            // InternalBSPL.g:88:7: ( 'synchronized' )
+            // InternalBSPL.g:88:9: 'synchronized'
             {
-            match("catch"); 
+            match("synchronized"); 
 
 
             }
@@ -1745,10 +1745,11 @@ public class InternalBSPLLexer extends Lexer {
         try {
             int _type = T__91;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBSPL.g:89:7: ( '?' )
-            // InternalBSPL.g:89:9: '?'
+            // InternalBSPL.g:89:7: ( 'catch' )
+            // InternalBSPL.g:89:9: 'catch'
             {
-            match('?'); 
+            match("catch"); 
+
 
             }
 
@@ -1765,10 +1766,10 @@ public class InternalBSPLLexer extends Lexer {
         try {
             int _type = T__92;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBSPL.g:90:7: ( '&' )
-            // InternalBSPL.g:90:9: '&'
+            // InternalBSPL.g:90:7: ( '?' )
+            // InternalBSPL.g:90:9: '?'
             {
-            match('&'); 
+            match('?'); 
 
             }
 
@@ -1785,11 +1786,10 @@ public class InternalBSPLLexer extends Lexer {
         try {
             int _type = T__93;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBSPL.g:91:7: ( 'private' )
-            // InternalBSPL.g:91:9: 'private'
+            // InternalBSPL.g:91:7: ( '&' )
+            // InternalBSPL.g:91:9: '&'
             {
-            match("private"); 
-
+            match('&'); 
 
             }
 
@@ -1931,10 +1931,10 @@ public class InternalBSPLLexer extends Lexer {
         try {
             int _type = RULE_HEX;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBSPL.g:21867:10: ( ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+ ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )? )
-            // InternalBSPL.g:21867:12: ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+ ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )?
+            // InternalBSPL.g:21904:10: ( ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+ ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )? )
+            // InternalBSPL.g:21904:12: ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+ ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )?
             {
-            // InternalBSPL.g:21867:12: ( '0x' | '0X' )
+            // InternalBSPL.g:21904:12: ( '0x' | '0X' )
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -1962,7 +1962,7 @@ public class InternalBSPLLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // InternalBSPL.g:21867:13: '0x'
+                    // InternalBSPL.g:21904:13: '0x'
                     {
                     match("0x"); 
 
@@ -1970,7 +1970,7 @@ public class InternalBSPLLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // InternalBSPL.g:21867:18: '0X'
+                    // InternalBSPL.g:21904:18: '0X'
                     {
                     match("0X"); 
 
@@ -1980,7 +1980,7 @@ public class InternalBSPLLexer extends Lexer {
 
             }
 
-            // InternalBSPL.g:21867:24: ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+
+            // InternalBSPL.g:21904:24: ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+
             int cnt2=0;
             loop2:
             do {
@@ -2018,7 +2018,7 @@ public class InternalBSPLLexer extends Lexer {
                 cnt2++;
             } while (true);
 
-            // InternalBSPL.g:21867:58: ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )?
+            // InternalBSPL.g:21904:58: ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )?
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -2027,10 +2027,10 @@ public class InternalBSPLLexer extends Lexer {
             }
             switch (alt4) {
                 case 1 :
-                    // InternalBSPL.g:21867:59: '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) )
+                    // InternalBSPL.g:21904:59: '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) )
                     {
                     match('#'); 
-                    // InternalBSPL.g:21867:63: ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) )
+                    // InternalBSPL.g:21904:63: ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) )
                     int alt3=2;
                     int LA3_0 = input.LA(1);
 
@@ -2048,7 +2048,7 @@ public class InternalBSPLLexer extends Lexer {
                     }
                     switch (alt3) {
                         case 1 :
-                            // InternalBSPL.g:21867:64: ( 'b' | 'B' ) ( 'i' | 'I' )
+                            // InternalBSPL.g:21904:64: ( 'b' | 'B' ) ( 'i' | 'I' )
                             {
                             if ( input.LA(1)=='B'||input.LA(1)=='b' ) {
                                 input.consume();
@@ -2072,7 +2072,7 @@ public class InternalBSPLLexer extends Lexer {
                             }
                             break;
                         case 2 :
-                            // InternalBSPL.g:21867:84: ( 'l' | 'L' )
+                            // InternalBSPL.g:21904:84: ( 'l' | 'L' )
                             {
                             if ( input.LA(1)=='L'||input.LA(1)=='l' ) {
                                 input.consume();
@@ -2111,11 +2111,11 @@ public class InternalBSPLLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBSPL.g:21869:10: ( '0' .. '9' ( '0' .. '9' | '_' )* )
-            // InternalBSPL.g:21869:12: '0' .. '9' ( '0' .. '9' | '_' )*
+            // InternalBSPL.g:21906:10: ( '0' .. '9' ( '0' .. '9' | '_' )* )
+            // InternalBSPL.g:21906:12: '0' .. '9' ( '0' .. '9' | '_' )*
             {
             matchRange('0','9'); 
-            // InternalBSPL.g:21869:21: ( '0' .. '9' | '_' )*
+            // InternalBSPL.g:21906:21: ( '0' .. '9' | '_' )*
             loop5:
             do {
                 int alt5=2;
@@ -2164,11 +2164,11 @@ public class InternalBSPLLexer extends Lexer {
         try {
             int _type = RULE_DECIMAL;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBSPL.g:21871:14: ( RULE_INT ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )? ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )? )
-            // InternalBSPL.g:21871:16: RULE_INT ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )? ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )?
+            // InternalBSPL.g:21908:14: ( RULE_INT ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )? ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )? )
+            // InternalBSPL.g:21908:16: RULE_INT ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )? ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )?
             {
             mRULE_INT(); 
-            // InternalBSPL.g:21871:25: ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )?
+            // InternalBSPL.g:21908:25: ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )?
             int alt7=2;
             int LA7_0 = input.LA(1);
 
@@ -2177,7 +2177,7 @@ public class InternalBSPLLexer extends Lexer {
             }
             switch (alt7) {
                 case 1 :
-                    // InternalBSPL.g:21871:26: ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT
+                    // InternalBSPL.g:21908:26: ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT
                     {
                     if ( input.LA(1)=='E'||input.LA(1)=='e' ) {
                         input.consume();
@@ -2188,7 +2188,7 @@ public class InternalBSPLLexer extends Lexer {
                         recover(mse);
                         throw mse;}
 
-                    // InternalBSPL.g:21871:36: ( '+' | '-' )?
+                    // InternalBSPL.g:21908:36: ( '+' | '-' )?
                     int alt6=2;
                     int LA6_0 = input.LA(1);
 
@@ -2221,7 +2221,7 @@ public class InternalBSPLLexer extends Lexer {
 
             }
 
-            // InternalBSPL.g:21871:58: ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )?
+            // InternalBSPL.g:21908:58: ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )?
             int alt8=3;
             int LA8_0 = input.LA(1);
 
@@ -2233,7 +2233,7 @@ public class InternalBSPLLexer extends Lexer {
             }
             switch (alt8) {
                 case 1 :
-                    // InternalBSPL.g:21871:59: ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' )
+                    // InternalBSPL.g:21908:59: ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' )
                     {
                     if ( input.LA(1)=='B'||input.LA(1)=='b' ) {
                         input.consume();
@@ -2257,7 +2257,7 @@ public class InternalBSPLLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // InternalBSPL.g:21871:87: ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' )
+                    // InternalBSPL.g:21908:87: ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' )
                     {
                     if ( input.LA(1)=='D'||input.LA(1)=='F'||input.LA(1)=='L'||input.LA(1)=='d'||input.LA(1)=='f'||input.LA(1)=='l' ) {
                         input.consume();
@@ -2290,10 +2290,10 @@ public class InternalBSPLLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBSPL.g:21873:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )* )
-            // InternalBSPL.g:21873:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )*
+            // InternalBSPL.g:21910:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )* )
+            // InternalBSPL.g:21910:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )*
             {
-            // InternalBSPL.g:21873:11: ( '^' )?
+            // InternalBSPL.g:21910:11: ( '^' )?
             int alt9=2;
             int LA9_0 = input.LA(1);
 
@@ -2302,7 +2302,7 @@ public class InternalBSPLLexer extends Lexer {
             }
             switch (alt9) {
                 case 1 :
-                    // InternalBSPL.g:21873:11: '^'
+                    // InternalBSPL.g:21910:11: '^'
                     {
                     match('^'); 
 
@@ -2320,7 +2320,7 @@ public class InternalBSPLLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // InternalBSPL.g:21873:44: ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )*
+            // InternalBSPL.g:21910:44: ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )*
             loop10:
             do {
                 int alt10=2;
@@ -2369,10 +2369,10 @@ public class InternalBSPLLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBSPL.g:21875:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )? | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )? ) )
-            // InternalBSPL.g:21875:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )? | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )? )
+            // InternalBSPL.g:21912:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )? | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )? ) )
+            // InternalBSPL.g:21912:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )? | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )? )
             {
-            // InternalBSPL.g:21875:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )? | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )? )
+            // InternalBSPL.g:21912:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )? | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )? )
             int alt15=2;
             int LA15_0 = input.LA(1);
 
@@ -2390,10 +2390,10 @@ public class InternalBSPLLexer extends Lexer {
             }
             switch (alt15) {
                 case 1 :
-                    // InternalBSPL.g:21875:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )?
+                    // InternalBSPL.g:21912:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )?
                     {
                     match('\"'); 
-                    // InternalBSPL.g:21875:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // InternalBSPL.g:21912:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop11:
                     do {
                         int alt11=3;
@@ -2409,7 +2409,7 @@ public class InternalBSPLLexer extends Lexer {
 
                         switch (alt11) {
                     	case 1 :
-                    	    // InternalBSPL.g:21875:21: '\\\\' .
+                    	    // InternalBSPL.g:21912:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -2417,7 +2417,7 @@ public class InternalBSPLLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalBSPL.g:21875:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // InternalBSPL.g:21912:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -2437,7 +2437,7 @@ public class InternalBSPLLexer extends Lexer {
                         }
                     } while (true);
 
-                    // InternalBSPL.g:21875:44: ( '\"' )?
+                    // InternalBSPL.g:21912:44: ( '\"' )?
                     int alt12=2;
                     int LA12_0 = input.LA(1);
 
@@ -2446,7 +2446,7 @@ public class InternalBSPLLexer extends Lexer {
                     }
                     switch (alt12) {
                         case 1 :
-                            // InternalBSPL.g:21875:44: '\"'
+                            // InternalBSPL.g:21912:44: '\"'
                             {
                             match('\"'); 
 
@@ -2459,10 +2459,10 @@ public class InternalBSPLLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // InternalBSPL.g:21875:49: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )?
+                    // InternalBSPL.g:21912:49: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )?
                     {
                     match('\''); 
-                    // InternalBSPL.g:21875:54: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // InternalBSPL.g:21912:54: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop13:
                     do {
                         int alt13=3;
@@ -2478,7 +2478,7 @@ public class InternalBSPLLexer extends Lexer {
 
                         switch (alt13) {
                     	case 1 :
-                    	    // InternalBSPL.g:21875:55: '\\\\' .
+                    	    // InternalBSPL.g:21912:55: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -2486,7 +2486,7 @@ public class InternalBSPLLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalBSPL.g:21875:62: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // InternalBSPL.g:21912:62: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -2506,7 +2506,7 @@ public class InternalBSPLLexer extends Lexer {
                         }
                     } while (true);
 
-                    // InternalBSPL.g:21875:79: ( '\\'' )?
+                    // InternalBSPL.g:21912:79: ( '\\'' )?
                     int alt14=2;
                     int LA14_0 = input.LA(1);
 
@@ -2515,7 +2515,7 @@ public class InternalBSPLLexer extends Lexer {
                     }
                     switch (alt14) {
                         case 1 :
-                            // InternalBSPL.g:21875:79: '\\''
+                            // InternalBSPL.g:21912:79: '\\''
                             {
                             match('\''); 
 
@@ -2546,12 +2546,12 @@ public class InternalBSPLLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBSPL.g:21877:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // InternalBSPL.g:21877:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // InternalBSPL.g:21914:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // InternalBSPL.g:21914:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // InternalBSPL.g:21877:24: ( options {greedy=false; } : . )*
+            // InternalBSPL.g:21914:24: ( options {greedy=false; } : . )*
             loop16:
             do {
                 int alt16=2;
@@ -2576,7 +2576,7 @@ public class InternalBSPLLexer extends Lexer {
 
                 switch (alt16) {
             	case 1 :
-            	    // InternalBSPL.g:21877:52: .
+            	    // InternalBSPL.g:21914:52: .
             	    {
             	    matchAny(); 
 
@@ -2606,12 +2606,12 @@ public class InternalBSPLLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBSPL.g:21879:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // InternalBSPL.g:21879:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // InternalBSPL.g:21916:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // InternalBSPL.g:21916:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // InternalBSPL.g:21879:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // InternalBSPL.g:21916:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop17:
             do {
                 int alt17=2;
@@ -2624,7 +2624,7 @@ public class InternalBSPLLexer extends Lexer {
 
                 switch (alt17) {
             	case 1 :
-            	    // InternalBSPL.g:21879:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // InternalBSPL.g:21916:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -2644,7 +2644,7 @@ public class InternalBSPLLexer extends Lexer {
                 }
             } while (true);
 
-            // InternalBSPL.g:21879:40: ( ( '\\r' )? '\\n' )?
+            // InternalBSPL.g:21916:40: ( ( '\\r' )? '\\n' )?
             int alt19=2;
             int LA19_0 = input.LA(1);
 
@@ -2653,9 +2653,9 @@ public class InternalBSPLLexer extends Lexer {
             }
             switch (alt19) {
                 case 1 :
-                    // InternalBSPL.g:21879:41: ( '\\r' )? '\\n'
+                    // InternalBSPL.g:21916:41: ( '\\r' )? '\\n'
                     {
-                    // InternalBSPL.g:21879:41: ( '\\r' )?
+                    // InternalBSPL.g:21916:41: ( '\\r' )?
                     int alt18=2;
                     int LA18_0 = input.LA(1);
 
@@ -2664,7 +2664,7 @@ public class InternalBSPLLexer extends Lexer {
                     }
                     switch (alt18) {
                         case 1 :
-                            // InternalBSPL.g:21879:41: '\\r'
+                            // InternalBSPL.g:21916:41: '\\r'
                             {
                             match('\r'); 
 
@@ -2696,10 +2696,10 @@ public class InternalBSPLLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBSPL.g:21881:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // InternalBSPL.g:21881:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalBSPL.g:21918:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // InternalBSPL.g:21918:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // InternalBSPL.g:21881:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalBSPL.g:21918:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt20=0;
             loop20:
             do {
@@ -2753,8 +2753,8 @@ public class InternalBSPLLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBSPL.g:21883:16: ( . )
-            // InternalBSPL.g:21883:18: .
+            // InternalBSPL.g:21920:16: ( . )
+            // InternalBSPL.g:21920:18: .
             {
             matchAny(); 
 
@@ -3461,7 +3461,7 @@ public class InternalBSPLLexer extends Lexer {
     static final String DFA21_maxS =
         "\1\uffff\1\76\1\174\1\46\1\165\1\156\1\165\1\163\1\165\1\75\1\76\5\75\1\76\1\56\1\72\1\141\1\170\1\171\1\157\3\uffff\1\157\3\uffff\1\72\4\uffff\1\157\1\141\1\150\1\171\1\145\1\170\1\154\1\172\5\uffff\1\75\6\uffff\2\164\1\uffff\1\172\1\160\1\172\1\154\1\167\1\154\1\171\1\172\1\142\1\162\1\157\20\uffff\1\75\5\uffff\1\74\4\uffff\1\162\1\164\1\163\1\141\1\160\1\151\1\156\1\154\1\162\1\156\3\uffff\1\154\1\164\11\uffff\1\146\1\172\1\164\1\151\1\160\1\162\2\171\1\uffff\1\154\6\uffff\2\172\1\164\1\uffff\1\157\1\uffff\2\172\1\154\1\172\1\uffff\1\154\1\153\1\141\1\164\1\166\4\uffff\2\172\2\145\1\164\1\145\1\164\1\143\1\163\1\172\1\141\1\145\1\165\1\141\1\uffff\1\145\1\143\1\154\1\145\1\157\1\172\1\145\1\172\2\uffff\1\141\1\162\2\uffff\1\172\1\uffff\1\151\1\141\1\155\1\157\1\141\2\uffff\1\156\1\172\1\151\1\162\1\143\1\150\1\145\1\uffff\1\154\1\172\1\162\1\165\1\172\1\150\1\145\1\157\1\167\1\uffff\1\172\1\uffff\1\156\1\164\1\uffff\1\143\1\147\1\145\1\143\1\164\1\163\1\uffff\1\143\1\172\1\150\1\162\1\172\1\154\1\uffff\1\156\1\154\1\uffff\2\172\1\146\1\172\1\uffff\1\143\2\172\1\145\1\164\1\157\1\145\1\163\1\151\1\172\1\uffff\1\172\1\157\1\uffff\1\171\1\172\1\164\2\uffff\1\172\1\uffff\1\145\2\uffff\1\172\1\145\1\154\2\172\1\157\2\uffff\1\156\1\172\1\uffff\1\172\1\uffff\1\157\1\uffff\1\162\1\172\2\uffff\1\156\1\151\2\uffff\1\146\1\172\1\uffff\3\172\2\uffff\1\145\1\uffff\1\144\1\172\1\uffff";
     static final String DFA21_acceptS =
-        "\27\uffff\1\56\1\60\1\61\1\uffff\1\63\1\64\1\65\1\uffff\1\70\1\71\1\72\1\73\10\uffff\1\133\2\134\1\137\1\140\1\uffff\1\32\1\1\1\2\1\125\1\3\1\120\2\uffff\1\133\13\uffff\1\13\1\44\1\35\1\14\1\27\1\45\1\36\1\15\1\40\1\37\1\16\1\135\1\136\1\41\1\17\1\42\1\uffff\1\43\1\24\1\25\1\33\1\26\1\uffff\1\46\1\34\1\124\1\117\12\uffff\1\56\1\60\1\61\2\uffff\1\63\1\64\1\65\1\123\1\67\1\70\1\71\1\72\1\73\10\uffff\1\130\1\uffff\1\131\1\132\1\134\1\137\1\22\1\20\3\uffff\1\5\1\uffff\1\76\4\uffff\1\75\5\uffff\1\23\1\21\1\30\1\31\16\uffff\1\105\10\uffff\1\4\1\10\2\uffff\1\6\1\106\1\uffff\1\7\5\uffff\1\47\1\126\7\uffff\1\103\11\uffff\1\113\1\uffff\1\122\2\uffff\1\107\6\uffff\1\77\6\uffff\1\62\2\uffff\1\102\4\uffff\1\127\12\uffff\1\54\2\uffff\1\55\3\uffff\1\116\1\104\1\uffff\1\111\1\uffff\1\52\1\11\6\uffff\1\51\1\100\2\uffff\1\112\1\uffff\1\110\1\uffff\1\12\2\uffff\1\121\1\50\2\uffff\1\114\1\101\2\uffff\1\57\3\uffff\1\66\1\53\1\uffff\1\74\2\uffff\1\115";
+        "\27\uffff\1\56\1\60\1\61\1\uffff\1\63\1\66\1\67\1\uffff\1\71\1\72\1\73\1\74\10\uffff\1\133\2\134\1\137\1\140\1\uffff\1\32\1\1\1\2\1\125\1\3\1\121\2\uffff\1\133\13\uffff\1\13\1\44\1\35\1\14\1\27\1\45\1\36\1\15\1\40\1\37\1\16\1\135\1\136\1\41\1\17\1\42\1\uffff\1\43\1\24\1\25\1\33\1\26\1\uffff\1\46\1\34\1\124\1\120\12\uffff\1\56\1\60\1\61\2\uffff\1\63\1\66\1\67\1\123\1\70\1\71\1\72\1\73\1\74\10\uffff\1\130\1\uffff\1\131\1\132\1\134\1\137\1\22\1\20\3\uffff\1\5\1\uffff\1\77\4\uffff\1\76\5\uffff\1\23\1\21\1\30\1\31\16\uffff\1\106\10\uffff\1\4\1\10\2\uffff\1\6\1\107\1\uffff\1\7\5\uffff\1\47\1\126\7\uffff\1\104\11\uffff\1\114\1\uffff\1\122\2\uffff\1\110\6\uffff\1\100\6\uffff\1\62\2\uffff\1\103\4\uffff\1\127\12\uffff\1\54\2\uffff\1\55\3\uffff\1\117\1\105\1\uffff\1\112\1\uffff\1\52\1\11\6\uffff\1\51\1\101\2\uffff\1\113\1\uffff\1\111\1\uffff\1\12\2\uffff\1\64\1\50\2\uffff\1\115\1\102\2\uffff\1\57\3\uffff\1\65\1\53\1\uffff\1\75\2\uffff\1\116";
     static final String DFA21_specialS =
         "\1\0\u012a\uffff}>";
     static final String[] DFA21_transitionS = {

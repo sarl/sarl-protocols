@@ -98,6 +98,24 @@ public interface BsplFactory extends EFactory
 	BsplProtocolParameter createBsplProtocolParameter();
 
 	/**
+	 * Returns a new object of class '<em>Protocol Private Parameter</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Protocol Private Parameter</em>'.
+	 * @generated
+	 */
+	BsplProtocolPrivateParameter createBsplProtocolPrivateParameter();
+
+	/**
+	 * Returns a new object of class '<em>Protocol Public Parameter</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Protocol Public Parameter</em>'.
+	 * @generated
+	 */
+	BsplProtocolPublicParameter createBsplProtocolPublicParameter();
+
+	/**
 	 * Returns a new object of class '<em>Protocol Message</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

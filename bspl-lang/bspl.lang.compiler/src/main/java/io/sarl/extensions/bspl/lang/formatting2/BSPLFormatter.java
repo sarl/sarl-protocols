@@ -41,7 +41,7 @@ import io.sarl.extensions.bspl.lang.bspl.BsplProtocolSpecification;
  * @mavengroupid $GroupId$
  * @mavenartifactid $ArtifactId$
  * @see FormatterFacade
- * @since 0.15
+ * @since 1.0
  */
 public class BSPLFormatter extends XbaseWithAnnotationsFormatter {
 

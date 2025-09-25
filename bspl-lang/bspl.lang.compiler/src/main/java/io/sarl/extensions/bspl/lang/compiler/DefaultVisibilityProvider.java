@@ -40,7 +40,7 @@ import io.sarl.extensions.bspl.lang.bspl.BsplProtocolMember;
  * @version $FullVersion$
  * @mavengroupid $GroupId$
  * @mavenartifactid $ArtifactId$
- * @since 0.15
+ * @since 1.0
  */
 @Singleton
 public class DefaultVisibilityProvider implements IDefaultVisibilityProvider {

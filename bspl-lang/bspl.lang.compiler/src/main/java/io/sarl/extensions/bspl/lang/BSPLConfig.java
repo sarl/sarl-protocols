@@ -28,7 +28,7 @@ package io.sarl.extensions.bspl.lang;
  * @version $FullVersion$
  * @mavengroupid $GroupId$
  * @mavenartifactid $ArtifactId$
- * @since 0.15
+ * @since 1.0
  */
 public final class BSPLConfig {
 
@@ -54,7 +54,7 @@ public final class BSPLConfig {
 
 	/** Name of the root folder for all the generated files by a SARL compiler.
 	 *
-	 * @since 0.15
+	 * @since 1.0
 	 */
 	public static final String GENERATED_SOURCE_ROOT_FOLDER_SIMPLENAME = "generated-sources"; //$NON-NLS-1$
 

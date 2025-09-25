@@ -36,7 +36,7 @@ import com.google.inject.ImplementedBy;
  * @version $FullVersion$
  * @mavengroupid $GroupId$
  * @mavenartifactid $ArtifactId$
- * @since 0.15
+ * @since 1.0
  */
 @ImplementedBy(DefaultVisibilityProvider.class)
 public interface IDefaultVisibilityProvider {

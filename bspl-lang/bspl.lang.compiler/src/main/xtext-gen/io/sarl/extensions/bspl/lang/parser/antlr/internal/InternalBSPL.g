@@ -300,35 +300,22 @@ ruleProtocol returns [EObject current=null]
 		)*
 		(
 			(
-				(
-					{
-						newCompositeNode(grammarAccess.getProtocolAccess().getMembersProtocolFirstParameterParserRuleCall_6_0_0());
-					}
-					lv_members_9_0=ruleProtocolFirstParameter
-					{
-						if ($current==null) {
-							$current = createModelElementForParent(grammarAccess.getProtocolRule());
-						}
-						add(
-							$current,
-							"members",
-							lv_members_9_0,
-							"io.sarl.extensions.bspl.lang.BSPL.ProtocolFirstParameter");
-						afterParserOrEnumRuleCall();
-					}
-				)
-			)
-			(
-				otherlv_10=','
+				otherlv_9='private'
 				{
-					newLeafNode(otherlv_10, grammarAccess.getProtocolAccess().getCommaKeyword_6_1_0());
+					newLeafNode(otherlv_9, grammarAccess.getProtocolAccess().getPrivateKeyword_6_0_0());
 				}
+				(
+					otherlv_10='parameter'
+					{
+						newLeafNode(otherlv_10, grammarAccess.getProtocolAccess().getParameterKeyword_6_0_1());
+					}
+				)?
 				(
 					(
 						{
-							newCompositeNode(grammarAccess.getProtocolAccess().getMembersProtocolFollowingParameterParserRuleCall_6_1_1_0());
+							newCompositeNode(grammarAccess.getProtocolAccess().getMembersProtocolPrivateParameterParserRuleCall_6_0_2_0());
 						}
-						lv_members_11_0=ruleProtocolFollowingParameter
+						lv_members_11_0=ruleProtocolPrivateParameter
 						{
 							if ($current==null) {
 								$current = createModelElementForParent(grammarAccess.getProtocolRule());
@@ -337,19 +324,152 @@ ruleProtocol returns [EObject current=null]
 								$current,
 								"members",
 								lv_members_11_0,
-								"io.sarl.extensions.bspl.lang.BSPL.ProtocolFollowingParameter");
+								"io.sarl.extensions.bspl.lang.BSPL.ProtocolPrivateParameter");
 							afterParserOrEnumRuleCall();
 						}
 					)
 				)
-			)*
+				(
+					otherlv_12=','
+					{
+						newLeafNode(otherlv_12, grammarAccess.getProtocolAccess().getCommaKeyword_6_0_3_0());
+					}
+					(
+						(
+							{
+								newCompositeNode(grammarAccess.getProtocolAccess().getMembersProtocolPrivateParameterParserRuleCall_6_0_3_1_0());
+							}
+							lv_members_13_0=ruleProtocolPrivateParameter
+							{
+								if ($current==null) {
+									$current = createModelElementForParent(grammarAccess.getProtocolRule());
+								}
+								add(
+									$current,
+									"members",
+									lv_members_13_0,
+									"io.sarl.extensions.bspl.lang.BSPL.ProtocolPrivateParameter");
+								afterParserOrEnumRuleCall();
+							}
+						)
+					)
+				)*
+			)
+			    |
+			(
+				otherlv_14='public'
+				{
+					newLeafNode(otherlv_14, grammarAccess.getProtocolAccess().getPublicKeyword_6_1_0());
+				}
+				(
+					otherlv_15='parameter'
+					{
+						newLeafNode(otherlv_15, grammarAccess.getProtocolAccess().getParameterKeyword_6_1_1());
+					}
+				)?
+				(
+					(
+						{
+							newCompositeNode(grammarAccess.getProtocolAccess().getMembersProtocolPublicParameterParserRuleCall_6_1_2_0());
+						}
+						lv_members_16_0=ruleProtocolPublicParameter
+						{
+							if ($current==null) {
+								$current = createModelElementForParent(grammarAccess.getProtocolRule());
+							}
+							add(
+								$current,
+								"members",
+								lv_members_16_0,
+								"io.sarl.extensions.bspl.lang.BSPL.ProtocolPublicParameter");
+							afterParserOrEnumRuleCall();
+						}
+					)
+				)
+				(
+					otherlv_17=','
+					{
+						newLeafNode(otherlv_17, grammarAccess.getProtocolAccess().getCommaKeyword_6_1_3_0());
+					}
+					(
+						(
+							{
+								newCompositeNode(grammarAccess.getProtocolAccess().getMembersProtocolPublicParameterParserRuleCall_6_1_3_1_0());
+							}
+							lv_members_18_0=ruleProtocolPublicParameter
+							{
+								if ($current==null) {
+									$current = createModelElementForParent(grammarAccess.getProtocolRule());
+								}
+								add(
+									$current,
+									"members",
+									lv_members_18_0,
+									"io.sarl.extensions.bspl.lang.BSPL.ProtocolPublicParameter");
+								afterParserOrEnumRuleCall();
+							}
+						)
+					)
+				)*
+			)
+			    |
+			(
+				otherlv_19='parameter'
+				{
+					newLeafNode(otherlv_19, grammarAccess.getProtocolAccess().getParameterKeyword_6_2_0());
+				}
+				(
+					(
+						{
+							newCompositeNode(grammarAccess.getProtocolAccess().getMembersProtocolParameterParserRuleCall_6_2_1_0());
+						}
+						lv_members_20_0=ruleProtocolParameter
+						{
+							if ($current==null) {
+								$current = createModelElementForParent(grammarAccess.getProtocolRule());
+							}
+							add(
+								$current,
+								"members",
+								lv_members_20_0,
+								"io.sarl.extensions.bspl.lang.BSPL.ProtocolParameter");
+							afterParserOrEnumRuleCall();
+						}
+					)
+				)
+				(
+					otherlv_21=','
+					{
+						newLeafNode(otherlv_21, grammarAccess.getProtocolAccess().getCommaKeyword_6_2_2_0());
+					}
+					(
+						(
+							{
+								newCompositeNode(grammarAccess.getProtocolAccess().getMembersProtocolParameterParserRuleCall_6_2_2_1_0());
+							}
+							lv_members_22_0=ruleProtocolParameter
+							{
+								if ($current==null) {
+									$current = createModelElementForParent(grammarAccess.getProtocolRule());
+								}
+								add(
+									$current,
+									"members",
+									lv_members_22_0,
+									"io.sarl.extensions.bspl.lang.BSPL.ProtocolParameter");
+								afterParserOrEnumRuleCall();
+							}
+						)
+					)
+				)*
+			)
 		)*
 		(
 			(
 				{
 					newCompositeNode(grammarAccess.getProtocolAccess().getMembersProtocolMessageParserRuleCall_7_0());
 				}
-				lv_members_12_0=ruleProtocolMessage
+				lv_members_23_0=ruleProtocolMessage
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getProtocolRule());
@@ -357,15 +477,15 @@ ruleProtocol returns [EObject current=null]
 					add(
 						$current,
 						"members",
-						lv_members_12_0,
+						lv_members_23_0,
 						"io.sarl.extensions.bspl.lang.BSPL.ProtocolMessage");
 					afterParserOrEnumRuleCall();
 				}
 			)
 		)*
-		otherlv_13='}'
+		otherlv_24='}'
 		{
-			newLeafNode(otherlv_13, grammarAccess.getProtocolAccess().getRightCurlyBracketKeyword_8());
+			newLeafNode(otherlv_24, grammarAccess.getProtocolAccess().getRightCurlyBracketKeyword_8());
 		}
 	)
 ;
@@ -467,326 +587,15 @@ ruleProtocolRole returns [EObject current=null]
 	)
 ;
 
-// Entry rule entryRuleProtocolFirstParameter
-entryRuleProtocolFirstParameter returns [EObject current=null]:
-	{ newCompositeNode(grammarAccess.getProtocolFirstParameterRule()); }
-	iv_ruleProtocolFirstParameter=ruleProtocolFirstParameter
-	{ $current=$iv_ruleProtocolFirstParameter.current; }
+// Entry rule entryRuleProtocolPrivateParameter
+entryRuleProtocolPrivateParameter returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getProtocolPrivateParameterRule()); }
+	iv_ruleProtocolPrivateParameter=ruleProtocolPrivateParameter
+	{ $current=$iv_ruleProtocolPrivateParameter.current; }
 	EOF;
 
-// Rule ProtocolFirstParameter
-ruleProtocolFirstParameter returns [EObject current=null]
-@init {
-	enterRule();
-}
-@after {
-	leaveRule();
-}:
-	(
-		(
-			(
-				{
-					$current = forceCreateModelElement(
-						grammarAccess.getProtocolFirstParameterAccess().getBsplProtocolParameterAction_0_0(),
-						$current);
-				}
-			)
-			(
-				(
-					(
-						lv_modifiers_1_0='private'
-						{
-							newLeafNode(lv_modifiers_1_0, grammarAccess.getProtocolFirstParameterAccess().getModifiersPrivateKeyword_0_1_0_0());
-						}
-						{
-							if ($current==null) {
-								$current = createModelElement(grammarAccess.getProtocolFirstParameterRule());
-							}
-							addWithLastConsumed($current, "modifiers", lv_modifiers_1_0, "private");
-						}
-					)
-				)
-				(
-					otherlv_2='parameter'
-					{
-						newLeafNode(otherlv_2, grammarAccess.getProtocolFirstParameterAccess().getParameterKeyword_0_1_1());
-					}
-				)?
-				(
-					(
-						{
-							newCompositeNode(grammarAccess.getProtocolFirstParameterAccess().getModifiersParameterModifierParserRuleCall_0_1_2_0());
-						}
-						lv_modifiers_3_0=ruleParameterModifier
-						{
-							if ($current==null) {
-								$current = createModelElementForParent(grammarAccess.getProtocolFirstParameterRule());
-							}
-							add(
-								$current,
-								"modifiers",
-								lv_modifiers_3_0,
-								"io.sarl.extensions.bspl.lang.BSPL.ParameterModifier");
-							afterParserOrEnumRuleCall();
-						}
-					)
-				)*
-				(
-					(
-						{
-							newCompositeNode(grammarAccess.getProtocolFirstParameterAccess().getNameValidIDParserRuleCall_0_1_3_0());
-						}
-						lv_name_4_0=ruleValidID
-						{
-							if ($current==null) {
-								$current = createModelElementForParent(grammarAccess.getProtocolFirstParameterRule());
-							}
-							set(
-								$current,
-								"name",
-								lv_name_4_0,
-								"org.eclipse.xtext.xbase.Xtype.ValidID");
-							afterParserOrEnumRuleCall();
-						}
-					)
-				)
-				(
-					otherlv_5=':'
-					{
-						newLeafNode(otherlv_5, grammarAccess.getProtocolFirstParameterAccess().getColonKeyword_0_1_4_0());
-					}
-					(
-						(
-							{
-								newCompositeNode(grammarAccess.getProtocolFirstParameterAccess().getTypeJvmTypeReferenceParserRuleCall_0_1_4_1_0());
-							}
-							lv_type_6_0=ruleJvmTypeReference
-							{
-								if ($current==null) {
-									$current = createModelElementForParent(grammarAccess.getProtocolFirstParameterRule());
-								}
-								set(
-									$current,
-									"type",
-									lv_type_6_0,
-									"org.eclipse.xtext.xbase.Xtype.JvmTypeReference");
-								afterParserOrEnumRuleCall();
-							}
-						)
-					)
-				)?
-				(
-					(
-						lv_modifiers_7_0='key'
-						{
-							newLeafNode(lv_modifiers_7_0, grammarAccess.getProtocolFirstParameterAccess().getModifiersKeyKeyword_0_1_5_0());
-						}
-						{
-							if ($current==null) {
-								$current = createModelElement(grammarAccess.getProtocolFirstParameterRule());
-							}
-							addWithLastConsumed($current, "modifiers", lv_modifiers_7_0, "key");
-						}
-					)
-				)?
-			)
-		)
-		    |
-		(
-			(
-				(
-					lv_modifiers_8_0='public'
-					{
-						newLeafNode(lv_modifiers_8_0, grammarAccess.getProtocolFirstParameterAccess().getModifiersPublicKeyword_1_0_0());
-					}
-					{
-						if ($current==null) {
-							$current = createModelElement(grammarAccess.getProtocolFirstParameterRule());
-						}
-						addWithLastConsumed($current, "modifiers", lv_modifiers_8_0, "public");
-					}
-				)
-			)
-			(
-				otherlv_9='parameter'
-				{
-					newLeafNode(otherlv_9, grammarAccess.getProtocolFirstParameterAccess().getParameterKeyword_1_1());
-				}
-			)?
-			(
-				(
-					{
-						newCompositeNode(grammarAccess.getProtocolFirstParameterAccess().getModifiersParameterModifierParserRuleCall_1_2_0());
-					}
-					lv_modifiers_10_0=ruleParameterModifier
-					{
-						if ($current==null) {
-							$current = createModelElementForParent(grammarAccess.getProtocolFirstParameterRule());
-						}
-						add(
-							$current,
-							"modifiers",
-							lv_modifiers_10_0,
-							"io.sarl.extensions.bspl.lang.BSPL.ParameterModifier");
-						afterParserOrEnumRuleCall();
-					}
-				)
-			)*
-			(
-				(
-					{
-						newCompositeNode(grammarAccess.getProtocolFirstParameterAccess().getNameValidIDParserRuleCall_1_3_0());
-					}
-					lv_name_11_0=ruleValidID
-					{
-						if ($current==null) {
-							$current = createModelElementForParent(grammarAccess.getProtocolFirstParameterRule());
-						}
-						set(
-							$current,
-							"name",
-							lv_name_11_0,
-							"org.eclipse.xtext.xbase.Xtype.ValidID");
-						afterParserOrEnumRuleCall();
-					}
-				)
-			)
-			(
-				otherlv_12=':'
-				{
-					newLeafNode(otherlv_12, grammarAccess.getProtocolFirstParameterAccess().getColonKeyword_1_4_0());
-				}
-				(
-					(
-						{
-							newCompositeNode(grammarAccess.getProtocolFirstParameterAccess().getTypeJvmTypeReferenceParserRuleCall_1_4_1_0());
-						}
-						lv_type_13_0=ruleJvmTypeReference
-						{
-							if ($current==null) {
-								$current = createModelElementForParent(grammarAccess.getProtocolFirstParameterRule());
-							}
-							set(
-								$current,
-								"type",
-								lv_type_13_0,
-								"org.eclipse.xtext.xbase.Xtype.JvmTypeReference");
-							afterParserOrEnumRuleCall();
-						}
-					)
-				)
-			)?
-			(
-				(
-					lv_modifiers_14_0='key'
-					{
-						newLeafNode(lv_modifiers_14_0, grammarAccess.getProtocolFirstParameterAccess().getModifiersKeyKeyword_1_5_0());
-					}
-					{
-						if ($current==null) {
-							$current = createModelElement(grammarAccess.getProtocolFirstParameterRule());
-						}
-						addWithLastConsumed($current, "modifiers", lv_modifiers_14_0, "key");
-					}
-				)
-			)?
-		)
-		    |
-		(
-			otherlv_15='parameter'
-			{
-				newLeafNode(otherlv_15, grammarAccess.getProtocolFirstParameterAccess().getParameterKeyword_2_0());
-			}
-			(
-				(
-					{
-						newCompositeNode(grammarAccess.getProtocolFirstParameterAccess().getModifiersParameterModifierParserRuleCall_2_1_0());
-					}
-					lv_modifiers_16_0=ruleParameterModifier
-					{
-						if ($current==null) {
-							$current = createModelElementForParent(grammarAccess.getProtocolFirstParameterRule());
-						}
-						add(
-							$current,
-							"modifiers",
-							lv_modifiers_16_0,
-							"io.sarl.extensions.bspl.lang.BSPL.ParameterModifier");
-						afterParserOrEnumRuleCall();
-					}
-				)
-			)*
-			(
-				(
-					{
-						newCompositeNode(grammarAccess.getProtocolFirstParameterAccess().getNameValidIDParserRuleCall_2_2_0());
-					}
-					lv_name_17_0=ruleValidID
-					{
-						if ($current==null) {
-							$current = createModelElementForParent(grammarAccess.getProtocolFirstParameterRule());
-						}
-						set(
-							$current,
-							"name",
-							lv_name_17_0,
-							"org.eclipse.xtext.xbase.Xtype.ValidID");
-						afterParserOrEnumRuleCall();
-					}
-				)
-			)
-			(
-				otherlv_18=':'
-				{
-					newLeafNode(otherlv_18, grammarAccess.getProtocolFirstParameterAccess().getColonKeyword_2_3_0());
-				}
-				(
-					(
-						{
-							newCompositeNode(grammarAccess.getProtocolFirstParameterAccess().getTypeJvmTypeReferenceParserRuleCall_2_3_1_0());
-						}
-						lv_type_19_0=ruleJvmTypeReference
-						{
-							if ($current==null) {
-								$current = createModelElementForParent(grammarAccess.getProtocolFirstParameterRule());
-							}
-							set(
-								$current,
-								"type",
-								lv_type_19_0,
-								"org.eclipse.xtext.xbase.Xtype.JvmTypeReference");
-							afterParserOrEnumRuleCall();
-						}
-					)
-				)
-			)?
-			(
-				(
-					lv_modifiers_20_0='key'
-					{
-						newLeafNode(lv_modifiers_20_0, grammarAccess.getProtocolFirstParameterAccess().getModifiersKeyKeyword_2_4_0());
-					}
-					{
-						if ($current==null) {
-							$current = createModelElement(grammarAccess.getProtocolFirstParameterRule());
-						}
-						addWithLastConsumed($current, "modifiers", lv_modifiers_20_0, "key");
-					}
-				)
-			)?
-		)
-	)
-;
-
-// Entry rule entryRuleProtocolFollowingParameter
-entryRuleProtocolFollowingParameter returns [EObject current=null]:
-	{ newCompositeNode(grammarAccess.getProtocolFollowingParameterRule()); }
-	iv_ruleProtocolFollowingParameter=ruleProtocolFollowingParameter
-	{ $current=$iv_ruleProtocolFollowingParameter.current; }
-	EOF;
-
-// Rule ProtocolFollowingParameter
-ruleProtocolFollowingParameter returns [EObject current=null]
+// Rule ProtocolPrivateParameter
+ruleProtocolPrivateParameter returns [EObject current=null]
 @init {
 	enterRule();
 }
@@ -797,19 +606,19 @@ ruleProtocolFollowingParameter returns [EObject current=null]
 		(
 			{
 				$current = forceCreateModelElement(
-					grammarAccess.getProtocolFollowingParameterAccess().getBsplProtocolParameterAction_0(),
+					grammarAccess.getProtocolPrivateParameterAccess().getBsplProtocolPrivateParameterAction_0(),
 					$current);
 			}
 		)
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getProtocolFollowingParameterAccess().getModifiersParameterModifierParserRuleCall_1_0());
+					newCompositeNode(grammarAccess.getProtocolPrivateParameterAccess().getModifiersParameterModifierParserRuleCall_1_0());
 				}
 				lv_modifiers_1_0=ruleParameterModifier
 				{
 					if ($current==null) {
-						$current = createModelElementForParent(grammarAccess.getProtocolFollowingParameterRule());
+						$current = createModelElementForParent(grammarAccess.getProtocolPrivateParameterRule());
 					}
 					add(
 						$current,
@@ -823,12 +632,12 @@ ruleProtocolFollowingParameter returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getProtocolFollowingParameterAccess().getNameValidIDParserRuleCall_2_0());
+					newCompositeNode(grammarAccess.getProtocolPrivateParameterAccess().getNameValidIDParserRuleCall_2_0());
 				}
 				lv_name_2_0=ruleValidID
 				{
 					if ($current==null) {
-						$current = createModelElementForParent(grammarAccess.getProtocolFollowingParameterRule());
+						$current = createModelElementForParent(grammarAccess.getProtocolPrivateParameterRule());
 					}
 					set(
 						$current,
@@ -842,17 +651,17 @@ ruleProtocolFollowingParameter returns [EObject current=null]
 		(
 			otherlv_3=':'
 			{
-				newLeafNode(otherlv_3, grammarAccess.getProtocolFollowingParameterAccess().getColonKeyword_3_0());
+				newLeafNode(otherlv_3, grammarAccess.getProtocolPrivateParameterAccess().getColonKeyword_3_0());
 			}
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getProtocolFollowingParameterAccess().getTypeJvmTypeReferenceParserRuleCall_3_1_0());
+						newCompositeNode(grammarAccess.getProtocolPrivateParameterAccess().getTypeJvmTypeReferenceParserRuleCall_3_1_0());
 					}
 					lv_type_4_0=ruleJvmTypeReference
 					{
 						if ($current==null) {
-							$current = createModelElementForParent(grammarAccess.getProtocolFollowingParameterRule());
+							$current = createModelElementForParent(grammarAccess.getProtocolPrivateParameterRule());
 						}
 						set(
 							$current,
@@ -868,11 +677,217 @@ ruleProtocolFollowingParameter returns [EObject current=null]
 			(
 				lv_modifiers_5_0='key'
 				{
-					newLeafNode(lv_modifiers_5_0, grammarAccess.getProtocolFollowingParameterAccess().getModifiersKeyKeyword_4_0());
+					newLeafNode(lv_modifiers_5_0, grammarAccess.getProtocolPrivateParameterAccess().getModifiersKeyKeyword_4_0());
 				}
 				{
 					if ($current==null) {
-						$current = createModelElement(grammarAccess.getProtocolFollowingParameterRule());
+						$current = createModelElement(grammarAccess.getProtocolPrivateParameterRule());
+					}
+					addWithLastConsumed($current, "modifiers", lv_modifiers_5_0, "key");
+				}
+			)
+		)?
+	)
+;
+
+// Entry rule entryRuleProtocolPublicParameter
+entryRuleProtocolPublicParameter returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getProtocolPublicParameterRule()); }
+	iv_ruleProtocolPublicParameter=ruleProtocolPublicParameter
+	{ $current=$iv_ruleProtocolPublicParameter.current; }
+	EOF;
+
+// Rule ProtocolPublicParameter
+ruleProtocolPublicParameter returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			{
+				$current = forceCreateModelElement(
+					grammarAccess.getProtocolPublicParameterAccess().getBsplProtocolPublicParameterAction_0(),
+					$current);
+			}
+		)
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getProtocolPublicParameterAccess().getModifiersParameterModifierParserRuleCall_1_0());
+				}
+				lv_modifiers_1_0=ruleParameterModifier
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getProtocolPublicParameterRule());
+					}
+					add(
+						$current,
+						"modifiers",
+						lv_modifiers_1_0,
+						"io.sarl.extensions.bspl.lang.BSPL.ParameterModifier");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)*
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getProtocolPublicParameterAccess().getNameValidIDParserRuleCall_2_0());
+				}
+				lv_name_2_0=ruleValidID
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getProtocolPublicParameterRule());
+					}
+					set(
+						$current,
+						"name",
+						lv_name_2_0,
+						"org.eclipse.xtext.xbase.Xtype.ValidID");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+		(
+			otherlv_3=':'
+			{
+				newLeafNode(otherlv_3, grammarAccess.getProtocolPublicParameterAccess().getColonKeyword_3_0());
+			}
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getProtocolPublicParameterAccess().getTypeJvmTypeReferenceParserRuleCall_3_1_0());
+					}
+					lv_type_4_0=ruleJvmTypeReference
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getProtocolPublicParameterRule());
+						}
+						set(
+							$current,
+							"type",
+							lv_type_4_0,
+							"org.eclipse.xtext.xbase.Xtype.JvmTypeReference");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+		)?
+		(
+			(
+				lv_modifiers_5_0='key'
+				{
+					newLeafNode(lv_modifiers_5_0, grammarAccess.getProtocolPublicParameterAccess().getModifiersKeyKeyword_4_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getProtocolPublicParameterRule());
+					}
+					addWithLastConsumed($current, "modifiers", lv_modifiers_5_0, "key");
+				}
+			)
+		)?
+	)
+;
+
+// Entry rule entryRuleProtocolParameter
+entryRuleProtocolParameter returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getProtocolParameterRule()); }
+	iv_ruleProtocolParameter=ruleProtocolParameter
+	{ $current=$iv_ruleProtocolParameter.current; }
+	EOF;
+
+// Rule ProtocolParameter
+ruleProtocolParameter returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			{
+				$current = forceCreateModelElement(
+					grammarAccess.getProtocolParameterAccess().getBsplProtocolParameterAction_0(),
+					$current);
+			}
+		)
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getProtocolParameterAccess().getModifiersParameterModifierParserRuleCall_1_0());
+				}
+				lv_modifiers_1_0=ruleParameterModifier
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getProtocolParameterRule());
+					}
+					add(
+						$current,
+						"modifiers",
+						lv_modifiers_1_0,
+						"io.sarl.extensions.bspl.lang.BSPL.ParameterModifier");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)*
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getProtocolParameterAccess().getNameValidIDParserRuleCall_2_0());
+				}
+				lv_name_2_0=ruleValidID
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getProtocolParameterRule());
+					}
+					set(
+						$current,
+						"name",
+						lv_name_2_0,
+						"org.eclipse.xtext.xbase.Xtype.ValidID");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+		(
+			otherlv_3=':'
+			{
+				newLeafNode(otherlv_3, grammarAccess.getProtocolParameterAccess().getColonKeyword_3_0());
+			}
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getProtocolParameterAccess().getTypeJvmTypeReferenceParserRuleCall_3_1_0());
+					}
+					lv_type_4_0=ruleJvmTypeReference
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getProtocolParameterRule());
+						}
+						set(
+							$current,
+							"type",
+							lv_type_4_0,
+							"org.eclipse.xtext.xbase.Xtype.JvmTypeReference");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+		)?
+		(
+			(
+				lv_modifiers_5_0='key'
+				{
+					newLeafNode(lv_modifiers_5_0, grammarAccess.getProtocolParameterAccess().getModifiersKeyKeyword_4_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getProtocolParameterRule());
 					}
 					addWithLastConsumed($current, "modifiers", lv_modifiers_5_0, "key");
 				}

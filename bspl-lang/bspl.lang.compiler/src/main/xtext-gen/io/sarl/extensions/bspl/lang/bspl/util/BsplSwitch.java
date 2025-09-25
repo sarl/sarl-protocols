@@ -141,6 +141,26 @@ public class BsplSwitch<T> extends Switch<T>
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case BsplPackage.BSPL_PROTOCOL_PRIVATE_PARAMETER:
+			{
+				BsplProtocolPrivateParameter bsplProtocolPrivateParameter = (BsplProtocolPrivateParameter)theEObject;
+				T result = caseBsplProtocolPrivateParameter(bsplProtocolPrivateParameter);
+				if (result == null) result = caseBsplProtocolParameter(bsplProtocolPrivateParameter);
+				if (result == null) result = caseBsplProtocolMember(bsplProtocolPrivateParameter);
+				if (result == null) result = caseBsplAnnotationTarget(bsplProtocolPrivateParameter);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case BsplPackage.BSPL_PROTOCOL_PUBLIC_PARAMETER:
+			{
+				BsplProtocolPublicParameter bsplProtocolPublicParameter = (BsplProtocolPublicParameter)theEObject;
+				T result = caseBsplProtocolPublicParameter(bsplProtocolPublicParameter);
+				if (result == null) result = caseBsplProtocolParameter(bsplProtocolPublicParameter);
+				if (result == null) result = caseBsplProtocolMember(bsplProtocolPublicParameter);
+				if (result == null) result = caseBsplAnnotationTarget(bsplProtocolPublicParameter);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case BsplPackage.BSPL_PROTOCOL_MESSAGE:
 			{
 				BsplProtocolMessage bsplProtocolMessage = (BsplProtocolMessage)theEObject;
@@ -262,6 +282,38 @@ public class BsplSwitch<T> extends Switch<T>
 	 * @generated
 	 */
 	public T caseBsplProtocolParameter(BsplProtocolParameter object)
+	{
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Protocol Private Parameter</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Protocol Private Parameter</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseBsplProtocolPrivateParameter(BsplProtocolPrivateParameter object)
+	{
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Protocol Public Parameter</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Protocol Public Parameter</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseBsplProtocolPublicParameter(BsplProtocolPublicParameter object)
 	{
 		return null;
 	}

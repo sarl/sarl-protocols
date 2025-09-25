@@ -52,7 +52,7 @@ import io.sarl.lang.core.util.OutParameter;
  * @version $FullVersion$
  * @mavengroupid $GroupId$
  * @mavenartifactid $ArtifactId$
- * @since 0.15
+ * @since 1.0
  */
 @Singleton
 public class BsplProtocolReactiveBehaviorGeneratorFragment {

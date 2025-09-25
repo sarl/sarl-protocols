@@ -73,6 +73,12 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BsplProtocolPrivateParameter" eSuperTypes="#//BsplProtocolParameter">
+    <eOperations name="getSpecifiedVisibility" lowerBound="1" eType="ecore:EEnum ../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmVisibility"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BsplProtocolPublicParameter" eSuperTypes="#//BsplProtocolParameter">
+    <eOperations name="getSpecifiedVisibility" lowerBound="1" eType="ecore:EEnum ../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmVisibility"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BsplProtocolMessage" eSuperTypes="#//BsplProtocolMember">
     <eOperations name="isInputTargetRole" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eOperations name="isOutputTargetRole" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>

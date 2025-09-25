@@ -34,7 +34,7 @@ import io.sarl.extensions.bspl.lang.bspl.BsplProtocolRole;
  * @version $FullVersion$
  * @mavengroupid $GroupId$
  * @mavenartifactid $ArtifactId$
- * @since 0.15
+ * @since 1.0
  */
 @ImplementedBy(DefaultProtocolNames.class)
 public interface IProtocolNames {

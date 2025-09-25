@@ -37,7 +37,7 @@ package io.sarl.extensions.bspl.lang.bspl.impl;
  * @version $FullVersion$
  * @mavengroupid $GroupId$
  * @mavenartifactid $ArtifactId$
- * @since 0.15
+ * @since 1.0
  */
 public class BsplProtocolRoleImplCustom extends BsplProtocolRoleImpl {
 

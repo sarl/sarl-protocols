@@ -28,7 +28,7 @@ import org.eclipse.osgi.util.NLS;
  * @version $FullVersion$
  * @mavengroupid $GroupId$
  * @mavenartifactid $ArtifactId$
- * @since 0.15
+ * @since 1.0
  * @ExcludeFromApidoc
  */
 @SuppressWarnings("all")

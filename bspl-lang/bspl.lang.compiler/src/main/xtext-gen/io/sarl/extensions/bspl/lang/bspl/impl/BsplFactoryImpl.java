@@ -91,6 +91,8 @@ public class BsplFactoryImpl extends EFactoryImpl implements BsplFactory
 			case BsplPackage.BSPL_PROTOCOL_ARGUMENT: return createBsplProtocolArgument();
 			case BsplPackage.BSPL_PROTOCOL_ROLE: return createBsplProtocolRole();
 			case BsplPackage.BSPL_PROTOCOL_PARAMETER: return createBsplProtocolParameter();
+			case BsplPackage.BSPL_PROTOCOL_PRIVATE_PARAMETER: return createBsplProtocolPrivateParameter();
+			case BsplPackage.BSPL_PROTOCOL_PUBLIC_PARAMETER: return createBsplProtocolPublicParameter();
 			case BsplPackage.BSPL_PROTOCOL_MESSAGE: return createBsplProtocolMessage();
 			case BsplPackage.BSPL_PROTOCOL_PROTOCOL_CALL: return createBsplProtocolProtocolCall();
 			default:
@@ -168,6 +170,30 @@ public class BsplFactoryImpl extends EFactoryImpl implements BsplFactory
 	{
 		BsplProtocolParameterImplCustom bsplProtocolParameter = new BsplProtocolParameterImplCustom();
 		return bsplProtocolParameter;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public BsplProtocolPrivateParameter createBsplProtocolPrivateParameter()
+	{
+		BsplProtocolPrivateParameterImplCustom bsplProtocolPrivateParameter = new BsplProtocolPrivateParameterImplCustom();
+		return bsplProtocolPrivateParameter;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public BsplProtocolPublicParameter createBsplProtocolPublicParameter()
+	{
+		BsplProtocolPublicParameterImplCustom bsplProtocolPublicParameter = new BsplProtocolPublicParameterImplCustom();
+		return bsplProtocolPublicParameter;
 	}
 
 	/**

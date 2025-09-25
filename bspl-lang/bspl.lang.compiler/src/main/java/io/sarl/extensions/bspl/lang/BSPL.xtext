@@ -37,7 +37,12 @@ Protocol returns BsplProtocol:
 	{BsplProtocol}
 	modifiers+=ProtocolVisibilityModifier* 'protocol'? name=ValidID '{'
 		( 'role'? members+=ProtocolRole (',' members+=ProtocolRole)* )*
-		( members+=ProtocolFirstParameter ( ',' members+=ProtocolFollowingParameter )* )*
+		( ( 'private' 'parameter'? members+=ProtocolPrivateParameter ( ',' members+=ProtocolPrivateParameter )* )
+		  |
+		  ( 'public' 'parameter'? members+=ProtocolPublicParameter ( ',' members+=ProtocolPublicParameter )* )
+		  |
+		  ( 'parameter' members+=ProtocolParameter ( ',' members+=ProtocolParameter )* )
+		)*
 		( members+=ProtocolMessage )*
 	'}'
 ;
@@ -47,18 +52,17 @@ ProtocolRole returns BsplProtocolRole:
 	name=ValidID ('[' (min=INT '..')? max=INT ']')?
 ;
 
-ProtocolFirstParameter returns BsplProtocolParameter:
-	{BsplProtocolParameter}
-	(
-		modifiers+='private' 'parameter'? modifiers+=ParameterModifier* name=ValidID (':' type=JvmTypeReference)? modifiers+='key'?
-	) | (
-		modifiers+='public' 'parameter'? modifiers+=ParameterModifier* name=ValidID (':' type=JvmTypeReference)? modifiers+='key'?
-	) | (
-		'parameter' modifiers+=ParameterModifier* name=ValidID (':' type=JvmTypeReference)? modifiers+='key'?
-	)
+ProtocolPrivateParameter returns BsplProtocolParameter:
+	{BsplProtocolPrivateParameter}
+	modifiers+=ParameterModifier* name=ValidID (':' type=JvmTypeReference)? modifiers+='key'?
 ;
 
-ProtocolFollowingParameter returns BsplProtocolParameter:
+ProtocolPublicParameter returns BsplProtocolParameter:
+	{BsplProtocolPublicParameter}
+	modifiers+=ParameterModifier* name=ValidID (':' type=JvmTypeReference)? modifiers+='key'?
+;
+
+ProtocolParameter returns BsplProtocolParameter:
 	{BsplProtocolParameter}
 	modifiers+=ParameterModifier* name=ValidID (':' type=JvmTypeReference)? modifiers+='key'?
 ;

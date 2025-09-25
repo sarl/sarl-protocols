@@ -442,8 +442,8 @@ public class BSPLGrammarKeywordAccess {
 	/** Keyword: {@code private}.
 	 * Source: io.sarl.extensions.bspl.lang.BSPL
 	 */
-	public String getModifiersPrivateKeyword() {
-		return this.grammarAccess.getProtocolFirstParameterAccess().getModifiersPrivateKeyword_0_1_0_0().getValue();
+	public String getPrivateKeyword() {
+		return this.grammarAccess.getProtocolAccess().getPrivateKeyword_6_0_0().getValue();
 	}
 
 	/** Keyword: {@code extension}.
@@ -520,7 +520,7 @@ public class BSPLGrammarKeywordAccess {
 	 * Source: io.sarl.extensions.bspl.lang.BSPL
 	 */
 	public String getParameterKeyword() {
-		return this.grammarAccess.getProtocolFirstParameterAccess().getParameterKeyword_2_0().getValue();
+		return this.grammarAccess.getProtocolAccess().getParameterKeyword_6_2_0().getValue();
 	}
 
 	/** Keyword: {@code [}.
@@ -711,6 +711,7 @@ public class BSPLGrammarKeywordAccess {
 			kws.add(getSuperKeyword());
 			kws.add(getCatchKeyword());
 			kws.add(getDoKeyword());
+			kws.add(getPrivateKeyword());
 			kws.add(getFinallyKeyword());
 			kws.add(getReturnKeyword());
 			kws.add(getWhileKeyword());
@@ -725,7 +726,6 @@ public class BSPLGrammarKeywordAccess {
 			kws.add(getNewKeyword());
 			kws.add(getImportKeyword());
 			kws.add(getVoidKeyword());
-			kws.add(getModifiersPrivateKeyword());
 			kws.add(getTypeofKeyword());
 			kws.add(getPackageKeyword());
 			kws.add(getOutKeyword());

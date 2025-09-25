@@ -70,7 +70,7 @@ import io.sarl.extensions.bspl.lang.bspl.BsplProtocolSpecification;
  * @version $FullVersion$
  * @mavengroupid $GroupId$
  * @mavenartifactid $ArtifactId$
- * @since 0.15
+ * @since 1.0
  * @see "https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#validation"
  */
 @Singleton
