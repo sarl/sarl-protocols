@@ -247,7 +247,7 @@ public class BsplProtocolSkillGeneratorFragment {
 				if (!inKeys.isEmpty()) {
 					for (final var inKey : inKeys) {
 						receiver.append("message.^event.").append(inKey.getName()); //$NON-NLS-1$
-						receiver.append(", "); //$NON-NLS-1$
+						receiver.append("?.toString, "); //$NON-NLS-1$
 					}
 				}
 				receiver.append("\"").append(Strings.convertToJavaString(outParam.getName())).append("\")") //$NON-NLS-1$ //$NON-NLS-2$
