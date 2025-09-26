@@ -1,0 +1,14 @@
+package pingPong
+
+import java.util.UUID
+
+PingPong {
+	
+	role ping, pong
+	parameter question : String, answer : String
+	private parameter id : UUID key
+	
+	ping -> pong : Ping[out id key, out question]
+	pong -> ping : Pong[in id key, in question, out answer]
+	
+}

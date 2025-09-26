@@ -1,0 +1,27 @@
+/** 
+ * 
+ */
+ package io.sarl.bspl.test
+
+import io.sarl.api.core.Initialize
+import io.sarl.api.core.Logging
+import io.sarl.api.workingmemory.WorkingMemory
+import io.sarl.extensions.bspl.api.protocol.enactment.ProtocolEnactment
+import pingPong.PingPongRole
+import pingPong.PingPongSpaceSpecification
+import pingPong.pingProtocolCapacity
+
+/** 
+ * 
+ */
+agent PingAgent {
+
+	uses ProtocolEnactment, Logging, pingProtocolCapacity, WorkingMemory
+
+	on Initialize {
+		loggingName = "PingAgent"
+		info("Started")
+		//enact(PingPongSpaceSpecification, PingPongRole.ping)
+	}
+
+}

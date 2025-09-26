@@ -1,0 +1,18 @@
+/* This file was automatically generated. Do not change its content. */
+
+package pingPong
+
+import io.sarl.extensions.bspl.api.protocol.impl.ProtocolCapacity
+import io.sarl.extensions.bspl.api.protocol.impl.ProtocolMessage
+import io.sarl.lang.core.DefaultSkill
+import io.sarl.lang.core.annotation.SarlAsynchronousExecution
+import java.util.List
+import pingPong.messages.Ping
+
+@DefaultSkill(typeof(pingProtocolSkill))
+public capacity pingProtocolCapacity extends ProtocolCapacity {
+  @SarlAsynchronousExecution
+  def getEnabledPingMessages : List<ProtocolMessage<Ping>>
+  @SarlAsynchronousExecution
+  def sendPingMessage(m : ProtocolMessage<Ping>)
+}

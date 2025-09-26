@@ -1,0 +1,49 @@
+/* This file was automatically generated. Do not change its content. */
+
+package pingPong
+
+import io.sarl.api.core.ExternalContextAccess
+import io.sarl.api.naming.name.ScopedDataName
+import io.sarl.api.workingmemory.WorkingMemory
+import io.sarl.extensions.bspl.api.protocol.impl.ProtocolMessage
+import io.sarl.extensions.bspl.api.protocol.impl.ProtocolSkill
+import io.sarl.lang.core.annotation.SarlAsynchronousExecution
+import java.util.List
+import java.util.UUID
+import pingPong.messages.Ping
+
+public skill pingProtocolSkill extends ProtocolSkill implements pingProtocolCapacity {
+  uses WorkingMemory, ExternalContextAccess
+  @SarlAsynchronousExecution
+  override getEnabledPingMessages : List<ProtocolMessage<Ping>> {
+    val enabledMessages = <ProtocolMessage<Ping>>newArrayList
+    getDefinedForName("pong").forEach [scope |
+      val spaceInstance = scope.findSpaceMachtingScope
+      if (spaceInstance !== null) {
+        synchronized (getWorkingMemoryLock) {
+          if (!(new ScopedDataName(scope.scope + #[ "id" ]).isBound) && !(new ScopedDataName(scope.scope + #[ "question" ]).isBound)) {
+            val messageInstance = new Ping
+            enabledMessages += new ProtocolMessage<Ping>(spaceInstance, messageInstance, scope.getKnowledge(typeof(UUID)))
+          }
+        }
+      }
+    ]
+    return enabledMessages
+  }
+  @SarlAsynchronousExecution
+  override sendPingMessage(message : ProtocolMessage<Ping>) {
+    val idId = new ScopedDataName("id")
+    var id : UUID
+    val questionId = new ScopedDataName("question")
+    var question : String
+    synchronized (getWorkingMemoryLock) {
+      id = idId.getKnowledge(typeof(UUID))
+      question = questionId.getKnowledge(typeof(String))
+      idId.bind
+      questionId.bind
+    }
+    message.^event.id = id
+    message.^event.question = question
+    emit(message.^space, message.^event) [it.ID == message.receiver]
+  }
+}

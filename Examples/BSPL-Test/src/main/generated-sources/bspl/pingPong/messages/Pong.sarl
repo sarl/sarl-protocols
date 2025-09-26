@@ -1,0 +1,12 @@
+/* This file was automatically generated. Do not change its content. */
+
+package pingPong.messages
+
+import io.sarl.extensions.bspl.api.protocol.events.ProtocolEvent
+import java.util.UUID
+
+public event Pong extends ProtocolEvent {
+  var answer : String
+  var id : UUID
+  var question : String
+}

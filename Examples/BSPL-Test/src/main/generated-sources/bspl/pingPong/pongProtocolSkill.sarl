@@ -1,0 +1,47 @@
+/* This file was automatically generated. Do not change its content. */
+
+package pingPong
+
+import io.sarl.api.core.ExternalContextAccess
+import io.sarl.api.naming.name.ScopedDataName
+import io.sarl.api.workingmemory.WorkingMemory
+import io.sarl.extensions.bspl.api.protocol.impl.ProtocolMessage
+import io.sarl.extensions.bspl.api.protocol.impl.ProtocolSkill
+import io.sarl.lang.core.annotation.SarlAsynchronousExecution
+import java.util.List
+import java.util.UUID
+import pingPong.messages.Pong
+
+public skill pongProtocolSkill extends ProtocolSkill implements pongProtocolCapacity {
+  uses WorkingMemory, ExternalContextAccess
+  @SarlAsynchronousExecution
+  override getEnabledPongMessages : List<ProtocolMessage<Pong>> {
+    val enabledMessages = <ProtocolMessage<Pong>>newArrayList
+    getDefinedForName("ping").forEach [scope |
+      val spaceInstance = scope.findSpaceMachtingScope
+      if (spaceInstance !== null) {
+        synchronized (getWorkingMemoryLock) {
+          if ((new ScopedDataName(scope.scope + #[ "id" ]).isDefined) && (new ScopedDataName(scope.scope + #[ "question" ]).isDefined) && !(new ScopedDataName(scope.scope + #[ "answer" ]).isBound)) {
+            val messageInstance = new Pong
+            messageInstance.id = scope.scope.get(0) as UUID // id
+            val inParamId = new ScopedDataName(scope.scope + #[ "question" ])
+            messageInstance.question = inParamId.getKnowledge(typeof(String))
+            enabledMessages += new ProtocolMessage<Pong>(spaceInstance, messageInstance, scope.getKnowledge(typeof(UUID)))
+          }
+        }
+      }
+    ]
+    return enabledMessages
+  }
+  @SarlAsynchronousExecution
+  override sendPongMessage(message : ProtocolMessage<Pong>) {
+    val answerId = new ScopedDataName(message.^event.id?.toString, "answer")
+    var answer : String
+    synchronized (getWorkingMemoryLock) {
+      answer = answerId.getKnowledge(typeof(String))
+      answerId.bind
+    }
+    message.^event.answer = answer
+    emit(message.^space, message.^event) [it.ID == message.receiver]
+  }
+}

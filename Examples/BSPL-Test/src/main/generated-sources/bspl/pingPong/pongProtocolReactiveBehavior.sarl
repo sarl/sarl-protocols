@@ -1,0 +1,17 @@
+/* This file was automatically generated. Do not change its content. */
+
+package pingPong
+
+import io.sarl.api.naming.name.ScopedDataName
+import io.sarl.api.workingmemory.WorkingMemory
+import io.sarl.extensions.bspl.api.protocol.impl.ProtocolBehavior
+import pingPong.messages.Ping
+
+public behavior pongProtocolReactiveBehavior extends ProtocolBehavior {
+  uses WorkingMemory
+  
+  on Ping {
+    new ScopedDataName("id").setKnowledge(occurrence.id)
+    new ScopedDataName("question").setKnowledge(occurrence.question)
+  }
+}

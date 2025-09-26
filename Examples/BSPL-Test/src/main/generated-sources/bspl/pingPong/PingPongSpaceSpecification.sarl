@@ -1,0 +1,16 @@
+/* This file was automatically generated. Do not change its content. */
+
+package pingPong
+
+import io.sarl.extensions.bspl.api.protocol.impl.AbstractProtocolSpaceSpecification
+import io.sarl.extensions.bspl.api.protocol.impl.ProtocolRole
+
+public class PingPongSpaceSpecification extends AbstractProtocolSpaceSpecification {
+  override getRoles : ProtocolRole[] {
+    PingPongRole.values
+  }
+  
+  override getProtocolName : String {
+    "PingPong"
+  }
+}
