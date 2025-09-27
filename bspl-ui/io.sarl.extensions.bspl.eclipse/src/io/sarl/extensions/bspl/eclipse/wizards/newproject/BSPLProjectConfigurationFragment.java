@@ -19,7 +19,7 @@
  * limitations under the License.
  */
 
-package io.sarl.extensions.bspl.eclipse.natures;
+package io.sarl.extensions.bspl.eclipse.wizards.newproject;
 
 import java.util.Arrays;
 import java.util.Collections;

@@ -73,7 +73,7 @@
  <extension
        point="io.sarl.apputils.eclipseextensions.projectConfigurationFragment">
     <projectConfigurationFragment
-          class="io.sarl.extensions.bspl.eclipse.BSPLEclipseExecutableExtensionFactory:io.sarl.extensions.bspl.eclipse.natures.BSPLProjectConfigurationFragment">
+          class="io.sarl.extensions.bspl.eclipse.BSPLEclipseExecutableExtensionFactory:io.sarl.extensions.bspl.eclipse.wizards.newproject.BSPLProjectConfigurationFragment">
     </projectConfigurationFragment>
  </extension>
 

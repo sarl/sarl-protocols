@@ -20,6 +20,8 @@
  */
 package io.sarl.extensions.bspl.lang.tests;
 
+import static io.sarl.tests.api.tools.TestAssertions.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static io.sarl.tests.api.tools.TestEObjects.fileGen;
 import static io.sarl.tests.api.tools.TestUtils.multilineString;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -228,7 +230,7 @@ public abstract class AbstractBsplTest {
 							}
 						}
 					}
-					Assert.assertEquals(expected.toString().replaceAll("[\r\n]+", " "), generatedCode.replaceAll("[\r\n]+", " "));
+					assertEqualsExceptNewLines(expected.toString(), generatedCode);
 					if (isJava) {
 						called.set(JavaTargetLanguageCompilationTestHelper.build(expected));
 					} else {
@@ -240,7 +242,7 @@ public abstract class AbstractBsplTest {
 			if (extraHelper != null) {
 				return extraHelper;
 			}
-			Assert.fail("Nothing was generated but the expectation was :\n" + expected);
+			fail("Nothing was generated but the expectation was :\n" + expected);
 			// Do not test the generated file expressed in the target language because there are issues.
 			return new IddleTargetLanguageCompilationTestHelper();
 		}
@@ -278,7 +280,7 @@ public abstract class AbstractBsplTest {
 								}
 								generatedCode = res.toString();
 								if (!Strings.isEmpty(generatedCode)) {
-									Assert.fail("Unexpected generation of code with :\n" + generatedCode);
+									fail("Unexpected generation of code with :\n" + generatedCode);
 								}
 							}
 						}
